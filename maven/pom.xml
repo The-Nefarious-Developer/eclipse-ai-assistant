@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.developer.nefarious.eclipse.copilot</groupId>
+	<artifactId>com.developer.nefarious.eclipse.copilot.parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Eclipse Copilot</name>
+
+	<organization>
+		<name>The Nefarious Developer</name>
+		<url>https://github.com/The-Nefarious-Developer</url>
+	</organization>
+
+	<properties>
+		<tycho-version>4.0.9</tycho-version>
+		<build.qualifier>'t'yyyyMMddHHmm</build.qualifier>
+		<build.version>1.0.0</build.version>
+	</properties>
+
+	<!-- Build Configuration -->
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<!-- Tycho plugin for Eclipse plugins -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<!-- Thyco Compiler -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-compiler-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<showWarnings>true</showWarnings>
+					<useProjectSettings>true</useProjectSettings>
+				</configuration>
+			</plugin>
+			<!-- The surefire plugin enables the unit test runs -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
+					<useUIHarness>false</useUIHarness>
+				</configuration>
+			</plugin>
+			<!-- Manage complex building and packaging of Eclipse plugins -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<format>${build.qualifier}</format>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>eclipse-repository</id>
+			<url>https://download.eclipse.org/releases/latest/</url>
+			<layout>p2</layout>
+		</repository>
+	</repositories>
+
+</project>
