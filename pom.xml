@@ -6,8 +6,6 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	
-	<!-- <groupId>com.developer.nefarious</groupId>
-	<artifactId>eclipse-copilot</artifactId> -->
 	<groupId>com.developer.nefarious</groupId>
 	<artifactId>eclipse-copilot</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
