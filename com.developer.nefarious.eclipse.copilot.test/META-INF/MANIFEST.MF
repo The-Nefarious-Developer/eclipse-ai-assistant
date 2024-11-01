@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Eclipse Copilot Test Suite
+Bundle-SymbolicName: com.developer.nefarious.eclipse.copilot.test
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.junit;bundle-version="4.13.2",
+ com.developer.nefarious.eclipse.copilot;bundle-version="1.0.0",
+ junit-jupiter-api
+Bundle-Vendor: The Nefarious Developer
+Automatic-Module-Name: com.developer.nefarious.eclipse.copilot.test
+Bundle-RequiredExecutionEnvironment: JavaSE-21
