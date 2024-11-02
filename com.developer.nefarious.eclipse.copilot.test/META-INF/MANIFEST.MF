@@ -5,7 +5,8 @@ Bundle-SymbolicName: com.developer.nefarious.eclipse.copilot.test
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.junit;bundle-version="4.13.2",
  com.developer.nefarious.eclipse.copilot;bundle-version="1.0.0",
- junit-jupiter-api
+ junit-jupiter-api,
+ org.eclipse.ui;bundle-version="3.206.100"
 Bundle-Vendor: The Nefarious Developer
 Automatic-Module-Name: com.developer.nefarious.eclipse.copilot.test
 Bundle-RequiredExecutionEnvironment: JavaSE-21
