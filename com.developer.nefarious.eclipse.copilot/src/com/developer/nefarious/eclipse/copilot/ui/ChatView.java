@@ -10,10 +10,14 @@ import org.eclipse.ui.part.ViewPart;
 
 public class ChatView extends ViewPart implements ISelectionListener {
 	
-	private Browser fBrowser;
+	private Browser browser;
 	
-	public Browser getfBrowser() {
-		return fBrowser;
+	public Browser getBrowser() {
+		return browser;
+	}
+	
+	public void setBrowser(Browser browser) {
+		this.browser = browser;
 	}
 
 	@Override
