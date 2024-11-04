@@ -1,4 +1,4 @@
-package com.developer.nefarious.eclipse.copilot.core;
+package com.developer.nefarious.eclipse.copilot.test.core;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
