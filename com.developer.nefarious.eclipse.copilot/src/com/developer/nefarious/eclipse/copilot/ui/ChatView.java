@@ -7,6 +7,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
 
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.part.ViewPart;
 
 public class ChatView extends ViewPart implements ISelectionListener {
@@ -21,6 +22,15 @@ public class ChatView extends ViewPart implements ISelectionListener {
 	public ChatView(BrowserFactory browserFactory) {
 		this.browserFactory = browserFactory;
 	}
+	
+	/**
+	 * Expose the getSite from ViewPart/WorkbenchPart for unit tests
+	 *
+	 * @return Instance that allows interaction with the workbench in Eclipse
+	 */
+	public IWorkbenchPartSite getWorkbenchPartSite() {
+		return getSite();
+	}
 
 	@Override
 	public void selectionChanged(IWorkbenchPart arg0, ISelection arg1) {
@@ -32,6 +42,7 @@ public class ChatView extends ViewPart implements ISelectionListener {
 	public void createPartControl(Composite parent) {
 		browser = browserFactory.createBrowser(parent, SWT.WEBKIT);
 		browser.setText("test");
+		getWorkbenchPartSite().getPage().addSelectionListener(this);
 	}
 
 	@Override

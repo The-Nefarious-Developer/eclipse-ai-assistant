@@ -1,11 +1,14 @@
 package com.developer.nefarious.eclipse.copilot.test.ui;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPartSite;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -29,7 +32,7 @@ public class ChatViewTest {
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 		
-		cut = new ChatView(mockFactory);
+		cut = spy(new ChatView(mockFactory));
 	}
 
 	@Test
@@ -39,12 +42,19 @@ public class ChatViewTest {
 		
 		when(mockFactory.createBrowser(mockParent, SWT.WEBKIT)).thenReturn(mockBrowser);
 		
+		IWorkbenchPartSite mockSite = mock(IWorkbenchPartSite.class);
+		when(cut.getWorkbenchPartSite()).thenReturn(mockSite);
+		
+		IWorkbenchPage mockPage = mock(IWorkbenchPage.class);
+		when(mockSite.getPage()).thenReturn(mockPage);
+		
 		// Act
 		cut.createPartControl(mockParent);
 		
 		// Assert
 		verify(mockFactory).createBrowser(mockParent, SWT.WEBKIT);
         verify(mockBrowser).setText("test");
+        verify(mockPage).addSelectionListener(cut);
 	}
 
 }
