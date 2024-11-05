@@ -74,5 +74,21 @@ public class ChatViewTest {
 		// Assert
 		verify(mockBrowser).setFocus();
 	}
+	
+	@Test
+	public void testDispose() {
+		// Arrange
+		IWorkbenchPartSite mockSite = mock(IWorkbenchPartSite.class);
+		when(cut.getWorkbenchPartSite()).thenReturn(mockSite);
+
+		IWorkbenchPage mockPage = mock(IWorkbenchPage.class);
+		when(mockSite.getPage()).thenReturn(mockPage);
+		
+		// Act
+		cut.dispose();
+		
+		// Assert
+		verify(mockPage).removeSelectionListener(cut);
+	}
 
 }

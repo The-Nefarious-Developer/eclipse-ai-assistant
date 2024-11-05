@@ -23,6 +23,11 @@ public class ChatView extends ViewPart implements ISelectionListener {
 		this.browserFactory = browserFactory;
 	}
 	
+	/**
+	 * Set a mocked browser instance for unit tests execution.
+	 *
+	 * @param A mocked browser instance
+	 */
 	public void setBrowser(Browser browser) { 
 		this.browser = browser;
 	}
@@ -51,6 +56,12 @@ public class ChatView extends ViewPart implements ISelectionListener {
 	@Override
 	public void setFocus() {
 		browser.setFocus();
+	}
+	
+	@Override
+	public void dispose() {
+		getWorkbenchPartSite().getPage().removeSelectionListener(this);
+		super.dispose(); // TODO: Add code coverage for super method call
 	}
 
 }
