@@ -10,8 +10,17 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 
 public class ChatView extends ViewPart implements ISelectionListener {
-	
+
 	private Browser browser;
+	private BrowserFactory browserFactory;
+
+	public ChatView() {
+		this(new DefaultBrowserFactory());
+	}
+
+	public ChatView(BrowserFactory browserFactory) {
+		this.browserFactory = browserFactory;
+	}
 
 	@Override
 	public void selectionChanged(IWorkbenchPart arg0, ISelection arg1) {
@@ -21,7 +30,7 @@ public class ChatView extends ViewPart implements ISelectionListener {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		browser = browser != null ? browser : new Browser(parent, SWT.WEBKIT);
+		browser = browserFactory.createBrowser(parent, SWT.WEBKIT);
 		browser.setText("test");
 	}
 
@@ -29,11 +38,6 @@ public class ChatView extends ViewPart implements ISelectionListener {
 	public void setFocus() {
 		// TODO Auto-generated method stub
 
-	}
-
-	public void setBrowser(Browser browser) {
-		this.browser = browser;
-		
 	}
 
 }
