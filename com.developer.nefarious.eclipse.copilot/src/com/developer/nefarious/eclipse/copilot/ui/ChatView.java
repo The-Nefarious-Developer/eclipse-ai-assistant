@@ -14,13 +14,21 @@ public class ChatView extends ViewPart implements ISelectionListener {
 
 	private Browser browser;
 	private BrowserFactory browserFactory;
+	
+	private ViewRender viewRender;
 
 	public ChatView() {
 		this(new DefaultBrowserFactory());
+		viewRender = new ChatViewRender();
 	}
 
 	public ChatView(BrowserFactory browserFactory) {
 		this.browserFactory = browserFactory;
+	}
+	
+	public ChatView(BrowserFactory browserFactory, ViewRender viewRender) {
+		this.browserFactory = browserFactory;
+		this.viewRender = viewRender;
 	}
 	
 	/**
@@ -49,7 +57,7 @@ public class ChatView extends ViewPart implements ISelectionListener {
 	@Override
 	public void createPartControl(Composite parent) {
 		browser = browserFactory.createBrowser(parent, SWT.WEBKIT);
-		browser.setText("test");
+		browser.setText(viewRender.build());
 		getWorkbenchPartSite().getPage().addSelectionListener(this);
 	}
 
