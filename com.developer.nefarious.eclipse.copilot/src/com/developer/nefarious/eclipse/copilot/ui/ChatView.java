@@ -23,8 +23,12 @@ public class ChatView extends ViewPart implements ISelectionListener {
 		this.browserFactory = browserFactory;
 	}
 	
+	public void setBrowser(Browser browser) { 
+		this.browser = browser;
+	}
+	
 	/**
-	 * Expose the getSite from ViewPart/WorkbenchPart for unit tests
+	 * Expose the getSite from ViewPart/WorkbenchPart for unit tests.
 	 *
 	 * @return Instance that allows interaction with the workbench in Eclipse
 	 */
@@ -33,9 +37,8 @@ public class ChatView extends ViewPart implements ISelectionListener {
 	}
 
 	@Override
-	public void selectionChanged(IWorkbenchPart arg0, ISelection arg1) {
+	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -47,8 +50,7 @@ public class ChatView extends ViewPart implements ISelectionListener {
 
 	@Override
 	public void setFocus() {
-		// TODO Auto-generated method stub
-
+		browser.setFocus();
 	}
 
 }
