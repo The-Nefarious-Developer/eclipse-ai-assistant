@@ -21,6 +21,12 @@
 
 	<dependencies>
 		<!-- Mockito dependency -->
+		<!-- The "Bundle 'org.mockito.mockito-core' cannot be resolved" issue in MANIFEST.MF is
+			 common in Eclipse plugin projects using external libraries via Maven, particularly 
+			 when working with OSGi and Tycho. This error happens because Eclipse's PDE (Plugin 
+			 Development Environment) tooling doesn't automatically recognize dependencies managed
+			 only in the pom.xml as available bundles, leading to discrepancies between Maven 
+			 resolution and OSGi resolution. -->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>

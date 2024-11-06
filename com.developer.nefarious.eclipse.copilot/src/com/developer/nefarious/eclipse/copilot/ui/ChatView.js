@@ -29,3 +29,24 @@ function say(something) {
 	alert("Java says: " + something);
 	document.getElementById("lastAction").innerText = "We said: " + something;
 }
+
+
+
+function sendMessage() {
+	const chatBox = document.getElementById('chatBox');
+	const userInput = document.getElementById('userInput').value;
+	if (userInput.trim() === "") return;
+	try {
+		var result = getResponse(); // Java callback
+		// Display user message
+		const userMessage = document.createElement('div');
+		userMessage.className = 'message user-message';
+		userMessage.textContent = userInput;
+		chatBox.appendChild(userMessage);
+	} catch (e) {
+
+	}
+	// Clear input
+	document.getElementById('userInput').value = "";
+	chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the bottom
+}
