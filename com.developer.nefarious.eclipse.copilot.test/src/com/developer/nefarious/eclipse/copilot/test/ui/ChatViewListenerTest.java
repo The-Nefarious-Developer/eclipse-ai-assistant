@@ -18,12 +18,12 @@ import org.mockito.MockitoAnnotations;
 import org.eclipse.swt.SWT;
 
 import com.developer.nefarious.eclipse.copilot.ui.BrowserFactory;
-import com.developer.nefarious.eclipse.copilot.ui.ChatView;
+import com.developer.nefarious.eclipse.copilot.ui.ChatViewListener;
 import com.developer.nefarious.eclipse.copilot.ui.ViewRender;
 
-public class ChatViewTest {
+public class ChatViewListenerTest {
 
-	private ChatView cut;
+	private ChatViewListener cut;
 
 	@Mock
 	private BrowserFactory mockFactory;
@@ -44,7 +44,7 @@ public class ChatViewTest {
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 
-		cut = spy(new ChatView(mockFactory, viewRender));
+		cut = spy(new ChatViewListener(mockFactory, viewRender));
 	}
 
 	@Test

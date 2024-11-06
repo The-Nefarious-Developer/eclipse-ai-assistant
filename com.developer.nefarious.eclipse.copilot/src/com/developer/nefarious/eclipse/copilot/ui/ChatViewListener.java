@@ -10,23 +10,23 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.part.ViewPart;
 
-public class ChatView extends ViewPart implements ISelectionListener {
+public class ChatViewListener extends ViewPart implements ISelectionListener {
 
 	private Browser browser;
 	private BrowserFactory browserFactory;
 	
 	private ViewRender viewRender;
 
-	public ChatView() {
+	public ChatViewListener() {
 		this(new DefaultBrowserFactory());
 		viewRender = new ChatViewRender();
 	}
 
-	public ChatView(BrowserFactory browserFactory) {
+	public ChatViewListener(BrowserFactory browserFactory) {
 		this.browserFactory = browserFactory;
 	}
 	
-	public ChatView(BrowserFactory browserFactory, ViewRender viewRender) {
+	public ChatViewListener(BrowserFactory browserFactory, ViewRender viewRender) {
 		this.browserFactory = browserFactory;
 		this.viewRender = viewRender;
 	}
