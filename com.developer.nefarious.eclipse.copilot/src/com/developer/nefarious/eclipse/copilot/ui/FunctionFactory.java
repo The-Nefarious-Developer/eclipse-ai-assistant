@@ -7,7 +7,7 @@ public class FunctionFactory implements IFunctionFactory {
 
 	@Override
 	public BrowserFunction createFunction(Browser browser, String name, Runnable function) {
-		return new IViewFunction(browser, name, function);
+		return new ViewFunction(browser, name, function);
 	}
 
 }
