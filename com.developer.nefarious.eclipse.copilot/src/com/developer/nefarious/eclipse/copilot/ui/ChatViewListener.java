@@ -13,22 +13,27 @@ import org.eclipse.ui.part.ViewPart;
 public class ChatViewListener extends ViewPart implements ISelectionListener {
 
 	private Browser browser;
-	private BrowserFactory browserFactory;
+	private IBrowserFactory browserFactory;
+//	private IFunctionFactory functionFactory;
 	
-	private ViewRender viewRender;
+	private IViewRender viewRender;
 
 	public ChatViewListener() {
-		this(new DefaultBrowserFactory());
+		this(new BrowserFactory());
 		viewRender = new ChatViewRender();
+//		functionFactory = new FunctionFactory();
 	}
 
-	public ChatViewListener(BrowserFactory browserFactory) {
+	public ChatViewListener(IBrowserFactory browserFactory) {
 		this.browserFactory = browserFactory;
 	}
 	
-	public ChatViewListener(BrowserFactory browserFactory, ViewRender viewRender) {
+	public ChatViewListener(IBrowserFactory browserFactory, IViewRender viewRender 
+//			IFunctionFactory functionFactory
+			) {
 		this.browserFactory = browserFactory;
 		this.viewRender = viewRender;
+//		this.functionFactory = functionFactory;
 	}
 	
 	/**

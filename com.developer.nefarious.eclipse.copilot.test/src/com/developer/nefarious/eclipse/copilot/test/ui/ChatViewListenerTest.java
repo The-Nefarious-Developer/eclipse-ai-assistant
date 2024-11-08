@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPartSite;
@@ -17,22 +18,29 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.eclipse.swt.SWT;
 
-import com.developer.nefarious.eclipse.copilot.ui.BrowserFactory;
 import com.developer.nefarious.eclipse.copilot.ui.ChatViewListener;
-import com.developer.nefarious.eclipse.copilot.ui.ViewRender;
+import com.developer.nefarious.eclipse.copilot.ui.IBrowserFactory;
+import com.developer.nefarious.eclipse.copilot.ui.IFunctionFactory;
+import com.developer.nefarious.eclipse.copilot.ui.IViewRender;
 
 public class ChatViewListenerTest {
 
 	private ChatViewListener cut;
 
 	@Mock
-	private BrowserFactory mockFactory;
-
+	private IBrowserFactory mockBrowserFactory;
+	
 	@Mock
 	private Browser mockBrowser;
+	
+	@Mock
+	private IFunctionFactory mockFunctionFactory;
 
 	@Mock
-	private ViewRender viewRender;
+	private BrowserFunction mockBrowserFunction;
+	
+	@Mock
+	private IViewRender viewRender;
 
 	private String randomWord() {
 		final String[] WORDS = { "apple", "banana", "grape" };
@@ -44,7 +52,8 @@ public class ChatViewListenerTest {
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 
-		cut = spy(new ChatViewListener(mockFactory, viewRender));
+		cut = spy(new ChatViewListener(mockBrowserFactory, viewRender));
+//		cut = spy(new ChatViewListener(mockBrowserFactory, viewRender, mockFunctionFactory));
 	}
 
 	@Test
@@ -52,7 +61,8 @@ public class ChatViewListenerTest {
 		// Arrange
 		Composite mockParent = mock(Composite.class);
 
-		when(mockFactory.createBrowser(mockParent, SWT.WEBKIT)).thenReturn(mockBrowser);
+		when(mockBrowserFactory.createBrowser(mockParent, SWT.WEBKIT)).thenReturn(mockBrowser);
+//		when(mockFunctionFactory.createFunction(mockBrowser, "test", )).thenReturn(mockBrowserFunction);
 
 		String mockViewContent = randomWord();
 		when(viewRender.build()).thenReturn(mockViewContent);
@@ -67,7 +77,7 @@ public class ChatViewListenerTest {
 		cut.createPartControl(mockParent);
 
 		// Assert
-		verify(mockFactory).createBrowser(mockParent, SWT.WEBKIT);
+		verify(mockBrowserFactory).createBrowser(mockParent, SWT.WEBKIT);
 		verify(mockBrowser).setText(mockViewContent);
 		verify(mockPage).addSelectionListener(cut);
 	}

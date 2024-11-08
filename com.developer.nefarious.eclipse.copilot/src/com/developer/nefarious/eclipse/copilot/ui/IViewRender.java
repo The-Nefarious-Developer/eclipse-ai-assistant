@@ -1,6 +1,6 @@
 package com.developer.nefarious.eclipse.copilot.ui;
 
-public interface ViewRender {
+public interface IViewRender {
 
 	String build();
 	

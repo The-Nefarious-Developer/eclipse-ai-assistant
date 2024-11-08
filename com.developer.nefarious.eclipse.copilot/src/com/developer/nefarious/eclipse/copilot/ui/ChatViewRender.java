@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-public class ChatViewRender implements ViewRender {
+public class ChatViewRender implements IViewRender {
 
 	@Override
 	public String build() {

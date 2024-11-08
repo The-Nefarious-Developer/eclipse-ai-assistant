@@ -9,10 +9,10 @@
             id="com.developer.nefarious.eclipse.copilot">
       </category>
       <view
-            id="com.developer.nefarious.eclipse.copilot.ui.ChatView"
+            id="com.developer.nefarious.eclipse.copilot.ui.ChatViewListener"
             name="Chat View"
             icon="icons/sample.png"
-            class="com.developer.nefarious.eclipse.copilot.ui.ChatView"
+            class="com.developer.nefarious.eclipse.copilot.ui.ChatViewListener"
             category="com.developer.nefarious.eclipse.copilot"
             inject="true">
       </view>
@@ -22,7 +22,7 @@
       <perspectiveExtension
             targetID="org.eclipse.jdt.ui.JavaPerspective">
          <view
-               id="com.developer.nefarious.eclipse.copilot.ui.ChatView"
+               id="com.developer.nefarious.eclipse.copilot.ui.ChatViewListener"
                relative="org.eclipse.ui.views.ProblemView"
                relationship="stack">
          </view>

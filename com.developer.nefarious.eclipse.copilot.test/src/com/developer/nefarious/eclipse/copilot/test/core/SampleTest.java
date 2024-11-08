@@ -2,7 +2,6 @@ package com.developer.nefarious.eclipse.copilot.test.core;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 public class SampleTest {
 	

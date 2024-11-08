@@ -10,11 +10,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.developer.nefarious.eclipse.copilot.ui.ChatViewRender;
-import com.developer.nefarious.eclipse.copilot.ui.ViewRender;
+import com.developer.nefarious.eclipse.copilot.ui.IViewRender;
 
 public class ChatViewRenderTest {
 	
-	private ViewRender cut;
+	private IViewRender cut;
 
 	private String randomWord() {
 		final String[] WORDS = { "apple", "banana", "grape" };
