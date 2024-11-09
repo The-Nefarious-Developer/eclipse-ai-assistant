@@ -1,10 +1,24 @@
 package com.developer.nefarious.eclipse.copilot.ui;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.Enumeration;
+
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
+import org.osgi.framework.Bundle;
 
 public class ChatViewRender implements IViewRender {
+
+	private static final String PROJECT_NAME = "com.developer.nefarious.eclipse.copilot";
+
+	private static final String VIEW_FILES_PATH = "resources/views/";
 
 	@Override
 	public String build() {
@@ -39,17 +53,28 @@ public class ChatViewRender implements IViewRender {
 		buffer.append("</html>");
 
 		return buffer.toString();
-
 	}
 
 	@Override
 	public String getResourceContent(String filename) {
-		String content = null;
-		try (InputStream inputStream = getClass().getResourceAsStream(filename)) {
-			content = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+		Bundle bundle = Platform.getBundle(ChatViewRender.PROJECT_NAME);
+		URL unresolvedfileURL = bundle.getEntry(VIEW_FILES_PATH + filename);
+		try {
+			URL resolvedFileURL = FileLocator.toFileURL(unresolvedfileURL);
+			try (InputStream inputStream = resolvedFileURL.openStream();
+					BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+				StringBuilder content = new StringBuilder();
+				String line;
+				while ((line = reader.readLine()) != null) {
+					content.append(line);
+				}
+				return content.toString();
+			}
 		} catch (IOException e) {
+			e.printStackTrace();
+			return "";
 		}
-		return content;
+
 	}
 
 }

@@ -11,7 +11,7 @@
       <view
             id="com.developer.nefarious.eclipse.copilot.ui.ChatViewListener"
             name="Chat View"
-            icon="icons/sample.png"
+            icon="resources/icons/sample.png"
             class="com.developer.nefarious.eclipse.copilot.ui.ChatViewListener"
             category="com.developer.nefarious.eclipse.copilot"
             inject="true">
