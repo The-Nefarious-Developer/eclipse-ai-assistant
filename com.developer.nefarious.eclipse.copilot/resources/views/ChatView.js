@@ -37,7 +37,7 @@ function sendMessage() {
 	const userInput = document.getElementById('userInput').value;
 	if (userInput.trim() === "") return;
 	try {
-		var result = getResponse(); // Java callback
+		var result = getAIResponse(); // Java callback
 		// Display user message
 		const userMessage = document.createElement('div');
 		userMessage.className = 'message user-message';

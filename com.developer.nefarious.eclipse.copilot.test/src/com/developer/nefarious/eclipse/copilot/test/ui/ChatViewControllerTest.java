@@ -23,7 +23,8 @@ public class ChatViewControllerTest {
 		String mockUserPrompt = "A very good prompt";
 		String expectedValue = "Hello **bosta**";
 		// Act
-		String returnValue = cut.getAnswerFromAI(mockUserPrompt);
+//		String returnValue = cut.getAnswerFromAI(mockUserPrompt);
+		String returnValue = cut.getAnswerFromAI();
 		// Assert
 		assertEquals(returnValue, expectedValue);
 	}

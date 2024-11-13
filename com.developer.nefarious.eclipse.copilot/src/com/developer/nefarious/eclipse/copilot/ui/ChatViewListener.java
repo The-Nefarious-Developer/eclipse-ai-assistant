@@ -3,6 +3,7 @@ package com.developer.nefarious.eclipse.copilot.ui;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
 
@@ -14,26 +15,30 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 
 	private Browser browser;
 	private IBrowserFactory browserFactory;
-//	private IFunctionFactory functionFactory;
+	private IFunctionFactory functionFactory;
+	private IChatViewController chatViewController;
 	
 	private IViewRender viewRender;
 
 	public ChatViewListener() {
 		this(new BrowserFactory());
 		viewRender = new ChatViewRender();
-//		functionFactory = new FunctionFactory();
+		functionFactory = new FunctionFactory();
 	}
 
 	public ChatViewListener(IBrowserFactory browserFactory) {
 		this.browserFactory = browserFactory;
 	}
 	
-	public ChatViewListener(IBrowserFactory browserFactory, IViewRender viewRender 
-//			IFunctionFactory functionFactory
-			) {
+	public ChatViewListener(
+			IBrowserFactory browserFactory, 
+			IViewRender viewRender, 
+			IFunctionFactory functionFactory,
+			IChatViewController chatViewController) {
 		this.browserFactory = browserFactory;
 		this.viewRender = viewRender;
-//		this.functionFactory = functionFactory;
+		this.functionFactory = functionFactory;
+		this.chatViewController = chatViewController;
 	}
 	
 	/**
@@ -63,6 +68,8 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 	public void createPartControl(Composite parent) {
 		browser = browserFactory.createBrowser(parent, SWT.WEBKIT);
 		browser.setText(viewRender.build());
+		BrowserFunction getAIResponseFunction = functionFactory.createFunction(browser, "getAIResponse", () -> chatViewController.getAnswerFromAI());
+		browser.addDisposeListener(e -> getAIResponseFunction.dispose());
 		getWorkbenchPartSite().getPage().addSelectionListener(this);
 	}
 
