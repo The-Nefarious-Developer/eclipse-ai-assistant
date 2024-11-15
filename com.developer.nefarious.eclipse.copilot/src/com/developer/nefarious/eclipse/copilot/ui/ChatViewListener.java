@@ -32,8 +32,7 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 	public ChatViewListener(
 			IBrowserFactory browserFactory, 
 			IViewRender viewRender, 
-			IFunctionFactory functionFactory,
-			IChatViewController chatViewController) {
+			IFunctionFactory functionFactory) {
 		this.browserFactory = browserFactory;
 		this.viewRender = viewRender;
 		this.functionFactory = functionFactory;

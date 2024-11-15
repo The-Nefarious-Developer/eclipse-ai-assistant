@@ -25,7 +25,6 @@ import org.eclipse.swt.SWT;
 
 import com.developer.nefarious.eclipse.copilot.ui.ChatViewListener;
 import com.developer.nefarious.eclipse.copilot.ui.IBrowserFactory;
-import com.developer.nefarious.eclipse.copilot.ui.IChatViewController;
 import com.developer.nefarious.eclipse.copilot.ui.IFunctionFactory;
 import com.developer.nefarious.eclipse.copilot.ui.IViewRender;
 
@@ -45,9 +44,6 @@ public class ChatViewListenerTest {
 	@Mock
 	private IFunctionFactory mockFunctionFactory;
 
-	@Mock
-	private IChatViewController mockChatViewController;
-
 	private String randomWord() {
 		final String[] WORDS = { "apple", "banana", "grape" };
 		int randomIndex = ThreadLocalRandom.current().nextInt(WORDS.length);
@@ -58,8 +54,7 @@ public class ChatViewListenerTest {
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 
-		cut = spy(
-				new ChatViewListener(mockBrowserFactory, mockViewRender, mockFunctionFactory, mockChatViewController));
+		cut = spy(new ChatViewListener(mockBrowserFactory, mockViewRender, mockFunctionFactory));
 	}
 
 	@AfterEach
