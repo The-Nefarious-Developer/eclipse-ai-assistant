@@ -3,10 +3,14 @@ package com.developer.nefarious.eclipse.copilot.ui;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 
-public class ViewFunction extends BrowserFunction {
+public class GetAIResponse extends BrowserFunction {
 
-	public ViewFunction(Browser browser, String name) {
+	public GetAIResponse(Browser browser, String name) {
 		super(browser, name);
+	}
+	
+	public static GetAIResponse create(Browser browser, String name) {
+		return new GetAIResponse(browser, name);
 	}
 
 	@Override
