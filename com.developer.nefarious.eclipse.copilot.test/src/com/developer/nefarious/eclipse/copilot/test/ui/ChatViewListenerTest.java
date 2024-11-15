@@ -1,6 +1,5 @@
 package com.developer.nefarious.eclipse.copilot.test.ui;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -20,12 +19,10 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.eclipse.swt.SWT;
 
-import com.developer.nefarious.eclipse.copilot.ui.ChatViewController;
 import com.developer.nefarious.eclipse.copilot.ui.ChatViewListener;
 import com.developer.nefarious.eclipse.copilot.ui.IBrowserFactory;
 import com.developer.nefarious.eclipse.copilot.ui.IChatViewController;
@@ -109,13 +106,13 @@ public class ChatViewListenerTest {
 		when(mockSite.getPage()).thenReturn(mockPage);
 		
 		BrowserFunction mockBrowserFunction = mock(BrowserFunction.class);
-		when(mockFunctionFactory.createFunction(eq(mockBrowser), eq("getAIResponse"), any(Runnable.class))).thenReturn(mockBrowserFunction);
+		when(mockFunctionFactory.createFunction(eq(mockBrowser), eq("getAIResponse"))).thenReturn(mockBrowserFunction);
 		
 		// Act
 		cut.createPartControl(mockParent);
 		
 		// Assert
-		verify(mockFunctionFactory).createFunction(eq(mockBrowser), eq("getAIResponse"), any(Runnable.class));
+		verify(mockFunctionFactory).createFunction(eq(mockBrowser), eq("getAIResponse"));
 		verify(mockBrowser).addDisposeListener(any(DisposeListener.class));
 	}
 

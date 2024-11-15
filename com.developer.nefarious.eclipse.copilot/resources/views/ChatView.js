@@ -37,12 +37,18 @@ function sendMessage() {
 	const userInput = document.getElementById('userInput').value;
 	if (userInput.trim() === "") return;
 	try {
-		var result = getAIResponse(); // Java callback
 		// Display user message
 		const userMessage = document.createElement('div');
 		userMessage.className = 'message user-message';
 		userMessage.textContent = userInput;
 		chatBox.appendChild(userMessage);
+		
+		var result = getAIResponse(); // Java callback
+		// Display AI Answer
+		const AIAnswer = document.createElement('div');
+		AIAnswer.className = 'message bot-message';
+		AIAnswer.textContent = result;
+		chatBox.appendChild(AIAnswer);
 	} catch (e) {
 
 	}

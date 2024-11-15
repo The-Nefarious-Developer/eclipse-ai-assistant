@@ -16,7 +16,6 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 	private Browser browser;
 	private IBrowserFactory browserFactory;
 	private IFunctionFactory functionFactory;
-	private IChatViewController chatViewController;
 	
 	private IViewRender viewRender;
 
@@ -24,7 +23,6 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 		this(new BrowserFactory());
 		viewRender = new ChatViewRender();
 		functionFactory = new FunctionFactory();
-		chatViewController = new ChatViewController();
 	}
 
 	public ChatViewListener(IBrowserFactory browserFactory) {
@@ -39,7 +37,6 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 		this.browserFactory = browserFactory;
 		this.viewRender = viewRender;
 		this.functionFactory = functionFactory;
-		this.chatViewController = chatViewController;
 	}
 	
 	/**
@@ -69,7 +66,7 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 	public void createPartControl(Composite parent) {
 		browser = browserFactory.createBrowser(parent, SWT.WEBKIT);
 		browser.setText(viewRender.build());
-		BrowserFunction getAIResponseFunction = functionFactory.createFunction(browser, "getAIResponse", () -> chatViewController.getAnswerFromAI());
+		BrowserFunction getAIResponseFunction = functionFactory.createFunction(browser, "getAIResponse");
 		browser.addDisposeListener(e -> getAIResponseFunction.dispose());
 		getWorkbenchPartSite().getPage().addSelectionListener(this);
 	}

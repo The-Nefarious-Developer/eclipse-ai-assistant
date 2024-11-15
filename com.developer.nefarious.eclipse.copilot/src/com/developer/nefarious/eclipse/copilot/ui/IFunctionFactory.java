@@ -5,6 +5,6 @@ import org.eclipse.swt.browser.BrowserFunction;
 
 public interface IFunctionFactory {
 	
-	BrowserFunction createFunction(Browser browser, String name, Runnable function);
+	BrowserFunction createFunction(Browser browser, String name);
 
 }
