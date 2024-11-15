@@ -20,9 +20,7 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.MockedStatic;
-import org.mockito.MockitoAnnotations;
 import org.osgi.framework.Bundle;
 
 import com.developer.nefarious.eclipse.copilot.ui.ChatViewRender;
@@ -65,7 +63,7 @@ public class ChatViewRenderTest {
 	@Test
 	public void testGetResourceContent() throws IOException {
 		// Arrange
-		String expectedValue = randomWord();
+		String expectedValue = randomWord() + "\n";
 		InputStream mockInputStream = new ByteArrayInputStream(expectedValue.getBytes());
 		
 		String projectName = "com.developer.nefarious.eclipse.copilot";

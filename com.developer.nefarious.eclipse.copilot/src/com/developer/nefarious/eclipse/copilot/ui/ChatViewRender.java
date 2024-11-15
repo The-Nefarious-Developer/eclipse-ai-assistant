@@ -1,14 +1,10 @@
 package com.developer.nefarious.eclipse.copilot.ui;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.Enumeration;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
@@ -66,7 +62,7 @@ public class ChatViewRender implements IViewRender {
 				StringBuilder content = new StringBuilder();
 				String line;
 				while ((line = reader.readLine()) != null) {
-					content.append(line);
+					content.append(line).append("\n");
 				}
 				return content.toString();
 			}
