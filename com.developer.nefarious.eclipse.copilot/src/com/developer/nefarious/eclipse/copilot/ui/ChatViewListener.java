@@ -8,7 +8,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
 
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.part.ViewPart;
 
 import com.developer.nefarious.eclipse.copilot.functions.GetAIResponse;
@@ -44,15 +43,6 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 	public void setBrowser(Browser browser) { 
 		this.browser = browser;
 	}
-	
-	/**
-	 * Expose the getSite from ViewPart/WorkbenchPart for unit tests.
-	 *
-	 * @return Instance that allows interaction with the workbench in Eclipse
-	 */
-	public IWorkbenchPartSite getWorkbenchPartSite() {
-		return getSite();
-	}
 
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
@@ -65,7 +55,8 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 		browser.setText(viewRender.build());
 		BrowserFunction getAIResponseFunction = GetAIResponse.create(browser, "getAIResponse");
 		browser.addDisposeListener(e -> getAIResponseFunction.dispose());
-		getWorkbenchPartSite().getPage().addSelectionListener(this);
+//		getWorkbenchPartSite().getPage().addSelectionListener(this);
+		getSite().getPage().addSelectionListener(this);
 	}
 
 	@Override
@@ -75,7 +66,7 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 	
 	@Override
 	public void dispose() {
-		getWorkbenchPartSite().getPage().removeSelectionListener(this);
+		getSite().getPage().removeSelectionListener(this);
 		super.dispose(); // TODO: Add code coverage for super method call
 	}
 

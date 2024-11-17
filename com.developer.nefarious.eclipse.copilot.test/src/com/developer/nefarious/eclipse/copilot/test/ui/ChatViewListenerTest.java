@@ -71,9 +71,8 @@ public class ChatViewListenerTest {
 		String mockViewContent = randomWord();
 		when(mockViewRender.build()).thenReturn(mockViewContent);
 
-		// Mock the getSite().getPage().addSelectionListener(this) call
 		IWorkbenchPartSite mockSite = mock(IWorkbenchPartSite.class);
-		when(cut.getWorkbenchPartSite()).thenReturn(mockSite);
+		when(cut.getSite()).thenReturn(mockSite);
 		IWorkbenchPage mockPage = mock(IWorkbenchPage.class);
 		when(mockSite.getPage()).thenReturn(mockPage);
 		
@@ -111,7 +110,7 @@ public class ChatViewListenerTest {
 	public void testDispose() {
 		// Arrange
 		IWorkbenchPartSite mockSite = mock(IWorkbenchPartSite.class);
-		when(cut.getWorkbenchPartSite()).thenReturn(mockSite);
+		when(cut.getSite()).thenReturn(mockSite);
 
 		IWorkbenchPage mockPage = mock(IWorkbenchPage.class);
 		when(mockSite.getPage()).thenReturn(mockPage);
