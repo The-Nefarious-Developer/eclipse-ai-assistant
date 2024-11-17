@@ -55,7 +55,6 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 		browser.setText(viewRender.build());
 		BrowserFunction getAIResponseFunction = GetAIResponse.create(browser, "getAIResponse");
 		browser.addDisposeListener(e -> getAIResponseFunction.dispose());
-//		getWorkbenchPartSite().getPage().addSelectionListener(this);
 		getSite().getPage().addSelectionListener(this);
 	}
 
