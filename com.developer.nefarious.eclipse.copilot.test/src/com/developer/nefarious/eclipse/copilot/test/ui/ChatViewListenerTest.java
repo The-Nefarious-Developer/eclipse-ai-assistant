@@ -24,8 +24,8 @@ import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import org.eclipse.swt.SWT;
 
+import com.developer.nefarious.eclipse.copilot.functions.GetAIResponse;
 import com.developer.nefarious.eclipse.copilot.ui.ChatViewListener;
-import com.developer.nefarious.eclipse.copilot.ui.GetAIResponse;
 import com.developer.nefarious.eclipse.copilot.ui.IBrowserFactory;
 import com.developer.nefarious.eclipse.copilot.ui.IViewRender;
 

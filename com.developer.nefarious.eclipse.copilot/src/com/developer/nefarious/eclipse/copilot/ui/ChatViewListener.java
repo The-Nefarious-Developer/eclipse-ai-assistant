@@ -11,6 +11,8 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.part.ViewPart;
 
+import com.developer.nefarious.eclipse.copilot.functions.GetAIResponse;
+
 public class ChatViewListener extends ViewPart implements ISelectionListener {
 
 	private Browser browser;

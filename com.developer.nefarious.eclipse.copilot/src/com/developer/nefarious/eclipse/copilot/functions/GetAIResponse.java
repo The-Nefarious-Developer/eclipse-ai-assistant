@@ -1,4 +1,4 @@
-package com.developer.nefarious.eclipse.copilot.ui;
+package com.developer.nefarious.eclipse.copilot.functions;
 
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
