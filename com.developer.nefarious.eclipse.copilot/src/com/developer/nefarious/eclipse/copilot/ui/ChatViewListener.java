@@ -12,6 +12,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 
 import com.developer.nefarious.eclipse.copilot.functions.GetAIResponse;
+import com.developer.nefarious.eclipse.copilot.functions.LoginHandler;
 
 public class ChatViewListener extends ViewPart implements ISelectionListener {
 
@@ -21,15 +22,11 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 	private IViewRender viewRender;
 
 	public ChatViewListener() {
-		this(new BrowserFactory());
+		browserFactory = new BrowserFactory();
 		viewRender = new ChatViewRender();
 	}
-
-	public ChatViewListener(IBrowserFactory browserFactory) {
-		this.browserFactory = browserFactory;
-	}
 	
-	public ChatViewListener(
+	public ChatViewListener( // Used for tests
 			IBrowserFactory browserFactory, 
 			IViewRender viewRender) {
 		this.browserFactory = browserFactory;
@@ -61,6 +58,12 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 		BrowserFunction getAIResponseFunction = GetAIResponse.create(browser, "getAIResponse");
 		browser.addDisposeListener(e -> getAIResponseFunction.dispose());
 		getSite().getPage().addSelectionListener(this);
+		setUpToolbar();
+	}
+
+	private void setUpToolbar() {
+		IToolBarManager toolbar = getToolbar();
+		toolbar.add(new LoginHandler());
 	}
 
 	@Override

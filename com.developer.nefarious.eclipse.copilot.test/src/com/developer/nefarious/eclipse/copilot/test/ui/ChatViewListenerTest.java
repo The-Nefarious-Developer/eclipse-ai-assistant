@@ -15,7 +15,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.junit.jupiter.api.AfterEach;
@@ -28,6 +27,7 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
 
 import com.developer.nefarious.eclipse.copilot.functions.GetAIResponse;
+import com.developer.nefarious.eclipse.copilot.functions.LoginHandler;
 import com.developer.nefarious.eclipse.copilot.ui.ChatViewListener;
 import com.developer.nefarious.eclipse.copilot.ui.IBrowserFactory;
 import com.developer.nefarious.eclipse.copilot.ui.IViewRender;
@@ -97,6 +97,7 @@ public class ChatViewListenerTest {
 			verify(mockPage).addSelectionListener(cut);
 			mockedStatic.verify(() -> GetAIResponse.create(mockBrowser, "getAIResponse"), times(1));
 			verify(mockBrowser).addDisposeListener(any(DisposeListener.class));
+			verify(mockToolbar).add(any(LoginHandler.class));
 		}
 
 	}
