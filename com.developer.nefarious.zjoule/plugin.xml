@@ -10,7 +10,7 @@
       </category>
       <view
             id="com.developer.nefarious.zjoule.ui.ChatViewListener"
-            name="Chat View"
+            name="zjoule"
             icon="resources/icons/sample.png"
             class="com.developer.nefarious.zjoule.ui.ChatViewListener"
             category="com.developer.nefarious.zjoule"

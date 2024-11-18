@@ -34,7 +34,6 @@ public class ChatViewRender implements IViewRender {
 		buffer.append("</head>");
 		buffer.append("<body>");
 		buffer.append("<div class=\"chat-container\">");
-		buffer.append("<div class=\"chat-header\">Chatbot Conversation</div>");
 		buffer.append("<div class=\"chat-box\" id=\"chatBox\">");
 		buffer.append("<div class=\"message bot-message\">Hello! How can I help you today?</div>");
 		buffer.append("<div class=\"message user-message\">Hi! Could you tell me the weather?</div>");

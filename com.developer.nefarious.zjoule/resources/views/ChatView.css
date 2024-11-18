@@ -20,13 +20,6 @@ body {
 	flex-direction: column;
 }
 
-.chat-header {
-	background-color: #4a76a8;
-	color: #fff;
-	padding: 10px;
-	text-align: center;
-}
-
 .chat-box {
 	padding: 15px;
 	height: 300px;
