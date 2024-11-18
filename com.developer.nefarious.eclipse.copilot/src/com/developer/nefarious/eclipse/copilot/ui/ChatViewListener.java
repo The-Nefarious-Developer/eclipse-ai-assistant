@@ -6,6 +6,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 
 import org.eclipse.ui.IWorkbenchPart;
@@ -14,7 +15,12 @@ import org.eclipse.ui.part.ViewPart;
 import com.developer.nefarious.eclipse.copilot.functions.GetAIResponse;
 import com.developer.nefarious.eclipse.copilot.functions.LoginHandler;
 
+import jakarta.inject.Inject;
+
 public class ChatViewListener extends ViewPart implements ISelectionListener {
+	
+	@Inject
+	Shell shell;
 
 	private Browser browser;
 	private IBrowserFactory browserFactory;
@@ -63,7 +69,7 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 
 	private void setUpToolbar() {
 		IToolBarManager toolbar = getToolbar();
-		toolbar.add(new LoginHandler());
+		toolbar.add(new LoginHandler(browser, shell));
 	}
 
 	@Override
