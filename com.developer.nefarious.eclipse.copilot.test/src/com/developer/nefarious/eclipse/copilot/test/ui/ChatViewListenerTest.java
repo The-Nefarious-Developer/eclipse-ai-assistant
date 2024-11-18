@@ -1,6 +1,7 @@
 package com.developer.nefarious.eclipse.copilot.test.ui;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.reset;
@@ -14,6 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.junit.jupiter.api.AfterEach;
@@ -22,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
+import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
 
 import com.developer.nefarious.eclipse.copilot.functions.GetAIResponse;
@@ -75,6 +78,10 @@ public class ChatViewListenerTest {
 		when(cut.getSite()).thenReturn(mockSite);
 		IWorkbenchPage mockPage = mock(IWorkbenchPage.class);
 		when(mockSite.getPage()).thenReturn(mockPage);
+		
+		IToolBarManager mockToolbar = mock(IToolBarManager.class);
+//		when(cut.getToolbar()).thenReturn(mockToolbar); Does't work with spies
+		doReturn(mockToolbar).when(cut).getToolbar(); // Work with spies
 		
 		// Mock the setup of the getAIResponse
 		try (MockedStatic<GetAIResponse> mockedStatic = mockStatic(GetAIResponse.class)) {

@@ -1,5 +1,6 @@
 package com.developer.nefarious.eclipse.copilot.ui;
 
+import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
@@ -47,6 +48,10 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		// TODO Auto-generated method stub
+	}
+	
+	public IToolBarManager getToolbar() {
+		return getViewSite().getActionBars().getToolBarManager();
 	}
 
 	@Override
