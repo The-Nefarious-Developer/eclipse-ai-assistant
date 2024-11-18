@@ -7,15 +7,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>com.developer.nefarious</groupId>
-	<artifactId>eclipse-copilot</artifactId>
+	<artifactId>zjoule</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	
-	<name>Eclipse Copilot</name>
+	<name>zjoule</name>
 
 	<modules>
-		<module>com.developer.nefarious.eclipse.copilot</module>
-		<module>com.developer.nefarious.eclipse.copilot.test</module>
+		<module>com.developer.nefarious.zjoule</module>
+		<module>com.developer.nefarious.zjoule.test</module>
 	</modules>
 	
 </project>
