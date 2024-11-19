@@ -12,4 +12,5 @@ Automatic-Module-Name: com.developer.nefarious.zjoule
 Import-Package: jakarta.inject;version="[2.0.0,3.0.0)"
 Bundle-ActivationPolicy: lazy
 Export-Package: com.developer.nefarious.zjoule.functions,
+ com.developer.nefarious.zjoule.login,
  com.developer.nefarious.zjoule.ui
