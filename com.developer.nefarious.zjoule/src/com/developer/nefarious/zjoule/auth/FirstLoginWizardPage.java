@@ -2,8 +2,6 @@ package com.developer.nefarious.zjoule.auth;
 
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -33,17 +31,7 @@ public class FirstLoginWizardPage extends WizardPage {
         textField.setLayoutData(gridData);
 
         // Add a ModifyListener to monitor textField changes
-        textField.addModifyListener(new ModifyListener() {
-            @Override
-            public void modifyText(ModifyEvent e) {
-                // Enable or disable the Next button based on textField content
-                if (textField.getText().trim().isEmpty()) {
-                    setPageComplete(false); // Disable Next button
-                } else {
-                    setPageComplete(true); // Enable Next button
-                }
-            }
-        });
+        textField.addModifyListener(new ServiceKeyModifyListener(this));
 
         setControl(container);
 	}
