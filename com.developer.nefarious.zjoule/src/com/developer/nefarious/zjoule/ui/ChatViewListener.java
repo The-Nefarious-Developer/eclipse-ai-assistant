@@ -47,6 +47,15 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 	public void setBrowser(Browser browser) { 
 		this.browser = browser;
 	}
+	
+	/**
+	 * Set a mocked shell instance for unit tests execution.
+	 *
+	 * @param A mocked shell instance
+	 */
+	public void setShell(Shell shell) { 
+		this.shell = shell;
+	}
 
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
@@ -69,7 +78,7 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 
 	private void setUpToolbar() {
 		IToolBarManager toolbar = getToolbar();
-		toolbar.add(new LoginHandler(browser, shell));
+		toolbar.add(LoginHandler.create(browser, shell));
 	}
 
 	@Override

@@ -14,10 +14,14 @@ public class LoginHandler extends Action {
 	private Browser browser;
 	private Shell shell;
 	
-	public LoginHandler(Browser browser, Shell shell) {
+	private LoginHandler(Browser browser, Shell shell) {
 		this.browser = browser;
 		this.shell = shell;
 		setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
+	}
+	
+	public static LoginHandler create(Browser browser, Shell shell) {
+		return new LoginHandler(browser, shell);
 	}
 
 	@Override
