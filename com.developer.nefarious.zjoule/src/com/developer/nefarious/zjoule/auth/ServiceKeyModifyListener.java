@@ -19,7 +19,6 @@ public class ServiceKeyModifyListener implements ModifyListener {
         } else {
         	firstLoginWizardPage.setPageComplete(true); // Enable Next button
         }
-		
 	}
 
 }
