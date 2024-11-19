@@ -1,7 +1,6 @@
 package com.developer.nefarious.zjoule.test.auth;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,42 +29,40 @@ public class DeploymentSelectionAdapterTest {
 		cut = new DeploymentSelectionAdapter(mockSecondLoginWizardPage);
 	}
 	
-//	@Test
-//	public void testWidgetSelectedWhenThereIsText() {
-//		// Arrange
-//		SelectionEvent mockSelectionEvent = mock(SelectionEvent.class);
-//		
-//		Combo mockDeploymentDropdown = mock(Combo.class);
-//		when(mockSecondLoginWizardPage.getDeploymentDropdown()).thenReturn(mockDeploymentDropdown);
-//		String mockText = mock(String.class);
-//		when(mockDeploymentDropdown.getText()).thenReturn(mockText);
-//		when(mockText.isEmpty()).thenReturn(false);
-//		
-//		// Act
-//		cut.widgetSelected(mockSelectionEvent);
-//		
-//		// Assert
-//		assertTrue(true);
-//		verify(mockSecondLoginWizardPage).setPageComplete(true);
-//	}
+	@Test
+	public void testWidgetSelectedWhenThereIsText() {
+		// Arrange
+		SelectionEvent mockSelectionEvent = mock(SelectionEvent.class);
+		
+		Combo mockDeploymentDropdown = mock(Combo.class);
+		when(mockSecondLoginWizardPage.getDeploymentDropdown()).thenReturn(mockDeploymentDropdown);
+		String mockText = "Some random text I don't care about.";
+		when(mockDeploymentDropdown.getText()).thenReturn(mockText);
+		
+		// Act
+		cut.widgetSelected(mockSelectionEvent);
+		
+		// Assert
+		assertTrue(true);
+		verify(mockSecondLoginWizardPage).setPageComplete(true);
+	}
 	
 	@Test
 	public void testWidgetSelectedWhenThereIsNoText() {
 		// Arrange
-//		SelectionEvent mockSelectionEvent = mock(SelectionEvent.class);
-//		
-//		Combo mockDeploymentDropdown = mock(Combo.class);
-//		when(mockSecondLoginWizardPage.getDeploymentDropdown()).thenReturn(mockDeploymentDropdown);
-//		String mockText = mock(String.class);
-//		when(mockDeploymentDropdown.getText()).thenReturn(mockText);
-//		when(mockText.isEmpty()).thenReturn(true);
-//		
-//		// Act
-//		cut.widgetSelected(mockSelectionEvent);
+		SelectionEvent mockSelectionEvent = mock(SelectionEvent.class);
+		
+		Combo mockDeploymentDropdown = mock(Combo.class);
+		when(mockSecondLoginWizardPage.getDeploymentDropdown()).thenReturn(mockDeploymentDropdown);
+		String mockText = ""; // It's empty. Did you notice?
+		when(mockDeploymentDropdown.getText()).thenReturn(mockText);
+		
+		// Act
+		cut.widgetSelected(mockSelectionEvent);
 		
 		// Assert
-		assertTrue(true);
-//		verify(mockSecondLoginWizardPage).setPageComplete(false);
+//		assertTrue(true);
+		verify(mockSecondLoginWizardPage).setPageComplete(false);
 	}
 
 }
