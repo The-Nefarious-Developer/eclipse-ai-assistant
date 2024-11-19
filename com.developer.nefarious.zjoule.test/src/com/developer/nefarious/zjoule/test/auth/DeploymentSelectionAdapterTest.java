@@ -54,7 +54,7 @@ public class DeploymentSelectionAdapterTest {
 		
 		Combo mockDeploymentDropdown = mock(Combo.class);
 		when(mockSecondLoginWizardPage.getDeploymentDropdown()).thenReturn(mockDeploymentDropdown);
-		String mockText = ""; // It's empty. Did you notice?
+		String mockText = "";
 		when(mockDeploymentDropdown.getText()).thenReturn(mockText);
 		
 		// Act
