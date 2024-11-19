@@ -75,17 +75,23 @@ public class SecondLoginWizardPage extends WizardPage {
 	@Override
 	public void setVisible(boolean visible) {
 		super.setVisible(visible);
-		if (visible) {
-			// Retrieve data from the first page
-			FirstLoginWizardPage firstPage = (FirstLoginWizardPage) getWizard().getPage("First Page");
-			String data = firstPage.getInputText();
+	    if (visible) {
+	        // Retrieve data from the first page
+	        FirstLoginWizardPage firstPage = (FirstLoginWizardPage) getWizard().getPage("First Page");
+	        String data = firstPage.getInputText();
 
-			// Example: Dynamically populate project dropdown based on first page's data
-			if (data != null && !data.isEmpty()) {
-				projectDropdown.setItems(new String[] { data + " - Project X", data + " - Project Y" });
-				deploymentDropdown.setItems(new String[] { data + " - Deployment A", data + " - Deployment B" });
-			}
-		}
+	        // Example: Dynamically populate project dropdown based on first page's data
+	        if (data != null && !data.isEmpty()) {
+	            projectDropdown.setItems(new String[] { data + " - Project X", data + " - Project Y" });
+	            deploymentDropdown.setItems(new String[] { data + " - Deployment A", data + " - Deployment B" });
+	        }
+	    } else {
+	        // Clear the inputs when the page is no longer visible (e.g., user clicked Back)
+	        projectDropdown.deselectAll();
+	        deploymentDropdown.deselectAll();
+	        deploymentDropdown.setEnabled(false);
+	        setPageComplete(false);
+	    }
 	}
 
 }
