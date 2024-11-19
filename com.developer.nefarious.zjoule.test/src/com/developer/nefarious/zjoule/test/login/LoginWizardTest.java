@@ -8,19 +8,24 @@ import org.junit.jupiter.api.Test;
 import com.developer.nefarious.zjoule.login.LoginWizard;
 
 public class LoginWizardTest {
-	
-	private LoginWizard cut; 
+
+	private LoginWizard cut;
 	
 	@BeforeEach
 	public void setUp() {
-		
+//		cut = spy(new LoginWizard());
 	}
 	
 	@Test
 	public void test() {
 		// Arrange
+//		doNothing().when(cut).addPage(any(FirstLoginWizardPage.class));
+//		doNothing().when(cut).addPage(any(SecondLoginWizardPage.class));
 		// Act
+//		cut.addPages();
 		// Assert
+//		verify(cut).addPage(any(FirstLoginWizardPage.class));
+//		verify(cut).addPage(any(SecondLoginWizardPage.class));
 		assertTrue(true);
 	}
 
