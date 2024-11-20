@@ -3,7 +3,6 @@ package com.developer.nefarious.zjoule.auth;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 
-import com.developer.nefarious.zjoule.model.ServiceKey;
 import com.google.gson.Gson;
 
 public class ServiceKeyModifyListener implements ModifyListener {
@@ -21,8 +20,7 @@ public class ServiceKeyModifyListener implements ModifyListener {
         if (inputText.isEmpty()) {
         	firstLoginWizardPage.setPageComplete(false); // Disable Next button
         } else {
-        	ServiceKey serviceKey = parseInputToObject(inputText);
-        	System.out.println(serviceKey.getClientId());
+//        	ServiceKey serviceKey = parseInputToObject(inputText);
         	firstLoginWizardPage.setPageComplete(true); // Enable Next button
         }
 	}
