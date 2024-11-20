@@ -11,19 +11,12 @@ import com.google.gson.JsonSyntaxException;
 
 public class JsonValidatorTest {
 	
-	private JsonValidator cut;
-	
-	@BeforeEach
-	public void setUp() {
-		cut = new JsonValidator();
-	}
-	
 	@Test
 	public void testIsValidJsonWithValidJson() {
 		// Arrange
 		String validJson = "{\"name\": \"John\", \"age\": 30}";
 		// Act
-		boolean returnValue = cut.isValidJson(validJson);
+		boolean returnValue = JsonValidator.isValidJson(validJson);
 		// Assert
 		assertTrue(returnValue);
 	}
@@ -36,7 +29,7 @@ public class JsonValidatorTest {
 		boolean returnValue = true;
 		// Act
 		try {
-			returnValue = cut.isValidJson(invalidJson);	
+			returnValue = JsonValidator.isValidJson(invalidJson);	
 		} catch (JsonSyntaxException error) {
 			gotAnError = true;
 		}

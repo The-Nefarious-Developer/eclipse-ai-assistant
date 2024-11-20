@@ -1,6 +1,7 @@
 package com.developer.nefarious.zjoule.test.auth;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -9,27 +10,29 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 
 import com.developer.nefarious.zjoule.auth.FirstLoginWizardPage;
+import com.developer.nefarious.zjoule.auth.JsonValidator;
 import com.developer.nefarious.zjoule.auth.ServiceKeyModifyListener;
 
 public class ServiceKeyModifyListenerTest {
 
 	private ServiceKeyModifyListener cut;
-	
+
 	@Mock
 	private FirstLoginWizardPage mockFirstLoginWizardPage;
-	
+
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		
+
 		cut = spy(new ServiceKeyModifyListener(mockFirstLoginWizardPage));
 	}
-	
+
 	@Test
-	public void testModifyTextWhenThereIsNoText() {
+	public void shouldDisableTheNextButtonIfInputIsEmpty() {
 		// Arrange
 		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
 		String mockInputText = "";
@@ -39,20 +42,25 @@ public class ServiceKeyModifyListenerTest {
 		// Assert
 		verify(mockFirstLoginWizardPage).setPageComplete(false);
 	}
-	
+
 	@Test
-	public void testModifyTextWhenThereIsValidText() {
+	public void shouldEnableTheNextButtonIfInputIsValid() {
 		// Arrange
 		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
-		String mockInputText = "Text I don't care about";
-		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockInputText);
-//		try () {
-//			
-//		}
-		// Act
-		cut.modifyText(mockModifyEvent);
-		// Assert
-		verify(mockFirstLoginWizardPage).setPageComplete(true);
+		String mockValidInputText = "{"
+			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
+			+ "\"clientid\": \"this matters\", "
+			+ "\"clientsecret\": \"this matters\", "
+			+ "\"url\": \"this matters\""
+			+ "}";
+		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockValidInputText);
+		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
+			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockValidInputText)).thenReturn(true);
+			// Act
+			cut.modifyText(mockModifyEvent);
+			// Assert
+			verify(mockFirstLoginWizardPage).setPageComplete(true);
+		}
 	}
-	
+
 }
