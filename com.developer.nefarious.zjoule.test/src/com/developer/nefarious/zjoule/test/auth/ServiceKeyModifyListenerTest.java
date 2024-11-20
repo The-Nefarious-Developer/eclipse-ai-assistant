@@ -1,7 +1,7 @@
 package com.developer.nefarious.zjoule.test.auth;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -19,28 +19,24 @@ public class ServiceKeyModifyListenerTest {
 	private ServiceKeyModifyListener cut;
 	
 	@Mock
-	FirstLoginWizardPage mockFirstLoginWizardPage;
+	private FirstLoginWizardPage mockFirstLoginWizardPage;
 	
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 		
-		cut = new ServiceKeyModifyListener(mockFirstLoginWizardPage);
+		cut = spy(new ServiceKeyModifyListener(mockFirstLoginWizardPage));
 	}
 	
 	@Test
 	public void testModifyTextWhenThereIsText() {
 		// Arrange
 		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
-		
 		String mockInputText = "Text I don't care about";
 		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockInputText);
-		
 		// Act
 		cut.modifyText(mockModifyEvent);
-		
 		// Assert
-		assertTrue(true);
 		verify(mockFirstLoginWizardPage).setPageComplete(true);
 	}
 	
@@ -48,15 +44,11 @@ public class ServiceKeyModifyListenerTest {
 	public void testModifyTextWhenThereIsNoText() {
 		// Arrange
 		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
-		
 		String mockInputText = "";
 		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockInputText);
-		
 		// Act
 		cut.modifyText(mockModifyEvent);
-		
 		// Assert
-		assertTrue(true);
 		verify(mockFirstLoginWizardPage).setPageComplete(false);
 	}
 	

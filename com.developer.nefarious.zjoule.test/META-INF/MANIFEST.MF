@@ -3,6 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: zjoule Test Suite
 Bundle-SymbolicName: com.developer.nefarious.zjoule.test
 Bundle-Version: 1.0.0.qualifier
+Import-Package: com.google.gson;version="2.11.0"
 Require-Bundle: 
  com.developer.nefarious.zjoule;bundle-version="1.0.0",
  org.eclipse.ui;bundle-version="3.206.100",
