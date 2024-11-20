@@ -29,18 +29,6 @@ public class ServiceKeyModifyListenerTest {
 	}
 	
 	@Test
-	public void testModifyTextWhenThereIsText() {
-		// Arrange
-		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
-		String mockInputText = "Text I don't care about";
-		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockInputText);
-		// Act
-		cut.modifyText(mockModifyEvent);
-		// Assert
-		verify(mockFirstLoginWizardPage).setPageComplete(true);
-	}
-	
-	@Test
 	public void testModifyTextWhenThereIsNoText() {
 		// Arrange
 		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
@@ -50,6 +38,21 @@ public class ServiceKeyModifyListenerTest {
 		cut.modifyText(mockModifyEvent);
 		// Assert
 		verify(mockFirstLoginWizardPage).setPageComplete(false);
+	}
+	
+	@Test
+	public void testModifyTextWhenThereIsValidText() {
+		// Arrange
+		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
+		String mockInputText = "Text I don't care about";
+		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockInputText);
+//		try () {
+//			
+//		}
+		// Act
+		cut.modifyText(mockModifyEvent);
+		// Assert
+		verify(mockFirstLoginWizardPage).setPageComplete(true);
 	}
 	
 }
