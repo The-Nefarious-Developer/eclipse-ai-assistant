@@ -1,46 +1,53 @@
 package com.developer.nefarious.zjoule.auth;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ServiceKey {
 
-	private ServiceUrls serviceurls;
-	private String clientid;
-	private String clientsecret;
-	private String url;
+	@SerializedName("serviceurls")
+	private ServiceUrls serviceUrl;
+	@SerializedName("clientid")
+	private String clientId;
+	@SerializedName("clientsecret")
+	private String clientSecret;
+	@SerializedName("url")
+	private String tokenUrl;
 
 	public String getServiceURL() {
-		return serviceurls.getAI_API_URL() + "/v2";
+		return serviceUrl.getApiUrl() + "/v2";
 	}
 
 	public String getClientId() {
-		return clientid;
+		return clientId;
 	}
 
 	public String getClientSecret() {
-		return clientsecret;
+		return clientSecret;
 	}
 
 	public String getTokenURL() {
-		return url + "/oauth/token";
+		return tokenUrl + "/oauth/token";
 	}
 
 	public Boolean isValid() {
-		return serviceurls != null && serviceurls.getAI_API_URL() != null && !serviceurls.getAI_API_URL().isEmpty()
-				&& clientid != null && !clientid.isEmpty() && clientsecret != null && !clientsecret.isEmpty()
-				&& url != null && !url.isEmpty();
+		return serviceUrl != null && serviceUrl.getApiUrl() != null && !serviceUrl.getApiUrl().isEmpty()
+				&& clientId != null && !clientId.isEmpty() && clientSecret != null && !clientSecret.isEmpty()
+				&& tokenUrl != null && !tokenUrl.isEmpty();
 	}
 
 }
 
 class ServiceUrls {
+	
+	@SerializedName("AI_API_URL")
+	private String apiUrl;
 
-	private String AI_API_URL;
-
-	public String getAI_API_URL() {
-		return AI_API_URL;
+	public String getApiUrl() {
+		return apiUrl;
 	}
 
-	public void setAI_API_URL(String AI_API_URL) {
-		this.AI_API_URL = AI_API_URL;
+	public void setApiUrl(String AI_API_URL) {
+		this.apiUrl = AI_API_URL;
 	}
 
 }

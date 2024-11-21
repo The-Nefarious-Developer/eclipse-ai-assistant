@@ -30,7 +30,6 @@ public class ServiceKeyTest {
 		    + "\"identityzoneid\": \"this will be ignored\", "
 		    + "\"url\": \"this matters\""
 		    + "}";
-		
 		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
 		// Act
 		Boolean returnValue = cut.isValid();
@@ -49,7 +48,6 @@ public class ServiceKeyTest {
 		    + "\"identityzoneid\": \"this will be ignored\", "
 		    + "\"url\": \"this matters\""
 		    + "}";
-		
 		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
 		// Act
 		Boolean returnValue = cut.isValid();
@@ -69,7 +67,6 @@ public class ServiceKeyTest {
 		    + "\"identityzoneid\": \"this will be ignored\", "
 		    + "\"url\": \"this matters\""
 		    + "}";
-		
 		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
 		// Act
 		Boolean returnValue = cut.isValid();
@@ -88,7 +85,6 @@ public class ServiceKeyTest {
 		    + "\"identityzoneid\": \"this will be ignored\", "
 		    + "\"url\": \"this matters\""
 		    + "}";
-		
 		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
 		// Act
 		Boolean returnValue = cut.isValid();
@@ -108,7 +104,6 @@ public class ServiceKeyTest {
 		    + "\"identityzoneid\": \"this will be ignored\", "
 		    + "\"url\": \"this matters\""
 		    + "}";
-		
 		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
 		// Act
 		Boolean returnValue = cut.isValid();
@@ -127,7 +122,6 @@ public class ServiceKeyTest {
 		    + "\"identityzoneid\": \"this will be ignored\", "
 		    + "\"url\": \"this matters\""
 		    + "}";
-		
 		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
 		// Act
 		Boolean returnValue = cut.isValid();
@@ -147,7 +141,6 @@ public class ServiceKeyTest {
 		    + "\"identityzoneid\": \"this will be ignored\", "
 		    + "\"url\": \"this matters\""
 		    + "}";
-		
 		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
 		// Act
 		Boolean returnValue = cut.isValid();
@@ -156,7 +149,7 @@ public class ServiceKeyTest {
 	}
 	
 	@Test
-	public void testIsNotValid_missingTokenURL() {
+	public void testIsNotValid_missingTokenUrl() {
 		// Arrange
 		String mockServiceKeyInput = "{"
 			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
@@ -166,7 +159,6 @@ public class ServiceKeyTest {
 		    + "\"identityzone\": \"this will be ignored\", "
 		    + "\"identityzoneid\": \"this will be ignored\""
 		    + "}";
-		
 		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
 		// Act
 		Boolean returnValue = cut.isValid();
@@ -175,7 +167,7 @@ public class ServiceKeyTest {
 	}
 	
 	@Test
-	public void testIsNotValid_emptyTokenURL() {
+	public void testIsNotValid_emptyTokenUrl() {
 		// Arrange
 		String mockServiceKeyInput = "{"
 			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
@@ -186,7 +178,6 @@ public class ServiceKeyTest {
 		    + "\"identityzoneid\": \"this will be ignored\", "
 		    + "\"url\": \"\""
 		    + "}";
-		
 		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
 		// Act
 		Boolean returnValue = cut.isValid();
