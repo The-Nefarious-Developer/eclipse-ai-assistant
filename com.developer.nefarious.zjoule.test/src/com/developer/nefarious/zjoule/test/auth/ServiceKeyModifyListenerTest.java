@@ -19,7 +19,7 @@ import com.developer.nefarious.zjoule.auth.ServiceKeyModifyListener;
 
 public class ServiceKeyModifyListenerTest {
 
-	public static String invalidServiceKeyMessage = "Invalid service key. Please provide valid credentials.";
+	public static final String INVALID_INPUT_MESSAGE = "Invalid service key. Please provide valid credentials.";
 
 	private ServiceKeyModifyListener cut;
 
@@ -60,6 +60,7 @@ public class ServiceKeyModifyListenerTest {
 		// Act
 		cut.modifyText(mockModifyEvent);
 		// Assert
+		verify(mockFirstLoginWizardPage).setValidationError(null);
 		verify(mockFirstLoginWizardPage).setPageComplete(false);
 	}
 
@@ -76,7 +77,7 @@ public class ServiceKeyModifyListenerTest {
 			// Act
 			cut.modifyText(mockModifyEvent);
 			// Assert
-			verify(mockFirstLoginWizardPage).setValidationError(invalidServiceKeyMessage);
+			verify(mockFirstLoginWizardPage).setValidationError(INVALID_INPUT_MESSAGE);
 			verify(mockFirstLoginWizardPage).setPageComplete(false);
 		}
 	}
@@ -99,7 +100,7 @@ public class ServiceKeyModifyListenerTest {
 			// Act
 			cut.modifyText(mockModifyEvent);
 			// Assert
-			verify(mockFirstLoginWizardPage).setValidationError(invalidServiceKeyMessage);
+			verify(mockFirstLoginWizardPage).setValidationError(INVALID_INPUT_MESSAGE);
 			verify(mockFirstLoginWizardPage).setPageComplete(false);
 		}
 	}
