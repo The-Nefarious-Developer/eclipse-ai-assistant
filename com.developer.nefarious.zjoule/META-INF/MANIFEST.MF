@@ -15,4 +15,5 @@ Bundle-ActivationPolicy: lazy
 Export-Package: com.developer.nefarious.zjoule.ai,
  com.developer.nefarious.zjoule.auth,
  com.developer.nefarious.zjoule.functions,
+ com.developer.nefarious.zjoule.memory,
  com.developer.nefarious.zjoule.ui
