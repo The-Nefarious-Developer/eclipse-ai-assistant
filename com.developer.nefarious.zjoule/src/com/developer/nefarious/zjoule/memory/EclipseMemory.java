@@ -1,17 +1,21 @@
 package com.developer.nefarious.zjoule.memory;
 
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.osgi.service.prefs.BackingStoreException;
 
-public abstract class MemoryObject implements IMemoryObject {
-
+public class EclipseMemory implements IEclipseMemory {
+	
 	private IEclipsePreferences preferences;
-
-	public MemoryObject() {
-		
-//		preferences = eclipseMemory.getEclipsePreferences();
+	
+	public EclipseMemory() {
+		preferences = EclipseMemory.getEclipsePreferences();
 	}
 
+	public static IEclipsePreferences getEclipsePreferences() {
+		return InstanceScope.INSTANCE.getNode(PLUGIN_ID);
+	}
+	
 	@Override
 	public void saveOnEclipsePreferences(String key, String value) {
 		preferences.put(key, value);
@@ -26,5 +30,5 @@ public abstract class MemoryObject implements IMemoryObject {
 	public String loadFromEclipsePreferences(String key) {
 		return preferences.get(key, null);
 	}
-	
+
 }

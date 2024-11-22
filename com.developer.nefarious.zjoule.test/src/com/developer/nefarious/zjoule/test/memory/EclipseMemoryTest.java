@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -15,29 +16,24 @@ import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import org.osgi.service.prefs.BackingStoreException;
 
-import com.developer.nefarious.zjoule.memory.EclipseMemoryStorage;
-import com.developer.nefarious.zjoule.memory.MemoryObject;
+import com.developer.nefarious.zjoule.memory.EclipseMemory;
 
-public class MemoryObjectTest {
-	
-	private MemoryObject cut;
-	
-	@Mock
-	private EclipseMemoryStorage mockEclipseMemory;
-	
+public class EclipseMemoryTest {
+
+	private EclipseMemory cut;
+
 	@Mock
 	private IEclipsePreferences mockPreferences;
-	
+
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		try(MockedStatic<EclipseMemoryStorage> eclipseMemoryStatic = mockStatic(EclipseMemoryStorage.class)) {
-			eclipseMemoryStatic.when(() -> EclipseMemoryStorage.getInstance()).thenReturn(mockEclipseMemory);
-			when(mockEclipseMemory.getEclipsePreferences()).thenReturn(mockPreferences);
-			cut = new MemoryObject() {};
+		try (MockedStatic<EclipseMemory> eclipseMemoryStatic = mockStatic(EclipseMemory.class)) {
+			eclipseMemoryStatic.when(() -> EclipseMemory.getEclipsePreferences()).thenReturn(mockPreferences);
+			cut = spy(new EclipseMemory());
 		}
 	}
-	
+
 	@Test
 	public void shouldSaveOnEclipsePreferences() throws BackingStoreException {
 		// Arrange
@@ -48,9 +44,8 @@ public class MemoryObjectTest {
 		// Assert
 		verify(mockPreferences).put(mockKey, mockValue);
 		verify(mockPreferences).flush();
-
 	}
-	
+
 	@Test
 	public void shouldDoNothingInCaseOfErrors() throws BackingStoreException {
 		// Arrange
@@ -63,7 +58,7 @@ public class MemoryObjectTest {
 		verify(mockPreferences).put(mockKey, mockValue);
 		assertThrows(BackingStoreException.class, () -> mockPreferences.flush());
 	}
-	
+
 	@Test
 	public void shouldLoadValueFromKeyAndReturnNullIfItDoesntExist() {
 		// Arrange
