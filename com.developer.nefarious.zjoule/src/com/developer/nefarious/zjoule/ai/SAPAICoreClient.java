@@ -10,13 +10,6 @@ public class SAPAICoreClient implements ISAPAICoreClient{
 	public SAPAICoreClient() {
 		httpClient = HttpClient.newHttpClient();
 	}
-	
-	/*
-	 * Constructor used for unit tests
-	 */
-	public SAPAICoreClient(HttpClient httpClient) {
-		this.httpClient = httpClient;
-	}
 
 	@Override
 	public ArrayList<String> getResourceGroups() {

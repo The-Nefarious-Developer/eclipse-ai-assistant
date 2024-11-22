@@ -18,7 +18,8 @@ public class ServiceKeyModifyListener implements ModifyListener {
 		String inputText = firstLoginWizardPage.getInputText().trim();
 		// Enable or disable the Next button based on textField content
 		if (inputText.isEmpty()) {
-			firstLoginWizardPage.setPageComplete(false); // Disable Next button
+			firstLoginWizardPage.setValidationError(null);
+			disableNextButton();
 		} else {
 			if (JsonValidator.isValidJson(inputText)) {
 				ServiceKey serviceKey = parseInputToObject(inputText);
