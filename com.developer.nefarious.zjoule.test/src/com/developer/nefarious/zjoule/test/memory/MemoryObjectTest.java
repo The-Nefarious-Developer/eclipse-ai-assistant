@@ -1,7 +1,6 @@
 package com.developer.nefarious.zjoule.test.memory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mockStatic;
@@ -40,7 +39,7 @@ public class MemoryObjectTest {
 	}
 	
 	@Test
-	public void shouldSaveOnEclipsePreferences() {
+	public void shouldSaveOnEclipsePreferences() throws BackingStoreException {
 		// Arrange
 		String mockKey = "some key";
 		String mockValue = "some random value";
@@ -48,12 +47,8 @@ public class MemoryObjectTest {
 		cut.saveOnEclipsePreferences(mockKey, mockValue);
 		// Assert
 		verify(mockPreferences).put(mockKey, mockValue);
-		try {
-			verify(mockPreferences).flush();
-		} catch (BackingStoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		verify(mockPreferences).flush();
+
 	}
 	
 	@Test
