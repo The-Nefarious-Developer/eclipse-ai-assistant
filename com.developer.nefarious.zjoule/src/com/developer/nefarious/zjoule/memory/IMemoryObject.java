@@ -2,10 +2,8 @@ package com.developer.nefarious.zjoule.memory;
 
 public interface IMemoryObject {
 	
-	public static final String PLUGIN_ID = "com.developer.nefarious.zjoule";
+	public void saveOnEclipsePreferences(String key, String value);
 	
-	public void save(String value);
-	
-	public String load();
+	public String loadFromEclipsePreferences(String key);
 
 }

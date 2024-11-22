@@ -1,24 +1,27 @@
 package com.developer.nefarious.zjoule.auth;
 
-import java.net.URI;
-import java.net.URLEncoder;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpRequest.BodyPublishers;
-import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
-
-import com.google.gson.Gson;
-
 public class AuthClient implements IAuthClient {
 
+	private ServiceKey serviceKey;
+	
+	public AuthClient() {
+		serviceKey = new ServiceKey();
+	}
+	
 	@Override
 	public String getAccessToken() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-//	private ServiceKey serviceKey;
+	public ServiceKey getServiceKey() {
+		return serviceKey;
+	}
+	
+	public void setServiceKey(ServiceKey serviceKey) {
+		this.serviceKey = serviceKey;
+	}
+	
 //	
 //	private AccessToken accessToken;
 //	
