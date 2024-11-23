@@ -10,13 +10,13 @@ import org.eclipse.swt.widgets.Label;
 
 public class SecondLoginWizardPage extends WizardPage {
 
-	private Combo projectDropdown;
+	private Combo resourceGroupDropdown;
 	private Combo deploymentDropdown;
 
 	protected SecondLoginWizardPage() {
 		super("Second Page");
 		setTitle("Select the model");
-		setDescription("Choose the Project and the Deployment ID.");
+		setDescription("Choose the Resource Group and the Deployment ID.");
 		setPageComplete(false); // Initially set the page as incomplete
 	}
 
@@ -27,14 +27,14 @@ public class SecondLoginWizardPage extends WizardPage {
 
 		// Create label and dropdown for project selection
 		Label projectLabel = new Label(container, SWT.NONE);
-		projectLabel.setText("Select Project:");
+		projectLabel.setText("Select the Resource Group:");
 
-		projectDropdown = new Combo(container, SWT.DROP_DOWN | SWT.READ_ONLY);
-		projectDropdown.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		projectDropdown.setItems(new String[] { "Project A", "Project B", "Project C" }); // Example items
+		resourceGroupDropdown = new Combo(container, SWT.DROP_DOWN | SWT.READ_ONLY);
+		resourceGroupDropdown.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		resourceGroupDropdown.setItems(new String[] { "Project A", "Project B", "Project C" }); // Example items
 
 		// Add a SelectionListener to enable the deployment dropdown when a valid project is selected
-		projectDropdown.addSelectionListener(new ProjectSelectionAdapter(this));
+		resourceGroupDropdown.addSelectionListener(new ProjectSelectionAdapter(this));
 
 		// Create label and dropdown for deployment ID selection
 		Label deploymentLabel = new Label(container, SWT.NONE);
@@ -61,12 +61,12 @@ public class SecondLoginWizardPage extends WizardPage {
 
 			// Example: Dynamically populate project dropdown based on first page's data
 			if (data != null && !data.isEmpty()) {
-				projectDropdown.setItems(new String[] { data + " - Project X", data + " - Project Y" });
+				resourceGroupDropdown.setItems(new String[] { data + " - Project X", data + " - Project Y" });
 				deploymentDropdown.setItems(new String[] { data + " - Deployment A", data + " - Deployment B" });
 			}
 		} else {
 			// Clear the inputs when the page is no longer visible (e.g., user clicked Back)
-			projectDropdown.deselectAll();
+			resourceGroupDropdown.deselectAll();
 			deploymentDropdown.deselectAll();
 			deploymentDropdown.setEnabled(false);
 			setPageComplete(false);
@@ -74,7 +74,7 @@ public class SecondLoginWizardPage extends WizardPage {
 	}
 
 	public Combo getProjectDropdown() {
-		return projectDropdown;
+		return resourceGroupDropdown;
 	}
 
 	public Combo getDeploymentDropdown() {

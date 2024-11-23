@@ -17,10 +17,4 @@ public class SAPAICoreClient implements ISAPAICoreClient{
 		return null;
 	}
 
-	@Override
-	public ArrayList<String> getDeployments() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

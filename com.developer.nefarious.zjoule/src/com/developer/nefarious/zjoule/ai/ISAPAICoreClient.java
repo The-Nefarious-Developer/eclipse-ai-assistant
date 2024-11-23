@@ -6,7 +6,7 @@ public interface ISAPAICoreClient {
 	
 	public ArrayList<String> getResourceGroups();
 	
-	public ArrayList<String> getDeployments();
+//	public ArrayList<String> getDeployments();
 	
 
 }

@@ -41,14 +41,5 @@ public class SAPAICoreClientTest {
 		// Assert
 		assertTrue(true);
 	}
-	
-	@Test
-	public void testGetDeployments() {
-		// Arrange
-		// Act
-//		cut.getDeployments();
-		// Assert
-		assertTrue(true);
-	}	
 
 }
