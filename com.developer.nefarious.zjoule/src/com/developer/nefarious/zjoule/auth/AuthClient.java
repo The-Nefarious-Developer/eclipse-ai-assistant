@@ -1,27 +1,23 @@
 package com.developer.nefarious.zjoule.auth;
 
-import com.developer.nefarious.zjoule.login.ServiceKey;
+import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
 
 public class AuthClient implements IAuthClient {
 
-	private ServiceKey serviceKey;
+	MemoryAccessToken memoryAccessToken;
 	
 	public AuthClient() {
-		serviceKey = new ServiceKey();
+		memoryAccessToken = new MemoryAccessToken();
 	}
 	
+	public AuthClient(MemoryAccessToken memoryAccessToken) {
+		this.memoryAccessToken = memoryAccessToken;
+	}
+
 	@Override
 	public String getAccessToken() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public ServiceKey getServiceKey() {
-		return serviceKey;
-	}
-	
-	public void setServiceKey(ServiceKey serviceKey) {
-		this.serviceKey = serviceKey;
+		AccessToken lastTokenResponse = memoryAccessToken.load();
+		return lastTokenResponse.getAccessToken();
 	}
 	
 //	

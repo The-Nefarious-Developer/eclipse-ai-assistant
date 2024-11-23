@@ -24,8 +24,14 @@ public class ServiceKeyModifyListener implements ModifyListener {
 			if (JsonValidator.isValidJson(inputText)) {
 				ServiceKey serviceKey = parseInputToObject(inputText);
 				if (serviceKey.isValid()) {
-					firstLoginWizardPage.setValidationError(null);
-					enableNextButton();
+//					try {
+//						ArrayList<ResourceGroup> resourceGroups = sapAiCoreClient.getResourceGroups();
+						firstLoginWizardPage.setValidationError(null);
+						enableNextButton();
+//					} catch(Exception error) {
+//						firstLoginWizardPage.setValidationError("Invalid service key. Please provide valid credentials.");
+//						disableNextButton();
+//					}
 				} else {
 					firstLoginWizardPage.setValidationError("Invalid service key. Please provide valid credentials.");
 					disableNextButton();

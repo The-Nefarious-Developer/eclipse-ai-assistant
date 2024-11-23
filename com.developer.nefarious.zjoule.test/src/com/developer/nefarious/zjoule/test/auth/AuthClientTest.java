@@ -1,31 +1,44 @@
 package com.developer.nefarious.zjoule.test.auth;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.developer.nefarious.zjoule.auth.AccessToken;
 import com.developer.nefarious.zjoule.auth.AuthClient;
-import com.developer.nefarious.zjoule.login.ServiceKey;
+import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
 
 public class AuthClientTest {
 	
+	private AuthClient cut;
+	
 	@Mock
-	private ServiceKey mockServiceKey;
+	private MemoryAccessToken mockMemoryAccessToken;
+	
+	@Mock
+	private AccessToken mockAccessToken;
 	
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
+		
+		cut = new AuthClient(mockMemoryAccessToken);
 	}
 	
 	@Test
-	public void shouldReturnAccessTokenFromMemoryWhenNoServiceKeyIsInjected() {
+	public void shouldReturnAccessTokenFromMemory() {
 		// Arrange
-		AuthClient cut = new AuthClient();
-		cut.setServiceKey(mockServiceKey);
+		String expectedValue = "super-secret";
+		when(mockMemoryAccessToken.load()).thenReturn(mockAccessToken);
+		when(mockAccessToken.getAccessToken()).thenReturn(expectedValue);
 		// Act
-		cut.getAccessToken();
+		String returnValue = cut.getAccessToken();
 		// Assert
+		assertEquals(returnValue, expectedValue);
 	}
 	
 }
