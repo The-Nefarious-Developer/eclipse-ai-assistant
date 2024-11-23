@@ -7,7 +7,7 @@ import org.osgi.service.prefs.BackingStoreException;
 public class EclipseMemory implements IEclipseMemory {
 	
 	private IEclipsePreferences preferences;
-	
+
 	public EclipseMemory() {
 		preferences = EclipseMemory.getEclipsePreferences();
 	}

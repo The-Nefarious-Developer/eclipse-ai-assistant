@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -30,7 +29,7 @@ public class EclipseMemoryTest {
 		MockitoAnnotations.openMocks(this);
 		try (MockedStatic<EclipseMemory> eclipseMemoryStatic = mockStatic(EclipseMemory.class)) {
 			eclipseMemoryStatic.when(() -> EclipseMemory.getEclipsePreferences()).thenReturn(mockPreferences);
-			cut = spy(new EclipseMemory());
+			cut = new EclipseMemory();
 		}
 	}
 
