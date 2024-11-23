@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.test.auth;
+package com.developer.nefarious.zjoule.test.login;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
@@ -13,9 +13,9 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 
-import com.developer.nefarious.zjoule.auth.FirstLoginWizardPage;
-import com.developer.nefarious.zjoule.auth.JsonValidator;
-import com.developer.nefarious.zjoule.auth.ServiceKeyModifyListener;
+import com.developer.nefarious.zjoule.login.FirstLoginWizardPage;
+import com.developer.nefarious.zjoule.login.JsonValidator;
+import com.developer.nefarious.zjoule.login.ServiceKeyModifyListener;
 
 public class ServiceKeyModifyListenerTest {
 

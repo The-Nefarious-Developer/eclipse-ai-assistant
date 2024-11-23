@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
-import com.developer.nefarious.zjoule.auth.LoginWizard;
+import com.developer.nefarious.zjoule.login.LoginWizard;
 
 public class LoginHandler extends Action {
 	

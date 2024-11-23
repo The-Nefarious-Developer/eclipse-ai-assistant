@@ -1,6 +1,6 @@
 package com.developer.nefarious.zjoule.memory;
 
-import com.developer.nefarious.zjoule.auth.ServiceKey;
+import com.developer.nefarious.zjoule.login.ServiceKey;
 
 public interface IMemoryServiceKey {
 	

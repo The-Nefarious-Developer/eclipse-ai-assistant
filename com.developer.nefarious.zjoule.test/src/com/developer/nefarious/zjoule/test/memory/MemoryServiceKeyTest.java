@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.developer.nefarious.zjoule.auth.ServiceKey;
+import com.developer.nefarious.zjoule.login.ServiceKey;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.memory.IObjectSerializer;
 import com.developer.nefarious.zjoule.memory.MemoryServiceKey;

@@ -1,5 +1,6 @@
-package com.developer.nefarious.zjoule.test.auth;
+package com.developer.nefarious.zjoule.test.login;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -11,12 +12,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.developer.nefarious.zjoule.auth.ProjectSelectionAdapter;
-import com.developer.nefarious.zjoule.auth.SecondLoginWizardPage;
+import com.developer.nefarious.zjoule.login.DeploymentSelectionAdapter;
+import com.developer.nefarious.zjoule.login.SecondLoginWizardPage;
 
-public class ProjectSelectionAdapterTest {
+public class DeploymentSelectionAdapterTest {
 	
-	private ProjectSelectionAdapter cut;
+	private DeploymentSelectionAdapter cut;
 	
 	@Mock
 	SecondLoginWizardPage mockSecondLoginWizardPage;
@@ -25,7 +26,7 @@ public class ProjectSelectionAdapterTest {
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 		
-		cut = new ProjectSelectionAdapter(mockSecondLoginWizardPage);
+		cut = new DeploymentSelectionAdapter(mockSecondLoginWizardPage);
 	}
 	
 	@Test
@@ -35,21 +36,15 @@ public class ProjectSelectionAdapterTest {
 		
 		Combo mockDeploymentDropdown = mock(Combo.class);
 		when(mockSecondLoginWizardPage.getDeploymentDropdown()).thenReturn(mockDeploymentDropdown);
-		
-		Combo mockProjectDropdown = mock(Combo.class);
-		when(mockSecondLoginWizardPage.getProjectDropdown()).thenReturn(mockProjectDropdown);
-		
 		String mockText = "Some random text I don't care about.";
-		when(mockProjectDropdown.getText()).thenReturn(mockText);
+		when(mockDeploymentDropdown.getText()).thenReturn(mockText);
 		
 		// Act
 		cut.widgetSelected(mockSelectionEvent);
 		
 		// Assert
-		verify(mockDeploymentDropdown).deselectAll();
-		verify(mockDeploymentDropdown).setEnabled(false);
-		verify(mockSecondLoginWizardPage).setPageComplete(false);
-		verify(mockDeploymentDropdown).setEnabled(true);
+		assertTrue(true);
+		verify(mockSecondLoginWizardPage).setPageComplete(true);
 	}
 	
 	@Test
@@ -59,19 +54,14 @@ public class ProjectSelectionAdapterTest {
 		
 		Combo mockDeploymentDropdown = mock(Combo.class);
 		when(mockSecondLoginWizardPage.getDeploymentDropdown()).thenReturn(mockDeploymentDropdown);
-		
-		Combo mockProjectDropdown = mock(Combo.class);
-		when(mockSecondLoginWizardPage.getProjectDropdown()).thenReturn(mockProjectDropdown);
-		
 		String mockText = "";
-		when(mockProjectDropdown.getText()).thenReturn(mockText);
+		when(mockDeploymentDropdown.getText()).thenReturn(mockText);
 		
 		// Act
 		cut.widgetSelected(mockSelectionEvent);
 		
 		// Assert
-		verify(mockDeploymentDropdown).deselectAll();
-		verify(mockDeploymentDropdown).setEnabled(false);
+//		assertTrue(true);
 		verify(mockSecondLoginWizardPage).setPageComplete(false);
 	}
 

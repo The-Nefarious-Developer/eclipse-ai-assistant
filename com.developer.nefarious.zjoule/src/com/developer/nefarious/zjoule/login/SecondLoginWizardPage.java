@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.auth;
+package com.developer.nefarious.zjoule.login;
 
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;

@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.test.auth;
+package com.developer.nefarious.zjoule.test.login;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.developer.nefarious.zjoule.auth.ServiceKey;
+import com.developer.nefarious.zjoule.login.ServiceKey;
 import com.google.gson.Gson;
 
 public class ServiceKeyTest {

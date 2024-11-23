@@ -6,7 +6,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.developer.nefarious.zjoule.auth.AuthClient;
-import com.developer.nefarious.zjoule.auth.ServiceKey;
+import com.developer.nefarious.zjoule.login.ServiceKey;
 
 public class AuthClientTest {
 	

@@ -1,5 +1,7 @@
 package com.developer.nefarious.zjoule.auth;
 
+import com.developer.nefarious.zjoule.login.ServiceKey;
+
 public class AuthClient implements IAuthClient {
 
 	private ServiceKey serviceKey;
