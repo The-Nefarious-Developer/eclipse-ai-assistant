@@ -35,6 +35,19 @@ public class AuthClientTest {
 		String expectedValue = "super-secret";
 		when(mockMemoryAccessToken.load()).thenReturn(mockAccessToken);
 		when(mockAccessToken.getAccessToken()).thenReturn(expectedValue);
+		when(mockAccessToken.isValid()).thenReturn(true);
+		// Act
+		String returnValue = cut.getAccessToken();
+		// Assert
+		assertEquals(returnValue, expectedValue);
+	}
+	
+	@Test
+	public void shouldRequestNewTokenIfMemoryIsInvalid() {
+		// Arrange
+		String expectedValue = "super-secret";
+		when(mockMemoryAccessToken.load()).thenReturn(mockAccessToken);
+		when(mockAccessToken.isValid()).thenReturn(false);
 		// Act
 		String returnValue = cut.getAccessToken();
 		// Assert

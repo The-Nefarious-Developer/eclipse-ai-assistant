@@ -17,7 +17,15 @@ public class AuthClient implements IAuthClient {
 	@Override
 	public String getAccessToken() {
 		AccessToken lastTokenResponse = memoryAccessToken.load();
-		return lastTokenResponse.getAccessToken();
+		if (lastTokenResponse.isValid()) {
+			return lastTokenResponse.getAccessToken(); 
+		} else {
+			return getNewAccessToken();
+		}
+	}
+	
+	private String getNewAccessToken() {
+		return "super-secret";
 	}
 	
 //	
