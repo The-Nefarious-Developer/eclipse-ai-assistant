@@ -25,7 +25,7 @@ import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.auth.AccessToken;
 import com.developer.nefarious.zjoule.auth.AuthClient;
 import com.developer.nefarious.zjoule.auth.AuthClientHelper;
-import com.developer.nefarious.zjoule.login.ServiceKey;
+import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.MemoryServiceKey;
 

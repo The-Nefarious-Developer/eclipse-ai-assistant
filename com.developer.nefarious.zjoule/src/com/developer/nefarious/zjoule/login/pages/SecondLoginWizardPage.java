@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.login;
+package com.developer.nefarious.zjoule.login.pages;
 
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -8,12 +8,15 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
+import com.developer.nefarious.zjoule.login.events.DeploymentSelectionAdapter;
+import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
+
 public class SecondLoginWizardPage extends WizardPage {
 
 	private Combo resourceGroupDropdown;
 	private Combo deploymentDropdown;
 
-	protected SecondLoginWizardPage() {
+	public SecondLoginWizardPage() {
 		super("Second Page");
 		setTitle("Select the model");
 		setDescription("Choose the Resource Group and the Deployment ID.");
@@ -34,7 +37,7 @@ public class SecondLoginWizardPage extends WizardPage {
 		resourceGroupDropdown.setItems(new String[] { "Project A", "Project B", "Project C" }); // Example items
 
 		// Add a SelectionListener to enable the deployment dropdown when a valid project is selected
-		resourceGroupDropdown.addSelectionListener(new ProjectSelectionAdapter(this));
+		resourceGroupDropdown.addSelectionListener(new ResourceGroupSelectionAdapter(this));
 
 		// Create label and dropdown for deployment ID selection
 		Label deploymentLabel = new Label(container, SWT.NONE);

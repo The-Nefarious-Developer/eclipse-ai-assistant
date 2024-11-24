@@ -1,7 +1,9 @@
-package com.developer.nefarious.zjoule.login;
+package com.developer.nefarious.zjoule.login.events;
 
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+
+import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
 
 public class DeploymentSelectionAdapter extends SelectionAdapter {
 	

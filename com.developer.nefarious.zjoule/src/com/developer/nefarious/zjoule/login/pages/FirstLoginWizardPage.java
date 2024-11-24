@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.login;
+package com.developer.nefarious.zjoule.login.pages;
 
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -7,12 +7,14 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
+import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
+
 public class FirstLoginWizardPage extends WizardPage {
 
 	private Text textField;
 	private Text errorText;
 
-	protected FirstLoginWizardPage() {
+	public FirstLoginWizardPage() {
 		super("First Page");
 		setTitle("Provide credentials");
 		setDescription("Attach the Service Key json file content for the SAP AI Core service.");

@@ -1,8 +1,10 @@
-package com.developer.nefarious.zjoule.login;
+package com.developer.nefarious.zjoule.login.events;
 
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 
+import com.developer.nefarious.zjoule.auth.ServiceKey;
+import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
 import com.google.gson.Gson;
 
 public class ServiceKeyModifyListener implements ModifyListener {

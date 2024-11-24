@@ -1,11 +1,11 @@
-package com.developer.nefarious.zjoule.test.login;
+package com.developer.nefarious.zjoule.test.login.events;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import com.developer.nefarious.zjoule.login.JsonValidator;
+import com.developer.nefarious.zjoule.login.events.JsonValidator;
 import com.google.gson.JsonSyntaxException;
 
 public class JsonValidatorTest {

@@ -2,6 +2,9 @@ package com.developer.nefarious.zjoule.login;
 
 import org.eclipse.jface.wizard.Wizard;
 
+import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
+import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
+
 public class LoginWizard extends Wizard {
 	
 	public LoginWizard() {
