@@ -2,7 +2,6 @@ package com.developer.nefarious.zjoule.login.events;
 
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-
 import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
 import com.developer.nefarious.zjoule.login.utils.JsonValidator;
@@ -12,12 +11,12 @@ public class ServiceKeyModifyListener implements ModifyListener {
 
 	private FirstLoginWizardPage firstLoginWizardPage;
 
-	public ServiceKeyModifyListener(FirstLoginWizardPage firstLoginWizardPage) {
+	public ServiceKeyModifyListener(final FirstLoginWizardPage firstLoginWizardPage) {
 		this.firstLoginWizardPage = firstLoginWizardPage;
 	}
 
 	@Override
-	public void modifyText(ModifyEvent event) {
+	public void modifyText(final ModifyEvent event) {
 		String inputText = firstLoginWizardPage.getInputText().trim();
 		// Enable or disable the Next button based on textField content
 		if (inputText.isEmpty()) {
@@ -29,8 +28,8 @@ public class ServiceKeyModifyListener implements ModifyListener {
 				if (serviceKey.isValid()) {
 //					try {
 //						ArrayList<ResourceGroup> resourceGroups = sapAiCoreClient.getResourceGroups();
-						firstLoginWizardPage.setValidationError(null);
-						enableNextButton();
+					firstLoginWizardPage.setValidationError(null);
+					enableNextButton();
 //					} catch(Exception error) {
 //						firstLoginWizardPage.setValidationError("Invalid service key. Please provide valid credentials.");
 //						disableNextButton();
@@ -46,7 +45,7 @@ public class ServiceKeyModifyListener implements ModifyListener {
 		}
 	}
 
-	private ServiceKey parseInputToObject(String inputText) {
+	private ServiceKey parseInputToObject(final String inputText) {
 		Gson gson = new Gson();
 		return gson.fromJson(inputText, ServiceKey.class);
 	}

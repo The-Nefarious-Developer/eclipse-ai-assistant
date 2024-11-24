@@ -3,14 +3,12 @@ package com.developer.nefarious.zjoule.test.login.events;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Combo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
 import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
 import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
 

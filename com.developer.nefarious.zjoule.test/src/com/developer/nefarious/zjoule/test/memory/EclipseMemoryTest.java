@@ -6,7 +6,6 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import org.osgi.service.prefs.BackingStoreException;
-
 import com.developer.nefarious.zjoule.memory.EclipseMemory;
 
 public class EclipseMemoryTest {

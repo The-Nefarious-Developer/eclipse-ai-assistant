@@ -17,7 +17,7 @@ public class EclipseMemory implements IEclipseMemory {
 	}
 	
 	@Override
-	public void saveOnEclipsePreferences(String key, String value) {
+	public void saveOnEclipsePreferences(final String key, final String value) {
 		preferences.put(key, value);
 		try {
 			preferences.flush(); // Persist the data
@@ -27,7 +27,7 @@ public class EclipseMemory implements IEclipseMemory {
 	}
 
 	@Override
-	public String loadFromEclipsePreferences(String key) {
+	public String loadFromEclipsePreferences(final String key) {
 		return preferences.get(key, null);
 	}
 

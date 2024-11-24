@@ -5,6 +5,7 @@ import com.developer.nefarious.zjoule.auth.AccessToken;
 public class MemoryAccessToken implements IMemoryAccessToken {
 
 	IObjectSerializer objectSerializer;
+	
 	IEclipseMemory eclipseMemory;
 	
 	public MemoryAccessToken() {
@@ -12,14 +13,14 @@ public class MemoryAccessToken implements IMemoryAccessToken {
 		eclipseMemory = new EclipseMemory();
 	}
 	
-	public MemoryAccessToken(IObjectSerializer objectSerializer, IEclipseMemory eclipseMemory) {
+	public MemoryAccessToken(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
 		this.objectSerializer = objectSerializer;
 		this.eclipseMemory = eclipseMemory;
 	}
 
 	@Override
-	public void save(AccessToken serviceKey) {
-		String serializedObject = objectSerializer.serialize(serviceKey);
+	public void save(final AccessToken accesstoken) {
+		String serializedObject = objectSerializer.serialize(accesstoken);
 		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
 	}
 

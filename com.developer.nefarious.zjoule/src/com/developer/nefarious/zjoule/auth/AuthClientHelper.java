@@ -5,7 +5,6 @@ import java.net.URLEncoder;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.nio.charset.StandardCharsets;
-
 import com.google.gson.Gson;
 
 public class AuthClientHelper implements IAuthClientHelper {
@@ -17,20 +16,22 @@ public class AuthClientHelper implements IAuthClientHelper {
 	}
 
 	@Override
-	public BodyPublisher createRequestBody(String clientId, String clientSecret) {
+	public BodyPublisher createRequestBody(final String clientId, final String clientSecret) {
+		// @formatter:off
 		String requestBody = "grant_type=client_credentials" 
 			+ "&client_id="	+ URLEncoder.encode(clientId, StandardCharsets.UTF_8) 
 			+ "&client_secret="	+ URLEncoder.encode(clientSecret, StandardCharsets.UTF_8);
+		// @formatter:on
 		return BodyPublishers.ofString(requestBody);
 	}
 
 	@Override
-	public URI createAuthUri(String tokenEndpoint) {
+	public URI createAuthUri(final String tokenEndpoint) {
 		return URI.create(tokenEndpoint);
 	}
 
 	@Override
-	public AccessToken convertResponseToObject(String responseBody) {
+	public AccessToken convertResponseToObject(final String responseBody) {
 		return gson.fromJson(responseBody, AccessToken.class);
 	}
 

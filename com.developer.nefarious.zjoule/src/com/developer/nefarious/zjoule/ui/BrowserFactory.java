@@ -6,7 +6,7 @@ import org.eclipse.swt.widgets.Composite;
 public class BrowserFactory implements IBrowserFactory {
 
 	@Override
-	public Browser createBrowser(Composite parent, int style) {
+	public Browser createBrowser(final Composite parent, final int style) {
 		return new Browser(parent, style);
 	}
 

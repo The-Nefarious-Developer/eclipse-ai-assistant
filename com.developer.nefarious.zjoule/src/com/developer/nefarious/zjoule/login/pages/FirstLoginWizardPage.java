@@ -6,13 +6,17 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
-
 import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
 
 public class FirstLoginWizardPage extends WizardPage {
 
 	private Text textField;
+	
 	private Text errorText;
+	
+	private final int inputHeigth = 100;
+	
+	private final int inputWidth = 300;
 
 	public FirstLoginWizardPage() {
 		super("First Page");
@@ -22,15 +26,15 @@ public class FirstLoginWizardPage extends WizardPage {
 	}
 
 	@Override
-	public void createControl(Composite parent) {
+	public void createControl(final Composite parent) {
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(2, false));
 
 		// Text field for user input
 		textField = new Text(container, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true);
-		gridData.heightHint = 100;
-		gridData.widthHint = 300;
+		gridData.heightHint = inputHeigth;
+		gridData.widthHint = inputWidth;
 		textField.setLayoutData(gridData);
 
 		// Add a ModifyListener to monitor textField changes
@@ -51,7 +55,7 @@ public class FirstLoginWizardPage extends WizardPage {
 	}
 
 	// Method to set validation error message
-	public void setValidationError(String message) {
+	public void setValidationError(final String message) {
 		if (message != null && !message.isEmpty()) {
 			errorText.setText(message);
 			errorText.setVisible(true);

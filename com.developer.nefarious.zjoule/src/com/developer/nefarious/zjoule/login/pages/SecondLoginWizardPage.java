@@ -7,13 +7,13 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-
 import com.developer.nefarious.zjoule.login.events.DeploymentSelectionAdapter;
 import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
 
 public class SecondLoginWizardPage extends WizardPage {
 
 	private Combo resourceGroupDropdown;
+	
 	private Combo deploymentDropdown;
 
 	public SecondLoginWizardPage() {
@@ -24,7 +24,7 @@ public class SecondLoginWizardPage extends WizardPage {
 	}
 
 	@Override
-	public void createControl(Composite parent) {
+	public void createControl(final Composite parent) {
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(2, false)); // Two columns for labels and dropdowns
 
@@ -55,7 +55,7 @@ public class SecondLoginWizardPage extends WizardPage {
 	}
 
 	@Override
-	public void setVisible(boolean visible) {
+	public void setVisible(final boolean visible) {
 		super.setVisible(visible);
 		if (visible) {
 			// Retrieve data from the first page

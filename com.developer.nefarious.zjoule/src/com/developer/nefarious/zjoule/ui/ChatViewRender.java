@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
@@ -22,6 +21,7 @@ public class ChatViewRender implements IViewRender {
 		String css = this.getResourceContent("ChatView.css");
 
 		StringBuilder buffer = new StringBuilder();
+		
 		buffer.append("<!doctype html>");
 		buffer.append("<html lang=\"en\">");
 		buffer.append("<head>");
@@ -46,14 +46,14 @@ public class ChatViewRender implements IViewRender {
 		buffer.append("</div>");
 		buffer.append("</body>");
 		buffer.append("</html>");
-
+		
 		return buffer.toString();
 	}
 
 	@Override
-	public String getResourceContent(String filename) {
+	public String getResourceContent(final String filename) {
 		Bundle bundle = Platform.getBundle(ChatViewRender.PROJECT_NAME);
-		URL unresolvedfileURL = bundle.getEntry(VIEW_FILES_PATH + filename);
+		final URL unresolvedfileURL = bundle.getEntry(VIEW_FILES_PATH + filename);
 		try {
 			URL resolvedFileURL = FileLocator.toFileURL(unresolvedfileURL);
 			try (InputStream inputStream = resolvedFileURL.openStream();

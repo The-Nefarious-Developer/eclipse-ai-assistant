@@ -6,10 +6,13 @@ public class ServiceKey {
 
 	@SerializedName("serviceurls")
 	private ServiceUrls serviceUrl;
+	
 	@SerializedName("clientid")
 	private String clientId;
+	
 	@SerializedName("clientsecret")
 	private String clientSecret;
+	
 	@SerializedName("url")
 	private String tokenUrl;
 
@@ -46,7 +49,7 @@ class ServiceUrls {
 		return apiUrl;
 	}
 
-	public void setApiUrl(String AI_API_URL) {
+	public void setApiUrl(final String AI_API_URL) {
 		this.apiUrl = AI_API_URL;
 	}
 

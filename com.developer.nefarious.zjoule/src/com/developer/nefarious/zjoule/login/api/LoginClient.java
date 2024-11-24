@@ -1,9 +1,8 @@
 package com.developer.nefarious.zjoule.login.api;
 
 import java.net.http.HttpClient;
-import java.util.ArrayList;
 
-public class LoginClient implements ILoginClient{
+public class LoginClient implements ILoginClient {
 	
 	private HttpClient httpClient;
 	

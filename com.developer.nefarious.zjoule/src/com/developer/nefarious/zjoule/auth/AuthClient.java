@@ -6,7 +6,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpResponse;
-
 import com.developer.nefarious.zjoule.memory.IMemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.IMemoryServiceKey;
 import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
@@ -26,7 +25,9 @@ import com.developer.nefarious.zjoule.memory.MemoryServiceKey;
 public class AuthClient implements IAuthClient {
 
 	private IMemoryAccessToken memoryAccessToken;
+	
 	private IMemoryServiceKey memoryServiceKey;
+	
 	private IAuthClientHelper authClientHelper;
 
 	/**
@@ -56,8 +57,10 @@ public class AuthClient implements IAuthClient {
 	 * @param authClientHelper  Helper class for handling authentication requests
 	 *                          and response parsing.
 	 */
-	public AuthClient(IMemoryAccessToken memoryAccessToken, IMemoryServiceKey memoryServiceKey,
-			IAuthClientHelper authClientHelper) {
+	public AuthClient(
+			final IMemoryAccessToken memoryAccessToken, 
+			final IMemoryServiceKey memoryServiceKey,
+			final IAuthClientHelper authClientHelper) {
 		this.memoryAccessToken = memoryAccessToken;
 		this.memoryServiceKey = memoryServiceKey;
 		this.authClientHelper = authClientHelper;
@@ -74,7 +77,7 @@ public class AuthClient implements IAuthClient {
 	 * @param memoryAccessToken The memory storage implementation for access tokens.
 	 * @param memoryServiceKey  The memory storage implementation for service keys.
 	 */
-	public AuthClient(IMemoryAccessToken memoryAccessToken, IMemoryServiceKey memoryServiceKey) {
+	public AuthClient(final IMemoryAccessToken memoryAccessToken, final IMemoryServiceKey memoryServiceKey) {
 		this.memoryAccessToken = memoryAccessToken;
 		this.memoryServiceKey = memoryServiceKey;
 		this.authClientHelper = new AuthClientHelper();

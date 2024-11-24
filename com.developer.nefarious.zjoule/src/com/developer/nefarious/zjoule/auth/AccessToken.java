@@ -1,7 +1,6 @@
 package com.developer.nefarious.zjoule.auth;
 
 import java.util.Date;
-
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -47,8 +46,10 @@ public class AccessToken {
 			return false;
 		}
 		long currentTime = new Date().getTime();
-		long expirationTime = receivedAt.getTime() + (expiresIn * 1000); // expiresIn is in seconds, convert to
-																			// milliseconds
+		// CHECKSTYLE:OFF 
+		// expiresIn is in seconds, convert to milliseconds
+		long expirationTime = receivedAt.getTime() + (expiresIn * 1000);
+		// CHECKSTYLE:ON
 		return currentTime < expirationTime;
 	}
 
@@ -68,7 +69,7 @@ public class AccessToken {
 		return accessToken;
 	}
 
-	public void setAccessToken(String accessToken) {
+	public void setAccessToken(final String accessToken) {
 		this.accessToken = accessToken;
 	}
 
@@ -76,7 +77,7 @@ public class AccessToken {
 		return tokenType;
 	}
 
-	public void setTokenType(String tokenType) {
+	public void setTokenType(final String tokenType) {
 		this.tokenType = tokenType;
 	}
 
@@ -84,7 +85,7 @@ public class AccessToken {
 		return expiresIn;
 	}
 
-	public void setExpiresIn(long expiresIn) {
+	public void setExpiresIn(final long expiresIn) {
 		this.expiresIn = expiresIn;
 	}
 
@@ -92,7 +93,7 @@ public class AccessToken {
 		return scope;
 	}
 
-	public void setScope(String scope) {
+	public void setScope(final String scope) {
 		this.scope = scope;
 	}
 
@@ -100,7 +101,7 @@ public class AccessToken {
 		return jti;
 	}
 
-	public void setJti(String jti) {
+	public void setJti(final String jti) {
 		this.jti = jti;
 	}
 
@@ -108,7 +109,7 @@ public class AccessToken {
 		return receivedAt;
 	}
 
-	public void setReceivedAt(Date receivedAt) {
+	public void setReceivedAt(final Date receivedAt) {
 		this.receivedAt = receivedAt;
 	}
 

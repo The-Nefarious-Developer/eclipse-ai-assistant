@@ -1,7 +1,6 @@
 package com.developer.nefarious.zjoule.login.api;
 
 import java.util.List;
-
 import com.google.gson.annotations.SerializedName;
 
 public class GetResourceGroupsResponse {
@@ -17,7 +16,7 @@ public class GetResourceGroupsResponse {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(final int count) {
         this.count = count;
     }
 
@@ -25,7 +24,7 @@ public class GetResourceGroupsResponse {
         return resourceGroups;
     }
 
-    public void setResourceGroups(List<ResourceGroup> resourceGroups) {
+    public void setResourceGroups(final List<ResourceGroup> resourceGroups) {
         this.resourceGroups = resourceGroups;
     }
     

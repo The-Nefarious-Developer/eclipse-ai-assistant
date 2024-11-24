@@ -9,9 +9,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import java.util.concurrent.ThreadLocalRandom;
-
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Composite;
@@ -26,7 +24,6 @@ import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
-
 import com.developer.nefarious.zjoule.functions.GetAIResponse;
 import com.developer.nefarious.zjoule.functions.LoginHandler;
 import com.developer.nefarious.zjoule.ui.ChatViewListener;
@@ -39,10 +36,13 @@ public class ChatViewListenerTest {
 
 	@Mock
 	private IBrowserFactory mockBrowserFactory;
+
 	@Mock
 	private Browser mockBrowser;
+
 	@Mock
 	private Shell mockShell;
+
 	@Mock
 	private IViewRender mockViewRender;
 

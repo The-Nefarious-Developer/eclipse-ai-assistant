@@ -1,7 +1,6 @@
 package com.developer.nefarious.zjoule.test.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -9,20 +8,17 @@ import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.ThreadLocalRandom;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.osgi.framework.Bundle;
-
 import com.developer.nefarious.zjoule.ui.ChatViewRender;
 import com.developer.nefarious.zjoule.ui.IViewRender;
 

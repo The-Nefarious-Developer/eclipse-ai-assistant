@@ -7,7 +7,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -15,13 +14,11 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpResponse;
 import java.util.concurrent.ThreadLocalRandom;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
-
 import com.developer.nefarious.zjoule.auth.AccessToken;
 import com.developer.nefarious.zjoule.auth.AuthClient;
 import com.developer.nefarious.zjoule.auth.AuthClientHelper;
@@ -35,12 +32,16 @@ public class AuthClientTest {
 
 	@Mock
 	private AuthClientHelper mockAuthClientHelper;
+	
 	@Mock
 	private MemoryAccessToken mockMemoryAccessToken;
+	
 	@Mock
 	private MemoryServiceKey mockMemoryServiceKey;
+	
 	@Mock
 	private AccessToken mockAccessToken;
+	
 	@Mock
 	private ServiceKey mockServiceKey;
 
@@ -71,7 +72,8 @@ public class AuthClientTest {
 		// Assert
 		assertEquals(returnValue, expectedValue);
 	}
-
+	
+	// CHECKSTYLE:OFF
 	@Test
 	public void shouldReturnNewToken() throws IOException, InterruptedException {
 		// Arrange
@@ -129,5 +131,6 @@ public class AuthClientTest {
 			}
 		}
 	}
+	// CHECKSTYLE:ON
 
 }

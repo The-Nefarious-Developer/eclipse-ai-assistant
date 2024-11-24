@@ -5,6 +5,7 @@ import com.developer.nefarious.zjoule.auth.ServiceKey;
 public class MemoryServiceKey implements IMemoryServiceKey {
 	
 	IObjectSerializer objectSerializer;
+	
 	IEclipseMemory eclipseMemory;
 	
 	public MemoryServiceKey() {
@@ -12,13 +13,13 @@ public class MemoryServiceKey implements IMemoryServiceKey {
 		eclipseMemory = new EclipseMemory();
 	}
 	
-	public MemoryServiceKey(IObjectSerializer objectSerializer, IEclipseMemory eclipseMemory) {
+	public MemoryServiceKey(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
 		this.objectSerializer = objectSerializer;
 		this.eclipseMemory = eclipseMemory;
 	}
 
 	@Override
-	public void save(ServiceKey serviceKey) {
+	public void save(final ServiceKey serviceKey) {
 		String serializedObject = objectSerializer.serialize(serviceKey);
 		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
 	}

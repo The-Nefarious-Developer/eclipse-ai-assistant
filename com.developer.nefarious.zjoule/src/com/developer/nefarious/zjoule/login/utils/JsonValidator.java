@@ -5,7 +5,7 @@ import com.google.gson.JsonSyntaxException;
 
 public class JsonValidator {
 	
-	public static boolean isValidJson(String json) {
+	public static boolean isValidJson(final String json) {
         try {
             JsonParser.parseString(json); // Attempts to parse the JSON string
             return true; // No exception means it's valid JSON

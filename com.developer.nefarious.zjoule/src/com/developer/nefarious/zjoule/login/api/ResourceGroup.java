@@ -1,7 +1,6 @@
 package com.developer.nefarious.zjoule.login.api;
 
 import java.util.List;
-
 import com.google.gson.annotations.SerializedName;
 
 public class ResourceGroup {
@@ -32,7 +31,7 @@ public class ResourceGroup {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(final String createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -40,7 +39,7 @@ public class ResourceGroup {
 		return labels;
 	}
 
-	public void setLabels(List<String> labels) {
+	public void setLabels(final List<String> labels) {
 		this.labels = labels;
 	}
 
@@ -48,7 +47,7 @@ public class ResourceGroup {
 		return resourceGroupId;
 	}
 
-	public void setResourceGroupId(String resourceGroupId) {
+	public void setResourceGroupId(final String resourceGroupId) {
 		this.resourceGroupId = resourceGroupId;
 	}
 
@@ -56,7 +55,7 @@ public class ResourceGroup {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(final String status) {
 		this.status = status;
 	}
 
@@ -64,7 +63,7 @@ public class ResourceGroup {
 		return statusMessage;
 	}
 
-	public void setStatusMessage(String statusMessage) {
+	public void setStatusMessage(final String statusMessage) {
 		this.statusMessage = statusMessage;
 	}
 
@@ -72,7 +71,7 @@ public class ResourceGroup {
 		return tenantId;
 	}
 
-	public void setTenantId(String tenantId) {
+	public void setTenantId(final String tenantId) {
 		this.tenantId = tenantId;
 	}
 
@@ -80,7 +79,7 @@ public class ResourceGroup {
 		return zoneId;
 	}
 
-	public void setZoneId(String zoneId) {
+	public void setZoneId(final String zoneId) {
 		this.zoneId = zoneId;
 	}
 	
