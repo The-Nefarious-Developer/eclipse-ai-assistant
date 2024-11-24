@@ -10,7 +10,7 @@ public class GetResourceGroupsResponse {
     private int count;
 
     @SerializedName("resources")
-    private List<ResourceGroup> resources;
+    private List<ResourceGroup> resourceGroups;
 
     // Getters and setters
     public int getCount() {
@@ -21,12 +21,12 @@ public class GetResourceGroupsResponse {
         this.count = count;
     }
 
-    public List<ResourceGroup> getResources() {
-        return resources;
+    public List<ResourceGroup> getResourceGroups() {
+        return resourceGroups;
     }
 
-    public void setResources(List<ResourceGroup> resources) {
-        this.resources = resources;
+    public void setResourceGroups(List<ResourceGroup> resourceGroups) {
+        this.resourceGroups = resourceGroups;
     }
     
 }
