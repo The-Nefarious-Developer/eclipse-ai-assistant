@@ -5,6 +5,7 @@ import org.eclipse.swt.events.ModifyListener;
 
 import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
+import com.developer.nefarious.zjoule.login.utils.JsonValidator;
 import com.google.gson.Gson;
 
 public class ServiceKeyModifyListener implements ModifyListener {

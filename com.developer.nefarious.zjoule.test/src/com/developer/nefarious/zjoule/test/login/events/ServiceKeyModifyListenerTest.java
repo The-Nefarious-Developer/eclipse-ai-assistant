@@ -13,9 +13,9 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 
-import com.developer.nefarious.zjoule.login.events.JsonValidator;
 import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
 import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
+import com.developer.nefarious.zjoule.login.utils.JsonValidator;
 
 public class ServiceKeyModifyListenerTest {
 

@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.login.events;
+package com.developer.nefarious.zjoule.login.utils;
 
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;

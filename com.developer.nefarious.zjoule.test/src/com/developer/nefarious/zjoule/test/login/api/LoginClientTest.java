@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.test.ai;
+package com.developer.nefarious.zjoule.test.login.api;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mockStatic;
@@ -12,12 +12,12 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 
-import com.developer.nefarious.zjoule.ai.ISAPAICoreClient;
-import com.developer.nefarious.zjoule.ai.SAPAICoreClient;
+import com.developer.nefarious.zjoule.login.api.ILoginClient;
+import com.developer.nefarious.zjoule.login.api.LoginClient;
 
-public class SAPAICoreClientTest {
+public class LoginClientTest {
 	
-	private ISAPAICoreClient cut;
+	private ILoginClient cut;
 	
 	@Mock
 	private HttpClient mockHttpClient;
@@ -28,7 +28,7 @@ public class SAPAICoreClientTest {
 		
 		try (MockedStatic<HttpClient> httpClientStatic = mockStatic(HttpClient.class)) {
 			httpClientStatic.when(() -> HttpClient.newHttpClient()).thenReturn(mockHttpClient);
-			cut = spy(new SAPAICoreClient());
+			cut = spy(new LoginClient());
 		}
 		
 	}

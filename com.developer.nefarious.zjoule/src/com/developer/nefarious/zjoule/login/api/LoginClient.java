@@ -1,18 +1,18 @@
-package com.developer.nefarious.zjoule.ai;
+package com.developer.nefarious.zjoule.login.api;
 
 import java.net.http.HttpClient;
 import java.util.ArrayList;
 
-public class SAPAICoreClient implements ISAPAICoreClient{
+public class LoginClient implements ILoginClient{
 	
 	private HttpClient httpClient;
 	
-	public SAPAICoreClient() {
+	public LoginClient() {
 		httpClient = HttpClient.newHttpClient();
 	}
 
 	@Override
-	public ArrayList<String> getResourceGroups() {
+	public GetResourceGroupsResponse getResourceGroups() {
 		// TODO Auto-generated method stub
 		return null;
 	}
