@@ -29,7 +29,6 @@ public class ServiceKeyModifyListenerTest {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-
 		cut = spy(new ServiceKeyModifyListener(mockFirstLoginWizardPage));
 	}
 
@@ -37,9 +36,14 @@ public class ServiceKeyModifyListenerTest {
 	public void shouldEnableTheNextButtonIfInputIsValid() {
 		// Arrange
 		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
-		String mockValidInputText = "{" + "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
-				+ "\"clientid\": \"this matters\", " + "\"clientsecret\": \"this matters\", "
-				+ "\"url\": \"this matters\"" + "}";
+		// @formatter:off
+		String mockValidInputText = "{" 
+			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
+			+ "\"clientid\": \"this matters\", " 
+			+ "\"clientsecret\": \"this matters\", "
+			+ "\"url\": \"this matters\"" 
+			+ "}";
+		// @formatter:on
 		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockValidInputText);
 		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
 			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockValidInputText)).thenReturn(true);
@@ -68,9 +72,14 @@ public class ServiceKeyModifyListenerTest {
 	public void shouldDisableTheNextButtonIfInputIsInvalid() {
 		// Arrange
 		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
-		String mockValidInputText = "{" + "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
-				+ "\"clientid\": \"this matters\", " + "\"clientsecret\": \"this matters\", "
-				+ "\"url\": \"this matters\"" + "}";
+		// @formatter:off
+		String mockValidInputText = "{" 
+			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
+			+ "\"clientid\": \"this matters\", " 
+			+ "\"clientsecret\": \"this matters\", "
+			+ "\"url\": \"this matters\"" 
+			+ "}";
+		// @formatter:on
 		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockValidInputText);
 		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
 			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockValidInputText)).thenReturn(false);
@@ -92,8 +101,14 @@ public class ServiceKeyModifyListenerTest {
 	public void shouldDisableTheNextButtonIfInputIsNotComplete() {
 		// Arrange
 		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
-		String mockValidInputText = "{" + "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
-				+ "\"clientid\": \"this matters\", " + "\"clientsecret\": \"\", " + "\"url\": \"this matters\"" + "}";
+		// @formatter:off
+		String mockValidInputText = "{" 
+			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
+			+ "\"clientid\": \"this matters\", " 
+			+ "\"clientsecret\": \"\", " 
+			+ "\"url\": \"this matters\"" 
+			+ "}";
+		// @formatter:on
 		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockValidInputText);
 		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
 			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockValidInputText)).thenReturn(true);
