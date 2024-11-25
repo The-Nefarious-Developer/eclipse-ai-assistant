@@ -6,6 +6,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
+import com.developer.nefarious.zjoule.login.api.LoginClient;
 import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
 
 public class FirstLoginWizardPage extends WizardPage {
@@ -38,7 +40,7 @@ public class FirstLoginWizardPage extends WizardPage {
 		textField.setLayoutData(gridData);
 
 		// Add a ModifyListener to monitor textField changes
-		textField.addModifyListener(new ServiceKeyModifyListener(this));
+		textField.addModifyListener(new ServiceKeyModifyListener(this, new LoginClient()));
 
 		// Hidden error text widget
 		errorText = new Text(container, SWT.READ_ONLY | SWT.MULTI | SWT.WRAP);
@@ -65,6 +67,12 @@ public class FirstLoginWizardPage extends WizardPage {
 			setPageComplete(true);
 		}
 		getShell().layout(true, true); // Update the layout to reflect visibility changes
+	}
+	
+	public void setResourceGroupsOnTheSeconPage(final GetResourceGroupsResponse getResourceGroupsResponse) {
+		SecondLoginWizardPage secondPage = (SecondLoginWizardPage) getWizard().getPage("Second Page");
+//		secondPage.setResourceGroups();
+		
 	}
 
 }

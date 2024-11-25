@@ -3,6 +3,7 @@ package com.developer.nefarious.zjoule.login.events;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import com.developer.nefarious.zjoule.auth.ServiceKey;
+import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
 import com.developer.nefarious.zjoule.login.utils.JsonValidator;
 import com.google.gson.Gson;
@@ -10,9 +11,14 @@ import com.google.gson.Gson;
 public class ServiceKeyModifyListener implements ModifyListener {
 
 	private FirstLoginWizardPage firstLoginWizardPage;
+	
+	private ILoginClient loginClient;
 
-	public ServiceKeyModifyListener(final FirstLoginWizardPage firstLoginWizardPage) {
+	public ServiceKeyModifyListener(
+			final FirstLoginWizardPage firstLoginWizardPage,
+			final ILoginClient loginClient) {
 		this.firstLoginWizardPage = firstLoginWizardPage;
+		this.loginClient = loginClient;
 	}
 
 	@Override
@@ -27,7 +33,8 @@ public class ServiceKeyModifyListener implements ModifyListener {
 				ServiceKey serviceKey = parseInputToObject(inputText);
 				if (serviceKey.isValid()) {
 //					try {
-//						ArrayList<ResourceGroup> resourceGroups = sapAiCoreClient.getResourceGroups();
+//					GetResourceGroupsResponse getResourceGroupsResponse = loginClient.getResourceGroups();
+//					firstLoginWizardPage.setResourceGroupsOnTheSeconPage(getResourceGroupsResponse);
 					firstLoginWizardPage.setValidationError(null);
 					enableNextButton();
 //					} catch(Exception error) {

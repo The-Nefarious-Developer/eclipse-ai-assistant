@@ -1,5 +1,6 @@
 package com.developer.nefarious.zjoule.login.pages;
 
+import java.util.ArrayList;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -15,6 +16,10 @@ public class SecondLoginWizardPage extends WizardPage {
 	private Combo resourceGroupDropdown;
 	
 	private Combo deploymentDropdown;
+	
+	private ArrayList<String> resourceGroups = new ArrayList<String>();
+	
+	private ArrayList<String> deployments = new ArrayList<String>();
 
 	public SecondLoginWizardPage() {
 		super("Second Page");
@@ -34,7 +39,10 @@ public class SecondLoginWizardPage extends WizardPage {
 
 		resourceGroupDropdown = new Combo(container, SWT.DROP_DOWN | SWT.READ_ONLY);
 		resourceGroupDropdown.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		resourceGroupDropdown.setItems(new String[] { "Project A", "Project B", "Project C" }); // Example items
+		
+//		resourceGroups.add("Project A");
+//		resourceGroups.add("Project B");
+//		resourceGroupDropdown.setItems(resourceGroups.toArray(new String[0])); // Example items
 
 		// Add a SelectionListener to enable the deployment dropdown when a valid project is selected
 		resourceGroupDropdown.addSelectionListener(new ResourceGroupSelectionAdapter(this));
@@ -45,7 +53,7 @@ public class SecondLoginWizardPage extends WizardPage {
 
 		deploymentDropdown = new Combo(container, SWT.DROP_DOWN | SWT.READ_ONLY);
 		deploymentDropdown.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		deploymentDropdown.setItems(new String[] { "Deployment 1", "Deployment 2", "Deployment 3" }); // Example items
+//		deploymentDropdown.setItems(new String[] { "Deployment 1", "Deployment 2", "Deployment 3" }); // Example items
 		deploymentDropdown.setEnabled(false); // Initially disabled
 
 		// Add a SelectionListener to track changes in the deployment dropdown
@@ -64,8 +72,8 @@ public class SecondLoginWizardPage extends WizardPage {
 
 			// Example: Dynamically populate project dropdown based on first page's data
 			if (data != null && !data.isEmpty()) {
-				resourceGroupDropdown.setItems(new String[] { data + " - Project X", data + " - Project Y" });
-				deploymentDropdown.setItems(new String[] { data + " - Deployment A", data + " - Deployment B" });
+				resourceGroupDropdown.setItems(resourceGroups.toArray(new String[0]));
+				deploymentDropdown.setItems(deployments.toArray(new String[0]));
 			}
 		} else {
 			// Clear the inputs when the page is no longer visible (e.g., user clicked Back)
@@ -82,6 +90,14 @@ public class SecondLoginWizardPage extends WizardPage {
 
 	public Combo getDeploymentDropdown() {
 		return deploymentDropdown;
+	}
+	
+	public void setResourceGroups(final ArrayList<String> resourceGroups) {
+		this.resourceGroups = resourceGroups;
+	}
+	
+	public void setDeployments(final ArrayList<String> deployments) {
+		this.deployments = deployments;
 	}
 
 }

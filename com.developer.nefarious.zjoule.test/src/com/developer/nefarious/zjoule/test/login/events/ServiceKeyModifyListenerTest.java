@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
+import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
+import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
 import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
 import com.developer.nefarious.zjoule.login.utils.JsonValidator;
@@ -23,11 +25,14 @@ public class ServiceKeyModifyListenerTest {
 
 	@Mock
 	private FirstLoginWizardPage mockFirstLoginWizardPage;
+	
+	@Mock
+	private ILoginClient mockLoginClient;
 
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		cut = spy(new ServiceKeyModifyListener(mockFirstLoginWizardPage));
+		cut = spy(new ServiceKeyModifyListener(mockFirstLoginWizardPage, mockLoginClient));
 	}
 
 	@Test
@@ -43,6 +48,8 @@ public class ServiceKeyModifyListenerTest {
 			+ "}";
 		// @formatter:on
 		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockValidInputText);
+		GetResourceGroupsResponse mockGetResourceGroupsResponse = mock(GetResourceGroupsResponse.class);
+		when(mockLoginClient.getResourceGroups()).thenReturn(mockGetResourceGroupsResponse);
 		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
 			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockValidInputText)).thenReturn(true);
 			// Act
