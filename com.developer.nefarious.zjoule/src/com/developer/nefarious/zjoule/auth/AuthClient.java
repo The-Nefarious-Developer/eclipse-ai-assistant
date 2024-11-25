@@ -127,10 +127,14 @@ public class AuthClient implements IAuthClient {
 		URI endpoint = authClientHelper.createAuthUri(serviceKey.getTokenURL());
 		BodyPublisher requestBody = authClientHelper.createRequestBody(serviceKey.getClientId(),
 				serviceKey.getClientSecret());
-
-		HttpRequest request = HttpRequest.newBuilder().uri(endpoint)
-				.header("Content-Type", "application/x-www-form-urlencoded").POST(requestBody).build();
-
+		
+		// @formatter:off
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(endpoint)
+				.header("Content-Type", "application/x-www-form-urlencoded")
+				.POST(requestBody)
+				.build();
+		// @formatter:on
 		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
 		AccessToken newAccessToken = authClientHelper.convertResponseToObject(response.body());

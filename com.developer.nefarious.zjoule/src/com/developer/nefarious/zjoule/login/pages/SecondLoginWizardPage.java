@@ -19,9 +19,9 @@ public class SecondLoginWizardPage extends WizardPage {
 	
 	private Combo deploymentDropdown;
 	
-	private ArrayList<String> resourceGroups = new ArrayList<String>();
+	private ArrayList<String> resourceGroupsForSelection = new ArrayList<String>();
 	
-	private ArrayList<String> deployments = new ArrayList<String>();
+	private ArrayList<String> deploymentsForSelection = new ArrayList<String>();
 
 	public SecondLoginWizardPage() {
 		super(PAGE_ID);
@@ -41,10 +41,6 @@ public class SecondLoginWizardPage extends WizardPage {
 
 		resourceGroupDropdown = new Combo(container, SWT.DROP_DOWN | SWT.READ_ONLY);
 		resourceGroupDropdown.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		
-//		resourceGroups.add("Project A");
-//		resourceGroups.add("Project B");
-//		resourceGroupDropdown.setItems(resourceGroups.toArray(new String[0])); // Example items
 
 		// Add a SelectionListener to enable the deployment dropdown when a valid project is selected
 		resourceGroupDropdown.addSelectionListener(new ResourceGroupSelectionAdapter(this));
@@ -55,7 +51,6 @@ public class SecondLoginWizardPage extends WizardPage {
 
 		deploymentDropdown = new Combo(container, SWT.DROP_DOWN | SWT.READ_ONLY);
 		deploymentDropdown.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-//		deploymentDropdown.setItems(new String[] { "Deployment 1", "Deployment 2", "Deployment 3" }); // Example items
 		deploymentDropdown.setEnabled(false); // Initially disabled
 
 		// Add a SelectionListener to track changes in the deployment dropdown
@@ -74,8 +69,8 @@ public class SecondLoginWizardPage extends WizardPage {
 
 			// Example: Dynamically populate project dropdown based on first page's data
 			if (data != null && !data.isEmpty()) {
-				resourceGroupDropdown.setItems(resourceGroups.toArray(new String[0]));
-				deploymentDropdown.setItems(deployments.toArray(new String[0]));
+				resourceGroupDropdown.setItems(resourceGroupsForSelection.toArray(new String[0]));
+				deploymentDropdown.setItems(deploymentsForSelection.toArray(new String[0]));
 			}
 		} else {
 			// Clear the inputs when the page is no longer visible (e.g., user clicked Back)
@@ -94,12 +89,12 @@ public class SecondLoginWizardPage extends WizardPage {
 		return deploymentDropdown;
 	}
 	
-	public void setResourceGroups(final ArrayList<String> resourceGroups) {
-		this.resourceGroups = resourceGroups;
+	public void setResourceGroupsForSelection(final ArrayList<String> resourceGroupsForSelection) {
+		this.resourceGroupsForSelection = resourceGroupsForSelection;
 	}
 	
-	public void setDeployments(final ArrayList<String> deployments) {
-		this.deployments = deployments;
+	public void setDeployments(final ArrayList<String> deploymentsForSelection) {
+		this.deploymentsForSelection = deploymentsForSelection;
 	}
 
 }

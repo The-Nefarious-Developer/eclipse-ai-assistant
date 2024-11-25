@@ -11,12 +11,10 @@ import com.google.gson.Gson;
 public class ServiceKeyModifyListener implements ModifyListener {
 
 	private FirstLoginWizardPage firstLoginWizardPage;
-	
+
 	private ILoginClient loginClient;
 
-	public ServiceKeyModifyListener(
-			final FirstLoginWizardPage firstLoginWizardPage,
-			final ILoginClient loginClient) {
+	public ServiceKeyModifyListener(final FirstLoginWizardPage firstLoginWizardPage, final ILoginClient loginClient) {
 		this.firstLoginWizardPage = firstLoginWizardPage;
 		this.loginClient = loginClient;
 	}
@@ -35,12 +33,12 @@ public class ServiceKeyModifyListener implements ModifyListener {
 //					try {
 //					GetResourceGroupsResponse getResourceGroupsResponse = loginClient.getResourceGroups();
 //					firstLoginWizardPage.setResourceGroupsOnTheSeconPage(getResourceGroupsResponse);
-					firstLoginWizardPage.setValidationError(null);
-					enableNextButton();
 //					} catch(Exception error) {
 //						firstLoginWizardPage.setValidationError("Invalid service key. Please provide valid credentials.");
 //						disableNextButton();
 //					}
+					firstLoginWizardPage.setValidationError(null);
+					enableNextButton();
 				} else {
 					firstLoginWizardPage.setValidationError("Invalid service key. Please provide valid credentials.");
 					disableNextButton();

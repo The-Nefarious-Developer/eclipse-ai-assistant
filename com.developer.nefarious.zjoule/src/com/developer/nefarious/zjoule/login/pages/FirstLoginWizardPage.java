@@ -76,7 +76,7 @@ public class FirstLoginWizardPage extends WizardPage {
 	public void setResourceGroupsOnTheSeconPage(final GetResourceGroupsResponse getResourceGroupsResponse) {
 		SecondLoginWizardPage secondPage = (SecondLoginWizardPage) getWizard().getPage(SecondLoginWizardPage.PAGE_ID);
 		ArrayList<String> resourceGroupsAvailableForSelection = ResourceGroupIdExtractor.extractResourceGroupIds(getResourceGroupsResponse);
-		secondPage.setResourceGroups(resourceGroupsAvailableForSelection);
+		secondPage.setResourceGroupsForSelection(resourceGroupsAvailableForSelection);
 		
 	}
 
