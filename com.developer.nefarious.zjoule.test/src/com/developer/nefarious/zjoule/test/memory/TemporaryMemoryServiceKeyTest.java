@@ -7,17 +7,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.auth.AccessToken;
+import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.memory.IMemoryAccessToken;
+import com.developer.nefarious.zjoule.memory.IMemoryServiceKey;
 import com.developer.nefarious.zjoule.memory.IObjectSerializer;
-import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
+import com.developer.nefarious.zjoule.memory.TemporaryMemoryServiceKey;
 
-public class MemoryAccessTokenTest {
-
-	public static final String KEY = "access-token";
+public class TemporaryMemoryServiceKeyTest {
 	
-	private IMemoryAccessToken cut;
+	public static final String KEY = "tmp-service-key";
+	
+	private IMemoryServiceKey cut;
 	
 	@Mock
 	IObjectSerializer mockObjectSerializer;
@@ -28,31 +28,32 @@ public class MemoryAccessTokenTest {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		cut = new MemoryAccessToken(mockObjectSerializer, mockEclipseMemory);
+		cut = new TemporaryMemoryServiceKey(mockObjectSerializer, mockEclipseMemory);
 	}
 	
 	@Test
-	public void shouldSaveAccessToken() {
+	public void shouldSaveServiceKey() {
 		// Arrange
-		AccessToken mockAccessToken = new AccessToken();
+		ServiceKey mockServiceKey = new ServiceKey();
 		String mockSerializedObject = "It doesn't matter";
-		when(mockObjectSerializer.serialize(mockAccessToken)).thenReturn(mockSerializedObject);
+		when(mockObjectSerializer.serialize(mockServiceKey)).thenReturn(mockSerializedObject);
 		// Act
-		cut.save(mockAccessToken);
+		cut.save(mockServiceKey);
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(KEY, mockSerializedObject);
 	}
 	
 	@Test
-	public void shouldAccessToken() {
+	public void shouldLoadServiceKey() {
 		// Arrange
-		AccessToken expectedValue = new AccessToken();
+		ServiceKey expectedValue = new ServiceKey();
 		String mockSerializedObject = "It doesn't matter";
 		when(mockEclipseMemory.loadFromEclipsePreferences(KEY)).thenReturn(mockSerializedObject);
-		when(mockObjectSerializer.deserialize(mockSerializedObject, AccessToken.class)).thenReturn(expectedValue);
+		when(mockObjectSerializer.deserialize(mockSerializedObject, ServiceKey.class)).thenReturn(expectedValue);
 		// Act
-		AccessToken returnValue = cut.load();
+		ServiceKey returnValue = cut.load();
 		// Assert
 		assertEquals(returnValue, expectedValue);
 	}
+
 }

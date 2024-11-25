@@ -4,7 +4,7 @@ import com.developer.nefarious.zjoule.auth.ServiceKey;
 
 public interface IMemoryServiceKey {
 	
-	public static final String KEY = "serviceKey";
+	public static final String KEY = "service-key";
 	
 	void save(ServiceKey serviceKey);
 	

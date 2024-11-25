@@ -9,14 +9,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
+import com.developer.nefarious.zjoule.memory.IMemoryServiceKey;
 import com.developer.nefarious.zjoule.memory.IObjectSerializer;
 import com.developer.nefarious.zjoule.memory.MemoryServiceKey;
 
 public class MemoryServiceKeyTest {
 	
-	public static final String KEY = "serviceKey";
+	public static final String KEY = "service-key";
 	
-	private MemoryServiceKey cut;
+	private IMemoryServiceKey cut;
 	
 	@Mock
 	IObjectSerializer mockObjectSerializer;
