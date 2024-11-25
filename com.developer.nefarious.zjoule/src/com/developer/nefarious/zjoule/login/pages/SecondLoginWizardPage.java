@@ -12,6 +12,8 @@ import com.developer.nefarious.zjoule.login.events.DeploymentSelectionAdapter;
 import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
 
 public class SecondLoginWizardPage extends WizardPage {
+	
+	public static final String PAGE_ID = "Second Page";
 
 	private Combo resourceGroupDropdown;
 	
@@ -22,7 +24,7 @@ public class SecondLoginWizardPage extends WizardPage {
 	private ArrayList<String> deployments = new ArrayList<String>();
 
 	public SecondLoginWizardPage() {
-		super("Second Page");
+		super(PAGE_ID);
 		setTitle("Select the model");
 		setDescription("Choose the Resource Group and the Deployment ID.");
 		setPageComplete(false); // Initially set the page as incomplete
@@ -67,7 +69,7 @@ public class SecondLoginWizardPage extends WizardPage {
 		super.setVisible(visible);
 		if (visible) {
 			// Retrieve data from the first page
-			FirstLoginWizardPage firstPage = (FirstLoginWizardPage) getWizard().getPage("First Page");
+			FirstLoginWizardPage firstPage = (FirstLoginWizardPage) getWizard().getPage(FirstLoginWizardPage.PAGE_ID);
 			String data = firstPage.getInputText();
 
 			// Example: Dynamically populate project dropdown based on first page's data

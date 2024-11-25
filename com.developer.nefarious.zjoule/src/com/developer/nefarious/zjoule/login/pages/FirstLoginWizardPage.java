@@ -1,5 +1,6 @@
 package com.developer.nefarious.zjoule.login.pages;
 
+import java.util.ArrayList;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -8,9 +9,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.login.api.LoginClient;
+import com.developer.nefarious.zjoule.login.api.ResourceGroupIdExtractor;
 import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
 
 public class FirstLoginWizardPage extends WizardPage {
+	
+	public static final String PAGE_ID = "First Page";
 
 	private Text textField;
 	
@@ -21,7 +25,7 @@ public class FirstLoginWizardPage extends WizardPage {
 	private final int inputWidth = 300;
 
 	public FirstLoginWizardPage() {
-		super("First Page");
+		super(PAGE_ID);
 		setTitle("Provide credentials");
 		setDescription("Attach the Service Key json file content for the SAP AI Core service.");
 		setPageComplete(false); // Initially set the page as incomplete
@@ -70,8 +74,9 @@ public class FirstLoginWizardPage extends WizardPage {
 	}
 	
 	public void setResourceGroupsOnTheSeconPage(final GetResourceGroupsResponse getResourceGroupsResponse) {
-		SecondLoginWizardPage secondPage = (SecondLoginWizardPage) getWizard().getPage("Second Page");
-//		secondPage.setResourceGroups();
+		SecondLoginWizardPage secondPage = (SecondLoginWizardPage) getWizard().getPage(SecondLoginWizardPage.PAGE_ID);
+		ArrayList<String> resourceGroupsAvailableForSelection = ResourceGroupIdExtractor.extractResourceGroupIds(getResourceGroupsResponse);
+		secondPage.setResourceGroups(resourceGroupsAvailableForSelection);
 		
 	}
 
