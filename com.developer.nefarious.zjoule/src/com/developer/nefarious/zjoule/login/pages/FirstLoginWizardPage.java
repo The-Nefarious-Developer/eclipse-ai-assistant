@@ -7,10 +7,17 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import com.developer.nefarious.zjoule.auth.AuthClientHelper;
+import com.developer.nefarious.zjoule.auth.IAuthClient;
+import com.developer.nefarious.zjoule.auth.AuthClient;
 import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
+import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.api.LoginClient;
+import com.developer.nefarious.zjoule.login.api.LoginClientHelper;
 import com.developer.nefarious.zjoule.login.api.ResourceGroupIdExtractor;
 import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
+import com.developer.nefarious.zjoule.memory.TemporaryMemoryAccessToken;
+import com.developer.nefarious.zjoule.memory.TemporaryMemoryServiceKey;
 
 public class FirstLoginWizardPage extends WizardPage {
 	
@@ -44,7 +51,7 @@ public class FirstLoginWizardPage extends WizardPage {
 		textField.setLayoutData(gridData);
 
 		// Add a ModifyListener to monitor textField changes
-		textField.addModifyListener(new ServiceKeyModifyListener(this, new LoginClient()));
+		textField.addModifyListener(new ServiceKeyModifyListener(this, createLoginClient()));
 
 		// Hidden error text widget
 		errorText = new Text(container, SWT.READ_ONLY | SWT.MULTI | SWT.WRAP);
@@ -77,7 +84,11 @@ public class FirstLoginWizardPage extends WizardPage {
 		SecondLoginWizardPage secondPage = (SecondLoginWizardPage) getWizard().getPage(SecondLoginWizardPage.PAGE_ID);
 		ArrayList<String> resourceGroupsAvailableForSelection = ResourceGroupIdExtractor.extractResourceGroupIds(getResourceGroupsResponse);
 		secondPage.setResourceGroupsForSelection(resourceGroupsAvailableForSelection);
-		
+	}
+	
+	private ILoginClient createLoginClient() {
+		IAuthClient tmpAuthClient = new AuthClient(new TemporaryMemoryAccessToken(), new TemporaryMemoryServiceKey(), new AuthClientHelper());
+		return new LoginClient(new LoginClientHelper(), tmpAuthClient);
 	}
 
 }
