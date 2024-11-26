@@ -22,9 +22,9 @@ public class ServiceKeyModifyListener implements ModifyListener {
 	@Override
 	public void modifyText(final ModifyEvent event) {
 		String inputText = firstLoginWizardPage.getInputText().trim();
-		// Enable or disable the Next button based on textField content
+		
 		if (inputText.isEmpty()) {
-			firstLoginWizardPage.setValidationError(null);
+			clearMessageLog();
 			disableNextButton();
 		} else {
 			if (JsonValidator.isValidJson(inputText)) {
@@ -37,14 +37,14 @@ public class ServiceKeyModifyListener implements ModifyListener {
 //						firstLoginWizardPage.setValidationError("Invalid service key. Please provide valid credentials.");
 //						disableNextButton();
 //					}
-					firstLoginWizardPage.setValidationError(null);
+					clearMessageLog();
 					enableNextButton();
 				} else {
-					firstLoginWizardPage.setValidationError("Invalid service key. Please provide valid credentials.");
+					showErrorMessage();
 					disableNextButton();
 				}
 			} else {
-				firstLoginWizardPage.setValidationError("Invalid service key. Please provide valid credentials.");
+				showErrorMessage();
 				disableNextButton();
 			}
 		}
@@ -53,6 +53,14 @@ public class ServiceKeyModifyListener implements ModifyListener {
 	private ServiceKey parseInputToObject(final String inputText) {
 		Gson gson = new Gson();
 		return gson.fromJson(inputText, ServiceKey.class);
+	}
+	
+	private void showErrorMessage() {
+		firstLoginWizardPage.setValidationError("Invalid service key. Please provide valid credentials.");
+	}
+	
+	private void clearMessageLog() {
+		firstLoginWizardPage.setValidationError(null);
 	}
 
 	private void enableNextButton() {
