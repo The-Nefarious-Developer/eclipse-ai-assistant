@@ -5,7 +5,11 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import com.developer.nefarious.zjoule.auth.AuthClient;
+import com.developer.nefarious.zjoule.auth.IAuthClient;
 import com.developer.nefarious.zjoule.auth.ServiceKey;
+import com.developer.nefarious.zjoule.memory.TemporaryMemoryAccessToken;
+import com.developer.nefarious.zjoule.memory.TemporaryMemoryServiceKey;
 
 public class LoginClient implements ILoginClient {
 	
@@ -20,12 +24,14 @@ public class LoginClient implements ILoginClient {
 
 	@Override
 	public GetResourceGroupsResponse getResourceGroups(final ServiceKey serviceKey) throws IOException, InterruptedException {
+		IAuthClient authClient = new AuthClient(new TemporaryMemoryAccessToken(), new TemporaryMemoryServiceKey());
+		
 		URI endpoint = loginClientHelper.createAuthUri(serviceKey.getTokenURL());
 		
 		// @formatter:off
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(endpoint)
-				.header("Content-Type", "application/x-www-form-urlencoded")
+				.header("Authorization", "Bearer " + authClient.getAccessToken())
 				.GET()
 				.build();
 		// @formatter:on
