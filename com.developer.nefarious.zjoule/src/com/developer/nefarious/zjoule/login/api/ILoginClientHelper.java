@@ -6,6 +6,8 @@ public interface ILoginClientHelper {
 	
 	URI createAuthUri(String tokenEndpoint);
 	
-	GetResourceGroupsResponse convertResponseToObject(String responseBody);
+	GetResourceGroupsResponse parseResourceGroupsResponseToObject(String responseBody);
+	
+	GetDeploymentsResponse parseDeploymentsResponseToObject(String responseBody);
 
 }

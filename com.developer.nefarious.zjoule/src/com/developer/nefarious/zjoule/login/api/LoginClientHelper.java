@@ -17,8 +17,13 @@ public class LoginClientHelper implements ILoginClientHelper {
 	}
 
 	@Override
-	public GetResourceGroupsResponse convertResponseToObject(final String responseBody) {
+	public GetResourceGroupsResponse parseResourceGroupsResponseToObject(final String responseBody) {
 		return gson.fromJson(responseBody, GetResourceGroupsResponse.class);
+	}
+	
+	@Override
+	public GetDeploymentsResponse parseDeploymentsResponseToObject(final String responseBody) {
+		return gson.fromJson(responseBody, GetDeploymentsResponse.class);
 	}
 
 }

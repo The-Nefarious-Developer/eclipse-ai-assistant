@@ -7,6 +7,6 @@ public interface ILoginClient {
 	
 	GetResourceGroupsResponse getResourceGroups(final ServiceKey serviceKey) throws IOException, InterruptedException;
 	
-	GetDeploymentsResponse getDeployments(final ServiceKey serviceKey, final String resourceGroup);
+	GetDeploymentsResponse getDeployments(final ServiceKey serviceKey, final String resourceGroup) throws IOException, InterruptedException;
 	
 }

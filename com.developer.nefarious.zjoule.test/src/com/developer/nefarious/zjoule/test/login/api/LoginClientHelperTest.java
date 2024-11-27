@@ -8,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
+import com.developer.nefarious.zjoule.login.api.GetDeploymentsResponse;
 import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.login.api.LoginClientHelper;
 import com.google.gson.Gson;
@@ -42,13 +43,25 @@ public class LoginClientHelperTest {
 	}
 
 	@Test
-	public void shouldConvertTheResponseBodyToObject() {
+	public void shouldConvertTheResourceGroupsResponseBodyToObject() {
 		// Arrange
 		Gson gson = new Gson();
 		String mockResponseBody = "{ \"count\": 1 }";
 		GetResourceGroupsResponse expectedObject = gson.fromJson(mockResponseBody, GetResourceGroupsResponse.class);
 		// Act
-		GetResourceGroupsResponse returnObject = cut.convertResponseToObject(mockResponseBody);
+		GetResourceGroupsResponse returnObject = cut.parseResourceGroupsResponseToObject(mockResponseBody);
+		// Assert
+		assertEquals(returnObject.getCount(), expectedObject.getCount());
+	}
+
+	@Test
+	public void shouldConvertTheDeploymentsResponseBodyToObject() {
+		// Arrange
+		Gson gson = new Gson();
+		String mockResponseBody = "{ \"count\": 1 }";
+		GetDeploymentsResponse expectedObject = gson.fromJson(mockResponseBody, GetDeploymentsResponse.class);
+		// Act
+		GetDeploymentsResponse returnObject = cut.parseDeploymentsResponseToObject(mockResponseBody);
 		// Assert
 		assertEquals(returnObject.getCount(), expectedObject.getCount());
 	}

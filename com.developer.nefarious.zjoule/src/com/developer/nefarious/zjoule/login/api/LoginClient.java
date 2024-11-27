@@ -35,14 +35,26 @@ public class LoginClient implements ILoginClient {
 		// @formatter:on
 		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-		GetResourceGroupsResponse getResourceGroupsResponse = loginClientHelper.convertResponseToObject(response.body());
+		GetResourceGroupsResponse getResourceGroupsResponse = loginClientHelper.parseResourceGroupsResponseToObject(response.body());
 		return getResourceGroupsResponse;
 	}
 
 	@Override
-	public GetDeploymentsResponse getDeployments(final ServiceKey serviceKey, final String resourceGroup) {
-		// TODO Auto-generated method stub
-		return null;
+	public GetDeploymentsResponse getDeployments(final ServiceKey serviceKey, final String resourceGroup) throws IOException, InterruptedException {
+		URI endpoint = loginClientHelper.createAuthUri(serviceKey.getServiceURL() + "/lm/deployments");
+		
+		// @formatter:off
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(endpoint)
+				.header("Authorization", "Bearer " + authClient.getNewAccessToken(serviceKey))
+				.header("AI-Resource-Group", resourceGroup)
+				.GET()
+				.build();
+		// @formatter:on
+		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+		GetDeploymentsResponse getDeploymentsResponse = loginClientHelper.parseDeploymentsResponseToObject(response.body());
+		return getDeploymentsResponse;
 	}
 
 }
