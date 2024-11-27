@@ -61,6 +61,7 @@ public class AuthClient implements IAuthClient {
 
 		AccessToken newAccessToken = authClientHelper.convertResponseToObject(response.body());
 		memoryAccessToken.save(newAccessToken);
+		memoryServiceKey.save(serviceKey);
 
 		return newAccessToken.getAccessToken();
 	}
