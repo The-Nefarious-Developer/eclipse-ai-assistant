@@ -39,7 +39,7 @@ public class ServiceKeyModifyListener implements ModifyListener {
 						disableNextButton();
 						return;
 					}
-//					firstLoginWizardPage.setResourceGroupsOnTheSeconPage(getResourceGroupsResponse);
+					firstLoginWizardPage.setResourceGroupsOnTheSeconPage(getResourceGroupsResponse);
 					clearMessageLog();
 					enableNextButton();
 				} else {

@@ -48,8 +48,7 @@ public class AuthClient implements IAuthClient {
 
 	public String getNewAccessToken(final ServiceKey serviceKey) throws IOException, InterruptedException {
 		URI endpoint = authClientHelper.createAuthUri(serviceKey.getTokenURL());
-		BodyPublisher requestBody = authClientHelper.createRequestBody(serviceKey.getClientId(),
-				serviceKey.getClientSecret());
+		BodyPublisher requestBody = authClientHelper.createRequestBody(serviceKey.getClientId(), serviceKey.getClientSecret());
 
 		// @formatter:off
 		HttpRequest request = HttpRequest.newBuilder()

@@ -12,15 +12,15 @@ import com.developer.nefarious.zjoule.login.events.DeploymentSelectionAdapter;
 import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
 
 public class SecondLoginWizardPage extends WizardPage {
-	
+
 	public static final String PAGE_ID = "Second Page";
 
 	private Combo resourceGroupDropdown;
-	
+
 	private Combo deploymentDropdown;
-	
+
 	private ArrayList<String> resourceGroupsForSelection = new ArrayList<String>();
-	
+
 	private ArrayList<String> deploymentsForSelection = new ArrayList<String>();
 
 	public SecondLoginWizardPage() {
@@ -42,7 +42,8 @@ public class SecondLoginWizardPage extends WizardPage {
 		resourceGroupDropdown = new Combo(container, SWT.DROP_DOWN | SWT.READ_ONLY);
 		resourceGroupDropdown.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
-		// Add a SelectionListener to enable the deployment dropdown when a valid project is selected
+		// Add a SelectionListener to enable the deployment dropdown when a valid
+		// project is selected
 		resourceGroupDropdown.addSelectionListener(new ResourceGroupSelectionAdapter(this));
 
 		// Create label and dropdown for deployment ID selection
@@ -88,11 +89,11 @@ public class SecondLoginWizardPage extends WizardPage {
 	public Combo getDeploymentDropdown() {
 		return deploymentDropdown;
 	}
-	
+
 	public void setResourceGroupsForSelection(final ArrayList<String> resourceGroupsForSelection) {
 		this.resourceGroupsForSelection = resourceGroupsForSelection;
 	}
-	
+
 	public void setDeployments(final ArrayList<String> deploymentsForSelection) {
 		this.deploymentsForSelection = deploymentsForSelection;
 	}

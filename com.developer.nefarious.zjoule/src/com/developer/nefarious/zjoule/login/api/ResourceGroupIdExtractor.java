@@ -11,6 +11,8 @@ public class ResourceGroupIdExtractor {
             return null;
         }
         
+        System.out.println(response.getCount());
+        
         // Step 1: Get the list of ResourceGroup objects from the response
         List<ResourceGroup> resourceGroups = response.getResourceGroups();
 

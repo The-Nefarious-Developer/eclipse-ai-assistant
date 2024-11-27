@@ -24,7 +24,7 @@ public class LoginClient implements ILoginClient {
 
 	@Override
 	public GetResourceGroupsResponse getResourceGroups(final ServiceKey serviceKey) throws IOException, InterruptedException {
-		URI endpoint = loginClientHelper.createAuthUri(serviceKey.getTokenURL());
+		URI endpoint = loginClientHelper.createAuthUri(serviceKey.getServiceURL() + "/admin/resourceGroups");
 		
 		// @formatter:off
 		HttpRequest request = HttpRequest.newBuilder()
