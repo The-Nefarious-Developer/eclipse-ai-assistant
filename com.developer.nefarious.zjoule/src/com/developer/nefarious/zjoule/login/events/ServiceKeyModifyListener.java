@@ -1,5 +1,6 @@
 package com.developer.nefarious.zjoule.login.events;
 
+import java.io.IOException;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import com.developer.nefarious.zjoule.auth.ServiceKey;
@@ -48,14 +49,14 @@ public class ServiceKeyModifyListener implements ModifyListener {
 
 		try {
 			handleValidServiceKey(serviceKey);
-		} catch (Exception e) {
+		} catch (IOException | InterruptedException e) {
 			showErrorMessage();
 			disableNextButton();
 		}
 
 	}
 
-	private void handleValidServiceKey(final ServiceKey serviceKey) throws Exception {
+	private void handleValidServiceKey(final ServiceKey serviceKey) throws IOException, InterruptedException {
 		GetResourceGroupsResponse getResourceGroupsResponse = loginClient.getResourceGroups(serviceKey);
 		firstLoginWizardPage.setResourceGroupsOnTheSecondPage(getResourceGroupsResponse);
 		firstLoginWizardPage.setServiceKey(serviceKey);

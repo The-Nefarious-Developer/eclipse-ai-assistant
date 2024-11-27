@@ -32,7 +32,7 @@ public class LoginClient implements ILoginClient {
 				.header("Authorization", "Bearer " + authClient.getNewAccessToken(serviceKey))
 				.GET()
 				.build();
-		// @formatter:on
+		// @formatter:off
 		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
 		GetResourceGroupsResponse getResourceGroupsResponse = loginClientHelper.parseResourceGroupsResponseToObject(response.body());

@@ -1,14 +1,21 @@
 package com.developer.nefarious.zjoule.test.login.events;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import java.io.IOException;
+import java.util.ArrayList;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Combo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
+import com.developer.nefarious.zjoule.auth.ServiceKey;
+import com.developer.nefarious.zjoule.login.api.DeploymentConfigurationNameExtractor;
+import com.developer.nefarious.zjoule.login.api.GetDeploymentsResponse;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
 import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
@@ -26,12 +33,11 @@ public class ResourceGroupSelectionAdapterTest {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		
 		cut = new ResourceGroupSelectionAdapter(mockSecondLoginWizardPage, mockLoginClient);
 	}
 	
 	@Test
-	public void shouldEnableTheDeploymentSelection() {
+	public void shouldEnableTheDeploymentSelection() throws IOException, InterruptedException {
 		// Arrange
 		SelectionEvent mockSelectionEvent = mock(SelectionEvent.class);
 		
@@ -44,6 +50,17 @@ public class ResourceGroupSelectionAdapterTest {
 		String mockText = "Some random text I don't care about.";
 		when(mockProjectDropdown.getText()).thenReturn(mockText);
 		
+		ServiceKey mockServiceKey = mock(ServiceKey.class);
+		when(mockSecondLoginWizardPage.getServiceKey()).thenReturn(mockServiceKey);
+		
+		GetDeploymentsResponse mockGetDeploymentsResponse = mock(GetDeploymentsResponse.class);
+		when(mockLoginClient.getDeployments(mockServiceKey, mockText)).thenReturn(mockGetDeploymentsResponse);
+		
+		ArrayList<String> mockListOfConfigurationNames = new ArrayList<String>();
+		try (MockedStatic<DeploymentConfigurationNameExtractor> configNameExtractorStatic = mockStatic(DeploymentConfigurationNameExtractor.class)) {
+			configNameExtractorStatic.when(() -> DeploymentConfigurationNameExtractor.extractResourceGroupIds(mockGetDeploymentsResponse)).thenReturn(mockListOfConfigurationNames);
+		}
+		
 		// Act
 		cut.widgetSelected(mockSelectionEvent);
 		
@@ -52,6 +69,7 @@ public class ResourceGroupSelectionAdapterTest {
 		verify(mockDeploymentDropdown).setEnabled(false);
 		verify(mockSecondLoginWizardPage).setPageComplete(false);
 		verify(mockDeploymentDropdown).setEnabled(true);
+		verify(mockSecondLoginWizardPage).setDeploymentsForSelection(mockListOfConfigurationNames);
 	}
 	
 	@Test

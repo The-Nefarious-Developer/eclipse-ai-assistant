@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Label;
 import com.developer.nefarious.zjoule.auth.AuthClient;
 import com.developer.nefarious.zjoule.auth.AuthClientHelper;
 import com.developer.nefarious.zjoule.auth.IAuthClient;
+import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.api.LoginClient;
 import com.developer.nefarious.zjoule.login.api.LoginClientHelper;
@@ -79,7 +80,6 @@ public class SecondLoginWizardPage extends WizardPage {
 			// Example: Dynamically populate project dropdown based on first page's data
 			if (data != null && !data.isEmpty()) {
 				resourceGroupDropdown.setItems(resourceGroupsForSelection.toArray(new String[0]));
-				deploymentDropdown.setItems(deploymentsForSelection.toArray(new String[0]));
 			}
 		} else {
 			// Clear the inputs when the page is no longer visible (e.g., user clicked Back)
@@ -97,13 +97,14 @@ public class SecondLoginWizardPage extends WizardPage {
 	public Combo getDeploymentDropdown() {
 		return deploymentDropdown;
 	}
-
+	
 	public void setResourceGroupsForSelection(final ArrayList<String> resourceGroupsForSelection) {
 		this.resourceGroupsForSelection = resourceGroupsForSelection;
 	}
 
 	public void setDeploymentsForSelection(final ArrayList<String> deploymentsForSelection) {
 		this.deploymentsForSelection = deploymentsForSelection;
+		deploymentDropdown.setItems(deploymentsForSelection.toArray(new String[0]));
 	}
 	
 	private ILoginClient createLoginClient() {
@@ -111,10 +112,10 @@ public class SecondLoginWizardPage extends WizardPage {
 		return new LoginClient(new LoginClientHelper(), tmpAuthClient);
 	}
 	
-//	public ServiceKey getServiceKey() {
-//		FirstLoginWizardPage firstPage = (FirstLoginWizardPage) getWizard().getPage(FirstLoginWizardPage.PAGE_ID);
-//		String serviceKeyInStringFormat = firstPage.getInputText();
-//		
-//	}
+	public ServiceKey getServiceKey() {
+		FirstLoginWizardPage firstPage = (FirstLoginWizardPage) getWizard().getPage(FirstLoginWizardPage.PAGE_ID);
+		return firstPage.getServiceKey();
+		
+	}
 
 }
