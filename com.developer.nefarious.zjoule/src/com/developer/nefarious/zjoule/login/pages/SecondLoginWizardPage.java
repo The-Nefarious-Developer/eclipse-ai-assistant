@@ -110,5 +110,11 @@ public class SecondLoginWizardPage extends WizardPage {
 		IAuthClient tmpAuthClient = new AuthClient(new TemporaryMemoryAccessToken(), new TemporaryMemoryServiceKey(), new AuthClientHelper());
 		return new LoginClient(new LoginClientHelper(), tmpAuthClient);
 	}
+	
+//	public ServiceKey getServiceKey() {
+//		FirstLoginWizardPage firstPage = (FirstLoginWizardPage) getWizard().getPage(FirstLoginWizardPage.PAGE_ID);
+//		String serviceKeyInStringFormat = firstPage.getInputText();
+//		
+//	}
 
 }

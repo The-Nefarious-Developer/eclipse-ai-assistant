@@ -1,6 +1,5 @@
 package com.developer.nefarious.zjoule.test.login.events;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.spy;
@@ -19,6 +18,7 @@ import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
 import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
 import com.developer.nefarious.zjoule.login.utils.JsonValidator;
+import com.google.gson.Gson;
 
 public class ServiceKeyModifyListenerTest {
 
@@ -31,56 +31,55 @@ public class ServiceKeyModifyListenerTest {
 
 	@Mock
 	private ILoginClient mockLoginClient;
+	
+	@Mock
+	private Gson mockGson;
+	
+	@Mock
+	private ServiceKey mockServiceKey;
 
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		cut = spy(new ServiceKeyModifyListener(mockFirstLoginWizardPage, mockLoginClient));
+		cut = spy(new ServiceKeyModifyListener(mockFirstLoginWizardPage, mockLoginClient, mockGson));
 	}
 
 	@Test
 	public void shouldEnableTheNextButtonIfInputIsValid() throws IOException, InterruptedException {
 		// Arrange
 		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
-		// @formatter:off
-		String mockValidInputText = "{" 
-			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
-			+ "\"clientid\": \"this matters\", " 
-			+ "\"clientsecret\": \"this matters\", "
-			+ "\"url\": \"this matters\"" 
-			+ "}";
-		// @formatter:on
-		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockValidInputText);
+		String mockInputText = "{ \"attribute\": \"value\" }";
+		String mockInputTextTrimmed = mockInputText.trim();
+		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockInputTextTrimmed);
 		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
-			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockValidInputText)).thenReturn(true);
+			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockInputTextTrimmed)).thenReturn(true);
 		}
+		when(mockGson.fromJson(mockInputTextTrimmed, ServiceKey.class)).thenReturn(mockServiceKey);
+		when(mockServiceKey.isValid()).thenReturn(true);
 		GetResourceGroupsResponse mockGetResourceGroupsResponse = mock(GetResourceGroupsResponse.class);
-		when(mockLoginClient.getResourceGroups(any(ServiceKey.class))).thenReturn(mockGetResourceGroupsResponse);
+		when(mockLoginClient.getResourceGroups(mockServiceKey)).thenReturn(mockGetResourceGroupsResponse);
 		// Act
 		cut.modifyText(mockModifyEvent);
 		// Assert
 		verify(mockFirstLoginWizardPage).setValidationError(null);
 		verify(mockFirstLoginWizardPage).setPageComplete(true);
-		verify(mockFirstLoginWizardPage).setResourceGroupsOnTheSeconPage(mockGetResourceGroupsResponse);
+		verify(mockFirstLoginWizardPage).setResourceGroupsOnTheSecondPage(mockGetResourceGroupsResponse);
+		verify(mockFirstLoginWizardPage).setServiceKey(mockServiceKey);
 	}
 	
 	@Test
 	public void shouldGracefullyHandleAnyError() throws IOException, InterruptedException {
 		// Arrange
 		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
-		// @formatter:off
-		String mockValidInputText = "{" 
-			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
-			+ "\"clientid\": \"this matters\", " 
-			+ "\"clientsecret\": \"this matters\", "
-			+ "\"url\": \"this matters\"" 
-			+ "}";
-		// @formatter:on
-		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockValidInputText);
+		String mockInputText = "{ \"attribute\": \"value\" }";
+		String mockInputTextTrimmed = mockInputText.trim();
+		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockInputTextTrimmed);
 		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
-			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockValidInputText)).thenReturn(true);
+			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockInputTextTrimmed)).thenReturn(true);
 		}
-		when(mockLoginClient.getResourceGroups(any(ServiceKey.class))).thenThrow(new IOException());
+		when(mockGson.fromJson(mockInputTextTrimmed, ServiceKey.class)).thenReturn(mockServiceKey);
+		when(mockServiceKey.isValid()).thenReturn(true);
+		when(mockLoginClient.getResourceGroups(mockServiceKey)).thenThrow(new IOException());
 		// Act
 		cut.modifyText(mockModifyEvent);
 		// Assert
@@ -105,17 +104,11 @@ public class ServiceKeyModifyListenerTest {
 	public void shouldDisableTheNextButtonIfInputIsInvalid() {
 		// Arrange
 		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
-		// @formatter:off
-		String mockValidInputText = "{" 
-			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
-			+ "\"clientid\": \"this matters\", " 
-			+ "\"clientsecret\": \"this matters\", "
-			+ "\"url\": \"this matters\"" 
-			+ "}";
-		// @formatter:on
-		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockValidInputText);
+		String mockInputText = "{ \"attribute\": \"value\" }";
+		String mockInputTextTrimmed = mockInputText.trim();
+		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockInputTextTrimmed);
 		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
-			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockValidInputText)).thenReturn(false);
+			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockInputTextTrimmed)).thenReturn(false);
 			// Act
 			cut.modifyText(mockModifyEvent);
 			// Assert
@@ -124,33 +117,23 @@ public class ServiceKeyModifyListenerTest {
 		}
 	}
 
-	/*
-	 * Be aware that in the following test, the input conversion method is not being
-	 * mocked. More tests are being covered through the ServiceKeyTest.java. The
-	 * purpose here is only make sure the error message is going to be properly
-	 * displayed.
-	 */
 	@Test
-	public void shouldDisableTheNextButtonIfInputIsNotComplete() {
+	public void shouldDisableTheNextButtonIfServiceKeyIsInvalid() {
 		// Arrange
 		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
-		// @formatter:off
-		String mockValidInputText = "{" 
-			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
-			+ "\"clientid\": \"this matters\", " 
-			+ "\"clientsecret\": \"\", " 
-			+ "\"url\": \"this matters\"" 
-			+ "}";
-		// @formatter:on
-		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockValidInputText);
+		String mockInputText = "{ \"attribute\": \"value\" }";
+		String mockInputTextTrimmed = mockInputText.trim();
+		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockInputTextTrimmed);
 		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
-			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockValidInputText)).thenReturn(true);
-			// Act
-			cut.modifyText(mockModifyEvent);
-			// Assert
-			verify(mockFirstLoginWizardPage).setValidationError(INVALID_INPUT_MESSAGE);
-			verify(mockFirstLoginWizardPage).setPageComplete(false);
+			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockInputTextTrimmed)).thenReturn(true);
 		}
+		when(mockGson.fromJson(mockInputTextTrimmed, ServiceKey.class)).thenReturn(mockServiceKey);
+		when(mockServiceKey.isValid()).thenReturn(false);
+		// Act
+		cut.modifyText(mockModifyEvent);
+		// Assert
+		verify(mockFirstLoginWizardPage).setValidationError(INVALID_INPUT_MESSAGE);
+		verify(mockFirstLoginWizardPage).setPageComplete(false);
 	}
 
 }

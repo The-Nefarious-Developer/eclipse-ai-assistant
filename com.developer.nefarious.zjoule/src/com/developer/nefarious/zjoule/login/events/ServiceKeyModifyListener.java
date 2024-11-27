@@ -14,10 +14,13 @@ public class ServiceKeyModifyListener implements ModifyListener {
 	private FirstLoginWizardPage firstLoginWizardPage;
 
 	private ILoginClient loginClient;
+	
+	private Gson gson;
 
-	public ServiceKeyModifyListener(final FirstLoginWizardPage firstLoginWizardPage, final ILoginClient loginClient) {
+	public ServiceKeyModifyListener(final FirstLoginWizardPage firstLoginWizardPage, final ILoginClient loginClient, final Gson gson) {
 		this.firstLoginWizardPage = firstLoginWizardPage;
 		this.loginClient = loginClient;
+		this.gson = gson;
 	}
 
 	@Override
@@ -36,7 +39,7 @@ public class ServiceKeyModifyListener implements ModifyListener {
 			return;
 		}
 
-		ServiceKey serviceKey = parseInputToObject(inputText);
+		ServiceKey serviceKey = gson.fromJson(inputText, ServiceKey.class);
 		if (!serviceKey.isValid()) {
 			showErrorMessage();
 			disableNextButton();
@@ -54,14 +57,10 @@ public class ServiceKeyModifyListener implements ModifyListener {
 
 	private void handleValidServiceKey(final ServiceKey serviceKey) throws Exception {
 		GetResourceGroupsResponse getResourceGroupsResponse = loginClient.getResourceGroups(serviceKey);
-		firstLoginWizardPage.setResourceGroupsOnTheSeconPage(getResourceGroupsResponse);
+		firstLoginWizardPage.setResourceGroupsOnTheSecondPage(getResourceGroupsResponse);
+		firstLoginWizardPage.setServiceKey(serviceKey);
 		clearMessageLog();
 		enableNextButton();
-	}
-
-	private ServiceKey parseInputToObject(final String inputText) {
-		Gson gson = new Gson();
-		return gson.fromJson(inputText, ServiceKey.class);
 	}
 
 	private void showErrorMessage() {

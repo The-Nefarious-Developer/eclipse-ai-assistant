@@ -19,6 +19,11 @@ public class ResourceGroupSelectionAdapter extends SelectionAdapter {
     public void widgetSelected(final SelectionEvent e) {       
         resetSelectionStatus();
         
+//        ServiceKey serviceKey = secondLoginWizardPage.getServiceKey();
+        String selectedResourceGroup = secondLoginWizardPage.getResourceGroupDropdown().getText();
+        
+//        loginClient.getDeployments(serviceKey, selectedResourceGroup);
+        
         if (isTheResourceGroupSelected()) {
         	enableTheDeploymentSelection();
         }

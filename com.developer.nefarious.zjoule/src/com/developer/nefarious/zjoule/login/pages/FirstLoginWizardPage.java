@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import com.developer.nefarious.zjoule.auth.AuthClientHelper;
 import com.developer.nefarious.zjoule.auth.IAuthClient;
+import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.auth.AuthClient;
 import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
@@ -18,6 +19,7 @@ import com.developer.nefarious.zjoule.login.api.ResourceGroupIdExtractor;
 import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
 import com.developer.nefarious.zjoule.memory.TemporaryMemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.TemporaryMemoryServiceKey;
+import com.google.gson.Gson;
 
 public class FirstLoginWizardPage extends WizardPage {
 	
@@ -30,6 +32,8 @@ public class FirstLoginWizardPage extends WizardPage {
 	private final int inputHeigth = 100;
 	
 	private final int inputWidth = 300;
+	
+	private ServiceKey serviceKey;
 
 	public FirstLoginWizardPage() {
 		super(PAGE_ID);
@@ -51,7 +55,7 @@ public class FirstLoginWizardPage extends WizardPage {
 		textField.setLayoutData(gridData);
 
 		// Add a ModifyListener to monitor textField changes
-		textField.addModifyListener(new ServiceKeyModifyListener(this, createLoginClient()));
+		textField.addModifyListener(new ServiceKeyModifyListener(this, createLoginClient(), new Gson()));
 
 		// Hidden error text widget
 		errorText = new Text(container, SWT.READ_ONLY | SWT.MULTI | SWT.WRAP);
@@ -80,7 +84,7 @@ public class FirstLoginWizardPage extends WizardPage {
 		getShell().layout(true, true); // Update the layout to reflect visibility changes
 	}
 	
-	public void setResourceGroupsOnTheSeconPage(final GetResourceGroupsResponse getResourceGroupsResponse) {
+	public void setResourceGroupsOnTheSecondPage(final GetResourceGroupsResponse getResourceGroupsResponse) {
 		SecondLoginWizardPage secondPage = (SecondLoginWizardPage) getWizard().getPage(SecondLoginWizardPage.PAGE_ID);
 		ArrayList<String> resourceGroupsAvailableForSelection = ResourceGroupIdExtractor.extractResourceGroupIds(getResourceGroupsResponse);
 		secondPage.setResourceGroupsForSelection(resourceGroupsAvailableForSelection);
@@ -89,6 +93,14 @@ public class FirstLoginWizardPage extends WizardPage {
 	private ILoginClient createLoginClient() {
 		IAuthClient tmpAuthClient = new AuthClient(new TemporaryMemoryAccessToken(), new TemporaryMemoryServiceKey(), new AuthClientHelper());
 		return new LoginClient(new LoginClientHelper(), tmpAuthClient);
+	}
+	
+	public void setServiceKey(final ServiceKey serviceKey) {
+		this.serviceKey = serviceKey;
+	}
+	
+	public ServiceKey getServiceKey() {
+		return serviceKey;
 	}
 
 }
