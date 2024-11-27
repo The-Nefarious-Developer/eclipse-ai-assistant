@@ -20,6 +20,39 @@ public class ServiceKeyModifyListener implements ModifyListener {
 		this.loginClient = loginClient;
 	}
 
+//	@Override
+//	public void modifyText(final ModifyEvent event) {
+//		String inputText = firstLoginWizardPage.getInputText().trim();
+//
+//		if (inputText.isEmpty()) {
+//			clearMessageLog();
+//			disableNextButton();
+//		} else {
+//			if (JsonValidator.isValidJson(inputText)) {
+//				ServiceKey serviceKey = parseInputToObject(inputText);
+//				if (serviceKey.isValid()) {
+//					GetResourceGroupsResponse getResourceGroupsResponse;
+//					try {
+//						getResourceGroupsResponse = loginClient.getResourceGroups(serviceKey);
+//					} catch (Exception error) {
+//						showErrorMessage();
+//						disableNextButton();
+//						return;
+//					}
+//					firstLoginWizardPage.setResourceGroupsOnTheSeconPage(getResourceGroupsResponse);
+//					clearMessageLog();
+//					enableNextButton();
+//				} else {
+//					showErrorMessage();
+//					disableNextButton();
+//				}
+//			} else {
+//				showErrorMessage();
+//				disableNextButton();
+//			}
+//		}
+//	}
+
 	@Override
 	public void modifyText(final ModifyEvent event) {
 		String inputText = firstLoginWizardPage.getInputText().trim();
@@ -27,30 +60,36 @@ public class ServiceKeyModifyListener implements ModifyListener {
 		if (inputText.isEmpty()) {
 			clearMessageLog();
 			disableNextButton();
-		} else {
-			if (JsonValidator.isValidJson(inputText)) {
-				ServiceKey serviceKey = parseInputToObject(inputText);
-				if (serviceKey.isValid()) {
-					GetResourceGroupsResponse getResourceGroupsResponse;
-					try {
-						getResourceGroupsResponse = loginClient.getResourceGroups(serviceKey);
-					} catch (Exception error) {
-						showErrorMessage();
-						disableNextButton();
-						return;
-					}
-					firstLoginWizardPage.setResourceGroupsOnTheSeconPage(getResourceGroupsResponse);
-					clearMessageLog();
-					enableNextButton();
-				} else {
-					showErrorMessage();
-					disableNextButton();
-				}
-			} else {
-				showErrorMessage();
-				disableNextButton();
-			}
+			return;
 		}
+
+		if (!JsonValidator.isValidJson(inputText)) {
+			showErrorMessage();
+			disableNextButton();
+			return;
+		}
+
+		ServiceKey serviceKey = parseInputToObject(inputText);
+		if (!serviceKey.isValid()) {
+			showErrorMessage();
+			disableNextButton();
+			return;
+		}
+
+		try {
+			handleValidServiceKey(serviceKey);
+		} catch (Exception e) {
+			showErrorMessage();
+			disableNextButton();
+		}
+
+	}
+
+	private void handleValidServiceKey(final ServiceKey serviceKey) throws Exception {
+		GetResourceGroupsResponse getResourceGroupsResponse = loginClient.getResourceGroups(serviceKey);
+		firstLoginWizardPage.setResourceGroupsOnTheSeconPage(getResourceGroupsResponse);
+		clearMessageLog();
+		enableNextButton();
 	}
 
 	private ServiceKey parseInputToObject(final String inputText) {
