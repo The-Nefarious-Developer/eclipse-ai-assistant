@@ -39,4 +39,10 @@ public class LoginClient implements ILoginClient {
 		return getResourceGroupsResponse;
 	}
 
+	@Override
+	public GetDeploymentsResponse getDeployments(final ServiceKey serviceKey, final String resourceGroup) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

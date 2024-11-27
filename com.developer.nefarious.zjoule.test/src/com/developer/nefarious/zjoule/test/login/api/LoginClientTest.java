@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.auth.IAuthClient;
-import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.api.ILoginClientHelper;
 import com.developer.nefarious.zjoule.login.api.LoginClient;
@@ -19,9 +18,6 @@ public class LoginClientTest {
 	
 	@Mock
 	private HttpClient mockHttpClient;
-	
-	@Mock
-	private ServiceKey mockServiceKey;
 	
 	@Mock
 	private IAuthClient mockAuthClient;
@@ -41,5 +37,5 @@ public class LoginClientTest {
 	}
 	
 	//TODO: Add test for fetching resource groups
-
+	
 }
