@@ -9,25 +9,29 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
 import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
 
-public class ProjectSelectionAdapterTest {
+public class ResourceGroupSelectionAdapterTest {
 	
 	private ResourceGroupSelectionAdapter cut;
 	
 	@Mock
-	SecondLoginWizardPage mockSecondLoginWizardPage;
+	private SecondLoginWizardPage mockSecondLoginWizardPage;
+	
+	@Mock
+	private ILoginClient mockLoginClient;
 	
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 		
-		cut = new ResourceGroupSelectionAdapter(mockSecondLoginWizardPage);
+		cut = new ResourceGroupSelectionAdapter(mockSecondLoginWizardPage, mockLoginClient);
 	}
 	
 	@Test
-	public void testWidgetSelectedWhenThereIsText() {
+	public void shouldEnableTheDeploymentSelection() {
 		// Arrange
 		SelectionEvent mockSelectionEvent = mock(SelectionEvent.class);
 		
@@ -35,7 +39,7 @@ public class ProjectSelectionAdapterTest {
 		when(mockSecondLoginWizardPage.getDeploymentDropdown()).thenReturn(mockDeploymentDropdown);
 		
 		Combo mockProjectDropdown = mock(Combo.class);
-		when(mockSecondLoginWizardPage.getProjectDropdown()).thenReturn(mockProjectDropdown);
+		when(mockSecondLoginWizardPage.getResourceGroupDropdown()).thenReturn(mockProjectDropdown);
 		
 		String mockText = "Some random text I don't care about.";
 		when(mockProjectDropdown.getText()).thenReturn(mockText);
@@ -51,7 +55,7 @@ public class ProjectSelectionAdapterTest {
 	}
 	
 	@Test
-	public void testWidgetSelectedWhenThereIsNoText() {
+	public void shouldNotEnableTheDeploymentSelection() {
 		// Arrange
 		SelectionEvent mockSelectionEvent = mock(SelectionEvent.class);
 		
@@ -59,7 +63,7 @@ public class ProjectSelectionAdapterTest {
 		when(mockSecondLoginWizardPage.getDeploymentDropdown()).thenReturn(mockDeploymentDropdown);
 		
 		Combo mockProjectDropdown = mock(Combo.class);
-		when(mockSecondLoginWizardPage.getProjectDropdown()).thenReturn(mockProjectDropdown);
+		when(mockSecondLoginWizardPage.getResourceGroupDropdown()).thenReturn(mockProjectDropdown);
 		
 		String mockText = "";
 		when(mockProjectDropdown.getText()).thenReturn(mockText);

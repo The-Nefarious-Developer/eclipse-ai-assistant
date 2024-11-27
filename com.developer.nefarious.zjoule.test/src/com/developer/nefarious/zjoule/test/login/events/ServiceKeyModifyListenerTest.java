@@ -1,16 +1,20 @@
 package com.developer.nefarious.zjoule.test.login.events;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import java.io.IOException;
 import org.eclipse.swt.events.ModifyEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
+import com.developer.nefarious.zjoule.auth.ServiceKey;
+import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
 import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
@@ -24,7 +28,7 @@ public class ServiceKeyModifyListenerTest {
 
 	@Mock
 	private FirstLoginWizardPage mockFirstLoginWizardPage;
-	
+
 	@Mock
 	private ILoginClient mockLoginClient;
 
@@ -35,7 +39,7 @@ public class ServiceKeyModifyListenerTest {
 	}
 
 	@Test
-	public void shouldEnableTheNextButtonIfInputIsValid() {
+	public void shouldEnableTheNextButtonIfInputIsValid() throws IOException, InterruptedException {
 		// Arrange
 		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
 		// @formatter:off
@@ -47,16 +51,41 @@ public class ServiceKeyModifyListenerTest {
 			+ "}";
 		// @formatter:on
 		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockValidInputText);
-//		GetResourceGroupsResponse mockGetResourceGroupsResponse = mock(GetResourceGroupsResponse.class);
-//		when(mockLoginClient.getResourceGroups()).thenReturn(mockGetResourceGroupsResponse);
 		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
 			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockValidInputText)).thenReturn(true);
-			// Act
-			cut.modifyText(mockModifyEvent);
-			// Assert
-			verify(mockFirstLoginWizardPage).setValidationError(null);
-			verify(mockFirstLoginWizardPage).setPageComplete(true);
 		}
+		GetResourceGroupsResponse mockGetResourceGroupsResponse = mock(GetResourceGroupsResponse.class);
+		when(mockLoginClient.getResourceGroups(any(ServiceKey.class))).thenReturn(mockGetResourceGroupsResponse);
+		// Act
+		cut.modifyText(mockModifyEvent);
+		// Assert
+		verify(mockFirstLoginWizardPage).setValidationError(null);
+		verify(mockFirstLoginWizardPage).setPageComplete(true);
+		verify(mockFirstLoginWizardPage).setResourceGroupsOnTheSeconPage(mockGetResourceGroupsResponse);
+	}
+	
+	@Test
+	public void shouldGracefullyHandleAnyError() throws IOException, InterruptedException {
+		// Arrange
+		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
+		// @formatter:off
+		String mockValidInputText = "{" 
+			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
+			+ "\"clientid\": \"this matters\", " 
+			+ "\"clientsecret\": \"this matters\", "
+			+ "\"url\": \"this matters\"" 
+			+ "}";
+		// @formatter:on
+		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockValidInputText);
+		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
+			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockValidInputText)).thenReturn(true);
+		}
+		when(mockLoginClient.getResourceGroups(any(ServiceKey.class))).thenThrow(new IOException());
+		// Act
+		cut.modifyText(mockModifyEvent);
+		// Assert
+		verify(mockFirstLoginWizardPage).setValidationError(INVALID_INPUT_MESSAGE);
+		verify(mockFirstLoginWizardPage).setPageComplete(false);
 	}
 
 	@Test

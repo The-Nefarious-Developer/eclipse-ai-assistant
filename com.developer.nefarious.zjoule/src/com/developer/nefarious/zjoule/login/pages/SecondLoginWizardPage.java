@@ -8,8 +8,16 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import com.developer.nefarious.zjoule.auth.AuthClient;
+import com.developer.nefarious.zjoule.auth.AuthClientHelper;
+import com.developer.nefarious.zjoule.auth.IAuthClient;
+import com.developer.nefarious.zjoule.login.api.ILoginClient;
+import com.developer.nefarious.zjoule.login.api.LoginClient;
+import com.developer.nefarious.zjoule.login.api.LoginClientHelper;
 import com.developer.nefarious.zjoule.login.events.DeploymentSelectionAdapter;
 import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
+import com.developer.nefarious.zjoule.memory.TemporaryMemoryAccessToken;
+import com.developer.nefarious.zjoule.memory.TemporaryMemoryServiceKey;
 
 public class SecondLoginWizardPage extends WizardPage {
 
@@ -44,7 +52,7 @@ public class SecondLoginWizardPage extends WizardPage {
 
 		// Add a SelectionListener to enable the deployment dropdown when a valid
 		// project is selected
-		resourceGroupDropdown.addSelectionListener(new ResourceGroupSelectionAdapter(this));
+		resourceGroupDropdown.addSelectionListener(new ResourceGroupSelectionAdapter(this, createLoginClient()));
 
 		// Create label and dropdown for deployment ID selection
 		Label deploymentLabel = new Label(container, SWT.NONE);
@@ -82,7 +90,7 @@ public class SecondLoginWizardPage extends WizardPage {
 		}
 	}
 
-	public Combo getProjectDropdown() {
+	public Combo getResourceGroupDropdown() {
 		return resourceGroupDropdown;
 	}
 
@@ -94,8 +102,13 @@ public class SecondLoginWizardPage extends WizardPage {
 		this.resourceGroupsForSelection = resourceGroupsForSelection;
 	}
 
-	public void setDeployments(final ArrayList<String> deploymentsForSelection) {
+	public void setDeploymentsForSelection(final ArrayList<String> deploymentsForSelection) {
 		this.deploymentsForSelection = deploymentsForSelection;
+	}
+	
+	private ILoginClient createLoginClient() {
+		IAuthClient tmpAuthClient = new AuthClient(new TemporaryMemoryAccessToken(), new TemporaryMemoryServiceKey(), new AuthClientHelper());
+		return new LoginClient(new LoginClientHelper(), tmpAuthClient);
 	}
 
 }
