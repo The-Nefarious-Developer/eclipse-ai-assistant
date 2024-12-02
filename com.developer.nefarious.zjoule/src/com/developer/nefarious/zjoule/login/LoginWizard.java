@@ -11,6 +11,8 @@ import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryAccessToken;
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryServiceKey;
 import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
 import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
+import com.developer.nefarious.zjoule.memory.EclipseMemory;
+import com.developer.nefarious.zjoule.utils.ObjectSerializer;
 
 public class LoginWizard extends Wizard {
 	
@@ -19,6 +21,7 @@ public class LoginWizard extends Wizard {
 	public LoginWizard() {
         setWindowTitle("Login to SAP AI Core");
         loginClient = createLoginClient();
+        TemporaryMemoryAccessToken.initialize(new ObjectSerializer(), new EclipseMemory());
     }
 	
 	@Override
@@ -35,7 +38,9 @@ public class LoginWizard extends Wizard {
 	}
 	
 	private ILoginClient createLoginClient() {
-		IAuthClient tmpAuthClient = new AuthClient(new TemporaryMemoryAccessToken(), new TemporaryMemoryServiceKey(), new AuthClientHelper());
+		TemporaryMemoryAccessToken temporaryMemoryAccessToken = TemporaryMemoryAccessToken.getInstance();
+//		TemporaryMemoryServiceKey temporaryMemoryServiceKey = TemporaryMemoryServiceKey.getInstance();
+		IAuthClient tmpAuthClient = new AuthClient(temporaryMemoryAccessToken, new TemporaryMemoryServiceKey(), new AuthClientHelper());
 		return new LoginClient(new LoginClientHelper(), tmpAuthClient);
 	}
 
