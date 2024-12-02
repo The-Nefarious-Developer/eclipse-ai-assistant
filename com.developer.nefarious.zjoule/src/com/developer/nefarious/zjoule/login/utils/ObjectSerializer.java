@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.memory;
+package com.developer.nefarious.zjoule.login.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

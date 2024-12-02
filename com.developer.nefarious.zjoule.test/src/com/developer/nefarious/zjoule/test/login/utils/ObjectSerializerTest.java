@@ -1,10 +1,10 @@
-package com.developer.nefarious.zjoule.test.memory;
+package com.developer.nefarious.zjoule.test.login.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.developer.nefarious.zjoule.auth.AccessToken;
-import com.developer.nefarious.zjoule.memory.ObjectSerializer;
+import com.developer.nefarious.zjoule.login.utils.ObjectSerializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

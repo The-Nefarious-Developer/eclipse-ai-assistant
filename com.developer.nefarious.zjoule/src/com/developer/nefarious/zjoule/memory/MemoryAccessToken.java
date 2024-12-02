@@ -1,6 +1,8 @@
 package com.developer.nefarious.zjoule.memory;
 
 import com.developer.nefarious.zjoule.auth.AccessToken;
+import com.developer.nefarious.zjoule.login.utils.IObjectSerializer;
+import com.developer.nefarious.zjoule.login.utils.ObjectSerializer;
 
 public class MemoryAccessToken implements IMemoryAccessToken {
 
