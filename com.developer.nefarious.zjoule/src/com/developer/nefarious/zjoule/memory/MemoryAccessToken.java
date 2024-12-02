@@ -2,22 +2,35 @@ package com.developer.nefarious.zjoule.memory;
 
 import com.developer.nefarious.zjoule.auth.AccessToken;
 import com.developer.nefarious.zjoule.utils.IObjectSerializer;
-import com.developer.nefarious.zjoule.utils.ObjectSerializer;
 
 public class MemoryAccessToken implements IMemoryAccessToken {
+	
+	private static MemoryAccessToken instance;
 
-	IObjectSerializer objectSerializer;
+	private IObjectSerializer objectSerializer;
 	
-	IEclipseMemory eclipseMemory;
+	private IEclipseMemory eclipseMemory;
 	
-	public MemoryAccessToken() {
-		objectSerializer = new ObjectSerializer();
-		eclipseMemory = new EclipseMemory();
-	}
-	
-	public MemoryAccessToken(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+	private MemoryAccessToken(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
 		this.objectSerializer = objectSerializer;
 		this.eclipseMemory = eclipseMemory;
+	}
+	
+	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+		if (instance == null) {
+			instance = new MemoryAccessToken(objectSerializer, eclipseMemory);
+		}
+	}
+
+	public static MemoryAccessToken getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException("MemoryAccessToken not initialized. Call initialize() first.");
+		}
+		return instance;
+	}
+
+	public static void resetInstance() {
+		instance = null;
 	}
 
 	@Override

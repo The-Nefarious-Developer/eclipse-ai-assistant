@@ -28,7 +28,10 @@ public class MemoryAccessTokenTest {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		cut = new MemoryAccessToken(mockObjectSerializer, mockEclipseMemory);
+		
+		MemoryAccessToken.resetInstance();
+		MemoryAccessToken.initialize(mockObjectSerializer, mockEclipseMemory);
+		cut = MemoryAccessToken.getInstance();
 	}
 	
 	@Test

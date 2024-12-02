@@ -2,22 +2,35 @@ package com.developer.nefarious.zjoule.memory;
 
 import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.utils.IObjectSerializer;
-import com.developer.nefarious.zjoule.utils.ObjectSerializer;
 
 public class MemoryServiceKey implements IMemoryServiceKey {
 	
-	IObjectSerializer objectSerializer;
+	private static MemoryServiceKey instance;
 	
-	IEclipseMemory eclipseMemory;
+	private IObjectSerializer objectSerializer;
 	
-	public MemoryServiceKey() {
-		objectSerializer = new ObjectSerializer();
-		eclipseMemory = new EclipseMemory();
-	}
+	private IEclipseMemory eclipseMemory;
 	
-	public MemoryServiceKey(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+	private MemoryServiceKey(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
 		this.objectSerializer = objectSerializer;
 		this.eclipseMemory = eclipseMemory;
+	}
+	
+	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+		if (instance == null) {
+			instance = new MemoryServiceKey(objectSerializer, eclipseMemory);
+		}
+	}
+
+	public static MemoryServiceKey getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException("MemoryServiceKey not initialized. Call initialize() first.");
+		}
+		return instance;
+	}
+
+	public static void resetInstance() {
+		instance = null;
 	}
 
 	@Override

@@ -28,7 +28,10 @@ public class MemoryServiceKeyTest {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		cut = new MemoryServiceKey(mockObjectSerializer, mockEclipseMemory);
+		
+		MemoryServiceKey.resetInstance();
+		MemoryServiceKey.initialize(mockObjectSerializer, mockEclipseMemory);
+		cut = MemoryServiceKey.getInstance();
 	}
 	
 	@Test

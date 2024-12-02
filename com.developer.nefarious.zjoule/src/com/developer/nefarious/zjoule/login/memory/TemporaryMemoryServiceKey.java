@@ -28,7 +28,7 @@ public class TemporaryMemoryServiceKey implements IMemoryServiceKey, ITemporaryM
 
 	public static TemporaryMemoryServiceKey getInstance() {
 		if (instance == null) {
-			throw new IllegalStateException("TemporaryMemoryAccessToken not initialized. Call initialize() first.");
+			throw new IllegalStateException("TemporaryMemoryServiceKey not initialized. Call initialize() first.");
 		}
 		return instance;
 	}
