@@ -11,13 +11,14 @@ import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryServiceKey;
 import com.developer.nefarious.zjoule.login.utils.IObjectSerializer;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.memory.IMemoryServiceKey;
 
 public class TemporaryMemoryServiceKeyTest {
 	
-	public static final String KEY = "tmp-service-key";
+	public static final String FINAL_KEY = "service-key";
 	
-	private IMemoryServiceKey cut;
+	public static final String TEMPORARY_KEY = "tmp-service-key";
+	
+	private TemporaryMemoryServiceKey cut;
 	
 	@Mock
 	IObjectSerializer mockObjectSerializer;
@@ -40,7 +41,7 @@ public class TemporaryMemoryServiceKeyTest {
 		// Act
 		cut.save(mockServiceKey);
 		// Assert
-		verify(mockEclipseMemory).saveOnEclipsePreferences(KEY, mockSerializedObject);
+		verify(mockEclipseMemory).saveOnEclipsePreferences(TEMPORARY_KEY, mockSerializedObject);
 	}
 	
 	@Test
@@ -48,12 +49,24 @@ public class TemporaryMemoryServiceKeyTest {
 		// Arrange
 		ServiceKey expectedValue = new ServiceKey();
 		String mockSerializedObject = "It doesn't matter";
-		when(mockEclipseMemory.loadFromEclipsePreferences(KEY)).thenReturn(mockSerializedObject);
+		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockSerializedObject);
 		when(mockObjectSerializer.deserialize(mockSerializedObject, ServiceKey.class)).thenReturn(expectedValue);
 		// Act
 		ServiceKey returnValue = cut.load();
 		// Assert
 		assertEquals(returnValue, expectedValue);
+	}
+	
+	@Test
+	public void shouldPersistServiceKey() {
+		// Arrange
+		ServiceKey mockServiceKey = new ServiceKey();
+		String mockSerializedObject = "It doesn't matter";
+		when(mockObjectSerializer.serialize(mockServiceKey)).thenReturn(mockSerializedObject);
+		// Act
+		cut.persist(mockServiceKey);
+		// Assert
+		verify(mockEclipseMemory).saveOnEclipsePreferences(FINAL_KEY, mockSerializedObject);
 	}
 
 }

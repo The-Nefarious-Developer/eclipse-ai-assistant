@@ -7,7 +7,7 @@ import com.developer.nefarious.zjoule.memory.EclipseMemory;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.memory.IMemoryServiceKey;
 
-public class TemporaryMemoryServiceKey implements IMemoryServiceKey {
+public class TemporaryMemoryServiceKey implements IMemoryServiceKey, ITemporaryMemoryServiceKey {
 	
 	public static final String KEY = "tmp-" + IMemoryServiceKey.KEY;
 	
@@ -35,6 +35,12 @@ public class TemporaryMemoryServiceKey implements IMemoryServiceKey {
 	public ServiceKey load() {
 		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
 		return objectSerializer.deserialize(serializedObject, ServiceKey.class);
+	}
+
+	@Override
+	public void persist(final ServiceKey temporaryServiceKey) {
+		String serializedObject = objectSerializer.serialize(temporaryServiceKey);
+		eclipseMemory.saveOnEclipsePreferences(IMemoryServiceKey.KEY, serializedObject);
 	}
 
 }
