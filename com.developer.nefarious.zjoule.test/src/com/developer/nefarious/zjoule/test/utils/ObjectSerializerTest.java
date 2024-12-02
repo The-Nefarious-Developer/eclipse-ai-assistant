@@ -16,7 +16,7 @@ public class ObjectSerializerTest {
 	
 	@BeforeEach
 	public void setUp() {
-		cut = new ObjectSerializer();
+		cut = ObjectSerializer.getInstance();
 	}
 	
 	@Test

@@ -20,6 +20,7 @@ public class LoginWizard extends Wizard {
 	
 	public LoginWizard() {
         setWindowTitle("Login to SAP AI Core");
+        initialization();
         loginClient = createLoginClient();
     }
 	
@@ -36,11 +37,16 @@ public class LoginWizard extends Wizard {
 		return true;
 	}
 	
+	private void initialization() {
+		ObjectSerializer objectSerializer = ObjectSerializer.getInstance();
+		EclipseMemory eclipseMemory = new EclipseMemory();
+		
+		TemporaryMemoryAccessToken.initialize(objectSerializer, eclipseMemory);
+		TemporaryMemoryServiceKey.initialize(objectSerializer, eclipseMemory);
+	}
+	
 	private ILoginClient createLoginClient() {
-        TemporaryMemoryAccessToken.initialize(new ObjectSerializer(), new EclipseMemory());
-        TemporaryMemoryAccessToken tmpMemoryAccessToken = TemporaryMemoryAccessToken.getInstance();
-        
-        TemporaryMemoryServiceKey.initialize(new ObjectSerializer(), new EclipseMemory());
+        TemporaryMemoryAccessToken tmpMemoryAccessToken = TemporaryMemoryAccessToken.getInstance();       
 		TemporaryMemoryServiceKey tmpMemoryServiceKey = TemporaryMemoryServiceKey.getInstance();
 		
 		IAuthClient tmpAuthClient = new AuthClient(tmpMemoryAccessToken, tmpMemoryServiceKey, new AuthClientHelper());

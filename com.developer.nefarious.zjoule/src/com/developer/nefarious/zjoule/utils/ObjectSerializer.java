@@ -4,8 +4,17 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class ObjectSerializer implements IObjectSerializer {
+	
+	private static ObjectSerializer instance;
 
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+	
+	public static ObjectSerializer getInstance() {
+		if (instance == null) {
+            instance = new ObjectSerializer();
+        }
+        return instance;
+	}
 
 	public String serialize(final Object object) {
 		if (object == null) {
