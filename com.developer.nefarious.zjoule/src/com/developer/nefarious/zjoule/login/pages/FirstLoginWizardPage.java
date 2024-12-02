@@ -17,8 +17,8 @@ import com.developer.nefarious.zjoule.login.api.LoginClient;
 import com.developer.nefarious.zjoule.login.api.LoginClientHelper;
 import com.developer.nefarious.zjoule.login.api.ResourceGroupIdExtractor;
 import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
-import com.developer.nefarious.zjoule.memory.TemporaryMemoryAccessToken;
-import com.developer.nefarious.zjoule.memory.TemporaryMemoryServiceKey;
+import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryAccessToken;
+import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryServiceKey;
 import com.google.gson.Gson;
 
 public class FirstLoginWizardPage extends WizardPage {

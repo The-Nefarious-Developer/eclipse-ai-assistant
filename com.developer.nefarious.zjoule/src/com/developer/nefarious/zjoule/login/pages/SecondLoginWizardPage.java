@@ -17,8 +17,8 @@ import com.developer.nefarious.zjoule.login.api.LoginClient;
 import com.developer.nefarious.zjoule.login.api.LoginClientHelper;
 import com.developer.nefarious.zjoule.login.events.DeploymentSelectionAdapter;
 import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
-import com.developer.nefarious.zjoule.memory.TemporaryMemoryAccessToken;
-import com.developer.nefarious.zjoule.memory.TemporaryMemoryServiceKey;
+import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryAccessToken;
+import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryServiceKey;
 
 public class SecondLoginWizardPage extends WizardPage {
 

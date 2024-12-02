@@ -1,6 +1,11 @@
-package com.developer.nefarious.zjoule.memory;
+package com.developer.nefarious.zjoule.login.memory;
 
 import com.developer.nefarious.zjoule.auth.AccessToken;
+import com.developer.nefarious.zjoule.memory.EclipseMemory;
+import com.developer.nefarious.zjoule.memory.IEclipseMemory;
+import com.developer.nefarious.zjoule.memory.IMemoryAccessToken;
+import com.developer.nefarious.zjoule.memory.IObjectSerializer;
+import com.developer.nefarious.zjoule.memory.ObjectSerializer;
 
 public class TemporaryMemoryAccessToken implements IMemoryAccessToken {
 	

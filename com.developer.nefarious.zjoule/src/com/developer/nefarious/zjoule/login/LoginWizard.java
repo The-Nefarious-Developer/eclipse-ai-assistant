@@ -18,6 +18,7 @@ public class LoginWizard extends Wizard {
 
 	@Override
 	public boolean performFinish() {
+		System.out.println("done!");
 		// TODO Auto-generated method stub
 		return true;
 	}

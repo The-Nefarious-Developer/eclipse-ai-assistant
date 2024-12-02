@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.test.memory;
+package com.developer.nefarious.zjoule.test.login.memory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.auth.AccessToken;
+import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.memory.IMemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.IObjectSerializer;
-import com.developer.nefarious.zjoule.memory.TemporaryMemoryAccessToken;
 
 public class TemporaryMemoryAccessTokenTest {
 
