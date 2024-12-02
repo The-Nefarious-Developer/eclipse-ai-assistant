@@ -7,18 +7,11 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
-import com.developer.nefarious.zjoule.auth.AuthClientHelper;
-import com.developer.nefarious.zjoule.auth.IAuthClient;
 import com.developer.nefarious.zjoule.auth.ServiceKey;
-import com.developer.nefarious.zjoule.auth.AuthClient;
 import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
-import com.developer.nefarious.zjoule.login.api.LoginClient;
-import com.developer.nefarious.zjoule.login.api.LoginClientHelper;
 import com.developer.nefarious.zjoule.login.api.ResourceGroupIdExtractor;
 import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
-import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryAccessToken;
-import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryServiceKey;
 import com.google.gson.Gson;
 
 public class FirstLoginWizardPage extends WizardPage {
@@ -34,12 +27,15 @@ public class FirstLoginWizardPage extends WizardPage {
 	private final int inputWidth = 300;
 	
 	private ServiceKey serviceKey;
+	
+	private ILoginClient loginClient;
 
-	public FirstLoginWizardPage() {
+	public FirstLoginWizardPage(final ILoginClient loginClient) {
 		super(PAGE_ID);
 		setTitle("Provide credentials");
 		setDescription("Attach the Service Key json file content for the SAP AI Core service.");
 		setPageComplete(false); // Initially set the page as incomplete
+		this.loginClient = loginClient;
 	}
 
 	@Override
@@ -55,7 +51,7 @@ public class FirstLoginWizardPage extends WizardPage {
 		textField.setLayoutData(gridData);
 
 		// Add a ModifyListener to monitor textField changes
-		textField.addModifyListener(new ServiceKeyModifyListener(this, createLoginClient(), new Gson()));
+		textField.addModifyListener(new ServiceKeyModifyListener(this, loginClient, new Gson()));
 
 		// Hidden error text widget
 		errorText = new Text(container, SWT.READ_ONLY | SWT.MULTI | SWT.WRAP);
@@ -88,11 +84,6 @@ public class FirstLoginWizardPage extends WizardPage {
 		SecondLoginWizardPage secondPage = (SecondLoginWizardPage) getWizard().getPage(SecondLoginWizardPage.PAGE_ID);
 		ArrayList<String> resourceGroupsAvailableForSelection = ResourceGroupIdExtractor.extractResourceGroupIds(getResourceGroupsResponse);
 		secondPage.setResourceGroupsForSelection(resourceGroupsAvailableForSelection);
-	}
-	
-	private ILoginClient createLoginClient() {
-		IAuthClient tmpAuthClient = new AuthClient(new TemporaryMemoryAccessToken(), new TemporaryMemoryServiceKey(), new AuthClientHelper());
-		return new LoginClient(new LoginClientHelper(), tmpAuthClient);
 	}
 	
 	public void setServiceKey(final ServiceKey serviceKey) {

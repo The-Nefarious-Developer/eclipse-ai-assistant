@@ -8,17 +8,10 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import com.developer.nefarious.zjoule.auth.AuthClient;
-import com.developer.nefarious.zjoule.auth.AuthClientHelper;
-import com.developer.nefarious.zjoule.auth.IAuthClient;
 import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
-import com.developer.nefarious.zjoule.login.api.LoginClient;
-import com.developer.nefarious.zjoule.login.api.LoginClientHelper;
 import com.developer.nefarious.zjoule.login.events.DeploymentSelectionAdapter;
 import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
-import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryAccessToken;
-import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryServiceKey;
 
 public class SecondLoginWizardPage extends WizardPage {
 
@@ -31,12 +24,15 @@ public class SecondLoginWizardPage extends WizardPage {
 	private ArrayList<String> resourceGroupsForSelection = new ArrayList<String>();
 
 	private ArrayList<String> deploymentsForSelection = new ArrayList<String>();
+	
+	private ILoginClient loginClient;
 
-	public SecondLoginWizardPage() {
+	public SecondLoginWizardPage(final ILoginClient loginClient) {
 		super(PAGE_ID);
 		setTitle("Select the model");
 		setDescription("Choose the Resource Group and the Deployment ID.");
 		setPageComplete(false); // Initially set the page as incomplete
+		this.loginClient = loginClient;
 	}
 
 	@Override
@@ -53,7 +49,7 @@ public class SecondLoginWizardPage extends WizardPage {
 
 		// Add a SelectionListener to enable the deployment dropdown when a valid
 		// project is selected
-		resourceGroupDropdown.addSelectionListener(new ResourceGroupSelectionAdapter(this, createLoginClient()));
+		resourceGroupDropdown.addSelectionListener(new ResourceGroupSelectionAdapter(this, loginClient));
 
 		// Create label and dropdown for deployment ID selection
 		Label deploymentLabel = new Label(container, SWT.NONE);
@@ -105,11 +101,6 @@ public class SecondLoginWizardPage extends WizardPage {
 	public void setDeploymentsForSelection(final ArrayList<String> deploymentsForSelection) {
 		this.deploymentsForSelection = deploymentsForSelection;
 		deploymentDropdown.setItems(deploymentsForSelection.toArray(new String[0]));
-	}
-	
-	private ILoginClient createLoginClient() {
-		IAuthClient tmpAuthClient = new AuthClient(new TemporaryMemoryAccessToken(), new TemporaryMemoryServiceKey(), new AuthClientHelper());
-		return new LoginClient(new LoginClientHelper(), tmpAuthClient);
 	}
 	
 	public ServiceKey getServiceKey() {
