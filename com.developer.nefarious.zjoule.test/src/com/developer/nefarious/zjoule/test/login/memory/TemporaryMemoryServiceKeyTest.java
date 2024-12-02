@@ -29,7 +29,10 @@ public class TemporaryMemoryServiceKeyTest {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		cut = new TemporaryMemoryServiceKey(mockObjectSerializer, mockEclipseMemory);
+		
+		TemporaryMemoryServiceKey.resetInstance();
+		TemporaryMemoryServiceKey.initialize(mockObjectSerializer, mockEclipseMemory);
+		cut = TemporaryMemoryServiceKey.getInstance();
 	}
 	
 	@Test

@@ -29,6 +29,7 @@ public class TemporaryMemoryAccessTokenTest {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
+		
 		TemporaryMemoryAccessToken.resetInstance();
 		TemporaryMemoryAccessToken.initialize(mockObjectSerializer, mockEclipseMemory);
 		cut = TemporaryMemoryAccessToken.getInstance();
