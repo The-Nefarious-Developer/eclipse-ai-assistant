@@ -7,63 +7,63 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryServiceKey;
+import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryResourceGroup;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.models.ServiceKey;
+import com.developer.nefarious.zjoule.models.ResourceGroup;
 import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
-public class TemporaryMemoryServiceKeyTest {
-	
-	public static final String FINAL_KEY = "service-key";
-	
-	public static final String TEMPORARY_KEY = "tmp-service-key";
-	
-	private TemporaryMemoryServiceKey cut;
-	
+public class TemporaryMemoryResourceGroupTest {
+
+	public static final String FINAL_KEY = "resource-group";
+
+	public static final String TEMPORARY_KEY = "tmp-resource-group";
+
+	private TemporaryMemoryResourceGroup cut;
+
 	@Mock
 	IObjectSerializer mockObjectSerializer;
-	
+
 	@Mock
 	IEclipseMemory mockEclipseMemory;
-	
+
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		
-		TemporaryMemoryServiceKey.resetInstance();
-		TemporaryMemoryServiceKey.initialize(mockObjectSerializer, mockEclipseMemory);
-		cut = TemporaryMemoryServiceKey.getInstance();
+
+		TemporaryMemoryResourceGroup.resetInstance();
+		TemporaryMemoryResourceGroup.initialize(mockObjectSerializer, mockEclipseMemory);
+		cut = TemporaryMemoryResourceGroup.getInstance();
 	}
-	
+
 	@Test
-	public void shouldSaveServiceKey() {
+	public void shouldSaveResourceGroup() {
 		// Arrange
-		ServiceKey mockServiceKey = new ServiceKey();
+		ResourceGroup mockResourceGroup = new ResourceGroup();
 		String mockSerializedObject = "It doesn't matter";
-		when(mockObjectSerializer.serialize(mockServiceKey)).thenReturn(mockSerializedObject);
+		when(mockObjectSerializer.serialize(mockResourceGroup)).thenReturn(mockSerializedObject);
 		// Act
-		cut.save(mockServiceKey);
+		cut.save(mockResourceGroup);
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(TEMPORARY_KEY, mockSerializedObject);
 	}
-	
+
 	@Test
-	public void shouldLoadServiceKey() {
+	public void shouldLoadResourceGroup() {
 		// Arrange
-		ServiceKey expectedValue = new ServiceKey();
+		ResourceGroup expectedValue = new ResourceGroup();
 		String mockSerializedObject = "It doesn't matter";
 		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockSerializedObject);
-		when(mockObjectSerializer.deserialize(mockSerializedObject, ServiceKey.class)).thenReturn(expectedValue);
+		when(mockObjectSerializer.deserialize(mockSerializedObject, ResourceGroup.class)).thenReturn(expectedValue);
 		// Act
-		ServiceKey returnValue = cut.load();
+		ResourceGroup returnValue = cut.load();
 		// Assert
 		assertEquals(returnValue, expectedValue);
 	}
-	
+
 	@Test
-	public void shouldPersistServiceKey() {
+	public void shouldPersistResourceGroup() {
 		// Arrange
-		ServiceKey mockServiceKey = new ServiceKey();
+		ResourceGroup mockResourceGroup = new ResourceGroup();
 		String mockSerializedObject = "It doesn't matter";
 		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockSerializedObject);
 		// Act
@@ -71,5 +71,4 @@ public class TemporaryMemoryServiceKeyTest {
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(FINAL_KEY, mockSerializedObject);
 	}
-
 }

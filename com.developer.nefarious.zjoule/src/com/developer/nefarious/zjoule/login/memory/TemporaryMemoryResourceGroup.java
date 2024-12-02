@@ -1,32 +1,32 @@
 package com.developer.nefarious.zjoule.login.memory;
 
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.memory.IMemoryAccessToken;
-import com.developer.nefarious.zjoule.models.AccessToken;
+import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.models.ResourceGroup;
 import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
-public class TemporaryMemoryAccessToken implements IMemoryAccessToken, ITemporaryMemoryObject {
+public class TemporaryMemoryResourceGroup implements IMemoryResourceGroup, ITemporaryMemoryObject {
 
-	private static TemporaryMemoryAccessToken instance;
+	private static TemporaryMemoryResourceGroup instance;
 
-	public static final String KEY = "tmp-" + IMemoryAccessToken.KEY;
+	public static final String KEY = "tmp-" + IMemoryResourceGroup.KEY;
 
 	IObjectSerializer objectSerializer;
 
 	IEclipseMemory eclipseMemory;
 
-	private TemporaryMemoryAccessToken(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+	private TemporaryMemoryResourceGroup(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
 		this.objectSerializer = objectSerializer;
 		this.eclipseMemory = eclipseMemory;
 	}
 
 	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
 		if (instance == null) {
-			instance = new TemporaryMemoryAccessToken(objectSerializer, eclipseMemory);
+			instance = new TemporaryMemoryResourceGroup(objectSerializer, eclipseMemory);
 		}
 	}
 
-	public static TemporaryMemoryAccessToken getInstance() {
+	public static TemporaryMemoryResourceGroup getInstance() {
 		if (instance == null) {
 			throw new IllegalStateException("TemporaryMemoryAccessToken not initialized. Call initialize() first.");
 		}
@@ -38,21 +38,20 @@ public class TemporaryMemoryAccessToken implements IMemoryAccessToken, ITemporar
 	}
 
 	@Override
-	public void save(final AccessToken accesstoken) {
-		String serializedObject = objectSerializer.serialize(accesstoken);
+	public void save(final ResourceGroup resourceGroup) {
+		String serializedObject = objectSerializer.serialize(resourceGroup);
 		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
 	}
 
 	@Override
-	public AccessToken load() {
+	public ResourceGroup load() {
 		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-		return objectSerializer.deserialize(serializedObject, AccessToken.class);
+		return objectSerializer.deserialize(serializedObject, ResourceGroup.class);
 	}
 
 	@Override
 	public void persist() {
 		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-		eclipseMemory.saveOnEclipsePreferences(IMemoryAccessToken.KEY, serializedObject);
+		eclipseMemory.saveOnEclipsePreferences(IMemoryResourceGroup.KEY, serializedObject);
 	}
-
 }

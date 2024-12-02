@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.login.api;
+package com.developer.nefarious.zjoule.models;
 
 import java.util.List;
 import com.google.gson.annotations.SerializedName;

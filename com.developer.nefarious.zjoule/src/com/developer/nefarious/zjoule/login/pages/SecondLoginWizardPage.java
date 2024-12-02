@@ -8,10 +8,10 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.events.DeploymentSelectionAdapter;
 import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
+import com.developer.nefarious.zjoule.models.ServiceKey;
 
 public class SecondLoginWizardPage extends WizardPage {
 

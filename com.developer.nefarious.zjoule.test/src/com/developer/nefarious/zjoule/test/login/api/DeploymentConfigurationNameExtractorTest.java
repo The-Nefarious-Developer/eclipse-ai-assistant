@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import org.junit.jupiter.api.Test;
-import com.developer.nefarious.zjoule.login.api.Deployment;
 import com.developer.nefarious.zjoule.login.api.DeploymentConfigurationNameExtractor;
 import com.developer.nefarious.zjoule.login.api.GetDeploymentsResponse;
+import com.developer.nefarious.zjoule.models.Deployment;
 
 public class DeploymentConfigurationNameExtractorTest {
 

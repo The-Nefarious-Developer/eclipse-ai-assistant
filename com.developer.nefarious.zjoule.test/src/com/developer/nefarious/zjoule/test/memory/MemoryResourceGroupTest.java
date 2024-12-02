@@ -8,16 +8,16 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.memory.IMemoryAccessToken;
-import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
-import com.developer.nefarious.zjoule.models.AccessToken;
+import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.memory.MemoryResourceGroup;
+import com.developer.nefarious.zjoule.models.ResourceGroup;
 import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
-public class MemoryAccessTokenTest {
+public class MemoryResourceGroupTest {
 
-	public static final String KEY = "access-token";
+	public static final String KEY = "resource-group";
 	
-	private IMemoryAccessToken cut;
+	private IMemoryResourceGroup cut;
 	
 	@Mock
 	IObjectSerializer mockObjectSerializer;
@@ -29,34 +29,33 @@ public class MemoryAccessTokenTest {
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 		
-		MemoryAccessToken.resetInstance();
-		MemoryAccessToken.initialize(mockObjectSerializer, mockEclipseMemory);
-		cut = MemoryAccessToken.getInstance();
+		MemoryResourceGroup.resetInstance();
+		MemoryResourceGroup.initialize(mockObjectSerializer, mockEclipseMemory);
+		cut = MemoryResourceGroup.getInstance();
 	}
 	
 	@Test
-	public void shouldSaveAccessToken() {
+	public void shouldSaveResourceGroup() {
 		// Arrange
-		AccessToken mockAccessToken = new AccessToken();
+		ResourceGroup mockResourceGroup = new ResourceGroup();
 		String mockSerializedObject = "It doesn't matter";
-		when(mockObjectSerializer.serialize(mockAccessToken)).thenReturn(mockSerializedObject);
+		when(mockObjectSerializer.serialize(mockResourceGroup)).thenReturn(mockSerializedObject);
 		// Act
-		cut.save(mockAccessToken);
+		cut.save(mockResourceGroup);
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(KEY, mockSerializedObject);
 	}
 	
 	@Test
-	public void shouldAccessToken() {
+	public void shouldResourceGroup() {
 		// Arrange
-		AccessToken expectedValue = new AccessToken();
+		ResourceGroup expectedValue = new ResourceGroup();
 		String mockSerializedObject = "It doesn't matter";
 		when(mockEclipseMemory.loadFromEclipsePreferences(KEY)).thenReturn(mockSerializedObject);
-		when(mockObjectSerializer.deserialize(mockSerializedObject, AccessToken.class)).thenReturn(expectedValue);
+		when(mockObjectSerializer.deserialize(mockSerializedObject, ResourceGroup.class)).thenReturn(expectedValue);
 		// Act
-		AccessToken returnValue = cut.load();
+		ResourceGroup returnValue = cut.load();
 		// Assert
 		assertEquals(returnValue, expectedValue);
 	}
-	
 }

@@ -8,16 +8,16 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.memory.IMemoryAccessToken;
-import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
-import com.developer.nefarious.zjoule.models.AccessToken;
+import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
+import com.developer.nefarious.zjoule.memory.MemoryDeployment;
+import com.developer.nefarious.zjoule.models.Deployment;
 import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
-public class MemoryAccessTokenTest {
+public class MemoryDeploymentTest {
 
-	public static final String KEY = "access-token";
+	public static final String KEY = "deployment";
 	
-	private IMemoryAccessToken cut;
+	private IMemoryDeployment cut;
 	
 	@Mock
 	IObjectSerializer mockObjectSerializer;
@@ -29,34 +29,33 @@ public class MemoryAccessTokenTest {
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 		
-		MemoryAccessToken.resetInstance();
-		MemoryAccessToken.initialize(mockObjectSerializer, mockEclipseMemory);
-		cut = MemoryAccessToken.getInstance();
+		MemoryDeployment.resetInstance();
+		MemoryDeployment.initialize(mockObjectSerializer, mockEclipseMemory);
+		cut = MemoryDeployment.getInstance();
 	}
 	
 	@Test
-	public void shouldSaveAccessToken() {
+	public void shouldSaveDeployment() {
 		// Arrange
-		AccessToken mockAccessToken = new AccessToken();
+		Deployment mockDeployment = new Deployment();
 		String mockSerializedObject = "It doesn't matter";
-		when(mockObjectSerializer.serialize(mockAccessToken)).thenReturn(mockSerializedObject);
+		when(mockObjectSerializer.serialize(mockDeployment)).thenReturn(mockSerializedObject);
 		// Act
-		cut.save(mockAccessToken);
+		cut.save(mockDeployment);
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(KEY, mockSerializedObject);
 	}
 	
 	@Test
-	public void shouldAccessToken() {
+	public void shouldDeployment() {
 		// Arrange
-		AccessToken expectedValue = new AccessToken();
+		Deployment expectedValue = new Deployment();
 		String mockSerializedObject = "It doesn't matter";
 		when(mockEclipseMemory.loadFromEclipsePreferences(KEY)).thenReturn(mockSerializedObject);
-		when(mockObjectSerializer.deserialize(mockSerializedObject, AccessToken.class)).thenReturn(expectedValue);
+		when(mockObjectSerializer.deserialize(mockSerializedObject, Deployment.class)).thenReturn(expectedValue);
 		// Act
-		AccessToken returnValue = cut.load();
+		Deployment returnValue = cut.load();
 		// Assert
 		assertEquals(returnValue, expectedValue);
 	}
-	
 }

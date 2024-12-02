@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.auth;
+package com.developer.nefarious.zjoule.models;
 
 import com.google.gson.annotations.SerializedName;
 

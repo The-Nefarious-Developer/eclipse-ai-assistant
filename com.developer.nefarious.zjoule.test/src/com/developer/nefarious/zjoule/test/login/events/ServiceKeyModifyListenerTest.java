@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
 import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
 import com.developer.nefarious.zjoule.login.utils.JsonValidator;
+import com.developer.nefarious.zjoule.models.ServiceKey;
 import com.google.gson.Gson;
 
 public class ServiceKeyModifyListenerTest {

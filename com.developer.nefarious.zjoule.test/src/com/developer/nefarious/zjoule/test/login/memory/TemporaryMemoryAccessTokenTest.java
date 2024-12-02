@@ -7,9 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.auth.AccessToken;
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
+import com.developer.nefarious.zjoule.models.AccessToken;
 import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
 public class TemporaryMemoryAccessTokenTest {
@@ -48,7 +48,7 @@ public class TemporaryMemoryAccessTokenTest {
 	}
 
 	@Test
-	public void shouldAccessToken() {
+	public void shouldLoadAccessToken() {
 		// Arrange
 		AccessToken expectedValue = new AccessToken();
 		String mockSerializedObject = "It doesn't matter";
@@ -71,4 +71,5 @@ public class TemporaryMemoryAccessTokenTest {
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(FINAL_KEY, mockSerializedObject);
 	}
+	
 }

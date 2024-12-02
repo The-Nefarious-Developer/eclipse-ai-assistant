@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.nio.charset.StandardCharsets;
+import com.developer.nefarious.zjoule.models.AccessToken;
 import com.google.gson.Gson;
 
 public class AuthClientHelper implements IAuthClientHelper {

@@ -1,6 +1,7 @@
 package com.developer.nefarious.zjoule.auth;
 
 import java.io.IOException;
+import com.developer.nefarious.zjoule.models.ServiceKey;
 
 public interface IAuthClient {
 	

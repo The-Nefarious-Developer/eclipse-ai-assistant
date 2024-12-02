@@ -1,6 +1,6 @@
 package com.developer.nefarious.zjoule.memory;
 
-import com.developer.nefarious.zjoule.auth.AccessToken;
+import com.developer.nefarious.zjoule.models.AccessToken;
 
 public interface IMemoryAccessToken {
 	

@@ -7,63 +7,63 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryServiceKey;
+import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryDeployment;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.models.ServiceKey;
+import com.developer.nefarious.zjoule.models.Deployment;
 import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
-public class TemporaryMemoryServiceKeyTest {
+public class TemporaryMemoryDeploymentTest {
+
+	public static final String FINAL_KEY = "deployment";
 	
-	public static final String FINAL_KEY = "service-key";
-	
-	public static final String TEMPORARY_KEY = "tmp-service-key";
-	
-	private TemporaryMemoryServiceKey cut;
-	
+	public static final String TEMPORARY_KEY = "tmp-deployment";
+
+	private TemporaryMemoryDeployment cut;
+
 	@Mock
 	IObjectSerializer mockObjectSerializer;
-	
+
 	@Mock
 	IEclipseMemory mockEclipseMemory;
-	
+
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 		
-		TemporaryMemoryServiceKey.resetInstance();
-		TemporaryMemoryServiceKey.initialize(mockObjectSerializer, mockEclipseMemory);
-		cut = TemporaryMemoryServiceKey.getInstance();
+		TemporaryMemoryDeployment.resetInstance();
+		TemporaryMemoryDeployment.initialize(mockObjectSerializer, mockEclipseMemory);
+		cut = TemporaryMemoryDeployment.getInstance();
 	}
-	
+
 	@Test
-	public void shouldSaveServiceKey() {
+	public void shouldSaveDeployment() {
 		// Arrange
-		ServiceKey mockServiceKey = new ServiceKey();
+		Deployment mockDeployment = new Deployment();
 		String mockSerializedObject = "It doesn't matter";
-		when(mockObjectSerializer.serialize(mockServiceKey)).thenReturn(mockSerializedObject);
+		when(mockObjectSerializer.serialize(mockDeployment)).thenReturn(mockSerializedObject);
 		// Act
-		cut.save(mockServiceKey);
+		cut.save(mockDeployment);
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(TEMPORARY_KEY, mockSerializedObject);
 	}
-	
+
 	@Test
-	public void shouldLoadServiceKey() {
+	public void shouldLoadDeployment() {
 		// Arrange
-		ServiceKey expectedValue = new ServiceKey();
+		Deployment expectedValue = new Deployment();
 		String mockSerializedObject = "It doesn't matter";
 		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockSerializedObject);
-		when(mockObjectSerializer.deserialize(mockSerializedObject, ServiceKey.class)).thenReturn(expectedValue);
+		when(mockObjectSerializer.deserialize(mockSerializedObject, Deployment.class)).thenReturn(expectedValue);
 		// Act
-		ServiceKey returnValue = cut.load();
+		Deployment returnValue = cut.load();
 		// Assert
 		assertEquals(returnValue, expectedValue);
 	}
-	
+
 	@Test
-	public void shouldPersistServiceKey() {
+	public void shouldPersistDeployment() {
 		// Arrange
-		ServiceKey mockServiceKey = new ServiceKey();
+		Deployment mockDeployment = new Deployment();
 		String mockSerializedObject = "It doesn't matter";
 		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockSerializedObject);
 		// Act
@@ -71,5 +71,5 @@ public class TemporaryMemoryServiceKeyTest {
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(FINAL_KEY, mockSerializedObject);
 	}
-
+	
 }

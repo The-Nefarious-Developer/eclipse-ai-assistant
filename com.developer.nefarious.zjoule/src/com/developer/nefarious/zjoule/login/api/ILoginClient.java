@@ -1,7 +1,7 @@
 package com.developer.nefarious.zjoule.login.api;
 
 import java.io.IOException;
-import com.developer.nefarious.zjoule.auth.ServiceKey;
+import com.developer.nefarious.zjoule.models.ServiceKey;
 
 public interface ILoginClient {
 	

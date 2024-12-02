@@ -1,6 +1,7 @@
 package com.developer.nefarious.zjoule.login.api;
 
 import java.util.List;
+import com.developer.nefarious.zjoule.models.Deployment;
 import com.google.gson.annotations.SerializedName;
 
 public class GetDeploymentsResponse {

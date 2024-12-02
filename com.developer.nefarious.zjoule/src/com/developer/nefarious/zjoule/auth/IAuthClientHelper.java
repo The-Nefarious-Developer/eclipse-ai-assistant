@@ -2,6 +2,7 @@ package com.developer.nefarious.zjoule.auth;
 
 import java.net.URI;
 import java.net.http.HttpRequest.BodyPublisher;
+import com.developer.nefarious.zjoule.models.AccessToken;
 
 public interface IAuthClientHelper {
 	

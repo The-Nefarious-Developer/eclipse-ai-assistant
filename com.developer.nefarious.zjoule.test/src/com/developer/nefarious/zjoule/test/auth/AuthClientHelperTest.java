@@ -12,8 +12,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
-import com.developer.nefarious.zjoule.auth.AccessToken;
 import com.developer.nefarious.zjoule.auth.AuthClientHelper;
+import com.developer.nefarious.zjoule.models.AccessToken;
 import com.google.gson.Gson;
 
 public class AuthClientHelperTest {

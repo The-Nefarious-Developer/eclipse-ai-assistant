@@ -8,6 +8,8 @@ import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpResponse;
 import com.developer.nefarious.zjoule.memory.IMemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.IMemoryServiceKey;
+import com.developer.nefarious.zjoule.models.AccessToken;
+import com.developer.nefarious.zjoule.models.ServiceKey;
 
 public class AuthClient implements IAuthClient {
 

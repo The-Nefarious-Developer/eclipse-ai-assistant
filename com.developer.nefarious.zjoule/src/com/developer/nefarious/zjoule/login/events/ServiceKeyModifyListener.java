@@ -3,11 +3,11 @@ package com.developer.nefarious.zjoule.login.events;
 import java.io.IOException;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
 import com.developer.nefarious.zjoule.login.utils.JsonValidator;
+import com.developer.nefarious.zjoule.models.ServiceKey;
 import com.google.gson.Gson;
 
 public class ServiceKeyModifyListener implements ModifyListener {

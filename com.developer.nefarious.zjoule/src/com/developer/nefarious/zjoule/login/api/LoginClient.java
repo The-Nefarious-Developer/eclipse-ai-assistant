@@ -6,7 +6,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import com.developer.nefarious.zjoule.auth.IAuthClient;
-import com.developer.nefarious.zjoule.auth.ServiceKey;
+import com.developer.nefarious.zjoule.models.ServiceKey;
 
 public class LoginClient implements ILoginClient {
 	
