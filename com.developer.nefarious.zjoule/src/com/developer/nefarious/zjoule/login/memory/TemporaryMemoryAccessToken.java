@@ -7,7 +7,7 @@ import com.developer.nefarious.zjoule.memory.EclipseMemory;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.memory.IMemoryAccessToken;
 
-public class TemporaryMemoryAccessToken implements IMemoryAccessToken {
+public class TemporaryMemoryAccessToken implements IMemoryAccessToken, ITemporaryMemoryAccessToken {
 	
 	public static final String KEY = "tmp-" + IMemoryAccessToken.KEY;
 
@@ -35,6 +35,12 @@ public class TemporaryMemoryAccessToken implements IMemoryAccessToken {
 	public AccessToken load() {
 		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
 		return objectSerializer.deserialize(serializedObject, AccessToken.class);
+	}
+
+	@Override
+	public void persist(final AccessToken temporaryAccessToken) {
+		String serializedObject = objectSerializer.serialize(temporaryAccessToken);
+		eclipseMemory.saveOnEclipsePreferences(IMemoryAccessToken.KEY, serializedObject);
 	}
 
 }
