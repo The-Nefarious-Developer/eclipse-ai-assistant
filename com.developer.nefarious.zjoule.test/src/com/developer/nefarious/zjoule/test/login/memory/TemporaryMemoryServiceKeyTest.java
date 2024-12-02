@@ -9,8 +9,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.auth.ServiceKey;
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryServiceKey;
-import com.developer.nefarious.zjoule.login.utils.IObjectSerializer;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
+import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
 public class TemporaryMemoryServiceKeyTest {
 	

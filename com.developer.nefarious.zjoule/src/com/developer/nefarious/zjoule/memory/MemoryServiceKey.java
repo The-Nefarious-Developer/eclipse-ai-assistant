@@ -1,8 +1,8 @@
 package com.developer.nefarious.zjoule.memory;
 
 import com.developer.nefarious.zjoule.auth.ServiceKey;
-import com.developer.nefarious.zjoule.login.utils.IObjectSerializer;
-import com.developer.nefarious.zjoule.login.utils.ObjectSerializer;
+import com.developer.nefarious.zjoule.utils.IObjectSerializer;
+import com.developer.nefarious.zjoule.utils.ObjectSerializer;
 
 public class MemoryServiceKey implements IMemoryServiceKey {
 	

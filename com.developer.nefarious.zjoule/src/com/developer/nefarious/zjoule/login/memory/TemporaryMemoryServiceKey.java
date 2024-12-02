@@ -1,11 +1,11 @@
 package com.developer.nefarious.zjoule.login.memory;
 
 import com.developer.nefarious.zjoule.auth.ServiceKey;
-import com.developer.nefarious.zjoule.login.utils.IObjectSerializer;
-import com.developer.nefarious.zjoule.login.utils.ObjectSerializer;
 import com.developer.nefarious.zjoule.memory.EclipseMemory;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.memory.IMemoryServiceKey;
+import com.developer.nefarious.zjoule.utils.IObjectSerializer;
+import com.developer.nefarious.zjoule.utils.ObjectSerializer;
 
 public class TemporaryMemoryServiceKey implements IMemoryServiceKey, ITemporaryMemoryServiceKey {
 	

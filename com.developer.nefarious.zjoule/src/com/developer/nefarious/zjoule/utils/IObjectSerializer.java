@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.login.utils;
+package com.developer.nefarious.zjoule.utils;
 
 public interface IObjectSerializer {
 	

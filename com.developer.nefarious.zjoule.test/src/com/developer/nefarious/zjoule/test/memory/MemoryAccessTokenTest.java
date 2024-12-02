@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.auth.AccessToken;
-import com.developer.nefarious.zjoule.login.utils.IObjectSerializer;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.memory.IMemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
+import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
 public class MemoryAccessTokenTest {
 

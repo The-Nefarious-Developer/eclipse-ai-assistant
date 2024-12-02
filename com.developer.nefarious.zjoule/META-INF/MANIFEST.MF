@@ -13,8 +13,7 @@ Import-Package: com.google.gson;version="[2.11.0,3.0.0)",
  com.google.gson.annotations;version="[2.11.0,3.0.0)",
  jakarta.inject;version="[2.0.0,3.0.0)"
 Bundle-ActivationPolicy: lazy
-Export-Package: com.developer.nefarious.zjoule.ai,
- com.developer.nefarious.zjoule.auth,
+Export-Package: com.developer.nefarious.zjoule.auth,
  com.developer.nefarious.zjoule.functions,
  com.developer.nefarious.zjoule.login,
  com.developer.nefarious.zjoule.login.api,
@@ -23,4 +22,5 @@ Export-Package: com.developer.nefarious.zjoule.ai,
  com.developer.nefarious.zjoule.login.pages,
  com.developer.nefarious.zjoule.login.utils,
  com.developer.nefarious.zjoule.memory,
- com.developer.nefarious.zjoule.ui
+ com.developer.nefarious.zjoule.ui,
+ com.developer.nefarious.zjoule.utils
