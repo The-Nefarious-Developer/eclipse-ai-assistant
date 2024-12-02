@@ -65,9 +65,9 @@ public class TemporaryMemoryAccessTokenTest {
 		// Arrange
 		AccessToken mockAccessToken = new AccessToken();
 		String mockSerializedObject = "It doesn't matter";
-		when(mockObjectSerializer.serialize(mockAccessToken)).thenReturn(mockSerializedObject);
+		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockSerializedObject);
 		// Act
-		cut.persist(mockAccessToken);
+		cut.persist();
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(FINAL_KEY, mockSerializedObject);
 	}

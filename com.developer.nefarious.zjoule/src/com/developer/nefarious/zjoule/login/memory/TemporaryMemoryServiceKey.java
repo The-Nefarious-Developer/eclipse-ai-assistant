@@ -5,7 +5,7 @@ import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.memory.IMemoryServiceKey;
 import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
-public class TemporaryMemoryServiceKey implements IMemoryServiceKey, ITemporaryMemoryServiceKey {
+public class TemporaryMemoryServiceKey implements IMemoryServiceKey, ITemporaryMemoryObject {
 	
 	private static TemporaryMemoryServiceKey instance;
 	
@@ -50,8 +50,8 @@ public class TemporaryMemoryServiceKey implements IMemoryServiceKey, ITemporaryM
 	}
 
 	@Override
-	public void persist(final ServiceKey temporaryServiceKey) {
-		String serializedObject = objectSerializer.serialize(temporaryServiceKey);
+	public void persist() {
+		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
 		eclipseMemory.saveOnEclipsePreferences(IMemoryServiceKey.KEY, serializedObject);
 	}
 
