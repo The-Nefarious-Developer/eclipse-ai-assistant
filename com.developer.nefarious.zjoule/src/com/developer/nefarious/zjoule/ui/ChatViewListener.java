@@ -86,7 +86,7 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 
 	private void setUpToolbar() {
 		IToolBarManager toolbar = getToolbar();
-		toolbar.add(LoginHandler.create(browser, shell));
+		toolbar.add(LoginHandler.create(shell));
 	}
 
 	@Override

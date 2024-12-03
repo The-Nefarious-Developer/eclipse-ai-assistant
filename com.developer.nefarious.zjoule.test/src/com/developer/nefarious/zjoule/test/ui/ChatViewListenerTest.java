@@ -88,7 +88,7 @@ public class ChatViewListenerTest {
 		// Mock the creation of the LoginHandler
 		try (MockedStatic<LoginHandler> mockedLoginHandlerStatic = mockStatic(LoginHandler.class)) {
 			LoginHandler mockLoginHandler = mock(LoginHandler.class);
-			mockedLoginHandlerStatic.when(() -> LoginHandler.create(mockBrowser, mockShell))
+			mockedLoginHandlerStatic.when(() -> LoginHandler.create(mockShell))
 					.thenReturn(mockLoginHandler);
 
 			// Mock the setup of the getAIResponse
