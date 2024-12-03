@@ -10,17 +10,12 @@ import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
 import com.developer.nefarious.zjoule.memory.MemoryResourceGroup;
-import com.developer.nefarious.zjoule.models.ResourceGroup;
-import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
 public class MemoryResourceGroupTest {
 
 	public static final String KEY = "resource-group";
 	
 	private IMemoryResourceGroup cut;
-	
-	@Mock
-	IObjectSerializer mockObjectSerializer;
 	
 	@Mock
 	IEclipseMemory mockEclipseMemory;
@@ -30,31 +25,27 @@ public class MemoryResourceGroupTest {
 		MockitoAnnotations.openMocks(this);
 		
 		MemoryResourceGroup.resetInstance();
-		MemoryResourceGroup.initialize(mockObjectSerializer, mockEclipseMemory);
+		MemoryResourceGroup.initialize(mockEclipseMemory);
 		cut = MemoryResourceGroup.getInstance();
 	}
 	
 	@Test
 	public void shouldSaveResourceGroup() {
 		// Arrange
-		ResourceGroup mockResourceGroup = new ResourceGroup();
-		String mockSerializedObject = "It doesn't matter";
-		when(mockObjectSerializer.serialize(mockResourceGroup)).thenReturn(mockSerializedObject);
+		String mockResourceGroup = "selected resource group";
 		// Act
 		cut.save(mockResourceGroup);
 		// Assert
-		verify(mockEclipseMemory).saveOnEclipsePreferences(KEY, mockSerializedObject);
+		verify(mockEclipseMemory).saveOnEclipsePreferences(KEY, mockResourceGroup);
 	}
 	
 	@Test
-	public void shouldResourceGroup() {
+	public void shouldLoadResourceGroup() {
 		// Arrange
-		ResourceGroup expectedValue = new ResourceGroup();
-		String mockSerializedObject = "It doesn't matter";
-		when(mockEclipseMemory.loadFromEclipsePreferences(KEY)).thenReturn(mockSerializedObject);
-		when(mockObjectSerializer.deserialize(mockSerializedObject, ResourceGroup.class)).thenReturn(expectedValue);
+		String expectedValue = "stored resource group";
+		when(mockEclipseMemory.loadFromEclipsePreferences(KEY)).thenReturn(expectedValue);
 		// Act
-		ResourceGroup returnValue = cut.load();
+		String returnValue = cut.load();
 		// Assert
 		assertEquals(returnValue, expectedValue);
 	}

@@ -9,8 +9,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryDeployment;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.models.Deployment;
-import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
 public class TemporaryMemoryDeploymentTest {
 
@@ -21,9 +19,6 @@ public class TemporaryMemoryDeploymentTest {
 	private TemporaryMemoryDeployment cut;
 
 	@Mock
-	IObjectSerializer mockObjectSerializer;
-
-	@Mock
 	IEclipseMemory mockEclipseMemory;
 
 	@BeforeEach
@@ -31,31 +26,27 @@ public class TemporaryMemoryDeploymentTest {
 		MockitoAnnotations.openMocks(this);
 		
 		TemporaryMemoryDeployment.resetInstance();
-		TemporaryMemoryDeployment.initialize(mockObjectSerializer, mockEclipseMemory);
+		TemporaryMemoryDeployment.initialize(mockEclipseMemory);
 		cut = TemporaryMemoryDeployment.getInstance();
 	}
 
 	@Test
 	public void shouldSaveDeployment() {
 		// Arrange
-		Deployment mockDeployment = new Deployment();
-		String mockSerializedObject = "It doesn't matter";
-		when(mockObjectSerializer.serialize(mockDeployment)).thenReturn(mockSerializedObject);
+		String mockDeployment = "selected deployment";
 		// Act
 		cut.save(mockDeployment);
 		// Assert
-		verify(mockEclipseMemory).saveOnEclipsePreferences(TEMPORARY_KEY, mockSerializedObject);
+		verify(mockEclipseMemory).saveOnEclipsePreferences(TEMPORARY_KEY, mockDeployment);
 	}
 
 	@Test
 	public void shouldLoadDeployment() {
 		// Arrange
-		Deployment expectedValue = new Deployment();
-		String mockSerializedObject = "It doesn't matter";
-		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockSerializedObject);
-		when(mockObjectSerializer.deserialize(mockSerializedObject, Deployment.class)).thenReturn(expectedValue);
+		String expectedValue = "stored deployment";
+		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(expectedValue);
 		// Act
-		Deployment returnValue = cut.load();
+		String returnValue = cut.load();
 		// Assert
 		assertEquals(returnValue, expectedValue);
 	}
@@ -63,13 +54,12 @@ public class TemporaryMemoryDeploymentTest {
 	@Test
 	public void shouldPersistDeployment() {
 		// Arrange
-		Deployment mockDeployment = new Deployment();
-		String mockSerializedObject = "It doesn't matter";
-		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockSerializedObject);
+		String mockDeployment = "temporary deployment";
+		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockDeployment);
 		// Act
 		cut.persist();
 		// Assert
-		verify(mockEclipseMemory).saveOnEclipsePreferences(FINAL_KEY, mockSerializedObject);
+		verify(mockEclipseMemory).saveOnEclipsePreferences(FINAL_KEY, mockDeployment);
 	}
 	
 }

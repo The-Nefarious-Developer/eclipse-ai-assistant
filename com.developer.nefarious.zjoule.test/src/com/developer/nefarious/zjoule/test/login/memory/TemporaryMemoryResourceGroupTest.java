@@ -9,8 +9,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryResourceGroup;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.models.ResourceGroup;
-import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
 public class TemporaryMemoryResourceGroupTest {
 
@@ -21,9 +19,6 @@ public class TemporaryMemoryResourceGroupTest {
 	private TemporaryMemoryResourceGroup cut;
 
 	@Mock
-	IObjectSerializer mockObjectSerializer;
-
-	@Mock
 	IEclipseMemory mockEclipseMemory;
 
 	@BeforeEach
@@ -31,31 +26,27 @@ public class TemporaryMemoryResourceGroupTest {
 		MockitoAnnotations.openMocks(this);
 
 		TemporaryMemoryResourceGroup.resetInstance();
-		TemporaryMemoryResourceGroup.initialize(mockObjectSerializer, mockEclipseMemory);
+		TemporaryMemoryResourceGroup.initialize(mockEclipseMemory);
 		cut = TemporaryMemoryResourceGroup.getInstance();
 	}
 
 	@Test
 	public void shouldSaveResourceGroup() {
 		// Arrange
-		ResourceGroup mockResourceGroup = new ResourceGroup();
-		String mockSerializedObject = "It doesn't matter";
-		when(mockObjectSerializer.serialize(mockResourceGroup)).thenReturn(mockSerializedObject);
+		String mockResourceGroup = "selected resource group";
 		// Act
 		cut.save(mockResourceGroup);
 		// Assert
-		verify(mockEclipseMemory).saveOnEclipsePreferences(TEMPORARY_KEY, mockSerializedObject);
+		verify(mockEclipseMemory).saveOnEclipsePreferences(TEMPORARY_KEY, mockResourceGroup);
 	}
 
 	@Test
 	public void shouldLoadResourceGroup() {
 		// Arrange
-		ResourceGroup expectedValue = new ResourceGroup();
-		String mockSerializedObject = "It doesn't matter";
-		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockSerializedObject);
-		when(mockObjectSerializer.deserialize(mockSerializedObject, ResourceGroup.class)).thenReturn(expectedValue);
+		String expectedValue = "stored resource group";
+		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(expectedValue);
 		// Act
-		ResourceGroup returnValue = cut.load();
+		String returnValue = cut.load();
 		// Assert
 		assertEquals(returnValue, expectedValue);
 	}
@@ -63,12 +54,11 @@ public class TemporaryMemoryResourceGroupTest {
 	@Test
 	public void shouldPersistResourceGroup() {
 		// Arrange
-		ResourceGroup mockResourceGroup = new ResourceGroup();
-		String mockSerializedObject = "It doesn't matter";
-		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockSerializedObject);
+		String mockResourceGroup = "temporary resource group";
+		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockResourceGroup);
 		// Act
 		cut.persist();
 		// Assert
-		verify(mockEclipseMemory).saveOnEclipsePreferences(FINAL_KEY, mockSerializedObject);
+		verify(mockEclipseMemory).saveOnEclipsePreferences(FINAL_KEY, mockResourceGroup);
 	}
 }

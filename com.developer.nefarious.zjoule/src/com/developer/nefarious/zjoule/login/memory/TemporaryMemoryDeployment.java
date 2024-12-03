@@ -2,8 +2,6 @@ package com.developer.nefarious.zjoule.login.memory;
 
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
-import com.developer.nefarious.zjoule.models.Deployment;
-import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
 public class TemporaryMemoryDeployment implements IMemoryDeployment, ITemporaryMemoryObject {
 
@@ -11,24 +9,21 @@ public class TemporaryMemoryDeployment implements IMemoryDeployment, ITemporaryM
 
 	public static final String KEY = "tmp-" + IMemoryDeployment.KEY;
 
-	IObjectSerializer objectSerializer;
-
 	IEclipseMemory eclipseMemory;
 
-	private TemporaryMemoryDeployment(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
-		this.objectSerializer = objectSerializer;
+	private TemporaryMemoryDeployment(final IEclipseMemory eclipseMemory) {
 		this.eclipseMemory = eclipseMemory;
 	}
 
-	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+	public static void initialize(final IEclipseMemory eclipseMemory) {
 		if (instance == null) {
-			instance = new TemporaryMemoryDeployment(objectSerializer, eclipseMemory);
+			instance = new TemporaryMemoryDeployment(eclipseMemory);
 		}
 	}
 
 	public static TemporaryMemoryDeployment getInstance() {
 		if (instance == null) {
-			throw new IllegalStateException("TemporaryMemoryAccessToken not initialized. Call initialize() first.");
+			throw new IllegalStateException("TemporaryMemoryDeployment not initialized. Call initialize() first.");
 		}
 		return instance;
 	}
@@ -38,20 +33,18 @@ public class TemporaryMemoryDeployment implements IMemoryDeployment, ITemporaryM
 	}
 
 	@Override
-	public void save(final Deployment deployment) {
-		String serializedObject = objectSerializer.serialize(deployment);
-		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
+	public void save(final String deployment) {
+		eclipseMemory.saveOnEclipsePreferences(KEY, deployment);
 	}
 
 	@Override
-	public Deployment load() {
-		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-		return objectSerializer.deserialize(serializedObject, Deployment.class);
+	public String load() {
+		return eclipseMemory.loadFromEclipsePreferences(KEY);
 	}
 
 	@Override
 	public void persist() {
-		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-		eclipseMemory.saveOnEclipsePreferences(IMemoryDeployment.KEY, serializedObject);
+		String deployment = eclipseMemory.loadFromEclipsePreferences(KEY);
+		eclipseMemory.saveOnEclipsePreferences(IMemoryDeployment.KEY, deployment);
 	}
 }

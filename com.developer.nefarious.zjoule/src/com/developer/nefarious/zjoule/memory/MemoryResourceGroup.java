@@ -1,24 +1,18 @@
 package com.developer.nefarious.zjoule.memory;
 
-import com.developer.nefarious.zjoule.models.ResourceGroup;
-import com.developer.nefarious.zjoule.utils.IObjectSerializer;
-
 public class MemoryResourceGroup implements IMemoryResourceGroup {
 
 	private static MemoryResourceGroup instance;
 
-	private IObjectSerializer objectSerializer;
-
 	private IEclipseMemory eclipseMemory;
 
-	private MemoryResourceGroup(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
-		this.objectSerializer = objectSerializer;
+	private MemoryResourceGroup(final IEclipseMemory eclipseMemory) {
 		this.eclipseMemory = eclipseMemory;
 	}
 
-	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+	public static void initialize(final IEclipseMemory eclipseMemory) {
 		if (instance == null) {
-			instance = new MemoryResourceGroup(objectSerializer, eclipseMemory);
+			instance = new MemoryResourceGroup(eclipseMemory);
 		}
 	}
 
@@ -34,15 +28,13 @@ public class MemoryResourceGroup implements IMemoryResourceGroup {
 	}
 
 	@Override
-	public void save(final ResourceGroup resourceGroup) {
-		String serializedObject = objectSerializer.serialize(resourceGroup);
-		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
+	public void save(final String resourceGroup) {
+		eclipseMemory.saveOnEclipsePreferences(KEY, resourceGroup);
 	}
 
 	@Override
-	public ResourceGroup load() {
-		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-		return objectSerializer.deserialize(serializedObject, ResourceGroup.class);
+	public String load() {
+		return eclipseMemory.loadFromEclipsePreferences(KEY);
 	}
 
 }

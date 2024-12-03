@@ -8,6 +8,8 @@ import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.api.LoginClient;
 import com.developer.nefarious.zjoule.login.api.LoginClientHelper;
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryAccessToken;
+import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryDeployment;
+import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryResourceGroup;
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryServiceKey;
 import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
 import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
@@ -34,6 +36,8 @@ public class LoginWizard extends Wizard {
 	public boolean performFinish() {
 		TemporaryMemoryAccessToken.getInstance().persist();
 		TemporaryMemoryServiceKey.getInstance().persist();
+		TemporaryMemoryResourceGroup.getInstance().persist();
+		TemporaryMemoryDeployment.getInstance().persist();
 		return true;
 	}
 	
@@ -43,6 +47,8 @@ public class LoginWizard extends Wizard {
 		
 		TemporaryMemoryAccessToken.initialize(objectSerializer, eclipseMemory);
 		TemporaryMemoryServiceKey.initialize(objectSerializer, eclipseMemory);
+		TemporaryMemoryResourceGroup.initialize(eclipseMemory);
+		TemporaryMemoryDeployment.initialize(eclipseMemory);
 	}
 	
 	private ILoginClient createLoginClient() {

@@ -10,17 +10,12 @@ import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
 import com.developer.nefarious.zjoule.memory.MemoryDeployment;
-import com.developer.nefarious.zjoule.models.Deployment;
-import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
 public class MemoryDeploymentTest {
 
 	public static final String KEY = "deployment";
 	
 	private IMemoryDeployment cut;
-	
-	@Mock
-	IObjectSerializer mockObjectSerializer;
 	
 	@Mock
 	IEclipseMemory mockEclipseMemory;
@@ -30,31 +25,27 @@ public class MemoryDeploymentTest {
 		MockitoAnnotations.openMocks(this);
 		
 		MemoryDeployment.resetInstance();
-		MemoryDeployment.initialize(mockObjectSerializer, mockEclipseMemory);
+		MemoryDeployment.initialize(mockEclipseMemory);
 		cut = MemoryDeployment.getInstance();
 	}
 	
 	@Test
 	public void shouldSaveDeployment() {
 		// Arrange
-		Deployment mockDeployment = new Deployment();
-		String mockSerializedObject = "It doesn't matter";
-		when(mockObjectSerializer.serialize(mockDeployment)).thenReturn(mockSerializedObject);
+		String mockDeployment = "selected deployment";
 		// Act
 		cut.save(mockDeployment);
 		// Assert
-		verify(mockEclipseMemory).saveOnEclipsePreferences(KEY, mockSerializedObject);
+		verify(mockEclipseMemory).saveOnEclipsePreferences(KEY, mockDeployment);
 	}
 	
 	@Test
 	public void shouldDeployment() {
 		// Arrange
-		Deployment expectedValue = new Deployment();
-		String mockSerializedObject = "It doesn't matter";
-		when(mockEclipseMemory.loadFromEclipsePreferences(KEY)).thenReturn(mockSerializedObject);
-		when(mockObjectSerializer.deserialize(mockSerializedObject, Deployment.class)).thenReturn(expectedValue);
+		String expectedValue = "stored deployment";
+		when(mockEclipseMemory.loadFromEclipsePreferences(KEY)).thenReturn(expectedValue);
 		// Act
-		Deployment returnValue = cut.load();
+		String returnValue = cut.load();
 		// Assert
 		assertEquals(returnValue, expectedValue);
 	}
