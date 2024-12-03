@@ -1,7 +1,8 @@
-package com.developer.nefarious.zjoule.login.api;
+package com.developer.nefarious.zjoule.login.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.developer.nefarious.zjoule.login.api.GetDeploymentsResponse;
 import com.developer.nefarious.zjoule.models.Deployment;
 
 public class DeploymentConfigurationNameExtractor {

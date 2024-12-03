@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.test.login.api;
+package com.developer.nefarious.zjoule.test.login.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import org.junit.jupiter.api.Test;
 import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
-import com.developer.nefarious.zjoule.login.api.ResourceGroupIdExtractor;
+import com.developer.nefarious.zjoule.login.utils.ResourceGroupIdExtractor;
 import com.developer.nefarious.zjoule.models.ResourceGroup;
 
 public class ResourceGroupIdExtractorTest {

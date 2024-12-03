@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.test.login.api;
+package com.developer.nefarious.zjoule.test.login.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import org.junit.jupiter.api.Test;
-import com.developer.nefarious.zjoule.login.api.DeploymentConfigurationNameExtractor;
 import com.developer.nefarious.zjoule.login.api.GetDeploymentsResponse;
+import com.developer.nefarious.zjoule.login.utils.DeploymentConfigurationNameExtractor;
 import com.developer.nefarious.zjoule.models.Deployment;
 
 public class DeploymentConfigurationNameExtractorTest {

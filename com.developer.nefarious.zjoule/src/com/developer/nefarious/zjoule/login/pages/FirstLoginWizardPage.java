@@ -9,8 +9,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
-import com.developer.nefarious.zjoule.login.api.ResourceGroupIdExtractor;
 import com.developer.nefarious.zjoule.login.events.ServiceKeyModifyListener;
+import com.developer.nefarious.zjoule.login.utils.ResourceGroupIdExtractor;
 import com.developer.nefarious.zjoule.models.ServiceKey;
 import com.google.gson.Gson;
 

@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import com.developer.nefarious.zjoule.login.api.DeploymentConfigurationNameExtractor;
 import com.developer.nefarious.zjoule.login.api.GetDeploymentsResponse;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
+import com.developer.nefarious.zjoule.login.utils.DeploymentConfigurationNameExtractor;
 import com.developer.nefarious.zjoule.models.ServiceKey;
 
 public class ResourceGroupSelectionAdapter extends SelectionAdapter {
