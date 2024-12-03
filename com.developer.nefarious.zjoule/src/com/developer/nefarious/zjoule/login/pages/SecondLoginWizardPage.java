@@ -11,6 +11,8 @@ import org.eclipse.swt.widgets.Label;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.events.DeploymentSelectionAdapter;
 import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
+import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
+import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
 import com.developer.nefarious.zjoule.models.ServiceKey;
 
 public class SecondLoginWizardPage extends WizardPage {
@@ -24,15 +26,26 @@ public class SecondLoginWizardPage extends WizardPage {
 	private ArrayList<String> resourceGroupsForSelection = new ArrayList<String>();
 
 	private ArrayList<String> deploymentsForSelection = new ArrayList<String>();
-	
+
 	private ILoginClient loginClient;
 
-	public SecondLoginWizardPage(final ILoginClient loginClient) {
+	private IMemoryResourceGroup memoryResourceGroup;
+
+	private IMemoryDeployment memoryDeployment;
+
+	// @formatter:off
+	public SecondLoginWizardPage(
+			final ILoginClient loginClient, 
+			final IMemoryResourceGroup memoryResourceGroup, 
+			final IMemoryDeployment memoryDeployment) {
+		// @formatter:on
 		super(PAGE_ID);
 		setTitle("Select the model");
 		setDescription("Choose the Resource Group and the Deployment ID.");
 		setPageComplete(false); // Initially set the page as incomplete
 		this.loginClient = loginClient;
+		this.memoryResourceGroup = memoryResourceGroup;
+		this.memoryDeployment = memoryDeployment;
 	}
 
 	@Override
@@ -49,7 +62,8 @@ public class SecondLoginWizardPage extends WizardPage {
 
 		// Add a SelectionListener to enable the deployment dropdown when a valid
 		// project is selected
-		resourceGroupDropdown.addSelectionListener(new ResourceGroupSelectionAdapter(this, loginClient));
+		resourceGroupDropdown
+				.addSelectionListener(new ResourceGroupSelectionAdapter(this, loginClient, memoryResourceGroup));
 
 		// Create label and dropdown for deployment ID selection
 		Label deploymentLabel = new Label(container, SWT.NONE);
@@ -60,7 +74,7 @@ public class SecondLoginWizardPage extends WizardPage {
 		deploymentDropdown.setEnabled(false); // Initially disabled
 
 		// Add a SelectionListener to track changes in the deployment dropdown
-		deploymentDropdown.addSelectionListener(new DeploymentSelectionAdapter(this));
+		deploymentDropdown.addSelectionListener(new DeploymentSelectionAdapter(this, memoryDeployment));
 
 		setControl(container);
 	}
@@ -93,7 +107,7 @@ public class SecondLoginWizardPage extends WizardPage {
 	public Combo getDeploymentDropdown() {
 		return deploymentDropdown;
 	}
-	
+
 	public void setResourceGroupsForSelection(final ArrayList<String> resourceGroupsForSelection) {
 		this.resourceGroupsForSelection = resourceGroupsForSelection;
 	}
@@ -102,11 +116,11 @@ public class SecondLoginWizardPage extends WizardPage {
 		this.deploymentsForSelection = deploymentsForSelection;
 		deploymentDropdown.setItems(deploymentsForSelection.toArray(new String[0]));
 	}
-	
+
 	public ServiceKey getServiceKey() {
 		FirstLoginWizardPage firstPage = (FirstLoginWizardPage) getWizard().getPage(FirstLoginWizardPage.PAGE_ID);
 		return firstPage.getServiceKey();
-		
+
 	}
 
 }

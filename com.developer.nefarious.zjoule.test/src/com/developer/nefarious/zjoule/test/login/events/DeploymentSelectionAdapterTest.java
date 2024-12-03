@@ -12,19 +12,23 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.login.events.DeploymentSelectionAdapter;
 import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
+import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
 
 public class DeploymentSelectionAdapterTest {
 	
 	private DeploymentSelectionAdapter cut;
 	
 	@Mock
-	SecondLoginWizardPage mockSecondLoginWizardPage;
+	private SecondLoginWizardPage mockSecondLoginWizardPage;
+	
+	@Mock
+	private IMemoryDeployment mockMemoryDeployment;
 	
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 		
-		cut = new DeploymentSelectionAdapter(mockSecondLoginWizardPage);
+		cut = new DeploymentSelectionAdapter(mockSecondLoginWizardPage, mockMemoryDeployment);
 	}
 	
 	@Test
@@ -43,6 +47,7 @@ public class DeploymentSelectionAdapterTest {
 		// Assert
 		assertTrue(true);
 		verify(mockSecondLoginWizardPage).setPageComplete(true);
+		verify(mockMemoryDeployment).save(mockText);
 	}
 	
 	@Test

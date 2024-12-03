@@ -18,6 +18,7 @@ import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
 import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
 import com.developer.nefarious.zjoule.login.utils.DeploymentConfigurationNameExtractor;
+import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
 import com.developer.nefarious.zjoule.models.ServiceKey;
 
 public class ResourceGroupSelectionAdapterTest {
@@ -30,10 +31,13 @@ public class ResourceGroupSelectionAdapterTest {
 	@Mock
 	private ILoginClient mockLoginClient;
 	
+	@Mock
+	private IMemoryResourceGroup mockMemoryResourceGroup;
+	
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		cut = new ResourceGroupSelectionAdapter(mockSecondLoginWizardPage, mockLoginClient);
+		cut = new ResourceGroupSelectionAdapter(mockSecondLoginWizardPage, mockLoginClient, mockMemoryResourceGroup);
 	}
 	
 	@Test
@@ -70,6 +74,7 @@ public class ResourceGroupSelectionAdapterTest {
 		verify(mockSecondLoginWizardPage).setPageComplete(false);
 		verify(mockDeploymentDropdown).setEnabled(true);
 		verify(mockSecondLoginWizardPage).setDeploymentsForSelection(mockListOfConfigurationNames);
+		verify(mockMemoryResourceGroup).save(mockText);
 	}
 	
 	@Test

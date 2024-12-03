@@ -29,7 +29,7 @@ public class LoginWizard extends Wizard {
 	@Override
 	public void addPages() {
 		addPage(new FirstLoginWizardPage(loginClient));
-		addPage(new SecondLoginWizardPage(loginClient));
+		addPage(new SecondLoginWizardPage(loginClient, TemporaryMemoryResourceGroup.getInstance(), TemporaryMemoryDeployment.getInstance()));
 	}
 
 	@Override

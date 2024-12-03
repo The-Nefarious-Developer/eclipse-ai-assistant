@@ -8,6 +8,7 @@ import com.developer.nefarious.zjoule.login.api.GetDeploymentsResponse;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
 import com.developer.nefarious.zjoule.login.utils.DeploymentConfigurationNameExtractor;
+import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
 import com.developer.nefarious.zjoule.models.ServiceKey;
 
 public class ResourceGroupSelectionAdapter extends SelectionAdapter {
@@ -15,14 +16,18 @@ public class ResourceGroupSelectionAdapter extends SelectionAdapter {
 	private SecondLoginWizardPage secondLoginWizardPage;
 
 	private ILoginClient loginClient;
+	
+	private IMemoryResourceGroup memoryResourceGroup;
 
 	// @formatter:off
 	public ResourceGroupSelectionAdapter(
 			final SecondLoginWizardPage secondLoginWizardPage,
-			final ILoginClient loginClient) {
-		// @formatter:off
+			final ILoginClient loginClient,
+			final IMemoryResourceGroup memoryResourceGroup) {
+		// @formatter:on
 		this.secondLoginWizardPage = secondLoginWizardPage;
 		this.loginClient = loginClient;
+		this.memoryResourceGroup = memoryResourceGroup;
 	}
 
 	@Override
@@ -49,18 +54,19 @@ public class ResourceGroupSelectionAdapter extends SelectionAdapter {
 	private Boolean isTheResourceGroupSelected() {
 		return !secondLoginWizardPage.getResourceGroupDropdown().getText().isEmpty();
 	}
-
-	private void handleAvailableDeployments() throws IOException, InterruptedException {
+	
+	private void handleAvailableDeployments() throws IOException, InterruptedException {		
+		String selectedResourceGroup = secondLoginWizardPage.getResourceGroupDropdown().getText();
 		ServiceKey serviceKey = secondLoginWizardPage.getServiceKey();
-		String selectedResourceGroup = secondLoginWizardPage.getResourceGroupDropdown().getText(); 
 		GetDeploymentsResponse getDeploymentsResponse = loginClient.getDeployments(serviceKey, selectedResourceGroup);
 		ArrayList<String> availableDeployments = DeploymentConfigurationNameExtractor.extractResourceGroupIds(getDeploymentsResponse);
 		secondLoginWizardPage.setDeploymentsForSelection(availableDeployments);
-		enableTheDeploymentSelection();	
+		memoryResourceGroup.save(selectedResourceGroup);
+		enableTheDeploymentSelection();
 	}
-	
+
 	private void enableTheDeploymentSelection() {
 		secondLoginWizardPage.getDeploymentDropdown().setEnabled(true);
 	}
-	
+
 }
