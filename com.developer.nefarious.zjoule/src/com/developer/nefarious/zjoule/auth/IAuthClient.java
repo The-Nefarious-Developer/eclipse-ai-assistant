@@ -9,6 +9,6 @@ public interface IAuthClient {
 	
 	public String getNewAccessToken() throws IOException, InterruptedException;
 	
-	public String getNewAccessToken(ServiceKey serviceKey) throws IOException, InterruptedException;
+	public String getNewAccessToken(final ServiceKey serviceKey) throws IOException, InterruptedException;
 
 }

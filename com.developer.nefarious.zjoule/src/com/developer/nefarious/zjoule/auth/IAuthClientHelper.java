@@ -6,10 +6,10 @@ import com.developer.nefarious.zjoule.models.AccessToken;
 
 public interface IAuthClientHelper {
 	
-	BodyPublisher createRequestBody(String clientId, String clientSecret);
+	BodyPublisher createRequestBody(final String clientId, final String clientSecret);
 	
-	URI createAuthUri(String tokenEndpoint);
+	URI createAuthUri(final String tokenEndpoint);
 	
-	AccessToken convertResponseToObject(String responseBody);
+	AccessToken convertResponseToObject(final String responseBody);
 
 }

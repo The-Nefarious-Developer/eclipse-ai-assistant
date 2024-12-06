@@ -4,7 +4,7 @@ public interface IMemoryDeployment {
 	
 	public static final String KEY = "deployment";
 	
-	void save(String deployment);
+	void save(final String deployment);
 	
 	String load();
 

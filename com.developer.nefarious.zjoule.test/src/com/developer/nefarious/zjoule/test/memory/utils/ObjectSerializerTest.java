@@ -1,16 +1,17 @@
-package com.developer.nefarious.zjoule.test.utils;
+package com.developer.nefarious.zjoule.test.memory.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.developer.nefarious.zjoule.memory.utils.IObjectSerializer;
+import com.developer.nefarious.zjoule.memory.utils.ObjectSerializer;
 import com.developer.nefarious.zjoule.models.AccessToken;
-import com.developer.nefarious.zjoule.utils.ObjectSerializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class ObjectSerializerTest {
 	
-	private ObjectSerializer cut;
+	private IObjectSerializer cut;
 	
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	

@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.ui;
+package com.developer.nefarious.zjoule.core.ui;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.ui;
+package com.developer.nefarious.zjoule.core.ui;
 
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.ISelection;
@@ -10,8 +10,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
-import com.developer.nefarious.zjoule.functions.GetAIResponse;
-import com.developer.nefarious.zjoule.functions.LoginHandler;
+import com.developer.nefarious.zjoule.core.functions.GetAIResponse;
+import com.developer.nefarious.zjoule.core.functions.LoginHandler;
 import jakarta.inject.Inject;
 
 public class ChatViewListener extends ViewPart implements ISelectionListener {
@@ -37,30 +37,10 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 		this.viewRender = viewRender;
 	}
 
-	/**
-	 * Sets a mocked {@link Browser} instance for unit test execution.
-	 * 
-	 * <p>This method allows a test to inject a mocked {@code Browser} instance 
-	 * into this class, enabling isolation of tests that depend on browser behavior. 
-	 * It is intended for use in testing environments where real browser interactions 
-	 * are not feasible or desirable.</p>
-	 * 
-	 * @param browser The mocked {@link Browser} instance to be set. Must not be {@code null}.
-	 */
 	public void setBrowser(final Browser browser) {
 		this.browser = browser;
 	}
 
-	/**
-	 * Sets a mocked {@link Shell} instance for unit test execution.
-	 * 
-	 * <p>This method allows a test to inject a mocked {@code Shell} instance into this class, 
-	 * enabling isolation of tests that depend on the UI shell behavior. 
-	 * It is intended for use in testing environments where creating a real {@code Shell} 
-	 * is either unnecessary or impractical.</p>
-	 * 
-	 * @param shell The mocked {@link Shell} instance to be set. Must not be {@code null}.
-	 */
 	public void setShell(final Shell shell) {
 		this.shell = shell;
 	}

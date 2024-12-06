@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.test.ui;
+package com.developer.nefarious.zjoule.test.core.ui;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
@@ -24,11 +24,11 @@ import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
-import com.developer.nefarious.zjoule.functions.GetAIResponse;
-import com.developer.nefarious.zjoule.functions.LoginHandler;
-import com.developer.nefarious.zjoule.ui.ChatViewListener;
-import com.developer.nefarious.zjoule.ui.IBrowserFactory;
-import com.developer.nefarious.zjoule.ui.IViewRender;
+import com.developer.nefarious.zjoule.core.functions.GetAIResponse;
+import com.developer.nefarious.zjoule.core.functions.LoginHandler;
+import com.developer.nefarious.zjoule.core.ui.ChatViewListener;
+import com.developer.nefarious.zjoule.core.ui.IBrowserFactory;
+import com.developer.nefarious.zjoule.core.ui.IViewRender;
 
 public class ChatViewListenerTest {
 

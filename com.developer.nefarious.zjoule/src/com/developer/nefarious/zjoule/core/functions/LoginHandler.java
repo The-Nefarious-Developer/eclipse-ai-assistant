@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.functions;
+package com.developer.nefarious.zjoule.core.functions;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.wizard.WizardDialog;

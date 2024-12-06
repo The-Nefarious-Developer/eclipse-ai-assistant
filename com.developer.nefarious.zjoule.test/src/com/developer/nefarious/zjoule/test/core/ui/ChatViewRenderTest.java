@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.test.ui;
+package com.developer.nefarious.zjoule.test.core.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,8 +19,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.osgi.framework.Bundle;
-import com.developer.nefarious.zjoule.ui.ChatViewRender;
-import com.developer.nefarious.zjoule.ui.IViewRender;
+import com.developer.nefarious.zjoule.core.ui.ChatViewRender;
+import com.developer.nefarious.zjoule.core.ui.IViewRender;
 
 public class ChatViewRenderTest {
 	

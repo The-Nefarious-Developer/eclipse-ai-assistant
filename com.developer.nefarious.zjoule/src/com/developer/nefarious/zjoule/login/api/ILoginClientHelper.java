@@ -4,10 +4,10 @@ import java.net.URI;
 
 public interface ILoginClientHelper {
 	
-	URI createAuthUri(String tokenEndpoint);
+	URI createAuthUri(final String tokenEndpoint);
 	
-	GetResourceGroupsResponse parseResourceGroupsResponseToObject(String responseBody);
+	GetResourceGroupsResponse parseResourceGroupsResponseToObject(final String responseBody);
 	
-	GetDeploymentsResponse parseDeploymentsResponseToObject(String responseBody);
+	GetDeploymentsResponse parseDeploymentsResponseToObject(final String responseBody);
 
 }

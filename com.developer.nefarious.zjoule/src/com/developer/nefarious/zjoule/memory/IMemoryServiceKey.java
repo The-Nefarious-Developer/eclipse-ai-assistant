@@ -6,7 +6,7 @@ public interface IMemoryServiceKey {
 	
 	public static final String KEY = "service-key";
 	
-	void save(ServiceKey serviceKey);
+	void save(final ServiceKey serviceKey);
 	
 	ServiceKey load();
 

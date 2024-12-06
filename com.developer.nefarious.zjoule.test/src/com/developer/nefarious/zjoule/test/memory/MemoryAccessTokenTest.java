@@ -10,8 +10,8 @@ import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.memory.IMemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
+import com.developer.nefarious.zjoule.memory.utils.IObjectSerializer;
 import com.developer.nefarious.zjoule.models.AccessToken;
-import com.developer.nefarious.zjoule.utils.IObjectSerializer;
 
 public class MemoryAccessTokenTest {
 

@@ -6,7 +6,7 @@ public interface IMemoryAccessToken {
 	
 	public static final String KEY = "access-token";
 	
-	void save(AccessToken accessToken);
+	void save(final AccessToken accessToken);
 	
 	AccessToken load();
 	

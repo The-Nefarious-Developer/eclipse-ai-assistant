@@ -14,7 +14,7 @@ import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryServiceKey;
 import com.developer.nefarious.zjoule.login.pages.FirstLoginWizardPage;
 import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
 import com.developer.nefarious.zjoule.memory.EclipseMemory;
-import com.developer.nefarious.zjoule.utils.ObjectSerializer;
+import com.developer.nefarious.zjoule.memory.utils.ObjectSerializer;
 
 public class LoginWizard extends Wizard {
 	

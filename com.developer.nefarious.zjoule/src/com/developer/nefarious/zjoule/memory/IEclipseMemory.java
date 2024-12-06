@@ -4,8 +4,8 @@ public interface IEclipseMemory {
 	
 	public static final String PLUGIN_ID = "com.developer.nefarious.zjoule";
 	
-	public void saveOnEclipsePreferences(String key, String value);
+	public void saveOnEclipsePreferences(final String key, final String value);
 	
-	public String loadFromEclipsePreferences(String key);
+	public String loadFromEclipsePreferences(final String key);
 
 }

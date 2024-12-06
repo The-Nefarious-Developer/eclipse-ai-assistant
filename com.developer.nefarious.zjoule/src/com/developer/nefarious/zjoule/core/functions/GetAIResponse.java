@@ -1,4 +1,4 @@
-package com.developer.nefarious.zjoule.functions;
+package com.developer.nefarious.zjoule.core.functions;
 
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;

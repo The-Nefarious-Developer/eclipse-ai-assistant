@@ -4,7 +4,7 @@ public interface IMemoryResourceGroup {
 	
 	public static final String KEY = "resource-group";
 	
-	void save(String resourceGroup);
+	void save(final String resourceGroup);
 	
 	String load();
 
