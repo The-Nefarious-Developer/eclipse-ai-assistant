@@ -91,7 +91,7 @@ public class OpenAIClientTest {
 		when(mockAuthClient.getServiceUrl()).thenReturn(mockServiceUrl);
 		
 		URI mockEndpoint = mock(URI.class);
-		mockURI.when(() -> URI.create(mockServiceUrl + "/inference/deployments/" + mockDeploymentId))
+		mockURI.when(() -> URI.create(mockServiceUrl + "/inference/deployments/" + mockDeploymentId + "/chat/completions?api-version=2023-05-15"))
 			.thenReturn(mockEndpoint);
 		
 		String mockToken = "token";

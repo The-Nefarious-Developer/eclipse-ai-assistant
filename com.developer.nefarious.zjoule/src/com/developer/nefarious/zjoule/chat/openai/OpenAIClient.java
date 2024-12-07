@@ -42,7 +42,7 @@ public class OpenAIClient implements IOpenIAIClient {
 	public String chatCompletion(final List<OpenAIMessage> messages) throws IOException, InterruptedException {
 		String serviceUrl = auth.getServiceUrl();
 		String deployment = memoryDeployment.load();
-		URI endpoint = URI.create(serviceUrl + "/inference/deployments/" + deployment);
+		URI endpoint = URI.create(serviceUrl + "/inference/deployments/" + deployment + "/chat/completions?api-version=2023-05-15");
 		String token = auth.getAccessToken();
 		String resourceGroup = memoryResourceGroup.load();
 		
