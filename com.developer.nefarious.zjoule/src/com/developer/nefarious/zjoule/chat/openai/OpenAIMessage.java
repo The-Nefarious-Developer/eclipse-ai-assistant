@@ -1,6 +1,8 @@
-package com.developer.nefarious.zjoule.models;
+package com.developer.nefarious.zjoule.chat.openai;
 
-public class Message {
+import com.developer.nefarious.zjoule.models.Role;
+
+public class OpenAIMessage {
 
 	private Role role;
 	

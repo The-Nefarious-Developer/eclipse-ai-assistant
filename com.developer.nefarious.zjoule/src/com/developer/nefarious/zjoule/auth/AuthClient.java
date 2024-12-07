@@ -51,7 +51,7 @@ public class AuthClient implements IAuthClient {
 
 	@Override
 	public String getNewAccessToken(final ServiceKey serviceKey) throws IOException, InterruptedException {
-		URI endpoint = authClientHelper.createAuthUri(serviceKey.getTokenURL());
+		URI endpoint = authClientHelper.convertEndpointStringToURI(serviceKey.getTokenURL());
 		BodyPublisher requestBody = authClientHelper.createRequestBody(serviceKey.getClientId(), serviceKey.getClientSecret());
 
 		// @formatter:off
@@ -68,6 +68,11 @@ public class AuthClient implements IAuthClient {
 		memoryServiceKey.save(serviceKey);
 
 		return newAccessToken.getAccessToken();
+	}
+	
+	@Override
+	public String getServiceUrl() {
+		return memoryServiceKey.load().getServiceURL();
 	}
 
 }

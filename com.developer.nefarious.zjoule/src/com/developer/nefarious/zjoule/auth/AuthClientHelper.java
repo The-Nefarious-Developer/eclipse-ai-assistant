@@ -27,7 +27,7 @@ public class AuthClientHelper implements IAuthClientHelper {
 	}
 
 	@Override
-	public URI createAuthUri(final String tokenEndpoint) {
+	public URI convertEndpointStringToURI(final String tokenEndpoint) {
 		return URI.create(tokenEndpoint);
 	}
 

@@ -52,14 +52,14 @@ public class AuthClientHelperTest {
 	}
 
 	@Test
-	public void shouldCreateTheAuthUri() {
+	public void shouldConvertEndpointStringToURI() {
 		// Arrange
 		URI expectedObject = mock(URI.class);
 		String mockTokenEndpoint = randomWord();
 		try (MockedStatic<URI> uriStatic = mockStatic(URI.class)) {
 			uriStatic.when(() -> URI.create(mockTokenEndpoint)).thenReturn(expectedObject);
 			// Act
-			URI returnObject = cut.createAuthUri(mockTokenEndpoint);
+			URI returnObject = cut.convertEndpointStringToURI(mockTokenEndpoint);
 			// Assert
 			assertEquals(returnObject, expectedObject);
 		}

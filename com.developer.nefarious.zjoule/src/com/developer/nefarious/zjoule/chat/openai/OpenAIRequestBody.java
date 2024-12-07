@@ -1,12 +1,11 @@
-package com.developer.nefarious.zjoule.chat;
+package com.developer.nefarious.zjoule.chat.openai;
 
 import java.util.List;
-import com.developer.nefarious.zjoule.models.Message;
 import com.google.gson.annotations.SerializedName;
 
 public class OpenAIRequestBody {
 	
-	private List<Message> messages;
+	private List<OpenAIMessage> messages;
 	
 	@SerializedName("max_tokens")
     private int maxTokens;
@@ -21,11 +20,11 @@ public class OpenAIRequestBody {
     
     private String stop;
 
-    public List<Message> getMessages() {
+    public List<OpenAIMessage> getMessages() {
         return messages;
     }
 
-    public void setMessages(final List<Message> messages) {
+    public void setMessages(final List<OpenAIMessage> messages) {
         this.messages = messages;
     }
 

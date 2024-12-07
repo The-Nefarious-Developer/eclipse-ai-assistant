@@ -8,7 +8,7 @@ public interface IAuthClientHelper {
 	
 	BodyPublisher createRequestBody(final String clientId, final String clientSecret);
 	
-	URI createAuthUri(final String tokenEndpoint);
+	URI convertEndpointStringToURI(final String tokenEndpoint);
 	
 	AccessToken convertResponseToObject(final String responseBody);
 
