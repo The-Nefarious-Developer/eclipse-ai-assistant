@@ -9,10 +9,10 @@
             id="com.developer.nefarious.zjoule">
       </category>
       <view
-            id="com.developer.nefarious.zjoule.ui.ChatViewListener"
+            id="com.developer.nefarious.zjoule.core.ui.ChatViewListener"
             name="zjoule"
             icon="resources/icons/sample.png"
-            class="com.developer.nefarious.zjoule.ui.ChatViewListener"
+            class="com.developer.nefarious.zjoule.core.ui.ChatViewListener"
             category="com.developer.nefarious.zjoule"
             inject="true">
       </view>
@@ -22,7 +22,7 @@
       <perspectiveExtension
             targetID="org.eclipse.jdt.ui.JavaPerspective">
          <view
-               id="com.developer.nefarious.zjoule.ui.ChatViewListener"
+               id="com.developer.nefarious.zjoule.core.ui.ChatViewListener"
                relative="org.eclipse.ui.views.ProblemView"
                relationship="stack">
          </view>
