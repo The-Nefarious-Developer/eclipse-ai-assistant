@@ -1,71 +1,79 @@
 package com.developer.nefarious.zjoule.chat.openai;
 
 import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 
 public class OpenAIRequestBody {
-	
+
 	private List<OpenAIMessage> messages;
-	
+
 	@SerializedName("max_tokens")
-    private int maxTokens;
-    
-    private double temperature;
-    
-    @SerializedName("frequency_penalty")
-    private double frequencyPenalty;
-    
-    @SerializedName("presence_penalty")
-    private double presencePenalty;
-    
-    private String stop;
+	private int maxTokens;
 
-    public List<OpenAIMessage> getMessages() {
-        return messages;
-    }
+	private double temperature;
 
-    public void setMessages(final List<OpenAIMessage> messages) {
-        this.messages = messages;
-    }
+	@SerializedName("frequency_penalty")
+	private double frequencyPenalty;
 
-    public int getMaxTokens() {
-        return maxTokens;
-    }
+	@SerializedName("presence_penalty")
+	private double presencePenalty;
 
-    public void setMaxTokens(final int maxTokens) {
-        this.maxTokens = maxTokens;
-    }
+	private String stop;
 
-    public double getTemperature() {
-        return temperature;
-    }
+	public List<OpenAIMessage> getMessages() {
+		return messages;
+	}
 
-    public void setTemperature(final double temperature) {
-        this.temperature = temperature;
-    }
+	public void setMessages(final List<OpenAIMessage> messages) {
+		this.messages = messages;
+	}
 
-    public double getFrequencyPenalty() {
-        return frequencyPenalty;
-    }
+	public int getMaxTokens() {
+		return maxTokens;
+	}
 
-    public void setFrequencyPenalty(final double frequencyPenalty) {
-        this.frequencyPenalty = frequencyPenalty;
-    }
+	public void setMaxTokens(final int maxTokens) {
+		this.maxTokens = maxTokens;
+	}
 
-    public double getPresencePenalty() {
-        return presencePenalty;
-    }
+	public double getTemperature() {
+		return temperature;
+	}
 
-    public void setPresencePenalty(final double presencePenalty) {
-        this.presencePenalty = presencePenalty;
-    }
+	public void setTemperature(final double temperature) {
+		this.temperature = temperature;
+	}
 
-    public String getStop() {
-        return stop;
-    }
+	public double getFrequencyPenalty() {
+		return frequencyPenalty;
+	}
 
-    public void setStop(final String stop) {
-        this.stop = stop;
-    }
+	public void setFrequencyPenalty(final double frequencyPenalty) {
+		this.frequencyPenalty = frequencyPenalty;
+	}
+
+	public double getPresencePenalty() {
+		return presencePenalty;
+	}
+
+	public void setPresencePenalty(final double presencePenalty) {
+		this.presencePenalty = presencePenalty;
+	}
+
+	public String getStop() {
+		return stop;
+	}
+
+	public void setStop(final String stop) {
+		this.stop = stop;
+	}
+
+	@Override
+	public String toString() {
+		Gson gson = new GsonBuilder().create();
+		return gson.toJson(this);
+	}
 
 }

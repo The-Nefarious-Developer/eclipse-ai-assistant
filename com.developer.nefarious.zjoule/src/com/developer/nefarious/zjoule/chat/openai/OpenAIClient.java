@@ -40,9 +40,8 @@ public class OpenAIClient implements IOpenIAIClient {
 
 	@Override
 	public String chatCompletion(final List<OpenAIMessage> messages) throws IOException, InterruptedException {
-		String serviceUrl = auth.getServiceUrl();
-		String deployment = memoryDeployment.load();
-		URI endpoint = URI.create(serviceUrl + "/inference/deployments/" + deployment + "/chat/completions?api-version=2023-05-15");
+		URI endpoint = createChatEndpoint();
+		
 		String token = auth.getAccessToken();
 		String resourceGroup = memoryResourceGroup.load();
 		
@@ -60,6 +59,14 @@ public class OpenAIClient implements IOpenIAIClient {
 		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 		
 		return helper.convertResponseToObject(response.body());
+	}
+	
+	private URI createChatEndpoint() {
+		String serviceUrl = auth.getServiceUrl();
+		String deployment = memoryDeployment.load();
+		String endpointInStringFormat = serviceUrl + "/inference/deployments/" + 
+				deployment + "/chat/completions?api-version=2023-05-15";
+		return URI.create(endpointInStringFormat);
 	}
 
 }

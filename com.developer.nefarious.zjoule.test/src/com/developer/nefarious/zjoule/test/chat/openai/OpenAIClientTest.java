@@ -90,9 +90,9 @@ public class OpenAIClientTest {
 		String mockServiceUrl = "https://something.com";
 		when(mockAuthClient.getServiceUrl()).thenReturn(mockServiceUrl);
 		
-		URI mockEndpoint = mock(URI.class);
-		mockURI.when(() -> URI.create(mockServiceUrl + "/inference/deployments/" + mockDeploymentId + "/chat/completions?api-version=2023-05-15"))
-			.thenReturn(mockEndpoint);
+		String mockEndpointInStringFormat = mockServiceUrl + "/inference/deployments/" + mockDeploymentId + "/chat/completions?api-version=2023-05-15";
+		URI mockEndpointInURIFormat = mock(URI.class);
+		mockURI.when(() -> URI.create(mockEndpointInStringFormat)).thenReturn(mockEndpointInURIFormat);
 		
 		String mockToken = "token";
 		when(mockAuthClient.getAccessToken()).thenReturn(mockToken);
@@ -108,8 +108,7 @@ public class OpenAIClientTest {
 		when(mockHttpRequestBuilder.build()).thenReturn(mockHttpRequest);
 		
 		HttpResponse<String> mockHttpResponse = mock(HttpResponse.class);
-		when(mockHttpClient.send(eq(mockHttpRequest), eq(HttpResponse.BodyHandlers.ofString())))
-			.thenReturn(mockHttpResponse);
+		when(mockHttpClient.send(eq(mockHttpRequest), eq(HttpResponse.BodyHandlers.ofString()))).thenReturn(mockHttpResponse);
 		
 		String mockResponseBody = "response-body-in-string-format";
 		when(mockHttpResponse.body()).thenReturn(mockResponseBody);
@@ -125,7 +124,7 @@ public class OpenAIClientTest {
 		String returnValue = cut.chatCompletion(messages);
 
 		// Assert
-		verify(mockHttpRequestBuilder).uri(mockEndpoint);
+		verify(mockHttpRequestBuilder).uri(mockEndpointInURIFormat);
 		verify(mockHttpRequestBuilder).header("Authorization", "Bearer " + mockToken);
 		verify(mockHttpRequestBuilder).header("AI-Resource-Group", mockResourceGroup);
 		verify(mockHttpRequestBuilder).POST(mockRequestBody);
