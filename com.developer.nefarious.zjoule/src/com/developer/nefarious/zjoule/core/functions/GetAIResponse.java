@@ -1,13 +1,10 @@
 package com.developer.nefarious.zjoule.core.functions;
 
-import java.io.IOException;
 import java.net.http.HttpClient;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
-
 import com.developer.nefarious.zjoule.auth.AuthClient;
 import com.developer.nefarious.zjoule.auth.AuthClientHelper;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIClient;
@@ -36,7 +33,7 @@ public class GetAIResponse extends BrowserFunction {
 		MemoryAccessToken.initialize(new ObjectSerializer(), new EclipseMemory());
 		MemoryServiceKey.initialize(new ObjectSerializer(), new EclipseMemory());
 		MemoryResourceGroup.initialize(new EclipseMemory());
-		MemoryDeployment.initialize(new EclipseMemory());
+		MemoryDeployment.initialize(new ObjectSerializer(), new EclipseMemory());
 		
 		MemoryAccessToken memoryAccessToken = MemoryAccessToken.getInstance();
 		MemoryServiceKey memoryServiceKey = MemoryServiceKey.getInstance();

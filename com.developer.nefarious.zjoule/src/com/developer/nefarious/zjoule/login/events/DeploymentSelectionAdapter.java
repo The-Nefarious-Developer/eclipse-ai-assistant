@@ -1,9 +1,11 @@
 package com.developer.nefarious.zjoule.login.events;
 
+import java.util.List;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
+import com.developer.nefarious.zjoule.models.Deployment;
 
 public class DeploymentSelectionAdapter extends SelectionAdapter {
 
@@ -22,13 +24,23 @@ public class DeploymentSelectionAdapter extends SelectionAdapter {
 
 	@Override
 	public void widgetSelected(final SelectionEvent e) {
-		String selectedDeployment = secondLoginWizardPage.getDeploymentDropdown().getText();
-		if (selectedDeployment.isEmpty()) {
+		String selectedDeploymentConfigurationName = secondLoginWizardPage.getDeploymentDropdown().getText();
+		if (selectedDeploymentConfigurationName.isEmpty()) {
 			secondLoginWizardPage.setPageComplete(false); // Disable Finish button if cleared
 		} else {
-			memoryDeployment.save(selectedDeployment);
+			Deployment selectedDeploymentObject = getSelectedDeploymentObject(selectedDeploymentConfigurationName);
+			memoryDeployment.save(selectedDeploymentObject);
 			secondLoginWizardPage.setPageComplete(true); // Enable Finish button when second dropdown is filled
 		}
+	}
+	
+	private Deployment getSelectedDeploymentObject(final String selectedDeploymentConfigurationName) {
+		List<Deployment> deploymentsForSelection = secondLoginWizardPage.getDeploymentsForSelection();
+		
+		return deploymentsForSelection.stream()
+		        .filter(deployment -> selectedDeploymentConfigurationName.equals(deployment.getConfigurationName()))
+		        .findFirst()
+		        .orElse(null);
 	}
 
 }

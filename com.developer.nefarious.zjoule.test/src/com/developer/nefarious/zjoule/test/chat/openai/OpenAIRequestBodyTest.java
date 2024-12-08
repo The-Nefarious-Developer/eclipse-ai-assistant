@@ -16,9 +16,9 @@ public class OpenAIRequestBodyTest {
 		OpenAIRequestBody cut = new OpenAIRequestBody();
 		
 		String expectedValue = "{\"messages\":["
-				+ "{\"role\":\"USER\","
+				+ "{\"role\":\"user\","
 				+ "\"content\":\"Hello!\"},"
-				+ "{\"role\":\"ASSISTANT\","
+				+ "{\"role\":\"assistant\","
 				+ "\"content\":\"Hi there!\"}],"
 				+ "\"max_tokens\":100,"
 				+ "\"temperature\":0.7,"
@@ -54,9 +54,9 @@ public class OpenAIRequestBodyTest {
 		OpenAIRequestBody cut = new OpenAIRequestBody();
 		
 		String expectedValue = "{\"messages\":["
-				+ "{\"role\":\"USER\","
+				+ "{\"role\":\"user\","
 				+ "\"content\":\"Hello!\"},"
-				+ "{\"role\":\"ASSISTANT\","
+				+ "{\"role\":\"assistant\","
 				+ "\"content\":\"Hi there!\"}],"
 				+ "\"max_tokens\":100,"
 				+ "\"temperature\":0.7,"

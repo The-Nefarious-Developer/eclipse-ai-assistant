@@ -8,12 +8,12 @@ public class OpenAIMessage {
 	
     private String content;
     
-    public OpenAIMessage() { };
+    public OpenAIMessage() { }
     
     public OpenAIMessage(final Role role, final String content) { 
     	this.role = role;
     	this.content = content;
-    };
+    }
 
     public Role getRole() {
         return role;

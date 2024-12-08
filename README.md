@@ -15,7 +15,7 @@ The following list of objects describes components that can handle data that is 
 | Access Token   | AccessToken.class `Serialized` | Authentication  | access-token    |
 | Service Key    | ServiceKey.class `Serialized`  | Authentication  | service-key     |
 | Resource Group | String                         | Chat            | resource-group  |
-| Deployment     | String                         | Chat            | deployment      |
+| Deployment     | Deployment.class `Serialized`  | Chat            | deployment      |
 
 All of these memory objects are defined during the [login wizard](./com.developer.nefarious.zjoule/src/com/developer/nefarious/zjoule/login/) through a memory allocation process that uses the Eclipse preferences system at the instance level to persist data across sessions.
 

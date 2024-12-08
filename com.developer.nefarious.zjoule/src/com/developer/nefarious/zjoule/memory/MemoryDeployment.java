@@ -1,24 +1,30 @@
 package com.developer.nefarious.zjoule.memory;
 
+import com.developer.nefarious.zjoule.memory.utils.IObjectSerializer;
+import com.developer.nefarious.zjoule.models.Deployment;
+
 public class MemoryDeployment implements IMemoryDeployment {
 
 	private static MemoryDeployment instance;
+	
+	private IObjectSerializer objectSerializer;
 
 	private IEclipseMemory eclipseMemory;
 
-	private MemoryDeployment(final IEclipseMemory eclipseMemory) {
+	private MemoryDeployment(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+		this.objectSerializer = objectSerializer;
 		this.eclipseMemory = eclipseMemory;
 	}
 
-	public static void initialize(final IEclipseMemory eclipseMemory) {
+	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
 		if (instance == null) {
-			instance = new MemoryDeployment(eclipseMemory);
+			instance = new MemoryDeployment(objectSerializer, eclipseMemory);
 		}
 	}
 
 	public static MemoryDeployment getInstance() {
 		if (instance == null) {
-			throw new IllegalStateException("MemoryAccessToken not initialized. Call initialize() first.");
+			throw new IllegalStateException("MemoryDeployment not initialized. Call initialize() first.");
 		}
 		return instance;
 	}
@@ -28,13 +34,15 @@ public class MemoryDeployment implements IMemoryDeployment {
 	}
 
 	@Override
-	public void save(final String deployment) {
-		eclipseMemory.saveOnEclipsePreferences(KEY, deployment);
+	public void save(final Deployment deployment) {
+		String serializedObject = objectSerializer.serialize(deployment);
+		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
 	}
 
 	@Override
-	public String load() {
-		return eclipseMemory.loadFromEclipsePreferences(KEY);
+	public Deployment load() {
+		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
+		return objectSerializer.deserialize(serializedObject, Deployment.class);
 	}
 	
 }

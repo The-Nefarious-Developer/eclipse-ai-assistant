@@ -26,6 +26,7 @@ import com.developer.nefarious.zjoule.chat.openai.OpenAIClient;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIMessage;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
 import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.models.Deployment;
 
 public class OpenAIClientTest {
 
@@ -84,8 +85,11 @@ public class OpenAIClientTest {
 		HttpRequest.Builder mockHttpRequestBuilder = mock(HttpRequest.Builder.class);
 		mockHttpRequest.when(HttpRequest::newBuilder).thenReturn(mockHttpRequestBuilder);
 		
+		Deployment mockDeployment = mock(Deployment.class);
+		when(mockMemoryDeployment.load()).thenReturn(mockDeployment);
+		
 		String mockDeploymentId = "sap-ai-core-deployment-id";
-		when(mockMemoryDeployment.load()).thenReturn(mockDeploymentId);
+		when(mockDeployment.getId()).thenReturn(mockDeploymentId);
 		
 		String mockServiceUrl = "https://something.com";
 		when(mockAuthClient.getServiceUrl()).thenReturn(mockServiceUrl);

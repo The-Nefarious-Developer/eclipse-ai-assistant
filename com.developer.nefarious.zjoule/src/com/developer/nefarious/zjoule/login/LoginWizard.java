@@ -48,7 +48,7 @@ public class LoginWizard extends Wizard {
 		TemporaryMemoryAccessToken.initialize(objectSerializer, eclipseMemory);
 		TemporaryMemoryServiceKey.initialize(objectSerializer, eclipseMemory);
 		TemporaryMemoryResourceGroup.initialize(eclipseMemory);
-		TemporaryMemoryDeployment.initialize(eclipseMemory);
+		TemporaryMemoryDeployment.initialize(objectSerializer, eclipseMemory);
 	}
 	
 	private ILoginClient createLoginClient() {

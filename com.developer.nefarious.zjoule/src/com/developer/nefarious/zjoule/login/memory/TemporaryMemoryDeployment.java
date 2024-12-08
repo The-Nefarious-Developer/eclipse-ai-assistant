@@ -2,22 +2,27 @@ package com.developer.nefarious.zjoule.login.memory;
 
 import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
+import com.developer.nefarious.zjoule.memory.utils.IObjectSerializer;
+import com.developer.nefarious.zjoule.models.Deployment;
 
 public class TemporaryMemoryDeployment implements IMemoryDeployment, ITemporaryMemoryObject {
 
 	private static TemporaryMemoryDeployment instance;
 
 	public static final String KEY = "tmp-" + IMemoryDeployment.KEY;
+	
+	IObjectSerializer objectSerializer;
 
 	IEclipseMemory eclipseMemory;
 
-	private TemporaryMemoryDeployment(final IEclipseMemory eclipseMemory) {
+	private TemporaryMemoryDeployment(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+		this.objectSerializer = objectSerializer;
 		this.eclipseMemory = eclipseMemory;
 	}
 
-	public static void initialize(final IEclipseMemory eclipseMemory) {
+	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
 		if (instance == null) {
-			instance = new TemporaryMemoryDeployment(eclipseMemory);
+			instance = new TemporaryMemoryDeployment(objectSerializer, eclipseMemory);
 		}
 	}
 
@@ -33,18 +38,20 @@ public class TemporaryMemoryDeployment implements IMemoryDeployment, ITemporaryM
 	}
 
 	@Override
-	public void save(final String deployment) {
-		eclipseMemory.saveOnEclipsePreferences(KEY, deployment);
+	public void save(final Deployment deployment) {
+		String serializedObject = objectSerializer.serialize(deployment);
+		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
 	}
 
 	@Override
-	public String load() {
-		return eclipseMemory.loadFromEclipsePreferences(KEY);
+	public Deployment load() {
+		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
+		return objectSerializer.deserialize(serializedObject, Deployment.class);
 	}
 
 	@Override
 	public void persist() {
-		String deployment = eclipseMemory.loadFromEclipsePreferences(KEY);
-		eclipseMemory.saveOnEclipsePreferences(IMemoryDeployment.KEY, deployment);
+		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
+		eclipseMemory.saveOnEclipsePreferences(IMemoryDeployment.KEY, serializedObject);
 	}
 }

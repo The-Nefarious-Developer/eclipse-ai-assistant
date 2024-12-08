@@ -1,6 +1,7 @@
 package com.developer.nefarious.zjoule.login.pages;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -13,6 +14,7 @@ import com.developer.nefarious.zjoule.login.events.DeploymentSelectionAdapter;
 import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
 import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.models.Deployment;
 import com.developer.nefarious.zjoule.models.ServiceKey;
 
 public class SecondLoginWizardPage extends WizardPage {
@@ -23,9 +25,9 @@ public class SecondLoginWizardPage extends WizardPage {
 
 	private Combo deploymentDropdown;
 
-	private ArrayList<String> resourceGroupsForSelection = new ArrayList<String>();
+	private List<String> resourceGroupsForSelection = new ArrayList<String>();
 
-	private ArrayList<String> deploymentsForSelection = new ArrayList<String>();
+	private List<Deployment> deploymentsForSelection = new ArrayList<Deployment>();
 
 	private ILoginClient loginClient;
 
@@ -112,15 +114,19 @@ public class SecondLoginWizardPage extends WizardPage {
 		this.resourceGroupsForSelection = resourceGroupsForSelection;
 	}
 
-	public void setDeploymentsForSelection(final ArrayList<String> deploymentsForSelection) {
+	public void setDeploymentsForSelection(final List<Deployment> deploymentsForSelection) {
 		this.deploymentsForSelection = deploymentsForSelection;
-		deploymentDropdown.setItems(deploymentsForSelection.toArray(new String[0]));
+		deploymentDropdown.setItems(
+				deploymentsForSelection.stream().map(Deployment::getConfigurationName).toArray(String[]::new));
 	}
 
 	public ServiceKey getServiceKey() {
 		FirstLoginWizardPage firstPage = (FirstLoginWizardPage) getWizard().getPage(FirstLoginWizardPage.PAGE_ID);
 		return firstPage.getServiceKey();
+	}
 
+	public List<Deployment> getDeploymentsForSelection() {
+		return deploymentsForSelection;
 	}
 
 }

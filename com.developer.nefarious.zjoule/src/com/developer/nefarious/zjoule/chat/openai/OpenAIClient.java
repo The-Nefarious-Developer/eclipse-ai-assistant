@@ -10,6 +10,7 @@ import java.util.List;
 import com.developer.nefarious.zjoule.auth.IAuthClient;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
 import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.models.Deployment;
 
 public class OpenAIClient implements IOpenIAIClient {
 
@@ -57,15 +58,15 @@ public class OpenAIClient implements IOpenIAIClient {
 		// @formatter:on
 		
 		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-		
+		System.out.println(response.body());
 		return helper.convertResponseToObject(response.body());
 	}
 	
 	private URI createChatEndpoint() {
 		String serviceUrl = auth.getServiceUrl();
-		String deployment = memoryDeployment.load();
+		Deployment deployment = memoryDeployment.load();
 		String endpointInStringFormat = serviceUrl + "/inference/deployments/" + 
-				deployment + "/chat/completions?api-version=2023-05-15";
+				deployment.getId() + "/chat/completions?api-version=2023-05-15";
 		return URI.create(endpointInStringFormat);
 	}
 

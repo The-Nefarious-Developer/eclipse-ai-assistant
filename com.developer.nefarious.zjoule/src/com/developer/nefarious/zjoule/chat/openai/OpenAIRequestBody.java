@@ -1,6 +1,7 @@
 package com.developer.nefarious.zjoule.chat.openai;
 
 import java.util.List;
+import com.developer.nefarious.zjoule.models.Role;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
@@ -72,7 +73,11 @@ public class OpenAIRequestBody {
 
 	@Override
 	public String toString() {
-		Gson gson = new GsonBuilder().create();
+		// @formatter:off
+		Gson gson = new GsonBuilder()
+			.registerTypeAdapter(Role.class, new Role.RoleSerializer())
+			.create();
+		// @formatter:on
 		return gson.toJson(this);
 	}
 

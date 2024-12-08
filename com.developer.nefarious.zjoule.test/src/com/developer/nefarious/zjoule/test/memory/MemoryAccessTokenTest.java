@@ -47,7 +47,7 @@ public class MemoryAccessTokenTest {
 	}
 	
 	@Test
-	public void shouldAccessToken() {
+	public void shouldLoadAccessToken() {
 		// Arrange
 		AccessToken expectedValue = new AccessToken();
 		String mockSerializedObject = "It doesn't matter";
