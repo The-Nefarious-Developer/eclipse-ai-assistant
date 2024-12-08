@@ -10,12 +10,10 @@ import com.developer.nefarious.zjoule.auth.AuthClientHelper;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIClient;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIClientHelper;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIMessage;
-import com.developer.nefarious.zjoule.memory.EclipseMemory;
 import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.MemoryDeployment;
 import com.developer.nefarious.zjoule.memory.MemoryResourceGroup;
 import com.developer.nefarious.zjoule.memory.MemoryServiceKey;
-import com.developer.nefarious.zjoule.memory.utils.ObjectSerializer;
 import com.developer.nefarious.zjoule.models.Role;
 
 public class PromptHandler extends BrowserFunction {
