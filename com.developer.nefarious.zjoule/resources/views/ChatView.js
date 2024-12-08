@@ -9,7 +9,7 @@ function sendMessage() {
 		userMessage.textContent = userInput;
 		chatBox.appendChild(userMessage);
 		
-		var result = getAIResponse(); // Java callback
+		var result = getAIResponse(userInput); // Java callback
 		// Display AI Answer
 		const AIAnswer = document.createElement('div');
 		AIAnswer.className = 'message bot-message';
