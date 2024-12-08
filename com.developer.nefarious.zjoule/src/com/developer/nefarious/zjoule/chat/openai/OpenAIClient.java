@@ -8,11 +8,12 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.util.List;
 import com.developer.nefarious.zjoule.auth.IAuthClient;
+import com.developer.nefarious.zjoule.chat.IAIClient;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
 import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
 import com.developer.nefarious.zjoule.models.Deployment;
 
-public class OpenAIClient implements IOpenIAIClient {
+public class OpenAIClient implements IAIClient<OpenAIMessage> {
 
 	private IAuthClient auth;
 

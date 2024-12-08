@@ -2,7 +2,6 @@ package com.developer.nefarious.zjoule.core;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryAccessToken;
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryDeployment;
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryResourceGroup;

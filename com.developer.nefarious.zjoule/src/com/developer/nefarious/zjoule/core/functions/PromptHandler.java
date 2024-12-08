@@ -27,7 +27,7 @@ public class PromptHandler extends BrowserFunction {
 	}
 
 	@Override
-	public Object function(final Object[] arguments) {		
+	public Object function(final Object[] arguments) {
 		MemoryAccessToken memoryAccessToken = MemoryAccessToken.getInstance();
 		MemoryServiceKey memoryServiceKey = MemoryServiceKey.getInstance();
 		AuthClientHelper authHelper = new AuthClientHelper();
