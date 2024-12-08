@@ -18,14 +18,14 @@ import com.developer.nefarious.zjoule.memory.MemoryServiceKey;
 import com.developer.nefarious.zjoule.memory.utils.ObjectSerializer;
 import com.developer.nefarious.zjoule.models.Role;
 
-public class GetAIResponse extends BrowserFunction {
+public class PromptHandler extends BrowserFunction {
 
-	public GetAIResponse(final Browser browser, final String name) {
+	public PromptHandler(final Browser browser, final String name) {
 		super(browser, name);
 	}
 	
-	public static GetAIResponse create(final Browser browser, final String name) {
-		return new GetAIResponse(browser, name);
+	public static PromptHandler create(final Browser browser, final String name) {
+		return new PromptHandler(browser, name);
 	}
 
 	@Override

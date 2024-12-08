@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
-import com.developer.nefarious.zjoule.core.functions.GetAIResponse;
+import com.developer.nefarious.zjoule.core.functions.PromptHandler;
 import com.developer.nefarious.zjoule.core.functions.LoginHandler;
 import jakarta.inject.Inject;
 
@@ -58,7 +58,7 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 	public void createPartControl(final Composite parent) {
 		browser = browserFactory.createBrowser(parent, SWT.WEBKIT);
 		browser.setText(viewRender.build());
-		BrowserFunction getAIResponseFunction = GetAIResponse.create(browser, "getAIResponse");
+		BrowserFunction getAIResponseFunction = PromptHandler.create(browser, "getAIResponse");
 		browser.addDisposeListener(e -> getAIResponseFunction.dispose());
 		getSite().getPage().addSelectionListener(this);
 		setUpToolbar();

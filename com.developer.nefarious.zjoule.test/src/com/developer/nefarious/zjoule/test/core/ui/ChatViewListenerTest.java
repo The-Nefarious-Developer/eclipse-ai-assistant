@@ -24,7 +24,7 @@ import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
-import com.developer.nefarious.zjoule.core.functions.GetAIResponse;
+import com.developer.nefarious.zjoule.core.functions.PromptHandler;
 import com.developer.nefarious.zjoule.core.functions.LoginHandler;
 import com.developer.nefarious.zjoule.core.ui.ChatViewListener;
 import com.developer.nefarious.zjoule.core.ui.IBrowserFactory;
@@ -92,9 +92,9 @@ public class ChatViewListenerTest {
 					.thenReturn(mockLoginHandler);
 
 			// Mock the setup of the getAIResponse
-			try (MockedStatic<GetAIResponse> mockedStatic = mockStatic(GetAIResponse.class)) {
-				GetAIResponse mockGetAIResponse = mock(GetAIResponse.class);
-				mockedStatic.when(() -> GetAIResponse.create(mockBrowser, "getAIResponse"))
+			try (MockedStatic<PromptHandler> mockedStatic = mockStatic(PromptHandler.class)) {
+				PromptHandler mockGetAIResponse = mock(PromptHandler.class);
+				mockedStatic.when(() -> PromptHandler.create(mockBrowser, "getAIResponse"))
 						.thenReturn(mockGetAIResponse);
 
 				// Act
@@ -104,7 +104,7 @@ public class ChatViewListenerTest {
 				verify(mockBrowserFactory).createBrowser(mockParent, SWT.WEBKIT);
 				verify(mockBrowser).setText(mockViewContent);
 				verify(mockPage).addSelectionListener(cut);
-				mockedStatic.verify(() -> GetAIResponse.create(mockBrowser, "getAIResponse"), times(1));
+				mockedStatic.verify(() -> PromptHandler.create(mockBrowser, "getAIResponse"), times(1));
 				verify(mockBrowser).addDisposeListener(any(DisposeListener.class));
 				verify(mockToolbar).add(mockLoginHandler);
 			}
