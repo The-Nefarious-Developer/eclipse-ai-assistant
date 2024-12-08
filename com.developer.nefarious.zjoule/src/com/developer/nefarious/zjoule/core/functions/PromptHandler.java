@@ -29,12 +29,7 @@ public class PromptHandler extends BrowserFunction {
 	}
 
 	@Override
-	public Object function(final Object[] arguments) {
-		MemoryAccessToken.initialize(new ObjectSerializer(), new EclipseMemory());
-		MemoryServiceKey.initialize(new ObjectSerializer(), new EclipseMemory());
-		MemoryResourceGroup.initialize(new EclipseMemory());
-		MemoryDeployment.initialize(new ObjectSerializer(), new EclipseMemory());
-		
+	public Object function(final Object[] arguments) {		
 		MemoryAccessToken memoryAccessToken = MemoryAccessToken.getInstance();
 		MemoryServiceKey memoryServiceKey = MemoryServiceKey.getInstance();
 		AuthClientHelper authHelper = new AuthClientHelper();

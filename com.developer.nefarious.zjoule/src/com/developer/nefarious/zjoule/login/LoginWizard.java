@@ -22,7 +22,6 @@ public class LoginWizard extends Wizard {
 	
 	public LoginWizard() {
         setWindowTitle("Login to SAP AI Core");
-        initialization();
         loginClient = createLoginClient();
     }
 	
@@ -39,16 +38,6 @@ public class LoginWizard extends Wizard {
 		TemporaryMemoryResourceGroup.getInstance().persist();
 		TemporaryMemoryDeployment.getInstance().persist();
 		return true;
-	}
-	
-	private void initialization() {
-		ObjectSerializer objectSerializer = ObjectSerializer.getInstance();
-		EclipseMemory eclipseMemory = new EclipseMemory();
-		
-		TemporaryMemoryAccessToken.initialize(objectSerializer, eclipseMemory);
-		TemporaryMemoryServiceKey.initialize(objectSerializer, eclipseMemory);
-		TemporaryMemoryResourceGroup.initialize(eclipseMemory);
-		TemporaryMemoryDeployment.initialize(objectSerializer, eclipseMemory);
 	}
 	
 	private ILoginClient createLoginClient() {

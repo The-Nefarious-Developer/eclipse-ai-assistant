@@ -4,7 +4,7 @@
 
 - Call the Login Wizard - `LoginHandler` - Call an Eclipse wizard that uses the `SAP AI Core` **service key** to enable the user to select the **resource group** and the AI model **deployment Id** configured on BTP.
 
-- Get AI Chat Response - `GetAiResponse` - Talks to the LLM using the **deployment id** selected through the login wizard.
+- Get AI Chat Response - `PromptHandler` - Talks to the LLM using the **deployment id** selected through the login wizard.
 
 ## Memory
 
