@@ -5,7 +5,7 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 	@Override
 	public String getAnswer(final String userPrompt) {
 		
-//		List<AIMessage> messages = new zArrayList<>();
+//		List<AIMessage> messages = new ArrayList<>();
 		
 		// 0. Define which AI Client should be used
 //		IMemoryDeployment memoryDeployment = MemoryDeployment.getInstance();
@@ -35,6 +35,7 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 //		aiClient.updateMessageHistory(messages);
 		
 		// 7. Return response in string format
+//		return answer.getMessage();
 		return "Existence is an abyss of purposeless chaos, devoid of inherent significance";
 	}
 

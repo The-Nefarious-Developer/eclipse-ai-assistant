@@ -7,6 +7,7 @@ import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 import com.developer.nefarious.zjoule.auth.AuthClient;
 import com.developer.nefarious.zjoule.auth.AuthClientHelper;
+import com.developer.nefarious.zjoule.chat.IMessage;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIClient;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIClientHelper;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIMessage;
@@ -46,7 +47,7 @@ public class PromptHandler extends BrowserFunction {
 		List<OpenAIMessage> messages = new ArrayList<>();
 		messages.add(message);
 		
-		String answer;
+		IMessage answer;
 		try {
 			answer = aiClient.chatCompletion(messages);
 		} catch (Exception e) {
@@ -58,7 +59,7 @@ public class PromptHandler extends BrowserFunction {
 		
 //		return arguments[0].toString();
 		
-		return answer;
+		return answer.getMessage();
 	}
 
 }

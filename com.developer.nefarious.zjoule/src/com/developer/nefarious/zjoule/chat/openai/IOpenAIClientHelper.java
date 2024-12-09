@@ -3,6 +3,8 @@ package com.developer.nefarious.zjoule.chat.openai;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.util.List;
 
+import com.developer.nefarious.zjoule.chat.IMessage;
+
 public interface IOpenAIClientHelper {
 	
 	static final int MAX_TOKENS = 1000;
@@ -17,6 +19,6 @@ public interface IOpenAIClientHelper {
 	
 	BodyPublisher createRequestBody(final List<OpenAIMessage> messages);
 	
-	String convertResponseToObject(final String responseBody);
+	IMessage convertResponseToObject(final String responseBody);
 
 }

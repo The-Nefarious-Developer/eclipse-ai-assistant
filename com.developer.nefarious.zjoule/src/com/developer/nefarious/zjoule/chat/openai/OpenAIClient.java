@@ -9,6 +9,7 @@ import java.net.http.HttpRequest.BodyPublisher;
 import java.util.List;
 import com.developer.nefarious.zjoule.auth.IAuthClient;
 import com.developer.nefarious.zjoule.chat.IAIClient;
+import com.developer.nefarious.zjoule.chat.IMessage;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
 import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
 import com.developer.nefarious.zjoule.models.Deployment;
@@ -41,7 +42,7 @@ public class OpenAIClient implements IAIClient<OpenAIMessage> {
 	}
 
 	@Override
-	public String chatCompletion(final List<OpenAIMessage> messages) throws IOException, InterruptedException {
+	public IMessage chatCompletion(final List<OpenAIMessage> messages) throws IOException, InterruptedException {
 		URI endpoint = createChatEndpoint();
 		
 		String token = auth.getAccessToken();

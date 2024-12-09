@@ -1,8 +1,9 @@
 package com.developer.nefarious.zjoule.chat.openai;
 
+import com.developer.nefarious.zjoule.chat.IMessage;
 import com.developer.nefarious.zjoule.models.Role;
 
-public class OpenAIMessage {
+public class OpenAIMessage implements IMessage {
 
 	private Role role;
 	
@@ -30,5 +31,10 @@ public class OpenAIMessage {
     public void setContent(final String content) {
         this.content = content;
     }
+
+	@Override
+	public String getMessage() {
+		return content;
+	}
     
 }
