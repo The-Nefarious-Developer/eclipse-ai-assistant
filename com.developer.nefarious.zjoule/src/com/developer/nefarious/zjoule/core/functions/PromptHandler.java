@@ -1,6 +1,5 @@
 package com.developer.nefarious.zjoule.core.functions;
 
-import java.net.http.HttpClient;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.swt.browser.Browser;
@@ -34,12 +33,11 @@ public class PromptHandler extends BrowserFunction {
 		AuthClientHelper authHelper = new AuthClientHelper();
 		AuthClient authClient = new AuthClient(memoryAccessToken, memoryServiceKey, authHelper);
 		
-		HttpClient httpClient = HttpClient.newHttpClient();
 		MemoryResourceGroup memoryResourceGroup = MemoryResourceGroup.getInstance();
 		MemoryDeployment memoryDeployment = MemoryDeployment.getInstance();
 		OpenAIClientHelper aiClientHelper = new OpenAIClientHelper();
 		
-		OpenAIClient aiClient = new OpenAIClient(authClient, httpClient, memoryResourceGroup, memoryDeployment, aiClientHelper);
+		OpenAIClient aiClient = new OpenAIClient(authClient, memoryResourceGroup, memoryDeployment, aiClientHelper);
 		
 		String userPrompt = arguments[0].toString();
 		OpenAIMessage message = new OpenAIMessage(Role.USER, userPrompt);

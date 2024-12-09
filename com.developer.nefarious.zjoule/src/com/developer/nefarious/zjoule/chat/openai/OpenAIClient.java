@@ -29,13 +29,12 @@ public class OpenAIClient implements IAIClient<OpenAIMessage> {
 	// @formatter:off
 	public OpenAIClient(
 			final IAuthClient authClient, 
-			final HttpClient httpClient,
 			final IMemoryResourceGroup memoryResourceGroup,
 			final IMemoryDeployment memoryDeployment,
 			final IOpenAIClientHelper openAIClientHelper) {
 		// @formatter:on
 		auth = authClient;
-		this.httpClient = httpClient;
+		this.httpClient = HttpClient.newHttpClient();
 		this.memoryResourceGroup = memoryResourceGroup;
 		this.memoryDeployment = memoryDeployment;
 		helper = openAIClientHelper;

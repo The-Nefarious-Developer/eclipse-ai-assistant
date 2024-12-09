@@ -21,6 +21,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.auth.AuthClient;
+import com.developer.nefarious.zjoule.chat.IMessage;
 import com.developer.nefarious.zjoule.chat.openai.IOpenAIClientHelper;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIClient;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIMessage;
@@ -31,6 +32,8 @@ import com.developer.nefarious.zjoule.models.Deployment;
 public class OpenAIClientTest {
 
 	private OpenAIClient cut;
+	
+	MockedStatic<HttpClient> mockStaticHttpClient;
 
 	MockedStatic<HttpRequest> mockHttpRequest;
 	
@@ -57,11 +60,13 @@ public class OpenAIClientTest {
 		
 		mockHttpRequest = mockStatic(HttpRequest.class);
 		mockURI = mockStatic(URI.class);
+		mockStaticHttpClient = mockStatic(HttpClient.class);
+		
+		mockStaticHttpClient.when(HttpClient::newHttpClient).thenReturn(mockHttpClient);
 		
 		// @formatter:off
 		cut = new OpenAIClient(
-				mockAuthClient, 
-				mockHttpClient, 
+				mockAuthClient,
 				mockMemoryResourceGroup, 
 				mockMemoryDeployment, 
 				mockOpenAIClientHelper);
@@ -76,7 +81,11 @@ public class OpenAIClientTest {
 		if (mockURI != null) {
 			mockURI.close();
         }
+		if (mockStaticHttpClient != null) {
+			mockStaticHttpClient.close();
+		}
 	}
+	
 	// CHECKSTYLE:OFF: MethodLength
 	@Test
 	public void shouldPlumbChatCompletion() throws IOException, InterruptedException {
@@ -117,7 +126,7 @@ public class OpenAIClientTest {
 		String mockResponseBody = "response-body-in-string-format";
 		when(mockHttpResponse.body()).thenReturn(mockResponseBody);
 		
-		String expectedValue = "content-of-the-response";
+		OpenAIMessage expectedValue = mock(OpenAIMessage.class);
 		when(mockOpenAIClientHelper.convertResponseToObject(mockResponseBody)).thenReturn(expectedValue);
 		
 		when(mockHttpRequestBuilder.uri(any())).thenReturn(mockHttpRequestBuilder);
@@ -125,7 +134,7 @@ public class OpenAIClientTest {
 		when(mockHttpRequestBuilder.POST(any())).thenReturn(mockHttpRequestBuilder);
 
 		// Act
-		String returnValue = cut.chatCompletion(messages);
+		IMessage returnValue = cut.chatCompletion(messages);
 
 		// Assert
 		verify(mockHttpRequestBuilder).uri(mockEndpointInURIFormat);

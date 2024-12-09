@@ -2,7 +2,6 @@ package com.developer.nefarious.zjoule.chat.openai;
 
 import java.net.http.HttpRequest.BodyPublisher;
 import java.util.List;
-
 import com.developer.nefarious.zjoule.chat.IMessage;
 
 public interface IOpenAIClientHelper {
