@@ -144,6 +144,10 @@ public class Deployment {
 		this.targetStatus = targetStatus;
 	}
 
+	public String getModelName() {
+		return getDetails().getResources().get("backendDetails").getModel().getName();
+	}
+
 }
 
 class Details {
