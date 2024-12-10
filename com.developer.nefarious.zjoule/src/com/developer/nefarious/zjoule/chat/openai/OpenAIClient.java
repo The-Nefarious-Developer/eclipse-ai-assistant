@@ -8,7 +8,6 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import com.developer.nefarious.zjoule.auth.IAuthClient;
 import com.developer.nefarious.zjoule.chat.IAIClient;
 import com.developer.nefarious.zjoule.chat.IChatMessage;

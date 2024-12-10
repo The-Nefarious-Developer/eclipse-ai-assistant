@@ -2,6 +2,7 @@ package com.developer.nefarious.zjoule.test.chat.openai;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -13,6 +14,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Arrays;
 import java.util.List;
 import java.net.http.HttpRequest.BodyPublisher;
 import org.junit.jupiter.api.AfterEach;
@@ -23,6 +25,8 @@ import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.auth.AuthClient;
 import com.developer.nefarious.zjoule.chat.IChatMessage;
+import com.developer.nefarious.zjoule.chat.models.Message;
+import com.developer.nefarious.zjoule.chat.models.MessageHistory;
 import com.developer.nefarious.zjoule.chat.memory.IMemoryMessageHistory;
 import com.developer.nefarious.zjoule.chat.openai.IOpenAIClientHelper;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIClient;
@@ -164,25 +168,45 @@ public class OpenAIClientTest {
 		assertInstanceOf(OpenAIChatMessage.class, returnValue);
 	}
 	
-//	@Test
-//	public void shouldSetMessageHistory() {
-//		// Arrange
-//		
-//		// Act
-////		cut.setMessageHistory(messages);
-//		// Assert
-//		assertTrue(true);
-//	}
-//	
-//	@Test
-//	public void shouldGetMessageHistory() {
-//		// Arrange
-//		
-//		// Act
-////		cut.getMessageHistory(messages);
-//		// Assert
-//		assertTrue(true);
-//	}
+	@Test
+	public void shouldSetMessageHistory() {
+		// Arrange
+		List<IChatMessage> mockChatMessages = Arrays.asList(
+				new OpenAIChatMessage(Role.ASSISTANT, "value-1"), 
+				new OpenAIChatMessage(Role.USER, "value-2"));
+		// Act
+		cut.setMessageHistory(mockChatMessages);
+		// Assert
+		assertTrue(true);
+	}
+	
+	@Test
+	public void shouldGetMessageHistory() {
+		// Arrange
+		Role expectedRole1 = Role.ASSISTANT;
+		Role expectedRole2 = Role.USER;
+		String expectedMessageContent1 = "value-1";
+		String expectedMessageContent2 = "value-2";
+		
+		MessageHistory mockMessageHistory = new MessageHistory();
+		mockMessageHistory.setMessages(Arrays.asList(
+				new Message(expectedRole1, expectedMessageContent1),
+				new Message(expectedRole2, expectedMessageContent2)));
+		
+		when(mockMemoryMessageHistory.load()).thenReturn(mockMessageHistory);
+		
+		// Act
+		List<IChatMessage> returnValue = cut.getMessageHistory();
+		
+		// Assert
+		IChatMessage returnMessage1 = returnValue.getFirst();
+		assertEquals(returnMessage1.getRole(), expectedRole1);
+		assertEquals(returnMessage1.getMessage(), expectedMessageContent1);
+		
+		IChatMessage returnMessage2 = returnValue.getLast();
+		assertEquals(returnMessage2.getRole(), expectedRole2);
+		assertEquals(returnMessage2.getMessage(), expectedMessageContent2);
+	}
 	
 	
 
