@@ -1,6 +1,7 @@
 package com.developer.nefarious.zjoule.test.chat.openai;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -28,6 +29,7 @@ import com.developer.nefarious.zjoule.chat.openai.OpenAIMessage;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
 import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
 import com.developer.nefarious.zjoule.models.Deployment;
+import com.developer.nefarious.zjoule.models.Role;
 
 public class OpenAIClientTest {
 
@@ -144,5 +146,18 @@ public class OpenAIClientTest {
 		assertEquals(returnValue, expectedValue);
 	}
 	// CHECKSTYLE:ON: MethodLength
+	
+	@Test
+	public void shouldCreateMessage() {
+		// Arrange
+		String expectedValue = "some-random-user-prompt";
+		
+		// Act
+		IMessage returnValue = cut.createMessage(Role.USER, expectedValue);
+		
+		// Assert
+		assertEquals(returnValue.getMessage(), expectedValue);
+		assertInstanceOf(OpenAIMessage.class, returnValue);
+	}
 
 }

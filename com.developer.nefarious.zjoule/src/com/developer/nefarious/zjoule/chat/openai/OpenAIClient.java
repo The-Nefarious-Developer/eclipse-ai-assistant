@@ -13,6 +13,7 @@ import com.developer.nefarious.zjoule.chat.IMessage;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
 import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
 import com.developer.nefarious.zjoule.models.Deployment;
+import com.developer.nefarious.zjoule.models.Role;
 
 public class OpenAIClient implements IAIClient<OpenAIMessage> {
 
@@ -69,6 +70,23 @@ public class OpenAIClient implements IAIClient<OpenAIMessage> {
 		String endpointInStringFormat = serviceUrl + "/inference/deployments/" + 
 				deployment.getId() + "/chat/completions?api-version=2023-05-15";
 		return URI.create(endpointInStringFormat);
+	}
+
+	@Override
+	public OpenAIMessage createMessage(final Role role, final String userPrompt) {
+		return new OpenAIMessage(role, userPrompt);
+	}
+
+	@Override
+	public void setMessageHistory(final List<IMessage> messages) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<IMessage> getMessageHistory() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
