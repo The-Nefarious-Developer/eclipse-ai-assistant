@@ -2,7 +2,7 @@ package com.developer.nefarious.zjoule.chat.openai;
 
 import java.net.http.HttpRequest.BodyPublisher;
 import java.util.List;
-import com.developer.nefarious.zjoule.chat.IMessage;
+import com.developer.nefarious.zjoule.chat.IChatMessage;
 
 public interface IOpenAIClientHelper {
 	
@@ -16,8 +16,8 @@ public interface IOpenAIClientHelper {
 	
 	static final String STOP = "null";
 	
-	BodyPublisher createRequestBody(final List<OpenAIMessage> messages);
+	BodyPublisher createRequestBody(final List<OpenAIChatMessage> messages);
 	
-	IMessage convertResponseToObject(final String responseBody);
+	IChatMessage convertResponseToObject(final String responseBody);
 
 }

@@ -3,6 +3,7 @@ package com.developer.nefarious.zjoule.chat;
 import java.util.Set;
 import com.developer.nefarious.zjoule.auth.AuthClient;
 import com.developer.nefarious.zjoule.auth.AuthClientHelper;
+import com.developer.nefarious.zjoule.chat.memory.MemoryMessageHistory;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIClient;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIClientHelper;
 import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
@@ -19,6 +20,7 @@ public class AIClientFactory {
 		MemoryServiceKey memoryServiceKey = MemoryServiceKey.getInstance();
 		MemoryResourceGroup memoryResourceGroup = MemoryResourceGroup.getInstance();
 		MemoryDeployment memoryDeployment = MemoryDeployment.getInstance();
+		MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
 
 		AuthClientHelper authHelper = new AuthClientHelper();
 		AuthClient authClient = new AuthClient(memoryAccessToken, memoryServiceKey, authHelper);
@@ -27,7 +29,7 @@ public class AIClientFactory {
 
 		if (isOpenAI(deployment.getModelName())) {
 			OpenAIClientHelper aiClientHelper = new OpenAIClientHelper();
-			return new OpenAIClient(authClient, memoryResourceGroup, memoryDeployment, aiClientHelper);
+			return new OpenAIClient(authClient, memoryMessageHistory, memoryResourceGroup, memoryDeployment, aiClientHelper);
 		} else {
 			return null;
 		}

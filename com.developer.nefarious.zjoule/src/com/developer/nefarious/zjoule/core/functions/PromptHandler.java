@@ -6,10 +6,11 @@ import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 import com.developer.nefarious.zjoule.auth.AuthClient;
 import com.developer.nefarious.zjoule.auth.AuthClientHelper;
-import com.developer.nefarious.zjoule.chat.IMessage;
+import com.developer.nefarious.zjoule.chat.IChatMessage;
+import com.developer.nefarious.zjoule.chat.memory.MemoryMessageHistory;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIClient;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIClientHelper;
-import com.developer.nefarious.zjoule.chat.openai.OpenAIMessage;
+import com.developer.nefarious.zjoule.chat.openai.OpenAIChatMessage;
 import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.MemoryDeployment;
 import com.developer.nefarious.zjoule.memory.MemoryResourceGroup;
@@ -36,16 +37,17 @@ public class PromptHandler extends BrowserFunction {
 		MemoryResourceGroup memoryResourceGroup = MemoryResourceGroup.getInstance();
 		MemoryDeployment memoryDeployment = MemoryDeployment.getInstance();
 		OpenAIClientHelper aiClientHelper = new OpenAIClientHelper();
+		MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
 		
-		OpenAIClient aiClient = new OpenAIClient(authClient, memoryResourceGroup, memoryDeployment, aiClientHelper);
+		OpenAIClient aiClient = new OpenAIClient(authClient, memoryMessageHistory, memoryResourceGroup, memoryDeployment, aiClientHelper);
 		
 		String userPrompt = arguments[0].toString();
-		OpenAIMessage message = new OpenAIMessage(Role.USER, userPrompt);
+		OpenAIChatMessage message = new OpenAIChatMessage(Role.USER, userPrompt);
 		
-		List<OpenAIMessage> messages = new ArrayList<>();
+		List<OpenAIChatMessage> messages = new ArrayList<>();
 		messages.add(message);
 		
-		IMessage answer;
+		IChatMessage answer;
 		try {
 			answer = aiClient.chatCompletion(messages);
 		} catch (Exception e) {

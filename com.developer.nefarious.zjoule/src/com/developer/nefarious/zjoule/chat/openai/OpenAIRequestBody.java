@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class OpenAIRequestBody {
 
-	private List<OpenAIMessage> messages;
+	private List<OpenAIChatMessage> messages;
 
 	@SerializedName("max_tokens")
 	private int maxTokens;
@@ -23,11 +23,11 @@ public class OpenAIRequestBody {
 
 	private String stop;
 
-	public List<OpenAIMessage> getMessages() {
+	public List<OpenAIChatMessage> getMessages() {
 		return messages;
 	}
 
-	public void setMessages(final List<OpenAIMessage> messages) {
+	public void setMessages(final List<OpenAIChatMessage> messages) {
 		this.messages = messages;
 	}
 

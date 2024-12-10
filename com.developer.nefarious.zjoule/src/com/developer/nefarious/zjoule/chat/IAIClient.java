@@ -6,12 +6,12 @@ import com.developer.nefarious.zjoule.models.Role;
 
 public interface IAIClient<T> {
 
-	IMessage chatCompletion(final List<T> messages) throws IOException, InterruptedException;
+	IChatMessage chatCompletion(final List<T> messages) throws IOException, InterruptedException;
 	
-	IMessage createMessage(final Role role, final String userPrompt);
+	IChatMessage createMessage(final Role role, final String userPrompt);
 	
-	List<IMessage> getMessageHistory();
+	List<IChatMessage> getMessageHistory();
 	
-	void setMessageHistory(final List<IMessage> messages);
+	void setMessageHistory(final List<IChatMessage> messages);
 	
 }

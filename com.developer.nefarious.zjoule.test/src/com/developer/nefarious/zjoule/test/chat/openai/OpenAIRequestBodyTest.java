@@ -3,7 +3,7 @@ package com.developer.nefarious.zjoule.test.chat.openai;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import com.developer.nefarious.zjoule.chat.openai.OpenAIMessage;
+import com.developer.nefarious.zjoule.chat.openai.OpenAIChatMessage;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIRequestBody;
 import com.developer.nefarious.zjoule.models.Role;
 
@@ -26,11 +26,11 @@ public class OpenAIRequestBodyTest {
 				+ "\"presence_penalty\":0.6,"
 				+ "\"stop\":\"done\"}";
 		
-		OpenAIMessage message1 = new OpenAIMessage();
+		OpenAIChatMessage message1 = new OpenAIChatMessage();
 		message1.setRole(Role.USER);
 		message1.setContent("Hello!");
 
-		OpenAIMessage message2 = new OpenAIMessage();
+		OpenAIChatMessage message2 = new OpenAIChatMessage();
 		message2.setRole(Role.ASSISTANT);
 		message2.setContent("Hi there!");
 
@@ -64,11 +64,11 @@ public class OpenAIRequestBodyTest {
 				+ "\"presence_penalty\":0.6,"
 				+ "\"stop\":\"null\"}";
 		
-		OpenAIMessage message1 = new OpenAIMessage();
+		OpenAIChatMessage message1 = new OpenAIChatMessage();
 		message1.setRole(Role.USER);
 		message1.setContent("Hello!");
 
-		OpenAIMessage message2 = new OpenAIMessage();
+		OpenAIChatMessage message2 = new OpenAIChatMessage();
 		message2.setRole(Role.ASSISTANT);
 		message2.setContent("Hi there!");
 

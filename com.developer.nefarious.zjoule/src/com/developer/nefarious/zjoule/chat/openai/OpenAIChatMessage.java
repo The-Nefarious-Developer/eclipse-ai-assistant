@@ -1,17 +1,17 @@
 package com.developer.nefarious.zjoule.chat.openai;
 
-import com.developer.nefarious.zjoule.chat.IMessage;
+import com.developer.nefarious.zjoule.chat.IChatMessage;
 import com.developer.nefarious.zjoule.models.Role;
 
-public class OpenAIMessage implements IMessage {
+public class OpenAIChatMessage implements IChatMessage {
 
 	private Role role;
 	
     private String content;
     
-    public OpenAIMessage() { }
+    public OpenAIChatMessage() { }
     
-    public OpenAIMessage(final Role role, final String content) { 
+    public OpenAIChatMessage(final Role role, final String content) { 
     	this.role = role;
     	this.content = content;
     }

@@ -22,10 +22,11 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.auth.AuthClient;
-import com.developer.nefarious.zjoule.chat.IMessage;
+import com.developer.nefarious.zjoule.chat.IChatMessage;
+import com.developer.nefarious.zjoule.chat.memory.IMemoryMessageHistory;
 import com.developer.nefarious.zjoule.chat.openai.IOpenAIClientHelper;
 import com.developer.nefarious.zjoule.chat.openai.OpenAIClient;
-import com.developer.nefarious.zjoule.chat.openai.OpenAIMessage;
+import com.developer.nefarious.zjoule.chat.openai.OpenAIChatMessage;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
 import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
 import com.developer.nefarious.zjoule.models.Deployment;
@@ -54,6 +55,9 @@ public class OpenAIClientTest {
 	private IMemoryDeployment mockMemoryDeployment;
 	
 	@Mock
+	private IMemoryMessageHistory mockMemoryMessageHistory;
+	
+	@Mock
 	private IOpenAIClientHelper mockOpenAIClientHelper;
 
 	@BeforeEach
@@ -69,6 +73,7 @@ public class OpenAIClientTest {
 		// @formatter:off
 		cut = new OpenAIClient(
 				mockAuthClient,
+				mockMemoryMessageHistory,
 				mockMemoryResourceGroup, 
 				mockMemoryDeployment, 
 				mockOpenAIClientHelper);
@@ -115,7 +120,7 @@ public class OpenAIClientTest {
 		String mockResourceGroup = "sap-ai-core-resource-group";
 		when(mockMemoryResourceGroup.load()).thenReturn(mockResourceGroup);
 		
-		List<OpenAIMessage> messages = mock(List.class);
+		List<OpenAIChatMessage> messages = mock(List.class);
 		BodyPublisher mockRequestBody = mock(BodyPublisher.class);
 		when(mockOpenAIClientHelper.createRequestBody(messages)).thenReturn(mockRequestBody);
 		
@@ -128,7 +133,7 @@ public class OpenAIClientTest {
 		String mockResponseBody = "response-body-in-string-format";
 		when(mockHttpResponse.body()).thenReturn(mockResponseBody);
 		
-		OpenAIMessage expectedValue = mock(OpenAIMessage.class);
+		OpenAIChatMessage expectedValue = mock(OpenAIChatMessage.class);
 		when(mockOpenAIClientHelper.convertResponseToObject(mockResponseBody)).thenReturn(expectedValue);
 		
 		when(mockHttpRequestBuilder.uri(any())).thenReturn(mockHttpRequestBuilder);
@@ -136,7 +141,7 @@ public class OpenAIClientTest {
 		when(mockHttpRequestBuilder.POST(any())).thenReturn(mockHttpRequestBuilder);
 
 		// Act
-		IMessage returnValue = cut.chatCompletion(messages);
+		IChatMessage returnValue = cut.chatCompletion(messages);
 
 		// Assert
 		verify(mockHttpRequestBuilder).uri(mockEndpointInURIFormat);
@@ -153,10 +158,32 @@ public class OpenAIClientTest {
 		String expectedValue = "some-random-user-prompt";
 		Role randomRole = Role.USER;
 		// Act
-		IMessage returnValue = cut.createMessage(randomRole, expectedValue);
+		IChatMessage returnValue = cut.createMessage(randomRole, expectedValue);
 		// Assert
 		assertEquals(returnValue.getMessage(), expectedValue);
-		assertInstanceOf(OpenAIMessage.class, returnValue);
+		assertInstanceOf(OpenAIChatMessage.class, returnValue);
 	}
+	
+//	@Test
+//	public void shouldSetMessageHistory() {
+//		// Arrange
+//		
+//		// Act
+////		cut.setMessageHistory(messages);
+//		// Assert
+//		assertTrue(true);
+//	}
+//	
+//	@Test
+//	public void shouldGetMessageHistory() {
+//		// Arrange
+//		
+//		// Act
+////		cut.getMessageHistory(messages);
+//		// Assert
+//		assertTrue(true);
+//	}
+	
+	
 
 }

@@ -24,7 +24,7 @@ public class OpenAIRequestResponse {
         @SerializedName("finish_reason")
         private String finishReason;
 
-        private OpenAIMessage message;
+        private OpenAIChatMessage message;
 
 		public int getIndex() {
 			return index;
@@ -42,11 +42,11 @@ public class OpenAIRequestResponse {
 			this.finishReason = finishReason;
 		}
 
-		public OpenAIMessage getMessage() {
+		public OpenAIChatMessage getMessage() {
 			return message;
 		}
 
-		public void setMessage(final OpenAIMessage message) {
+		public void setMessage(final OpenAIChatMessage message) {
 			this.message = message;
 		}
         

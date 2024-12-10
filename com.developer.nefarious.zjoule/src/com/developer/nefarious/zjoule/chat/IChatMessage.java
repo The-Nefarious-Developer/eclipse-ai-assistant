@@ -1,6 +1,6 @@
 package com.developer.nefarious.zjoule.chat;
 
-public interface IMessage {
+public interface IChatMessage {
 	
 	String getMessage();
 

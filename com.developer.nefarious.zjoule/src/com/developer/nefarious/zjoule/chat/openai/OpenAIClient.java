@@ -9,17 +9,20 @@ import java.net.http.HttpRequest.BodyPublisher;
 import java.util.List;
 import com.developer.nefarious.zjoule.auth.IAuthClient;
 import com.developer.nefarious.zjoule.chat.IAIClient;
-import com.developer.nefarious.zjoule.chat.IMessage;
+import com.developer.nefarious.zjoule.chat.IChatMessage;
+import com.developer.nefarious.zjoule.chat.memory.IMemoryMessageHistory;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
 import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
 import com.developer.nefarious.zjoule.models.Deployment;
 import com.developer.nefarious.zjoule.models.Role;
 
-public class OpenAIClient implements IAIClient<OpenAIMessage> {
-
-	private IAuthClient auth;
+public class OpenAIClient implements IAIClient<OpenAIChatMessage> {
 
 	private HttpClient httpClient;
+
+	private IAuthClient auth;
+	
+	private IMemoryMessageHistory memoryMessageHistory;
 	
 	private IMemoryResourceGroup memoryResourceGroup;
 	
@@ -30,19 +33,21 @@ public class OpenAIClient implements IAIClient<OpenAIMessage> {
 	// @formatter:off
 	public OpenAIClient(
 			final IAuthClient authClient, 
+			final IMemoryMessageHistory memoryMessageHistory,
 			final IMemoryResourceGroup memoryResourceGroup,
 			final IMemoryDeployment memoryDeployment,
 			final IOpenAIClientHelper openAIClientHelper) {
 		// @formatter:on
-		auth = authClient;
 		this.httpClient = HttpClient.newHttpClient();
+		auth = authClient;
+		this.memoryMessageHistory = memoryMessageHistory;
 		this.memoryResourceGroup = memoryResourceGroup;
 		this.memoryDeployment = memoryDeployment;
 		helper = openAIClientHelper;
 	}
 
 	@Override
-	public IMessage chatCompletion(final List<OpenAIMessage> messages) throws IOException, InterruptedException {
+	public IChatMessage chatCompletion(final List<OpenAIChatMessage> messages) throws IOException, InterruptedException {
 		URI endpoint = createChatEndpoint();
 		
 		String token = auth.getAccessToken();
@@ -73,18 +78,20 @@ public class OpenAIClient implements IAIClient<OpenAIMessage> {
 	}
 
 	@Override
-	public OpenAIMessage createMessage(final Role role, final String userPrompt) {
-		return new OpenAIMessage(role, userPrompt);
+	public OpenAIChatMessage createMessage(final Role role, final String userPrompt) {
+		return new OpenAIChatMessage(role, userPrompt);
 	}
 
 	@Override
-	public void setMessageHistory(final List<IMessage> messages) {
-		// TODO Auto-generated method stub
+	public void setMessageHistory(final List<IChatMessage> messages) {
+//		List<Message> messagesToBeStored = messages.stream()
+//				.map(message -> new Message())
+//		memoryMessageHistory.save();
 		
 	}
 
 	@Override
-	public List<IMessage> getMessageHistory() {
+	public List<IChatMessage> getMessageHistory() {
 		// TODO Auto-generated method stub
 		return null;
 	}
