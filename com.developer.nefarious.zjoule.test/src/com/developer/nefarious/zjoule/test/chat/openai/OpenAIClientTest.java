@@ -151,10 +151,9 @@ public class OpenAIClientTest {
 	public void shouldCreateMessage() {
 		// Arrange
 		String expectedValue = "some-random-user-prompt";
-		
+		Role randomRole = Role.USER;
 		// Act
-		IMessage returnValue = cut.createMessage(Role.USER, expectedValue);
-		
+		IMessage returnValue = cut.createMessage(randomRole, expectedValue);
 		// Assert
 		assertEquals(returnValue.getMessage(), expectedValue);
 		assertInstanceOf(OpenAIMessage.class, returnValue);
