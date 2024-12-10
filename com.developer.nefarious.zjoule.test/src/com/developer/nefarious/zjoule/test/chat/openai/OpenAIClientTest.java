@@ -2,7 +2,6 @@ package com.developer.nefarious.zjoule.test.chat.openai;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -20,6 +19,7 @@ import java.net.http.HttpRequest.BodyPublisher;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
@@ -171,13 +171,27 @@ public class OpenAIClientTest {
 	@Test
 	public void shouldSetMessageHistory() {
 		// Arrange
+		Role expectedRole1 = Role.ASSISTANT;
+		Role expectedRole2 = Role.USER;
+		String expectedMessageContent1 = "value-1";
+		String expectedMessageContent2 = "value-2";
+		
 		List<IChatMessage> mockChatMessages = Arrays.asList(
-				new OpenAIChatMessage(Role.ASSISTANT, "value-1"), 
-				new OpenAIChatMessage(Role.USER, "value-2"));
+				new OpenAIChatMessage(expectedRole1, expectedMessageContent1), 
+				new OpenAIChatMessage(expectedRole2, expectedMessageContent2));
 		// Act
 		cut.setMessageHistory(mockChatMessages);
 		// Assert
-		assertTrue(true);
+		ArgumentCaptor<MessageHistory> captor = ArgumentCaptor.forClass(MessageHistory.class);
+		verify(mockMemoryMessageHistory).save(captor.capture());
+		
+		List<Message> capturedMessages = captor.getValue().getMessages();
+		assertEquals(2, capturedMessages.size());
+		assertEquals(expectedRole1, capturedMessages.get(0).getRole());
+		assertEquals(expectedRole2, capturedMessages.get(1).getRole());
+		assertEquals(expectedMessageContent1, capturedMessages.get(0).getContent());
+		assertEquals(expectedMessageContent2, capturedMessages.get(1).getContent());
+		
 	}
 	
 	@Test
