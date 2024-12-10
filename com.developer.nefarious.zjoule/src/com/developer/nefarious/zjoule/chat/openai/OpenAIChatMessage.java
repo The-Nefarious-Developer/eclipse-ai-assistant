@@ -15,7 +15,8 @@ public class OpenAIChatMessage implements IChatMessage {
     	this.role = role;
     	this.content = content;
     }
-
+    
+    @Override
     public Role getRole() {
         return role;
     }

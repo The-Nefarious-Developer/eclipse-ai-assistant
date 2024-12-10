@@ -7,10 +7,14 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import com.developer.nefarious.zjoule.auth.IAuthClient;
 import com.developer.nefarious.zjoule.chat.IAIClient;
 import com.developer.nefarious.zjoule.chat.IChatMessage;
 import com.developer.nefarious.zjoule.chat.memory.IMemoryMessageHistory;
+import com.developer.nefarious.zjoule.chat.models.Message;
+import com.developer.nefarious.zjoule.chat.models.MessageHistory;
 import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
 import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
 import com.developer.nefarious.zjoule.models.Deployment;
@@ -83,17 +87,20 @@ public class OpenAIClient implements IAIClient<OpenAIChatMessage> {
 	}
 
 	@Override
-	public void setMessageHistory(final List<IChatMessage> messages) {
-//		List<Message> messagesToBeStored = messages.stream()
-//				.map(message -> new Message())
-//		memoryMessageHistory.save();
-		
+	public void setMessageHistory(final List<IChatMessage> chatMessages) {
+		MessageHistory newMessageHistory = new MessageHistory();
+		newMessageHistory.setMessages(chatMessages.stream()
+				.map(chatMessage -> new Message(chatMessage.getRole(), chatMessage.getMessage()))
+				.collect(Collectors.toList()));
+		memoryMessageHistory.save(newMessageHistory);		
 	}
 
 	@Override
 	public List<IChatMessage> getMessageHistory() {
-		// TODO Auto-generated method stub
-		return null;
+		MessageHistory messageHistory = memoryMessageHistory.load();
+		return messageHistory.getMessages().stream()
+				.map(message -> new OpenAIChatMessage(message.getRole(), message.getContent()))
+				.collect(Collectors.toList());
 	}
 
 }
