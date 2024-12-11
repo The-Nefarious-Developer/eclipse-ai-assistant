@@ -93,7 +93,7 @@ public class AIClientFactoryTest {
 		// Arrange
 		when(mockDeployment.getModelName()).thenReturn("potato");
 		// Act
-		IAIClient<?> returnValue = AIClientFactory.getClient();
+		IAIClient returnValue = AIClientFactory.getClient();
 		// Assert
 		assertNull(returnValue);
 	}
@@ -103,7 +103,7 @@ public class AIClientFactoryTest {
 		// Arrange
 		when(mockDeployment.getModelName()).thenReturn("gpt-4");
 		// Act
-		IAIClient<?> returnValue = AIClientFactory.getClient();
+		IAIClient returnValue = AIClientFactory.getClient();
 		// Assert
 		assertInstanceOf(OpenAIClient.class, returnValue);
 	}
@@ -113,7 +113,7 @@ public class AIClientFactoryTest {
 		// Arrange
 		when(mockDeployment.getModelName()).thenReturn("gpt-4-32k");
 		// Act
-		IAIClient<?> returnValue = AIClientFactory.getClient();
+		IAIClient returnValue = AIClientFactory.getClient();
 		// Assert
 		assertInstanceOf(OpenAIClient.class, returnValue);
 	}
@@ -123,7 +123,7 @@ public class AIClientFactoryTest {
 		// Arrange
 		when(mockDeployment.getModelName()).thenReturn("gpt-35-turbo");
 		// Act
-		IAIClient<?> returnValue = AIClientFactory.getClient();
+		IAIClient returnValue = AIClientFactory.getClient();
 		// Assert
 		assertInstanceOf(OpenAIClient.class, returnValue);
 	}
@@ -133,7 +133,7 @@ public class AIClientFactoryTest {
 		// Arrange
 		when(mockDeployment.getModelName()).thenReturn("gpt-35-turbo-16k");
 		// Act
-		IAIClient<?> returnValue = AIClientFactory.getClient();
+		IAIClient returnValue = AIClientFactory.getClient();
 		// Assert
 		assertInstanceOf(OpenAIClient.class, returnValue);
 	}

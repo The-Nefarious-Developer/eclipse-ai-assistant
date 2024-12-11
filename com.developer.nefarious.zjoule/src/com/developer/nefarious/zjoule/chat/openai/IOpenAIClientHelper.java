@@ -16,7 +16,7 @@ public interface IOpenAIClientHelper {
 	
 	static final String STOP = "null";
 	
-	BodyPublisher createRequestBody(final List<OpenAIChatMessage> messages);
+	BodyPublisher createRequestBody(final List<IChatMessage> messages);
 	
 	IChatMessage convertResponseToObject(final String responseBody);
 

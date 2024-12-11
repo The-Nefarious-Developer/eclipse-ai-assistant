@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 public class OpenAIClientHelper implements IOpenAIClientHelper {
 
 	@Override
-	public BodyPublisher createRequestBody(final List<OpenAIChatMessage> messages) {
+	public BodyPublisher createRequestBody(final List<IChatMessage> messages) {
 		OpenAIRequestBody requestBody = new OpenAIRequestBody();
 		
 		requestBody.setMessages(messages);

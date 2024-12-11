@@ -19,7 +19,7 @@ import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
 import com.developer.nefarious.zjoule.models.Deployment;
 import com.developer.nefarious.zjoule.models.Role;
 
-public class OpenAIClient implements IAIClient<OpenAIChatMessage> {
+public class OpenAIClient implements IAIClient {
 
 	private HttpClient httpClient;
 
@@ -50,7 +50,7 @@ public class OpenAIClient implements IAIClient<OpenAIChatMessage> {
 	}
 
 	@Override
-	public IChatMessage chatCompletion(final List<OpenAIChatMessage> messages) throws IOException, InterruptedException {
+	public IChatMessage chatCompletion(final List<IChatMessage> messages) throws IOException, InterruptedException {
 		URI endpoint = createChatEndpoint();
 		
 		String token = auth.getAccessToken();

@@ -14,7 +14,7 @@ import com.developer.nefarious.zjoule.models.Deployment;
 
 public class AIClientFactory {
 
-	public static IAIClient<?> getClient() {
+	public static IAIClient getClient() {
 
 		MemoryAccessToken memoryAccessToken = MemoryAccessToken.getInstance();
 		MemoryServiceKey memoryServiceKey = MemoryServiceKey.getInstance();

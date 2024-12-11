@@ -1,6 +1,7 @@
 package com.developer.nefarious.zjoule.chat.openai;
 
 import java.util.List;
+import com.developer.nefarious.zjoule.chat.IChatMessage;
 import com.developer.nefarious.zjoule.models.Role;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -8,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class OpenAIRequestBody {
 
-	private List<OpenAIChatMessage> messages;
+	private List<IChatMessage> messages;
 
 	@SerializedName("max_tokens")
 	private int maxTokens;
@@ -23,11 +24,11 @@ public class OpenAIRequestBody {
 
 	private String stop;
 
-	public List<OpenAIChatMessage> getMessages() {
+	public List<IChatMessage> getMessages() {
 		return messages;
 	}
 
-	public void setMessages(final List<OpenAIChatMessage> messages) {
+	public void setMessages(final List<IChatMessage> messages) {
 		this.messages = messages;
 	}
 

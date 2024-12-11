@@ -1,30 +1,81 @@
 package com.developer.nefarious.zjoule.test.chat;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.MockitoAnnotations;
+import com.developer.nefarious.zjoule.chat.AIClientFactory;
+import com.developer.nefarious.zjoule.chat.ChatOrchestrator;
+import com.developer.nefarious.zjoule.chat.IAIClient;
+import com.developer.nefarious.zjoule.chat.IChatMessage;
 import com.developer.nefarious.zjoule.chat.IChatOrchestrator;
+import com.developer.nefarious.zjoule.models.Role;
 
 public class ChatOrchestratorTest {
 	
 	private IChatOrchestrator cut;
 	
+	MockedStatic<AIClientFactory> mockAIClientFactory;
+	
+	@Mock
+	private IAIClient mockAIClient;
+	
 	@BeforeEach
 	public void setUp() {
+		MockitoAnnotations.openMocks(this);
 		
-//		cut = new ChatOrchestrator();
+		mockAIClientFactory = mockStatic(AIClientFactory.class);
+		mockAIClientFactory.when(AIClientFactory::getClient).thenReturn(mockAIClient);
+		
+		cut = new ChatOrchestrator();
+	}
+	
+	@AfterEach
+	public void tearDown() {
+		if (mockAIClientFactory != null) {
+			mockAIClientFactory.close();
+		}
 	}
 	
 	@Test
-	public void shouldPlumbAnswer() {
-//		// Arrange
-//		String expectedValue = "Existence is an abyss of purposeless chaos, devoid of inherent significance";
-//		String mockUserPrompt = "What's the meaning of life?";
-//		// Act
-//		String returnValue = cut.getAnswer(mockUserPrompt);
-//		// Assert
-		assertTrue(true);
-//		assertEquals(expectedValue, returnValue);
+	public void shouldPlumbAnswer() throws IOException, InterruptedException {
+		// Arrange
+		String mockUserPrompt = "What's the meaning of life?";
+		IChatMessage mockUserMessage = mock(IChatMessage.class);
+		when(mockAIClient.createMessage(Role.USER, mockUserPrompt)).thenReturn(mockUserMessage);
+		
+		IChatMessage mockOldMessage1 = mock(IChatMessage.class);
+		IChatMessage mockOldMessage2 = mock(IChatMessage.class);
+		List<IChatMessage> mockMessageHistory = Arrays.asList(mockOldMessage1, mockOldMessage2);
+		when(mockAIClient.getMessageHistory()).thenReturn(mockMessageHistory);
+		
+		List<IChatMessage> mockInputMessages = Arrays.asList(mockOldMessage1, mockOldMessage2, mockUserMessage);
+		
+		IChatMessage mockAnswer = mock(IChatMessage.class);
+		when(mockAIClient.chatCompletion(mockInputMessages)).thenReturn(mockAnswer);
+		
+		List<IChatMessage> mockAllMessages = Arrays.asList(mockOldMessage1, mockOldMessage2, mockUserMessage, mockAnswer);
+		
+		String expectedValue = "42";
+		when(mockAnswer.getMessage()).thenReturn(expectedValue);
+		
+		// Act
+		String returnValue = cut.getAnswer(mockUserPrompt);
+		
+		// Assert
+		verify(mockAIClient).getMessageHistory();
+		verify(mockAIClient).setMessageHistory(mockAllMessages);
+		assertEquals(expectedValue, returnValue);
 	}
 
 }

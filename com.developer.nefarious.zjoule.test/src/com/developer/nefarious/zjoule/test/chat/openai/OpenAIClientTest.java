@@ -124,7 +124,7 @@ public class OpenAIClientTest {
 		String mockResourceGroup = "sap-ai-core-resource-group";
 		when(mockMemoryResourceGroup.load()).thenReturn(mockResourceGroup);
 		
-		List<OpenAIChatMessage> messages = mock(List.class);
+		List<IChatMessage> messages = mock(List.class);
 		BodyPublisher mockRequestBody = mock(BodyPublisher.class);
 		when(mockOpenAIClientHelper.createRequestBody(messages)).thenReturn(mockRequestBody);
 		

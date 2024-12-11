@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.List;
 import com.developer.nefarious.zjoule.models.Role;
 
-public interface IAIClient<T> {
+public interface IAIClient {
 
-	IChatMessage chatCompletion(final List<T> messages) throws IOException, InterruptedException;
+	IChatMessage chatCompletion(final List<IChatMessage> messages) throws IOException, InterruptedException;
 	
 	IChatMessage createMessage(final Role role, final String userPrompt);
 	
