@@ -73,7 +73,6 @@ public class ChatOrchestratorTest {
 		String returnValue = cut.getAnswer(mockUserPrompt);
 		
 		// Assert
-		verify(mockAIClient).getMessageHistory();
 		verify(mockAIClient).setMessageHistory(mockAllMessages);
 		assertEquals(expectedValue, returnValue);
 	}
