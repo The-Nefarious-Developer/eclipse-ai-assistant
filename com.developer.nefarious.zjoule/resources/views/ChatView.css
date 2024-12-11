@@ -33,7 +33,6 @@ body {
 .message {
 	padding: 10px;
 	border-radius: 15px;
-	max-width: 70%;
 	word-wrap: break-word;
 }
 
@@ -41,12 +40,12 @@ body {
 	align-self: flex-end;
 	background-color: #4a76a8;
 	color: #fff;
+	max-width: 70%;
 }
 
 .bot-message {
-	align-self: flex-start;
-	background-color: #e5e5ea;
 	color: #333;
+	max-width: 100%;
 }
 
 .chat-input {
