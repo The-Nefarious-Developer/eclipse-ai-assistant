@@ -45,8 +45,12 @@ public class TemporaryMemoryAccessToken implements IMemoryAccessToken, ITemporar
 
 	@Override
 	public AccessToken load() {
-		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-		return objectSerializer.deserialize(serializedObject, AccessToken.class);
+		try {
+			String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
+			return objectSerializer.deserialize(serializedObject, AccessToken.class);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override

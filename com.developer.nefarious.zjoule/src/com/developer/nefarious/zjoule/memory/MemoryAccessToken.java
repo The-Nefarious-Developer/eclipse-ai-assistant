@@ -4,18 +4,18 @@ import com.developer.nefarious.zjoule.memory.utils.IObjectSerializer;
 import com.developer.nefarious.zjoule.models.AccessToken;
 
 public class MemoryAccessToken implements IMemoryAccessToken {
-	
+
 	private static MemoryAccessToken instance;
 
 	private IObjectSerializer objectSerializer;
-	
+
 	private IEclipseMemory eclipseMemory;
-	
+
 	private MemoryAccessToken(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
 		this.objectSerializer = objectSerializer;
 		this.eclipseMemory = eclipseMemory;
 	}
-	
+
 	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
 		if (instance == null) {
 			instance = new MemoryAccessToken(objectSerializer, eclipseMemory);
@@ -41,8 +41,12 @@ public class MemoryAccessToken implements IMemoryAccessToken {
 
 	@Override
 	public AccessToken load() {
-		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-		return objectSerializer.deserialize(serializedObject, AccessToken.class);
+		try {
+			String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
+			return objectSerializer.deserialize(serializedObject, AccessToken.class);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }

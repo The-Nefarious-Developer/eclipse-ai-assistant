@@ -10,7 +10,7 @@ public class TemporaryMemoryDeployment implements IMemoryDeployment, ITemporaryM
 	private static TemporaryMemoryDeployment instance;
 
 	public static final String KEY = "tmp-" + IMemoryDeployment.KEY;
-	
+
 	IObjectSerializer objectSerializer;
 
 	IEclipseMemory eclipseMemory;
@@ -45,8 +45,12 @@ public class TemporaryMemoryDeployment implements IMemoryDeployment, ITemporaryM
 
 	@Override
 	public Deployment load() {
-		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-		return objectSerializer.deserialize(serializedObject, Deployment.class);
+		try {
+			String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
+			return objectSerializer.deserialize(serializedObject, Deployment.class);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import com.developer.nefarious.zjoule.models.Deployment;
 public class MemoryDeployment implements IMemoryDeployment {
 
 	private static MemoryDeployment instance;
-	
+
 	private IObjectSerializer objectSerializer;
 
 	private IEclipseMemory eclipseMemory;
@@ -41,8 +41,12 @@ public class MemoryDeployment implements IMemoryDeployment {
 
 	@Override
 	public Deployment load() {
-		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-		return objectSerializer.deserialize(serializedObject, Deployment.class);
+		try {
+			String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
+			return objectSerializer.deserialize(serializedObject, Deployment.class);
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	
+
 }

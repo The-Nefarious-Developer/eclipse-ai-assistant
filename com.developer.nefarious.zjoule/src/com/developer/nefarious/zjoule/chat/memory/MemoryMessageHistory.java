@@ -5,9 +5,9 @@ import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.memory.utils.IObjectSerializer;
 
 public class MemoryMessageHistory implements IMemoryMessageHistory {
-	
+
 	private static MemoryMessageHistory instance;
-	
+
 	private IObjectSerializer objectSerializer;
 
 	private IEclipseMemory eclipseMemory;

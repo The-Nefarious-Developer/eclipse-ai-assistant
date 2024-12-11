@@ -4,18 +4,18 @@ import com.developer.nefarious.zjoule.memory.utils.IObjectSerializer;
 import com.developer.nefarious.zjoule.models.ServiceKey;
 
 public class MemoryServiceKey implements IMemoryServiceKey {
-	
+
 	private static MemoryServiceKey instance;
-	
+
 	private IObjectSerializer objectSerializer;
-	
+
 	private IEclipseMemory eclipseMemory;
-	
+
 	private MemoryServiceKey(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
 		this.objectSerializer = objectSerializer;
 		this.eclipseMemory = eclipseMemory;
 	}
-	
+
 	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
 		if (instance == null) {
 			instance = new MemoryServiceKey(objectSerializer, eclipseMemory);
@@ -41,8 +41,12 @@ public class MemoryServiceKey implements IMemoryServiceKey {
 
 	@Override
 	public ServiceKey load() {
-		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-		return objectSerializer.deserialize(serializedObject, ServiceKey.class);
+		try {
+			String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
+			return objectSerializer.deserialize(serializedObject, ServiceKey.class);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }
