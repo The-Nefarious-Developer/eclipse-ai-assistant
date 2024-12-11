@@ -21,7 +21,7 @@ public class AIClientFactory {
 		MemoryResourceGroup memoryResourceGroup = MemoryResourceGroup.getInstance();
 		MemoryDeployment memoryDeployment = MemoryDeployment.getInstance();
 		MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
-
+		
 		AuthClientHelper authHelper = new AuthClientHelper();
 		AuthClient authClient = new AuthClient(memoryAccessToken, memoryServiceKey, authHelper);
 

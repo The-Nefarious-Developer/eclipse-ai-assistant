@@ -2,6 +2,7 @@ package com.developer.nefarious.zjoule.core;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import com.developer.nefarious.zjoule.chat.memory.MemoryMessageHistory;
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryAccessToken;
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryDeployment;
 import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryResourceGroup;
@@ -61,6 +62,7 @@ public class Activator extends AbstractUIPlugin {
 		MemoryServiceKey.initialize(objectSerializer, eclipseMemory);
 		MemoryResourceGroup.initialize(eclipseMemory);
 		MemoryDeployment.initialize(objectSerializer, eclipseMemory);
+		MemoryMessageHistory.initialize(objectSerializer, eclipseMemory);
 		
 		// Memory resources for login operation
 		TemporaryMemoryAccessToken.initialize(objectSerializer, eclipseMemory);

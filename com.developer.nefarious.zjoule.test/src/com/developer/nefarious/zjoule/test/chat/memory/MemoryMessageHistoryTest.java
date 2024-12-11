@@ -58,4 +58,5 @@ public class MemoryMessageHistoryTest {
 		// Assert
 		assertEquals(returnValue, expectedValue);
 	}
+	
 }

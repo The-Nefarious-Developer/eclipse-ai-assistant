@@ -42,8 +42,12 @@ public class MemoryMessageHistory implements IMemoryMessageHistory {
 
 	@Override
 	public MessageHistory load() {
-		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-		return objectSerializer.deserialize(serializedObject, MessageHistory.class);
+		try {
+			String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
+			return objectSerializer.deserialize(serializedObject, MessageHistory.class);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }

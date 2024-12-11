@@ -36,10 +36,7 @@ public class ChatOrchestratorTest {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-
 		mockAIClientFactory = mockStatic(AIClientFactory.class);
-		mockAIClientFactory.when(AIClientFactory::getClient).thenReturn(mockAIClient);
-
 		cut = new ChatOrchestrator();
 	}
 
@@ -53,6 +50,8 @@ public class ChatOrchestratorTest {
 	@Test
 	public void shouldPlumbAnswer() throws IOException, InterruptedException {
 		// Arrange
+		mockAIClientFactory.when(AIClientFactory::getClient).thenReturn(mockAIClient);
+		
 		String mockUserPrompt = "What's the meaning of life?";
 		IChatMessage mockUserMessage = mock(IChatMessage.class);
 		when(mockAIClient.createMessage(Role.USER, mockUserPrompt)).thenReturn(mockUserMessage);
@@ -83,6 +82,8 @@ public class ChatOrchestratorTest {
 	@Test
 	public void shouldPlumbErrorMessageIfChatCompletionDoesntWork() throws IOException, InterruptedException {
 		// Arrange
+		mockAIClientFactory.when(AIClientFactory::getClient).thenReturn(mockAIClient);
+		
 		String mockUserPrompt = "What's the meaning of life?";
 		IChatMessage mockUserMessage = mock(IChatMessage.class);
 		when(mockAIClient.createMessage(Role.USER, mockUserPrompt)).thenReturn(mockUserMessage);
@@ -107,6 +108,8 @@ public class ChatOrchestratorTest {
 	@Test
 	public void shouldNotStopIfThereIsNoMessageHistory() throws IOException, InterruptedException {
 		// Arrange
+		mockAIClientFactory.when(AIClientFactory::getClient).thenReturn(mockAIClient);
+		
 		String mockUserPrompt = "What's the meaning of life?";
 		IChatMessage mockUserMessage = mock(IChatMessage.class);
 		when(mockAIClient.createMessage(Role.USER, mockUserPrompt)).thenReturn(mockUserMessage);
