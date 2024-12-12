@@ -1,11 +1,10 @@
 package com.developer.nefarious.zjoule.chat.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MessageHistory {
 	
-	private List<Message> messages = new ArrayList<>();
+	private List<Message> messages;
 
 	public List<Message> getMessages() {
 		return messages;

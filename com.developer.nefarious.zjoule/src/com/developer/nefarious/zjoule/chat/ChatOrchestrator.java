@@ -19,7 +19,10 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 		messages.addAll(messageHistory);
 		
 		// 2. Get content of the active window
-//		String editorContent = ActiveWindowContent.getActiveEditorContent();
+//		String editorContent = EditorContentReader.readActiveEditorContent();
+//		System.out.println("--------------- Start");
+//		System.out.println(editorContent);
+//		System.out.println("--------------- End");
 //		IMessage message = aiClient.createMessage(Role.SYSTEM, editorContent);
 		
 		// 3. Create message object
