@@ -38,7 +38,8 @@ body {
 
 .user-message {
 	align-self: flex-end;
-	background-color: #4a76a8;
+	/* background-color: #4a76a8; */
+	background-color: #8C60FF;
 	color: #fff;
 	max-width: 70%;
 }
@@ -65,13 +66,21 @@ body {
 
 .chat-input button {
 	padding: 10px;
-	background-color: #4a76a8;
+	/* background-color: #4a76a8; */
+	background-color: #8C60FF;
 	color: #fff;
 	border: none;
 	cursor: pointer;
 }
 
-code {
+code:not([class]) {
+    /* Your styles here */
+    color: gray;
+    background-color: #f5f5f5;
+    font-family: monospace;
+}
+
+code.language-abap {
     display: block; /* Ensures the code block takes up its own line */
     white-space: pre; /* Preserves whitespace and formatting */
     overflow-x: auto; /* Adds horizontal scrolling if content overflows */

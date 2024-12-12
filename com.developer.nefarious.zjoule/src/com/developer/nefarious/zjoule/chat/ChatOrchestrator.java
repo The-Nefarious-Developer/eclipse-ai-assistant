@@ -46,6 +46,7 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 		aiClient.setMessageHistory(messages);
 		
 		// 7. Return response in string format
+		System.out.println(answer.getMessage());
 		return answer.getMessage();
 	}
 
