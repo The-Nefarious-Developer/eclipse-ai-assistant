@@ -69,8 +69,6 @@ public class OpenAIClient implements IAIClient {
 		// @formatter:on
 
 		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-		
-		System.out.println(response.body());
 
 		return helper.convertResponseToObject(response.body());
 	}

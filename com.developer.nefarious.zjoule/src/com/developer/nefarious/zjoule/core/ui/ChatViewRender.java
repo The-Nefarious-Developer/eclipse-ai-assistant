@@ -8,17 +8,19 @@ import java.net.URL;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
+import com.developer.nefarious.zjoule.core.Activator;
 
 public class ChatViewRender implements IViewRender {
 
-	private static final String PROJECT_NAME = "com.developer.nefarious.zjoule";
+	private static final String PROJECT_NAME = Activator.PLUGIN_ID;
 
 	private static final String VIEW_FILES_PATH = "resources/views/";
 
 	@Override
 	public String build() {
-		String js = this.getResourceContent("ChatView.js");
-		String css = this.getResourceContent("ChatView.css");
+		String marked = getResourceContent("marked.min.js");
+		String js = getResourceContent("scripts.js");
+		String css = getResourceContent("styles.css");
 
 		StringBuilder buffer = new StringBuilder();
 		
@@ -29,6 +31,7 @@ public class ChatViewRender implements IViewRender {
 		buffer.append("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
 		buffer.append("<title>Sample View</title>");
 		buffer.append("<style>" + css + "</style>");
+		buffer.append("<script>" + marked + "</script>");
 		buffer.append("<script>" + js + "</script>");
 		buffer.append("</script>");
 		buffer.append("</head>");

@@ -2,7 +2,6 @@ package com.developer.nefarious.zjoule.chat;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.developer.nefarious.zjoule.chat.utils.EditorContentReader;
 import com.developer.nefarious.zjoule.models.Role;
 

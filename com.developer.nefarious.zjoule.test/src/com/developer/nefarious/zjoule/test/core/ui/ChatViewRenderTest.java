@@ -40,20 +40,25 @@ public class ChatViewRenderTest {
 	@Test
 	public void testGetContent() {
 		// Arrange
-		String mockJsFileContent = randomWord();
-		doReturn(mockJsFileContent).when(cut).getResourceContent("ChatView.js");
-		String expectedJsReference = "<script>" + mockJsFileContent + "</script>";
+		String mockMarkedContent = randomWord();
+		doReturn(mockMarkedContent).when(cut).getResourceContent("marked.min.js.js");
+		String expectedMarkedReference = "<script>" + mockMarkedContent + "</script>";
 		
-		String mockCssFileContent = randomWord();
-		doReturn(mockCssFileContent).when(cut).getResourceContent("ChatView.css");
-		String expectedCssReference = "<style>" + mockCssFileContent + "</style>";
+		String mockScriptsFileContent = randomWord();
+		doReturn(mockScriptsFileContent).when(cut).getResourceContent("ChatView.js");
+		String expectedScriptsReference = "<script>" + mockScriptsFileContent + "</script>";
+		
+		String mockStylesFileContent = randomWord();
+		doReturn(mockStylesFileContent).when(cut).getResourceContent("styles.css");
+		String expectedStylesReference = "<style>" + mockStylesFileContent + "</style>";
 		
 		// Act
 		String returnValue = cut.build();
 		
 		// Assert
-		assertTrue(returnValue.contains(expectedJsReference));
-		assertTrue(returnValue.contains(expectedCssReference));
+		assertTrue(returnValue.contains(expectedMarkedReference));
+		assertTrue(returnValue.contains(expectedScriptsReference));
+		assertTrue(returnValue.contains(expectedStylesReference));
 	}
 	
 	@Test

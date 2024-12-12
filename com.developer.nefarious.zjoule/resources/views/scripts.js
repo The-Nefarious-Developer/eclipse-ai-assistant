@@ -13,7 +13,7 @@ function sendMessage() {
 		// Display AI Answer
 		const AIAnswer = document.createElement('div');
 		AIAnswer.className = 'message bot-message';
-		AIAnswer.textContent = result;
+		AIAnswer.innerHTML = marked.parse(result);
 		chatBox.appendChild(AIAnswer);
 	} catch (e) {
 
