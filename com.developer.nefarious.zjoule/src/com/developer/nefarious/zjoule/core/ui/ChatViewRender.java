@@ -72,7 +72,6 @@ public class ChatViewRender implements IViewRender {
 			e.printStackTrace();
 			return "";
 		}
-
 	}
 
 }

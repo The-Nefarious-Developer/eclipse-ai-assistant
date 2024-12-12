@@ -40,15 +40,15 @@ public class ChatViewRenderTest {
 	@Test
 	public void testGetContent() {
 		// Arrange
-		String mockMarkedContent = randomWord();
-		doReturn(mockMarkedContent).when(cut).getResourceContent("marked.min.js.js");
+		String mockMarkedContent = "marked-library";
+		doReturn(mockMarkedContent).when(cut).getResourceContent("marked.min.js");
 		String expectedMarkedReference = "<script>" + mockMarkedContent + "</script>";
 		
-		String mockScriptsFileContent = randomWord();
-		doReturn(mockScriptsFileContent).when(cut).getResourceContent("ChatView.js");
+		String mockScriptsFileContent = "js-scritps";
+		doReturn(mockScriptsFileContent).when(cut).getResourceContent("scripts.js");
 		String expectedScriptsReference = "<script>" + mockScriptsFileContent + "</script>";
 		
-		String mockStylesFileContent = randomWord();
+		String mockStylesFileContent = "css-styles";
 		doReturn(mockStylesFileContent).when(cut).getResourceContent("styles.css");
 		String expectedStylesReference = "<style>" + mockStylesFileContent + "</style>";
 		
