@@ -80,7 +80,7 @@ code:not([class]) {
     font-family: monospace;
 }
 
-code.language-abap {
+code[class] {
     display: block; /* Ensures the code block takes up its own line */
     white-space: pre; /* Preserves whitespace and formatting */
     overflow-x: auto; /* Adds horizontal scrolling if content overflows */
