@@ -95,8 +95,7 @@ public class ChatOrchestratorTest {
 		IChatMessage mockAnswer = mock(IChatMessage.class);
 		when(mockAIClient.chatCompletion(mockInputMessages)).thenReturn(mockAnswer);
 
-		List<IChatMessage> mockAllMessages = Arrays.asList(mockOldMessage1, mockOldMessage2, mockSystemMessage, mockUserMessage,
-				mockAnswer);
+		List<IChatMessage> mockAllMessages = Arrays.asList(mockOldMessage1, mockOldMessage2, mockUserMessage, mockAnswer);
 
 		String expectedValue = "42";
 		when(mockAnswer.getMessage()).thenReturn(expectedValue);
@@ -161,7 +160,7 @@ public class ChatOrchestratorTest {
 		IChatMessage mockAnswer = mock(IChatMessage.class);
 		when(mockAIClient.chatCompletion(mockInputMessages)).thenReturn(mockAnswer);
 
-		List<IChatMessage> mockAllMessages = Arrays.asList(mockSystemMessage, mockUserMessage,	mockAnswer);
+		List<IChatMessage> mockAllMessages = Arrays.asList(mockUserMessage,	mockAnswer);
 
 		String expectedValue = "42";
 		when(mockAnswer.getMessage()).thenReturn(expectedValue);

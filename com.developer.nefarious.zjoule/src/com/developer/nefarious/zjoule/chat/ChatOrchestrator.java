@@ -27,7 +27,8 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 		    ? baseInstructions + "Consider the following code as context: " + editorContent 
 		    : baseInstructions;
 		
-		messages.add(aiClient.createMessage(Role.SYSTEM, systemInstructions));
+		IChatMessage systemMessage = aiClient.createMessage(Role.SYSTEM, systemInstructions);
+		messages.add(systemMessage);
 		
 		// 3. Create message object
 		IChatMessage userMessage = aiClient.createMessage(Role.USER, userPrompt);
@@ -43,6 +44,7 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 		}
 		
 		// 5. Save the response into the chat history
+		messages.remove(systemMessage);
 		messages.add(answer);
 		aiClient.setMessageHistory(messages);
 		
