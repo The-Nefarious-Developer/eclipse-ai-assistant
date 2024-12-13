@@ -121,7 +121,7 @@ public class ChatViewListenerTest {
 		mockedStaticClearHandler.when(() -> ClearHandler.create(mockBrowser)).thenReturn(mockClearHandler);
 
 		LoginHandler mockLoginHandler = mock(LoginHandler.class);
-		mockedStaticLoginHandler.when(() -> LoginHandler.create(mockShell)).thenReturn(mockLoginHandler);
+		mockedStaticLoginHandler.when(() -> LoginHandler.create(mockShell, mockBrowser)).thenReturn(mockLoginHandler);
 
 		PromptHandler mockGetAIResponse = mock(PromptHandler.class);
 		mockedStaticPromptHandler.when(() -> PromptHandler.create(mockBrowser, "getAIResponse")).thenReturn(mockGetAIResponse);
@@ -142,6 +142,7 @@ public class ChatViewListenerTest {
 		verify(mockMenu).add(mockLogoutHandler);
 		verify(mockMenu).add(any(Separator.class));
 		verify(mockMenu).add(mockClearHandler);
+//		verify(mockBrowser).execute("logout();");
 	}
 
 	@Test

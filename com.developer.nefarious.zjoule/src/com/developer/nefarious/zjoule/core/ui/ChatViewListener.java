@@ -74,7 +74,7 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 
 	private void setUpToolbar() {
 		IToolBarManager toolbar = getToolbar();
-		toolbar.add(LoginHandler.create(shell));
+		toolbar.add(LoginHandler.create(shell, browser));
 		IMenuManager menu = getMenu();
 		menu.add(ClearHandler.create(browser));
 		menu.add(new Separator());

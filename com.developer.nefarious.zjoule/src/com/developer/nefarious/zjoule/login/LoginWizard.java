@@ -1,6 +1,7 @@
 package com.developer.nefarious.zjoule.login;
 
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.swt.browser.Browser;
 import com.developer.nefarious.zjoule.auth.AuthClient;
 import com.developer.nefarious.zjoule.auth.AuthClientHelper;
 import com.developer.nefarious.zjoule.auth.IAuthClient;
@@ -16,9 +17,13 @@ import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
 
 public class LoginWizard extends Wizard {
 	
+	private Browser browser;
+	
 	private ILoginClient loginClient;
 	
-	public LoginWizard() {
+	public LoginWizard(final Browser browser) {
+		this.browser = browser;
+		
         setWindowTitle("Login to SAP AI Core");
         loginClient = createLoginClient();
     }
@@ -35,6 +40,8 @@ public class LoginWizard extends Wizard {
 		TemporaryMemoryServiceKey.getInstance().persist();
 		TemporaryMemoryResourceGroup.getInstance().persist();
 		TemporaryMemoryDeployment.getInstance().persist();
+		
+		browser.execute("login();");
 		return true;
 	}
 	

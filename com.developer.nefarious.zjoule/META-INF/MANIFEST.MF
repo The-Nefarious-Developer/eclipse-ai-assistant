@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources;bundle-version="3.21.0",
  org.eclipse.ui.ide;bundle-version="3.22.300",
- org.eclipse.jface
+ org.eclipse.jface,
+ org.eclipse.swt
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Automatic-Module-Name: com.developer.nefarious.zjoule
 Import-Package: com.google.gson;version="[2.11.0,3.0.0)",
