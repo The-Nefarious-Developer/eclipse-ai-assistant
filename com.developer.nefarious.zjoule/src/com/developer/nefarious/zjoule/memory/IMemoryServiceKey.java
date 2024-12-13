@@ -9,5 +9,7 @@ public interface IMemoryServiceKey {
 	void save(final ServiceKey serviceKey);
 	
 	ServiceKey load();
+	
+	Boolean isEmpty();
 
 }

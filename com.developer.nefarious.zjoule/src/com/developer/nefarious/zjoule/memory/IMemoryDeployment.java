@@ -9,5 +9,7 @@ public interface IMemoryDeployment {
 	void save(final Deployment deployment);
 	
 	Deployment load();
+	
+	Boolean isEmpty();
 
 }

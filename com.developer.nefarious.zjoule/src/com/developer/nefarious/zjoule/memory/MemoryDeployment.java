@@ -48,5 +48,21 @@ public class MemoryDeployment implements IMemoryDeployment {
 			return null;
 		}
 	}
+	
+	@Override
+	public Boolean isEmpty() {
+		Deployment deployment = load();
+		if (deployment == null) {
+			return true;
+		}
+		if (deployment.getConfigurationName() == null) {
+			return true;
+		}
+		if (deployment.getConfigurationName().isEmpty() || 
+				deployment.getConfigurationName().isBlank()) {
+			return true;
+		}
+		return false;
+	}
 
 }

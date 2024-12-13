@@ -7,5 +7,7 @@ public interface IMemoryResourceGroup {
 	void save(final String resourceGroup);
 	
 	String load();
+	
+	Boolean isEmpty();
 
 }

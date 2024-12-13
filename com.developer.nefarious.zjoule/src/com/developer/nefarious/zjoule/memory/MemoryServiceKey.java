@@ -48,5 +48,21 @@ public class MemoryServiceKey implements IMemoryServiceKey {
 			return null;
 		}
 	}
+	
+	@Override
+	public Boolean isEmpty() {
+		ServiceKey serviceKey = load();
+		if (serviceKey == null) {
+			return true;
+		}
+		if (serviceKey.getClientId() == null) {
+			return true;
+		}
+		if (serviceKey.getClientId().isEmpty() || 
+				serviceKey.getClientId().isBlank()) {
+			return true;
+		}
+		return false;
+	}
 
 }

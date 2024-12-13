@@ -1,8 +1,15 @@
 package com.developer.nefarious.zjoule.test.chat.memory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -11,6 +18,8 @@ import com.developer.nefarious.zjoule.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.chat.memory.IMemoryMessageHistory;
 import com.developer.nefarious.zjoule.chat.memory.MemoryMessageHistory;
 import com.developer.nefarious.zjoule.memory.utils.IObjectSerializer;
+import com.developer.nefarious.zjoule.models.Role;
+import com.developer.nefarious.zjoule.chat.models.Message;
 import com.developer.nefarious.zjoule.chat.models.MessageHistory;
 
 public class MemoryMessageHistoryTest {
@@ -31,7 +40,7 @@ public class MemoryMessageHistoryTest {
 		
 		MemoryMessageHistory.resetInstance();
 		MemoryMessageHistory.initialize(mockObjectSerializer, mockEclipseMemory);
-		cut = MemoryMessageHistory.getInstance();
+		cut = spy(MemoryMessageHistory.getInstance());
 	}
 	
 	@Test
@@ -66,6 +75,56 @@ public class MemoryMessageHistoryTest {
 		cut.clear();
 		// Assert
 		verify(mockEclipseMemory).deleteFromEclipsePreferences(KEY);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenNoMemory() {
+		// Arrange
+		doReturn(null).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenMessagesAreNull() {
+		// Arrange
+		MessageHistory mockMessageHistoryWithEmptyMessages = new MessageHistory();
+		doReturn(mockMessageHistoryWithEmptyMessages).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenThereIsNoMessages() {
+		// Arrange
+		MessageHistory mockMessageHistoryWithEmptyMessages = new MessageHistory();
+		mockMessageHistoryWithEmptyMessages.setMessages(new ArrayList<>());
+		doReturn(mockMessageHistoryWithEmptyMessages).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldNotBeEmptyThereAreMessages() {
+		// Arrange
+		MessageHistory mockMessageHistoryWithEmptyMessages = new MessageHistory();
+		List<Message> mockMessages = Arrays.asList(new Message(Role.USER, "If we’re all stardust, does that make vacuuming a cosmic event?"));
+		mockMessageHistoryWithEmptyMessages.setMessages(mockMessages);
+		doReturn(mockMessageHistoryWithEmptyMessages).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertFalse(returnValue);
 	}
 	
 }

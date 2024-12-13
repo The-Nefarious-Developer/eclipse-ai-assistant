@@ -1,6 +1,10 @@
 package com.developer.nefarious.zjoule.test.memory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +35,7 @@ public class MemoryServiceKeyTest {
 		
 		MemoryServiceKey.resetInstance();
 		MemoryServiceKey.initialize(mockObjectSerializer, mockEclipseMemory);
-		cut = MemoryServiceKey.getInstance();
+		cut = spy(MemoryServiceKey.getInstance());
 	}
 	
 	@Test
@@ -57,6 +61,70 @@ public class MemoryServiceKeyTest {
 		ServiceKey returnValue = cut.load();
 		// Assert
 		assertEquals(returnValue, expectedValue);
+	}
+	
+
+	@Test
+	public void shouldBeEmptyWhenNoMemory() {
+		// Arrange
+		doReturn(null).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenServiceKeyIsNull() {
+		// Arrange
+		ServiceKey mockServiceKey = new ServiceKey();
+		mockServiceKey.setClientId(null);
+		doReturn(mockServiceKey).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenServiceKeyIsEmpty() {
+		// Arrange
+		ServiceKey mockServiceKey = new ServiceKey();
+		mockServiceKey.setClientId("");
+		doReturn(mockServiceKey).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenServiceKeyIsBlank() {
+		// Arrange
+		ServiceKey mockServiceKey = new ServiceKey();
+		mockServiceKey.setClientId(" ");
+		doReturn(mockServiceKey).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldNotBeEmptyWhenServiceKeyIsSave() {
+		// Arrange
+		ServiceKey mockServiceKey = new ServiceKey();
+		mockServiceKey.setClientId("some-service-key");
+		doReturn(mockServiceKey).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertFalse(returnValue);
 	}
 
 }

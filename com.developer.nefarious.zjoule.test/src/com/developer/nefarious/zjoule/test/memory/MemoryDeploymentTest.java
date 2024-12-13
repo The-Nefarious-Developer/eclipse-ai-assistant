@@ -1,6 +1,10 @@
 package com.developer.nefarious.zjoule.test.memory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +35,7 @@ public class MemoryDeploymentTest {
 		
 		MemoryDeployment.resetInstance();
 		MemoryDeployment.initialize(mockObjectSerializer, mockEclipseMemory);
-		cut = MemoryDeployment.getInstance();
+		cut = spy(MemoryDeployment.getInstance());
 	}
 	
 	@Test
@@ -57,6 +61,69 @@ public class MemoryDeploymentTest {
 		Deployment returnValue = cut.load();
 		// Assert
 		assertEquals(returnValue, expectedValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenNoMemory() {
+		// Arrange
+		doReturn(null).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenDeploymentIsNull() {
+		// Arrange
+		Deployment mockMockDeployment = new Deployment();
+		mockMockDeployment.setConfigurationName(null);
+		doReturn(mockMockDeployment).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenDeploymentIsEmpty() {
+		// Arrange
+		Deployment mockMockDeployment = new Deployment();
+		mockMockDeployment.setConfigurationName("");
+		doReturn(mockMockDeployment).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenDeploymentIsBlank() {
+		// Arrange
+		Deployment mockMockDeployment = new Deployment();
+		mockMockDeployment.setConfigurationName(" ");
+		doReturn(mockMockDeployment).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldNotBeEmptyWhenDeploymentIsSave() {
+		// Arrange
+		Deployment mockMockDeployment = new Deployment();
+		mockMockDeployment.setConfigurationName("some-deployment");
+		doReturn(mockMockDeployment).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertFalse(returnValue);
 	}
 	
 }

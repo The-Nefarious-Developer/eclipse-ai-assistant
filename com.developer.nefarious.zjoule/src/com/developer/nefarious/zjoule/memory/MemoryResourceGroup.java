@@ -36,5 +36,17 @@ public class MemoryResourceGroup implements IMemoryResourceGroup {
 	public String load() {
 		return eclipseMemory.loadFromEclipsePreferences(KEY);
 	}
+	
+	@Override
+	public Boolean isEmpty() {
+		String resourceGroup = load();
+		if (resourceGroup == null) {
+			return true;
+		}
+		if (resourceGroup.isEmpty() || resourceGroup.isBlank()) {
+			return true;
+		}
+		return false;
+	}
 
 }

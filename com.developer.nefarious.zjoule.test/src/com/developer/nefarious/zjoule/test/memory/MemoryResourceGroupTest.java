@@ -1,6 +1,10 @@
 package com.developer.nefarious.zjoule.test.memory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +30,7 @@ public class MemoryResourceGroupTest {
 		
 		MemoryResourceGroup.resetInstance();
 		MemoryResourceGroup.initialize(mockEclipseMemory);
-		cut = MemoryResourceGroup.getInstance();
+		cut = spy(MemoryResourceGroup.getInstance());
 	}
 	
 	@Test
@@ -49,4 +53,64 @@ public class MemoryResourceGroupTest {
 		// Assert
 		assertEquals(returnValue, expectedValue);
 	}
+	
+	@Test
+	public void shouldBeEmptyWhenNoMemory() {
+		// Arrange
+		doReturn(null).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWheResourceGroupIsNull() {
+		// Arrange
+		String mockMockResourceGroup = null;
+		doReturn(mockMockResourceGroup).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenResourceGroupIsEmpty() {
+		// Arrange
+		String mockMockResourceGroup = "";
+		doReturn(mockMockResourceGroup).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenResourceGroupIsBlank() {
+		// Arrange
+		String mockMockResourceGroup = " ";
+		doReturn(mockMockResourceGroup).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldNotBeEmptyWhenResourceGroupIsSave() {
+		// Arrange
+		String mockMockResourceGroup = "resource-group";
+		doReturn(mockMockResourceGroup).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertFalse(returnValue);
+	}
+	
 }

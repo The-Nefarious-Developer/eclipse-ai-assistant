@@ -11,5 +11,7 @@ public interface IMemoryMessageHistory {
 	MessageHistory load();
 	
 	void clear();
+	
+	Boolean isEmpty();
 
 }

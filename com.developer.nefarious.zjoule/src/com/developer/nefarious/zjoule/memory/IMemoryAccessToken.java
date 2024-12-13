@@ -10,4 +10,6 @@ public interface IMemoryAccessToken {
 	
 	AccessToken load();
 	
+	Boolean isEmpty();
+	
 }

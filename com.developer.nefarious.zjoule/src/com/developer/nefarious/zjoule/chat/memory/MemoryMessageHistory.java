@@ -55,4 +55,19 @@ public class MemoryMessageHistory implements IMemoryMessageHistory {
 		eclipseMemory.deleteFromEclipsePreferences(KEY);
 	}
 
+	@Override
+	public Boolean isEmpty() {
+		MessageHistory messageHistory = load();
+		if (messageHistory == null) {
+			return true;
+		}
+		if (messageHistory.getMessages() == null) {
+			return true;
+		}
+		if (messageHistory.getMessages().isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+
 }
