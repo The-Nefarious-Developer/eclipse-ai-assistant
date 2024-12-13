@@ -18,7 +18,7 @@ import com.developer.nefarious.zjoule.core.functions.LoginHandler;
 import com.developer.nefarious.zjoule.core.functions.LogoutHandler;
 import jakarta.inject.Inject;
 
-public class ChatViewListener extends ViewPart implements ISelectionListener {
+public class ViewListener extends ViewPart implements ISelectionListener {
 
 	@Inject
 	Shell shell;
@@ -29,12 +29,12 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 
 	private final IViewRender viewRender;
 
-	public ChatViewListener() {
+	public ViewListener() {
 		browserFactory = new BrowserFactory();
-		viewRender = new ChatViewRender();
+		viewRender = new ViewRender();
 	}
 
-	public ChatViewListener( // Used for tests
+	public ViewListener( // Used for tests
 			final IBrowserFactory browserFactory, 
 			final IViewRender viewRender) {
 		this.browserFactory = browserFactory;

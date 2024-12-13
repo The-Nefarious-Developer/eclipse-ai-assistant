@@ -10,7 +10,7 @@ import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 import com.developer.nefarious.zjoule.core.Activator;
 
-public class ChatViewRender implements IViewRender {
+public class ViewRender implements IViewRender {
 
 	private static final String PROJECT_NAME = Activator.PLUGIN_ID;
 
@@ -61,7 +61,7 @@ public class ChatViewRender implements IViewRender {
 
 	@Override
 	public String getResourceContent(final String filename) {
-		Bundle bundle = Platform.getBundle(ChatViewRender.PROJECT_NAME);
+		Bundle bundle = Platform.getBundle(ViewRender.PROJECT_NAME);
 		final URL unresolvedfileURL = bundle.getEntry(VIEW_FILES_PATH + filename);
 		try {
 			URL resolvedFileURL = FileLocator.toFileURL(unresolvedfileURL);

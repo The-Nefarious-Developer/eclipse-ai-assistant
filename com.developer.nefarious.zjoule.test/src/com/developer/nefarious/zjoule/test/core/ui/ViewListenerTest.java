@@ -30,13 +30,13 @@ import com.developer.nefarious.zjoule.core.functions.PromptHandler;
 import com.developer.nefarious.zjoule.core.functions.ClearHandler;
 import com.developer.nefarious.zjoule.core.functions.LoginHandler;
 import com.developer.nefarious.zjoule.core.functions.LogoutHandler;
-import com.developer.nefarious.zjoule.core.ui.ChatViewListener;
+import com.developer.nefarious.zjoule.core.ui.ViewListener;
 import com.developer.nefarious.zjoule.core.ui.IBrowserFactory;
 import com.developer.nefarious.zjoule.core.ui.IViewRender;
 
-public class ChatViewListenerTest {
+public class ViewListenerTest {
 
-	private ChatViewListener cut;
+	private ViewListener cut;
 
 	@Mock
 	private IBrowserFactory mockBrowserFactory;
@@ -73,7 +73,7 @@ public class ChatViewListenerTest {
 		mockedStaticPromptHandler = mockStatic(PromptHandler.class);
 		mockedStaticLogoutHandler = mockStatic(LogoutHandler.class);
 
-		cut = spy(new ChatViewListener(mockBrowserFactory, mockViewRender));
+		cut = spy(new ViewListener(mockBrowserFactory, mockViewRender));
 		cut.setShell(mockShell);
 	}
 

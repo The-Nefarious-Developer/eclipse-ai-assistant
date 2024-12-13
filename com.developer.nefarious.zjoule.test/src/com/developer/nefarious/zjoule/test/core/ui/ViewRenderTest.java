@@ -19,10 +19,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.osgi.framework.Bundle;
-import com.developer.nefarious.zjoule.core.ui.ChatViewRender;
+import com.developer.nefarious.zjoule.core.ui.ViewRender;
 import com.developer.nefarious.zjoule.core.ui.IViewRender;
 
-public class ChatViewRenderTest {
+public class ViewRenderTest {
 	
 	private IViewRender cut;
 	
@@ -34,7 +34,7 @@ public class ChatViewRenderTest {
 	
 	@BeforeEach
 	public void setUp() {
-		cut = spy(new ChatViewRender());
+		cut = spy(new ViewRender());
 	}
 	
 	@Test
