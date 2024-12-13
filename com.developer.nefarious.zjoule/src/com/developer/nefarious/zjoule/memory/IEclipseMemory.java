@@ -9,5 +9,7 @@ public interface IEclipseMemory {
 	void saveOnEclipsePreferences(final String key, final String value);
 	
 	String loadFromEclipsePreferences(final String key);
+	
+	void clearAll();
 
 }

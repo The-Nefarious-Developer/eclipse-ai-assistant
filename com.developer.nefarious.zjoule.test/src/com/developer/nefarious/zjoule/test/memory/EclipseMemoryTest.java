@@ -68,4 +68,23 @@ public class EclipseMemoryTest {
 		assertEquals(returnValue, expectedValue);
 	}
 
+	@Test
+	public void shouldClearAllMemory() throws BackingStoreException {
+		// Arrange
+		// Act
+		cut.clearAll();
+		// Assert
+		verify(mockPreferences).clear();
+	}
+
+	@Test
+	public void shouldDoNothingIfClearFail() throws BackingStoreException {
+		// Arrange
+		doThrow(new BackingStoreException("Accidents happen")).when(mockPreferences).clear();
+		// Act
+		cut.clearAll();
+		// Assert
+		assertThrows(BackingStoreException.class, () -> mockPreferences.clear());
+	}
+
 }

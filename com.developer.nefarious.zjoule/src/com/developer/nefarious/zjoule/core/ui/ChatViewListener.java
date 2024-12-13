@@ -1,6 +1,8 @@
 package com.developer.nefarious.zjoule.core.ui;
 
+import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
@@ -11,7 +13,9 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 import com.developer.nefarious.zjoule.core.functions.PromptHandler;
+import com.developer.nefarious.zjoule.core.functions.ClearHandler;
 import com.developer.nefarious.zjoule.core.functions.LoginHandler;
+import com.developer.nefarious.zjoule.core.functions.LogoutHandler;
 import jakarta.inject.Inject;
 
 public class ChatViewListener extends ViewPart implements ISelectionListener {
@@ -53,6 +57,10 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 	public IToolBarManager getToolbar() {
 		return getViewSite().getActionBars().getToolBarManager();
 	}
+	
+	public IMenuManager getMenu() {
+		return getViewSite().getActionBars().getMenuManager();
+	}
 
 	@Override
 	public void createPartControl(final Composite parent) {
@@ -67,6 +75,10 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 	private void setUpToolbar() {
 		IToolBarManager toolbar = getToolbar();
 		toolbar.add(LoginHandler.create(shell));
+		IMenuManager menu = getMenu();
+		menu.add(ClearHandler.create(browser));
+		menu.add(new Separator());
+		menu.add(LogoutHandler.create(browser));
 	}
 
 	@Override
@@ -77,7 +89,7 @@ public class ChatViewListener extends ViewPart implements ISelectionListener {
 	@Override
 	public void dispose() {
 		getSite().getPage().removeSelectionListener(this);
-		super.dispose(); // TODO: Add code coverage for super method call
+		super.dispose();
 	}
 
 }

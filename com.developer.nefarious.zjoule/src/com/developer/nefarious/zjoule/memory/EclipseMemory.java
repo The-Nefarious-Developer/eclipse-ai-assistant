@@ -31,4 +31,13 @@ public class EclipseMemory implements IEclipseMemory {
 		return preferences.get(key, null);
 	}
 
+	@Override
+	public void clearAll() {
+		try {
+			preferences.clear();
+		} catch (BackingStoreException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

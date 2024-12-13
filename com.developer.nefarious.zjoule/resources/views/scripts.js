@@ -8,7 +8,7 @@ function sendMessage() {
 		userMessage.className = 'message user-message';
 		userMessage.textContent = userInput;
 		chatBox.appendChild(userMessage);
-		
+
 		var result = getAIResponse(userInput); // Java callback
 		// Display AI Answer
 		const AIAnswer = document.createElement('div');
@@ -21,4 +21,10 @@ function sendMessage() {
 	// Clear input
 	document.getElementById('userInput').value = "";
 	chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the bottom
+}
+
+function clearMessages() {
+	const chatBox = document.getElementById('chatBox');
+	chatBox.innerHTML = ''; // Remove all child elements
+	location.reload()
 }

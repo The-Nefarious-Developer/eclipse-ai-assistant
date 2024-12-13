@@ -6,22 +6,28 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.wizard.WizardDialog;
-import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
-import com.developer.nefarious.zjoule.login.LoginWizard;
+import com.developer.nefarious.zjoule.core.ui.ChatViewRender;
+import com.developer.nefarious.zjoule.memory.EclipseMemory;
 
-public class LoginHandler extends Action {
+public class ClearHandler extends Action {
 	
-	private static final String ICON = "platform:/plugin/org.eclipse.jdt.debug.ui/icons/full/elcl16/deadlock_view.png";
+	private static final String ICON = "platform:/plugin/org.eclipse.ui/icons/full/etool16/clear.png";
+
+	private Browser browser;
 	
-	private Shell shell;
-	
-	private LoginHandler(final Shell shell) {
-		this.shell = shell;
-		setToolTipText("Click to log in to your BTP subaccount.");
+	private ClearHandler(final Browser browser) {
+		this.browser = browser;
+		
+		setText("Clear Chat");
+		setToolTipText("Clear message history.");
 		setIcon();
+	}
+	
+	public static ClearHandler create(final Browser browser) {
+		return new ClearHandler(browser);
 	}
 	
 	private void setIcon() {
@@ -34,16 +40,15 @@ public class LoginHandler extends Action {
 			setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
 		}
 	}
-
-	public static LoginHandler create(final Shell shell) {
-		return new LoginHandler(shell);
-	}
-
+	
 	@Override
 	public void run() {
-		LoginWizard wizard = new LoginWizard();
-		WizardDialog dialog = new WizardDialog(shell, wizard);
-		dialog.open();
+		EclipseMemory eclipseMemory = new EclipseMemory();
+		eclipseMemory.clearAll();
+		
+		ChatViewRender viewRender = new ChatViewRender();
+		browser.setText(viewRender.build());
 	}
-
+	
+	
 }
