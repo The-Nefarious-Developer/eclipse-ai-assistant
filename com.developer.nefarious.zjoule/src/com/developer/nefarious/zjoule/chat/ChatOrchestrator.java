@@ -24,7 +24,7 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 		String editorContent = EditorContentReader.readActiveEditorContent();
 		
 		String systemInstructions = editorContent != null 
-		    ? baseInstructions + "Consider the following code as context: " + editorContent 
+		    ? baseInstructions + " Consider the following code as context: " + editorContent 
 		    : baseInstructions;
 		
 		IChatMessage systemMessage = aiClient.createMessage(Role.SYSTEM, systemInstructions);

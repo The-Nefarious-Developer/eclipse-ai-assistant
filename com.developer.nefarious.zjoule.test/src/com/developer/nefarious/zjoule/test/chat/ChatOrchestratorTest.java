@@ -86,7 +86,7 @@ public class ChatOrchestratorTest {
 				.thenReturn(mockEditorContent);
 
 		IChatMessage mockSystemMessage = mock(IChatMessage.class);
-		String mockSystemInstructions = mockBaseInstructions + "Consider the following code as context: "
+		String mockSystemInstructions = mockBaseInstructions + " Consider the following code as context: "
 				+ mockEditorContent;
 		when(mockAIClient.createMessage(Role.SYSTEM, mockSystemInstructions)).thenReturn(mockSystemMessage);
 
