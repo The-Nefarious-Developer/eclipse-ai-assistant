@@ -1,5 +1,6 @@
 package com.developer.nefarious.zjoule.test.core.ui;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -13,12 +14,14 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
@@ -33,6 +36,7 @@ import com.developer.nefarious.zjoule.core.functions.LogoutHandler;
 import com.developer.nefarious.zjoule.core.ui.ViewListener;
 import com.developer.nefarious.zjoule.core.ui.IBrowserFactory;
 import com.developer.nefarious.zjoule.core.ui.IViewRender;
+import com.developer.nefarious.zjoule.core.events.Initialization;
 
 public class ViewListenerTest {
 
@@ -49,6 +53,36 @@ public class ViewListenerTest {
 
 	@Mock
 	private IViewRender mockViewRender;
+	
+	@Mock
+	ClearHandler mockClearHandler;
+	
+	@Mock
+	LoginHandler mockLoginHandler;
+	
+	@Mock
+	PromptHandler mockGetAIResponse;
+	
+	@Mock
+	LogoutHandler mockLogoutHandler;
+	
+	@Mock
+	IMenuManager mockMenu;
+	
+	@Mock
+	IToolBarManager mockToolbar;
+	
+	@Mock
+	IWorkbenchPage mockPage;
+	
+	@Mock
+	Display mockDisplay;
+	
+	@Mock
+	IWorkbenchPartSite mockSite;
+	
+	@Mock
+	Composite mockParent;
 
 	MockedStatic<ClearHandler> mockedStaticClearHandler;
 	
@@ -57,6 +91,8 @@ public class ViewListenerTest {
 	MockedStatic<PromptHandler> mockedStaticPromptHandler;
 	
 	MockedStatic<LogoutHandler> mockedStaticLogoutHandler;
+	
+	MockedStatic<Display> mockedStaticDisplay;
 
 	private String randomWord() {
 		final String[] WORDS = { "apple", "banana", "grape" };
@@ -72,6 +108,7 @@ public class ViewListenerTest {
 		mockedStaticLoginHandler = mockStatic(LoginHandler.class);
 		mockedStaticPromptHandler = mockStatic(PromptHandler.class);
 		mockedStaticLogoutHandler = mockStatic(LogoutHandler.class);
+		mockedStaticDisplay = mockStatic(Display.class);
 
 		cut = spy(new ViewListener(mockBrowserFactory, mockViewRender));
 		cut.setShell(mockShell);
@@ -94,41 +131,32 @@ public class ViewListenerTest {
 		if (mockedStaticLogoutHandler != null) {
 			mockedStaticLogoutHandler.close();
 		}
+		if (mockedStaticDisplay != null) {
+			mockedStaticDisplay.close();
+		}
 	}
 
+	// CHECKSTYLE:OFF: MethodLength
 	@Test
 	public void testCreatePartControl() {
 		// Arrange
-		Composite mockParent = mock(Composite.class);
-
 		when(mockBrowserFactory.createBrowser(mockParent, SWT.WEBKIT)).thenReturn(mockBrowser);
 
 		String mockViewContent = randomWord();
 		when(mockViewRender.build()).thenReturn(mockViewContent);
-
-		IWorkbenchPartSite mockSite = mock(IWorkbenchPartSite.class);
+		
 		when(cut.getSite()).thenReturn(mockSite);
-		IWorkbenchPage mockPage = mock(IWorkbenchPage.class);
 		when(mockSite.getPage()).thenReturn(mockPage);
-
-		IToolBarManager mockToolbar = mock(IToolBarManager.class);
+		
 		doReturn(mockToolbar).when(cut).getToolbar();
-
-		IMenuManager mockMenu = mock(IMenuManager.class);
 		doReturn(mockMenu).when(cut).getMenu();
 		
-		ClearHandler mockClearHandler = mock(ClearHandler.class);
 		mockedStaticClearHandler.when(() -> ClearHandler.create(mockBrowser)).thenReturn(mockClearHandler);
-
-		LoginHandler mockLoginHandler = mock(LoginHandler.class);
 		mockedStaticLoginHandler.when(() -> LoginHandler.create(mockShell, mockBrowser)).thenReturn(mockLoginHandler);
-
-		PromptHandler mockGetAIResponse = mock(PromptHandler.class);
 		mockedStaticPromptHandler.when(() -> PromptHandler.create(mockBrowser, "getAIResponse")).thenReturn(mockGetAIResponse);
-		
-		LogoutHandler mockLogoutHandler = mock(LogoutHandler.class);
 		mockedStaticLogoutHandler.when(() -> LogoutHandler.create(mockBrowser)).thenReturn(mockLogoutHandler);
-
+		mockedStaticDisplay.when(Display::getDefault).thenReturn(mockDisplay);
+		
 		// Act
 		cut.createPartControl(mockParent);
 
@@ -142,8 +170,13 @@ public class ViewListenerTest {
 		verify(mockMenu).add(mockLogoutHandler);
 		verify(mockMenu).add(any(Separator.class));
 		verify(mockMenu).add(mockClearHandler);
-//		verify(mockBrowser).execute("logout();");
+		
+		ArgumentCaptor<Runnable> captor = ArgumentCaptor.forClass(Runnable.class);
+        verify(mockDisplay).asyncExec(captor.capture());
+        Runnable actualRunnable = captor.getValue();
+        assertTrue(actualRunnable instanceof Initialization);
 	}
+	// CHECKSTYLE:ON: MethodLength
 
 	@Test
 	public void testSetFocus() {

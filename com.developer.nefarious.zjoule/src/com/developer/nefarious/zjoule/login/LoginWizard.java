@@ -5,6 +5,7 @@ import org.eclipse.swt.browser.Browser;
 import com.developer.nefarious.zjoule.auth.AuthClient;
 import com.developer.nefarious.zjoule.auth.AuthClientHelper;
 import com.developer.nefarious.zjoule.auth.IAuthClient;
+import com.developer.nefarious.zjoule.auth.SessionManager;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.api.LoginClient;
 import com.developer.nefarious.zjoule.login.api.LoginClientHelper;
@@ -41,7 +42,7 @@ public class LoginWizard extends Wizard {
 		TemporaryMemoryResourceGroup.getInstance().persist();
 		TemporaryMemoryDeployment.getInstance().persist();
 		
-		browser.execute("login();");
+		SessionManager.login(browser);
 		return true;
 	}
 	

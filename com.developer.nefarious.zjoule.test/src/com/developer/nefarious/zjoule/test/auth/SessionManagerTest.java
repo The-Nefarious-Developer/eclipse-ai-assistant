@@ -2,8 +2,11 @@ package com.developer.nefarious.zjoule.test.auth;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.eclipse.swt.browser.Browser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.auth.SessionManager;
+import com.developer.nefarious.zjoule.memory.EclipseMemory;
 import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.MemoryDeployment;
 import com.developer.nefarious.zjoule.memory.MemoryResourceGroup;
@@ -132,6 +136,28 @@ public class SessionManagerTest {
 		Boolean returnValue = SessionManager.isUserLoggedIn();
 		// Assert
 		assertFalse(returnValue);
+	}
+	
+	@Test
+	public void shouldLogout() {
+		// Arrange
+		Browser mockBrowser = mock(Browser.class);
+		EclipseMemory mockEclipseMemory = mock(EclipseMemory.class);
+		// Act
+		SessionManager.logout(mockBrowser, mockEclipseMemory);
+		// Assert
+		verify(mockEclipseMemory).clearAll();
+		verify(mockBrowser).execute("logout();");
+	}
+	
+	@Test
+	public void shouldLogin() {
+		// Arrange
+		Browser mockBrowser = mock(Browser.class);
+		// Act
+		SessionManager.login(mockBrowser);
+		// Assert
+		verify(mockBrowser).execute("login();");
 	}
 
 }

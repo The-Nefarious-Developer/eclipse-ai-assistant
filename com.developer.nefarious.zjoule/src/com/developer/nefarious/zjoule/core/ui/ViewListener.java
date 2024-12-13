@@ -8,11 +8,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 import com.developer.nefarious.zjoule.core.functions.PromptHandler;
+import com.developer.nefarious.zjoule.core.events.Initialization;
 import com.developer.nefarious.zjoule.core.functions.ClearHandler;
 import com.developer.nefarious.zjoule.core.functions.LoginHandler;
 import com.developer.nefarious.zjoule.core.functions.LogoutHandler;
@@ -70,6 +72,7 @@ public class ViewListener extends ViewPart implements ISelectionListener {
 		browser.addDisposeListener(e -> getAIResponseFunction.dispose());
 		getSite().getPage().addSelectionListener(this);
 		setUpToolbar();
+		Display.getDefault().asyncExec(new Initialization(browser));
 	}
 
 	private void setUpToolbar() {

@@ -9,6 +9,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
+import com.developer.nefarious.zjoule.auth.SessionManager;
 import com.developer.nefarious.zjoule.memory.EclipseMemory;
 
 public class LogoutHandler extends Action {
@@ -43,11 +44,7 @@ public class LogoutHandler extends Action {
 
 	@Override
 	public void run() {
-		EclipseMemory eclipseMemory = new EclipseMemory();
-		eclipseMemory.clearAll();
-		if (browser != null && !browser.isDisposed()) {
-			browser.execute("logout();");
-		}
+		SessionManager.logout(browser, new EclipseMemory());
 	}
 
 }

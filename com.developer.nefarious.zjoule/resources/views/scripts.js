@@ -47,7 +47,6 @@ function deactivateChat() {
 function activateChat() {
 	const chatContainer = document.querySelector(".chat-container");
 	chatContainer.style.display = 'flex'; // Show the input
-	//chatContainer.style.display = 'block';
 }
 
 function showInstructions() {

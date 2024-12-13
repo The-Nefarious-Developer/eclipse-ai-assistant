@@ -59,4 +59,10 @@ public class TemporaryMemoryServiceKey implements IMemoryServiceKey, ITemporaryM
 		eclipseMemory.saveOnEclipsePreferences(IMemoryServiceKey.KEY, serializedObject);
 	}
 
+	@Override
+	public Boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

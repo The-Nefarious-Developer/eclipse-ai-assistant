@@ -23,7 +23,7 @@ public class ViewRender implements IViewRender {
 		String css = getResourceContent("styles.css");
 
 		StringBuilder buffer = new StringBuilder();
-		
+
 		buffer.append("<!doctype html>");
 		buffer.append("<html lang=\"en\">");
 		buffer.append("<head>");
@@ -36,12 +36,12 @@ public class ViewRender implements IViewRender {
 		buffer.append("</script>");
 		buffer.append("</head>");
 		buffer.append("<body>");
-		
+
 		buffer.append("<div class=\"center-instructions\" id=\"instructions\">");
 		buffer.append("<h2>Let’s Get Started!</h2>");
 		buffer.append("<p>Locate and click on the \"Authentication\" Button at the top of the screen.</p>");
 		buffer.append("</div>");
-		
+
 		buffer.append("<div class=\"chat-container\">");
 		buffer.append("<div class=\"chat-box\" id=\"chatBox\">");
 //		buffer.append("<div class=\"message bot-message\">Hello! How can I help you today?</div>");
@@ -55,7 +55,7 @@ public class ViewRender implements IViewRender {
 		buffer.append("</div>");
 		buffer.append("</body>");
 		buffer.append("</html>");
-		
+
 		return buffer.toString();
 	}
 

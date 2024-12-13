@@ -10,7 +10,6 @@ import org.eclipse.swt.browser.Browser;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import com.developer.nefarious.zjoule.chat.memory.MemoryMessageHistory;
-import com.developer.nefarious.zjoule.core.ui.ViewRender;
 
 public class ClearHandler extends Action {
 	
@@ -46,8 +45,8 @@ public class ClearHandler extends Action {
 		MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
 		memoryMessageHistory.clear();
 		
-		ViewRender viewRender = new ViewRender();
-		browser.setText(viewRender.build());
+//		ViewRender viewRender = new ViewRender();
+//		browser.setText(viewRender.build());
 	}
 	
 	

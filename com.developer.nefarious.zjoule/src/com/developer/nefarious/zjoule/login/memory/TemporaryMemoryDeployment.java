@@ -58,4 +58,10 @@ public class TemporaryMemoryDeployment implements IMemoryDeployment, ITemporaryM
 		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
 		eclipseMemory.saveOnEclipsePreferences(IMemoryDeployment.KEY, serializedObject);
 	}
+
+	@Override
+	public Boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

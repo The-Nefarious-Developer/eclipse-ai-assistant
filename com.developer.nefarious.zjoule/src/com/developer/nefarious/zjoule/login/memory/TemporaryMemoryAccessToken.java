@@ -59,4 +59,10 @@ public class TemporaryMemoryAccessToken implements IMemoryAccessToken, ITemporar
 		eclipseMemory.saveOnEclipsePreferences(IMemoryAccessToken.KEY, serializedObject);
 	}
 
+	@Override
+	public Boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -47,4 +47,10 @@ public class TemporaryMemoryResourceGroup implements IMemoryResourceGroup, ITemp
 		String resourceGroup = eclipseMemory.loadFromEclipsePreferences(KEY);
 		eclipseMemory.saveOnEclipsePreferences(IMemoryResourceGroup.KEY, resourceGroup);
 	}
+
+	@Override
+	public Boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
