@@ -2,6 +2,7 @@ package com.developer.nefarious.zjoule.chat;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.developer.nefarious.zjoule.chat.utils.EditorContentReader;
 import com.developer.nefarious.zjoule.models.Role;
 
 public class ChatOrchestrator implements IChatOrchestrator  {
@@ -19,13 +20,14 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 		messages.addAll(messageHistory);
 		
 		// 2. Get content of the active window
-//		String baseInstructions = "Act as a friendly and informative SAP ABAP Developer expert, "
-//				+ "always considering the best practices and the clean-abap guidelines when providing answers.";
-//		
-//		String activeEditorContentInstructions = "Consider the following code as context: ";
-//		String editorContent = EditorContentReader.readActiveEditorContent();
-//		IChatMessage systemMessage = aiClient.createMessage(Role.SYSTEM, baseInstructions + activeEditorContentInstructions + editorContent);
-//		messages.add(systemMessage);
+		String baseInstructions = Instruction.getMessage();
+		String editorContent = EditorContentReader.readActiveEditorContent();
+		
+		String systemInstructions = editorContent != null 
+		    ? baseInstructions + "Consider the following code as context: " + editorContent 
+		    : baseInstructions;
+		
+		messages.add(aiClient.createMessage(Role.SYSTEM, systemInstructions));
 		
 		// 3. Create message object
 		IChatMessage userMessage = aiClient.createMessage(Role.USER, userPrompt);
