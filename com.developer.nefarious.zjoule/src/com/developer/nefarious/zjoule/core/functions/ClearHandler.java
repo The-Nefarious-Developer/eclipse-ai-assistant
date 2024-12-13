@@ -45,8 +45,7 @@ public class ClearHandler extends Action {
 		MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
 		memoryMessageHistory.clear();
 		
-//		ViewRender viewRender = new ViewRender();
-//		browser.setText(viewRender.build());
+		browser.execute("clearMessages();");
 	}
 	
 	
