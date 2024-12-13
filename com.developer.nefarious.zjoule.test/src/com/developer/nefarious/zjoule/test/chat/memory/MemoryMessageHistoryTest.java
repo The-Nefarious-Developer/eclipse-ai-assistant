@@ -59,4 +59,13 @@ public class MemoryMessageHistoryTest {
 		assertEquals(returnValue, expectedValue);
 	}
 	
+	@Test
+	public void shouldClearMessageHistory() {
+		// Arrange		
+		// Act
+		cut.clear();
+		// Assert
+		verify(mockEclipseMemory).deleteFromEclipsePreferences(KEY);
+	}
+	
 }

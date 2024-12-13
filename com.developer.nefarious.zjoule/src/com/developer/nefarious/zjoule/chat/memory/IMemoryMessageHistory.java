@@ -9,5 +9,7 @@ public interface IMemoryMessageHistory {
 	void save(final MessageHistory messages);
 	
 	MessageHistory load();
+	
+	void clear();
 
 }

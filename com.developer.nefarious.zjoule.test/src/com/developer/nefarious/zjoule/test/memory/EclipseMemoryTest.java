@@ -44,7 +44,7 @@ public class EclipseMemoryTest {
 	}
 
 	@Test
-	public void shouldDoNothingInCaseOfErrors() throws BackingStoreException {
+	public void shouldDoNothingInCaseOfErrorsOnSave() throws BackingStoreException {
 		// Arrange
 		String mockKey = "some key";
 		String mockValue = "some random value";
@@ -66,6 +66,29 @@ public class EclipseMemoryTest {
 		String returnValue = cut.loadFromEclipsePreferences(mockKey);
 		// Assert
 		assertEquals(returnValue, expectedValue);
+	}
+
+	@Test
+	public void shouldDeleteFromEclipsePreferences() throws BackingStoreException {
+		// Arrange
+		String mockKey = "some key";
+		// Act
+		cut.deleteFromEclipsePreferences(mockKey);
+		// Assert
+		verify(mockPreferences).remove(mockKey);
+		verify(mockPreferences).flush();		
+	}
+	
+	@Test
+	public void shouldDoNothingInCaseOfErrorsOnDelete() throws BackingStoreException {
+		// Arrange
+		String mockKey = "some key";
+		doThrow(new BackingStoreException("Accidents happen")).when(mockPreferences).flush();
+		// Act
+		cut.deleteFromEclipsePreferences(mockKey);
+		// Assert
+		verify(mockPreferences).remove(mockKey);
+		assertThrows(BackingStoreException.class, () -> mockPreferences.flush());	
 	}
 
 	@Test

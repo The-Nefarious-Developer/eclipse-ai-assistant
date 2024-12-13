@@ -32,6 +32,16 @@ public class EclipseMemory implements IEclipseMemory {
 	}
 
 	@Override
+	public void deleteFromEclipsePreferences(final String key) {
+		try {
+	        preferences.remove(key);
+	        preferences.flush();
+	    } catch (BackingStoreException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	@Override
 	public void clearAll() {
 		try {
 			preferences.clear();

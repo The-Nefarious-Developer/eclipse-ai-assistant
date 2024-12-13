@@ -9,8 +9,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
+import com.developer.nefarious.zjoule.chat.memory.MemoryMessageHistory;
 import com.developer.nefarious.zjoule.core.ui.ChatViewRender;
-import com.developer.nefarious.zjoule.memory.EclipseMemory;
 
 public class ClearHandler extends Action {
 	
@@ -43,8 +43,8 @@ public class ClearHandler extends Action {
 	
 	@Override
 	public void run() {
-		EclipseMemory eclipseMemory = new EclipseMemory();
-		eclipseMemory.clearAll();
+		MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
+		memoryMessageHistory.clear();
 		
 		ChatViewRender viewRender = new ChatViewRender();
 		browser.setText(viewRender.build());

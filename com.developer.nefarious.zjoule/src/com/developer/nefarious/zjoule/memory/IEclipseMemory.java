@@ -10,6 +10,8 @@ public interface IEclipseMemory {
 	
 	String loadFromEclipsePreferences(final String key);
 	
+	void deleteFromEclipsePreferences(String key);
+	
 	void clearAll();
 
 }

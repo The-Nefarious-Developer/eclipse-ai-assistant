@@ -50,4 +50,9 @@ public class MemoryMessageHistory implements IMemoryMessageHistory {
 		}
 	}
 
+	@Override
+	public void clear() {
+		eclipseMemory.deleteFromEclipsePreferences(KEY);
+	}
+
 }
