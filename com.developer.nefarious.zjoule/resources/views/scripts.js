@@ -23,8 +23,39 @@ function sendMessage() {
 	chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the bottom
 }
 
+function login() {
+	hideInstructions();
+	activateChat();
+}
+
+function logout() {
+	clearMessages();
+	deactivateChat();
+	showInstructions();
+}
+
 function clearMessages() {
 	const chatBox = document.getElementById('chatBox');
 	chatBox.innerHTML = ''; // Remove all child elements
-	location.reload()
+}
+
+function deactivateChat() {
+	const chatContainer = document.querySelector(".chat-container");
+	chatContainer.style.display = "none";
+}
+
+function activateChat() {
+	const chatContainer = document.querySelector(".chat-container");
+	chatContainer.style.display = 'flex'; // Show the input
+	//chatContainer.style.display = 'block';
+}
+
+function showInstructions() {
+	const instructions = document.getElementById("instructions");
+	instructions.style.display = "block";
+}
+
+function hideInstructions() {
+	const instructions = document.getElementById("instructions");
+	instructions.style.display = "none";
 }

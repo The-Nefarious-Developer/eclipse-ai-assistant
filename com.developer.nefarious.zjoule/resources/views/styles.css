@@ -5,7 +5,22 @@ body {
 	align-items: center;
 	height: 100vh;
 	margin: 0;
-	background-color: #f4f4f9;
+	background-color: #f0f0f0;
+}
+
+.center-instructions {
+	position: absolute;
+	top: 35%;
+	left: 30%;
+	transform: translate(-20%, -20%);
+	padding: 20px;
+	text-align: center;
+	font-size: 13px;
+	background-color: #f0f0f0;
+}
+
+.center-instructions h2 {
+	color: #8C60FF;
 }
 
 .chat-container {
@@ -38,7 +53,6 @@ body {
 
 .user-message {
 	align-self: flex-end;
-	/* background-color: #4a76a8; */
 	background-color: #8C60FF;
 	color: #fff;
 	max-width: 70%;
@@ -74,19 +88,19 @@ body {
 }
 
 code:not([class]) {
-    /* Your styles here */
-    color: gray;
-    background-color: #f5f5f5;
-    font-family: monospace;
+	color: gray;
+	background-color: #f5f5f5;
+	font-family: monospace;
 }
 
 code[class] {
-    display: block; /* Ensures the code block takes up its own line */
-    white-space: pre; /* Preserves whitespace and formatting */
-    overflow-x: auto; /* Adds horizontal scrolling if content overflows */
-    max-width: 100%; /* Ensures it does not exceed the screen width */
-    background-color: #f4f4f4; /* Optional: Light gray background for better readability */
-    padding: 10px; /* Optional: Add some padding around the code */
-    border-radius: 5px; /* Optional: Rounded corners */
-    font-family: monospace; /* Use a monospace font for code */
+	display: block; /* Ensures the code block takes up its own line */
+	white-space: pre; /* Preserves whitespace and formatting */
+	overflow-x: auto; /* Adds horizontal scrolling if content overflows */
+	max-width: 100%; /* Ensures it does not exceed the screen width */
+	background-color: #f4f4f4;
+	/* Optional: Light gray background for better readability */
+	padding: 10px; /* Optional: Add some padding around the code */
+	border-radius: 5px; /* Optional: Rounded corners */
+	font-family: monospace; /* Use a monospace font for code */
 }
