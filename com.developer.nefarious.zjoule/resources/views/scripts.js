@@ -3,8 +3,8 @@ function sendMessage() {
 	if (userInput.trim() === "") return;
 	try {
 		addUserMessage(userInput);
-		var result = getAIResponse(userInput); // Java callback
-		addBotMessage(result);
+		var answer = getAIResponse(userInput); // Java callback
+		addBotMessage(answer);
 	} catch (e) {
 	}
 	clearMessageAndScrollDown();
