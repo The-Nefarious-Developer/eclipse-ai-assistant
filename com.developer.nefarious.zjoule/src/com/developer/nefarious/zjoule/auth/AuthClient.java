@@ -13,8 +13,6 @@ import com.developer.nefarious.zjoule.models.ServiceKey;
 
 public class AuthClient implements IAuthClient {
 
-	private HttpClient httpClient;
-
 	private IMemoryAccessToken memoryAccessToken;
 
 	private IMemoryServiceKey memoryServiceKey;
@@ -30,7 +28,7 @@ public class AuthClient implements IAuthClient {
 		this.memoryAccessToken = memoryAccessToken;
 		this.memoryServiceKey = memoryServiceKey;
 		this.authClientHelper = authClientHelper;
-		httpClient = HttpClient.newHttpClient();
+		
 	}
 
 	@Override
@@ -51,6 +49,8 @@ public class AuthClient implements IAuthClient {
 
 	@Override
 	public String getNewAccessToken(final ServiceKey serviceKey) throws IOException, InterruptedException {
+		HttpClient httpClient = HttpClient.newHttpClient();
+		
 		URI endpoint = authClientHelper.convertEndpointStringToURI(serviceKey.getTokenURL());
 		BodyPublisher requestBody = authClientHelper.createRequestBody(serviceKey.getClientId(), serviceKey.getClientSecret());
 
