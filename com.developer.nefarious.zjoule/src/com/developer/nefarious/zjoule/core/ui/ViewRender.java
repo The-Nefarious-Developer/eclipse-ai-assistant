@@ -15,13 +15,20 @@ public class ViewRender implements IViewRender {
 	private static final String PROJECT_NAME = Activator.PLUGIN_ID;
 
 	private static final String VIEW_FILES_PATH = "resources/views/";
+	
+	private IViewRenderHelper helper;
+	
+	public ViewRender() {
+		helper = ViewRenderHelper.getInstance();
+	}
 
 	@Override
 	public String build() {
 		String marked = getResourceContent("marked.min.js");
 		String js = getResourceContent("scripts.js");
 		String css = getResourceContent("styles.css");
-
+		
+		StringBuilder chatHistoryBuffer = helper.getChatHistory();
 		StringBuilder buffer = new StringBuilder();
 
 		buffer.append("<!doctype html>");
@@ -36,17 +43,17 @@ public class ViewRender implements IViewRender {
 		buffer.append("</script>");
 		buffer.append("</head>");
 		buffer.append("<body>");
-
 		buffer.append("<div class=\"center-instructions\" id=\"instructions\">");
 		buffer.append("<h2>Let’s Get Started!</h2>");
 		buffer.append("<p>Locate and click on the \"Authentication\" Button at the top of the screen.</p>");
 		buffer.append("</div>");
-
 		buffer.append("<div class=\"chat-container\">");
 		buffer.append("<div class=\"chat-box\" id=\"chatBox\">");
-//		buffer.append("<div class=\"message bot-message\">Hello! How can I help you today?</div>");
-//		buffer.append("<div class=\"message user-message\">Hi! Could you tell me the weather?</div>");
-//		buffer.append("<div class=\"message bot-message\">Sure! The weather today is sunny with a high of 75°F.</div>");
+		
+		if (chatHistoryBuffer.length() > 0) {
+			buffer.append(chatHistoryBuffer);
+		}
+		
 		buffer.append("</div>");
 		buffer.append("<div class=\"chat-input\">");
 		buffer.append("<input type=\"text\" id=\"userInput\" placeholder=\"Type your message here...\" />");

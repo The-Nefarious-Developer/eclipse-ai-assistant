@@ -20,11 +20,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.osgi.framework.Bundle;
 import com.developer.nefarious.zjoule.core.ui.ViewRender;
+import com.developer.nefarious.zjoule.core.ui.ViewRenderHelper;
 import com.developer.nefarious.zjoule.core.ui.IViewRender;
 
 public class ViewRenderTest {
 	
 	private IViewRender cut;
+	
+	MockedStatic<ViewRenderHelper> mockedStaticViewRenderHelper;
 	
 	private String randomWord() {
 		final String[] WORDS = { "apple", "banana", "grape" };
