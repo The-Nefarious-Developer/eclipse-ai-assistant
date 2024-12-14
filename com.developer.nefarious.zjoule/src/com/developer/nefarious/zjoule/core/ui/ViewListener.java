@@ -26,25 +26,33 @@ public class ViewListener extends ViewPart {
 	private Shell shell;
 
 	private Browser browser;
-	
-	ISelectionListener selectionListener;
+
+	private IViewRender viewRender;
+
+	private ISelectionListener selectionListener;
+
+	private PartListener partListener;
 
 	@Override
 	public void createPartControl(final Composite parent) {
 		browser = BrowserFactory.create(parent, SWT.WEBKIT);
-		selectionListener = SelectionListener.getInstance(browser);
-		IViewRender viewRender = ViewRender.getInstance();
-		PartListener partListener = PartListener.getInstance(browser);
-		
-		browser.setText(viewRender.build());		
-	
+		selectionListener = SelectionListener.create(browser);
+		viewRender = ViewRender.create();
+		partListener = PartListener.create(browser);
+
+		browser.setText(viewRender.build());
+
 		BrowserFunction promptHandler = PromptHandler.create(browser, "getAIResponse");
-		browser.addDisposeListener(e -> promptHandler.dispose());
-	
+		browser.addDisposeListener(e -> {
+			if (!browser.isDisposed()) {
+				promptHandler.dispose();
+			}
+		});
+
 		getSite().getPage().addPartListener(partListener);
 		getSite().getPage().addSelectionListener(selectionListener);
 		Display.getDefault().asyncExec(new Initialization(browser));
-		
+
 		setUpToolbar();
 	}
 
@@ -55,30 +63,41 @@ public class ViewListener extends ViewPart {
 
 	@Override
 	public void dispose() {
-		getSite().getPage().removeSelectionListener(selectionListener);
+		if (selectionListener != null) {
+			getSite().getPage().removeSelectionListener(selectionListener);
+		}
+
+		if (browser != null && !browser.isDisposed()) {
+			browser.dispose();
+		}
+
+		if (partListener != null) {
+			getSite().getPage().removePartListener(partListener);
+		}
+
 		super.dispose();
 	}
-	
+
 	public void setShell(final Shell shell) {
 		this.shell = shell;
 	}
-	
+
 	public void setBrowser(final Browser browser) {
 		this.browser = browser;
 	}
-	
+
 	public ISelectionListener getSelectionListener() {
 		return selectionListener;
 	}
-	
+
 	private IToolBarManager getToolbar() {
 		return getViewSite().getActionBars().getToolBarManager();
 	}
-	
+
 	private IMenuManager getMenu() {
 		return getViewSite().getActionBars().getMenuManager();
 	}
-	
+
 	private void setUpToolbar() {
 		IToolBarManager toolbar = getToolbar();
 		toolbar.add(LoginHandler.create(shell, browser));

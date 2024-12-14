@@ -11,8 +11,6 @@ import org.osgi.framework.Bundle;
 import com.developer.nefarious.zjoule.core.Activator;
 
 public class ViewRender implements IViewRender {
-	
-	private static IViewRender instance;
 
 	private static final String PROJECT_NAME = Activator.PLUGIN_ID;
 
@@ -20,11 +18,8 @@ public class ViewRender implements IViewRender {
 	
 	private ViewRender() { }
 	
-	public static IViewRender getInstance() {
-		if (instance == null) {
-			instance = new ViewRender();
-		}
-		return instance;
+	public static IViewRender create() {
+		return new ViewRender();
 	}
 
 	@Override

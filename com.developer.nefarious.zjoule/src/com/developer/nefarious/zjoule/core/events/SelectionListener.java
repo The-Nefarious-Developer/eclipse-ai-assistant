@@ -8,19 +8,14 @@ import com.developer.nefarious.zjoule.core.functions.TagHandler;
 
 public class SelectionListener implements ISelectionListener {
 	
-	private static ISelectionListener instance;
-	
 	private Browser browser;
 	
 	private SelectionListener(final Browser browser) {
 		this.browser = browser;
 	}
 	
-	public static ISelectionListener getInstance(final Browser browser) {
-		if (instance == null) {
-			instance = new SelectionListener(browser);
-		}
-		return instance;
+	public static ISelectionListener create(final Browser browser) {
+		return new SelectionListener(browser);
 	}
 
 	@Override
