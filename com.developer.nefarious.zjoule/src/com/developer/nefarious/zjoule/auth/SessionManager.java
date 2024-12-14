@@ -1,6 +1,7 @@
 package com.developer.nefarious.zjoule.auth;
 
 import org.eclipse.swt.browser.Browser;
+import com.developer.nefarious.zjoule.core.functions.TagHandler;
 import com.developer.nefarious.zjoule.memory.EclipseMemory;
 import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.MemoryDeployment;
@@ -28,6 +29,7 @@ public abstract class SessionManager {
 	
 	public static void login(final Browser browser) {
 		browser.execute("login();");
+		TagHandler.update(browser);
 	}
 
 }

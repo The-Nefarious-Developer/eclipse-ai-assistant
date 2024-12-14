@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.auth.SessionManager;
+import com.developer.nefarious.zjoule.core.functions.TagHandler;
 import com.developer.nefarious.zjoule.memory.EclipseMemory;
 import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
 import com.developer.nefarious.zjoule.memory.MemoryDeployment;
@@ -29,6 +30,8 @@ public class SessionManagerTest {
 	private MockedStatic<MemoryResourceGroup> mockedStaticMemoryResourceGroup;
 	
 	private MockedStatic<MemoryDeployment> mockedStaticMemoryDeployment;
+	
+	private MockedStatic<TagHandler> mockedStaticTagHandler;
 	
 	@Mock
 	private MemoryAccessToken mockMemoryAccessToken;
@@ -50,6 +53,7 @@ public class SessionManagerTest {
 		mockedStaticMemoryServiceKey = mockStatic(MemoryServiceKey.class);
 		mockedStaticMemoryResourceGroup = mockStatic(MemoryResourceGroup.class);
 		mockedStaticMemoryDeployment = mockStatic(MemoryDeployment.class);
+		mockedStaticTagHandler = mockStatic(TagHandler.class);
 		
 		mockedStaticMemoryAccessToken.when(MemoryAccessToken::getInstance).thenReturn(mockMemoryAccessToken);
 		mockedStaticMemoryServiceKey.when(MemoryServiceKey::getInstance).thenReturn(mockMemoryServiceKey);
@@ -70,6 +74,9 @@ public class SessionManagerTest {
 		}
 		if (mockedStaticMemoryDeployment != null) {
 			mockedStaticMemoryDeployment.close();
+		}
+		if (mockedStaticTagHandler != null) {
+			mockedStaticTagHandler.close();
 		}
 	}
 	
@@ -158,6 +165,7 @@ public class SessionManagerTest {
 		SessionManager.login(mockBrowser);
 		// Assert
 		verify(mockBrowser).execute("login();");
+		mockedStaticTagHandler.verify(() -> TagHandler.update(mockBrowser));
 	}
 
 }
