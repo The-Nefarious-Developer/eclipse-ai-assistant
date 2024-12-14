@@ -55,8 +55,8 @@ public class ViewRenderHelperTest {
 		String mockAIAnswer = "ai-answer";
 		
 		StringBuilder expectedValue = new StringBuilder();
-		expectedValue.append("<div class=\"message bot-message\">" + mockUserQuestion + "</div>");
-		expectedValue.append("<div class=\"message user-message\">" + mockAIAnswer + "</div>");
+		expectedValue.append("<div class=\"message user-message\">" + mockUserQuestion + "</div>");
+		expectedValue.append("<div class=\"message bot-message\">" + mockAIAnswer + "</div>");
 		
 		List<Message> mockMessages = Arrays.asList(
 				new Message(Role.USER, mockUserQuestion), 
