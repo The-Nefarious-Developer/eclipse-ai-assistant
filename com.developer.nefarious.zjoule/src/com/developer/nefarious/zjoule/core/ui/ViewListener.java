@@ -34,7 +34,7 @@ public class ViewListener extends ViewPart {
 		browser = BrowserFactory.create(parent, SWT.WEBKIT);
 		selectionListener = SelectionListener.getInstance(browser);
 		IViewRender viewRender = ViewRender.getInstance();
-		PartListener partListener = PartListener.getInstance();
+		PartListener partListener = PartListener.getInstance(browser);
 		
 		browser.setText(viewRender.build());		
 	

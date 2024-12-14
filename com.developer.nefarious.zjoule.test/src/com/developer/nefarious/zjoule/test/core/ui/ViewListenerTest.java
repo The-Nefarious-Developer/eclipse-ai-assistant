@@ -113,7 +113,7 @@ public class ViewListenerTest {
 		mockedStaticBrowserFactory.when(() -> BrowserFactory.create(mockParent, SWT.WEBKIT)).thenReturn(mockBrowser);
 		mockedStaticSelectionListener.when(() -> SelectionListener.getInstance(mockBrowser)).thenReturn(mockSelectionListener);
 		mockedStaticViewRender.when(ViewRender::getInstance).thenReturn(mockViewRender);
-		mockedStaticPartListener.when(PartListener::getInstance).thenReturn(mockPartListener);
+		mockedStaticPartListener.when(() -> PartListener.getInstance(mockBrowser)).thenReturn(mockPartListener);
 		mockedStaticPromptHandler.when(() -> PromptHandler.create(mockBrowser, "getAIResponse")).thenReturn(mockPromptHandler);
 		mockedStaticDisplay.when(Display::getDefault).thenReturn(mockDisplay);
 		mockedStaticLoginHandler.when(() -> LoginHandler.create(mockShell, mockBrowser)).thenReturn(mockLoginHandler);
@@ -182,7 +182,6 @@ public class ViewListenerTest {
 		cut.createPartControl(mockParent);
 		
 		// Assert
-		assertTrue(true);
 		verify(mockBrowser).setText(mockBuildResult);
 		verify(mockBrowser).addDisposeListener(any(DisposeListener.class));
 		verify(mockPage).addPartListener(mockPartListener);
