@@ -60,7 +60,7 @@ public class EditorContentReader {
 			IFile file = input.getFile();
 
 			// Return the file name
-			return file.getName();
+			return file.getParent().getName();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

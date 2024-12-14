@@ -11,15 +11,20 @@ import org.osgi.framework.Bundle;
 import com.developer.nefarious.zjoule.core.Activator;
 
 public class ViewRender implements IViewRender {
+	
+	private static IViewRender instance;
 
 	private static final String PROJECT_NAME = Activator.PLUGIN_ID;
 
 	private static final String VIEW_FILES_PATH = "resources/views/";
 	
-	private IViewRenderHelper helper;
+	private ViewRender() { }
 	
-	public ViewRender() {
-		helper = ViewRenderHelper.getInstance();
+	public static IViewRender getInstance() {
+		if (instance == null) {
+			instance = new ViewRender();
+		}
+		return instance;
 	}
 
 	@Override
@@ -28,7 +33,6 @@ public class ViewRender implements IViewRender {
 		String js = getResourceContent("scripts.js");
 		String css = getResourceContent("styles.css");
 		
-		StringBuilder chatHistoryBuffer = helper.getChatHistory();
 		StringBuilder buffer = new StringBuilder();
 
 		buffer.append("<!doctype html>");
@@ -49,11 +53,6 @@ public class ViewRender implements IViewRender {
 		buffer.append("</div>");
 		buffer.append("<div class=\"chat-container\">");
 		buffer.append("<div class=\"chat-box\" id=\"chatBox\">");
-		
-		if (chatHistoryBuffer.length() > 0) {
-			buffer.append(chatHistoryBuffer);
-		}
-		
 		buffer.append("</div>");
 		buffer.append("<div class=\"chat-input\">");
 		buffer.append("<div class=\"tag-box\">#Tag</div>");
