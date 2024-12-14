@@ -1,26 +1,35 @@
 function sendMessage() {
-	const chatBox = document.getElementById('chatBox');
 	const userInput = document.getElementById('userInput').value;
 	if (userInput.trim() === "") return;
 	try {
-		// Display user message
-		const userMessage = document.createElement('div');
-		userMessage.className = 'message user-message';
-		userMessage.textContent = userInput;
-		chatBox.appendChild(userMessage);
-
+		addUserMessage(userInput);
 		var result = getAIResponse(userInput); // Java callback
-		// Display AI Answer
-		const AIAnswer = document.createElement('div');
-		AIAnswer.className = 'message bot-message';
-		AIAnswer.innerHTML = marked.parse(result);
-		chatBox.appendChild(AIAnswer);
+		addBotMessage(result);
 	} catch (e) {
-
 	}
-	// Clear input
+	clearMessageAndScrollDown();
+}
+
+function addUserMessage(input) {
+	const chatBox = document.getElementById('chatBox');
+	const message = document.createElement('div');
+	message.className = 'message user-message';
+	message.textContent = input;
+	chatBox.appendChild(message);
+}
+
+function addBotMessage(input) {
+	const chatBox = document.getElementById('chatBox');
+	const message = document.createElement('div');
+	message.className = 'message bot-message';
+	message.innerHTML = marked.parse(input);
+	chatBox.appendChild(message);
+}
+
+function clearMessageAndScrollDown() {
+	const chatBox = document.getElementById('chatBox');
 	document.getElementById('userInput').value = "";
-	chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the bottom
+	chatBox.scrollTop = chatBox.scrollHeight;
 }
 
 function login() {
