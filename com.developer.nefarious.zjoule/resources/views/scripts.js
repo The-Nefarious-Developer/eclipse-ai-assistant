@@ -58,3 +58,15 @@ function hideInstructions() {
 	const instructions = document.getElementById("instructions");
 	instructions.style.display = "none";
 }
+
+function updateTag(file) {
+	const tagBox = document.querySelector(".tag-box");
+	if (file != 'null') {
+		tagBox.textContent = file;
+		tagBox.style.display = "block";
+	} else {
+		tagBox.textContent = '';
+		tagBox.style.display = "none";
+	}
+
+}

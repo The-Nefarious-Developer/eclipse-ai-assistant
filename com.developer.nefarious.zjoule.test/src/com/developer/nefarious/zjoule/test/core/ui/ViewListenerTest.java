@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,8 +29,10 @@ import org.mockito.MockitoAnnotations;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import com.developer.nefarious.zjoule.core.functions.PromptHandler;
+import com.developer.nefarious.zjoule.core.functions.TagHandler;
 import com.developer.nefarious.zjoule.core.functions.ClearHandler;
 import com.developer.nefarious.zjoule.core.functions.LoginHandler;
 import com.developer.nefarious.zjoule.core.functions.LogoutHandler;
@@ -93,6 +96,8 @@ public class ViewListenerTest {
 	MockedStatic<LogoutHandler> mockedStaticLogoutHandler;
 	
 	MockedStatic<Display> mockedStaticDisplay;
+	
+	MockedStatic<TagHandler> mockedStaticTagHandler;
 
 	private String randomWord() {
 		final String[] WORDS = { "apple", "banana", "grape" };
@@ -109,6 +114,7 @@ public class ViewListenerTest {
 		mockedStaticPromptHandler = mockStatic(PromptHandler.class);
 		mockedStaticLogoutHandler = mockStatic(LogoutHandler.class);
 		mockedStaticDisplay = mockStatic(Display.class);
+		mockedStaticTagHandler = mockStatic(TagHandler.class);
 
 		cut = spy(new ViewListener(mockBrowserFactory, mockViewRender));
 		cut.setShell(mockShell);
@@ -133,6 +139,9 @@ public class ViewListenerTest {
 		}
 		if (mockedStaticDisplay != null) {
 			mockedStaticDisplay.close();
+		}
+		if (mockedStaticTagHandler != null) {
+			mockedStaticTagHandler.close();
 		}
 	}
 
@@ -202,6 +211,22 @@ public class ViewListenerTest {
 
 		// Assert
 		verify(mockPage).removeSelectionListener(cut);
+	}
+	
+	@Test
+	public void shouldChangeTheTagValue() {
+		// Arrange
+		cut.setBrowser(mockBrowser);
+		
+		IWorkbenchPart mockWorkbenchPart = mock(IWorkbenchPart.class);
+		ISelection mockSelection = mock(ISelection.class);
+		
+		// Act
+		cut.selectionChanged(mockWorkbenchPart, mockSelection);
+		
+		// Assert
+		mockedStaticTagHandler.verify(() -> TagHandler.update(mockBrowser));
+		
 	}
 
 }

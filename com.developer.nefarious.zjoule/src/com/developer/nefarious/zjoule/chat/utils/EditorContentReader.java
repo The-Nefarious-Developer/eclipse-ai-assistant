@@ -41,4 +41,30 @@ public class EditorContentReader {
 		}
 	}
 
+	public static String getActiveEditorFileName() {
+		try {
+			// Get the active workbench window
+			IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+			if (window == null) {
+				return null;
+			}
+
+			// Get the active editor
+			IEditorPart editor = window.getActivePage().getActiveEditor();
+			if (editor == null || !(editor.getEditorInput() instanceof FileEditorInput)) {
+				return null;
+			}
+
+			// Get the file from the editor input
+			FileEditorInput input = (FileEditorInput) editor.getEditorInput();
+			IFile file = input.getFile();
+
+			// Return the file name
+			return file.getName();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

@@ -68,13 +68,17 @@ body {
 
 .chat-input {
 	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 	border-top: 1px solid #ddd;
 	padding: 10px;
 	background-color: #fff;
+	gap: 5px;
 }
 
 .chat-input input {
-	flex: 1;
+	flex: none;
+	width: 100%;
 	padding: 10px;
 	border: none;
 	outline: none;
@@ -83,11 +87,21 @@ body {
 
 .chat-input button {
 	padding: 10px;
-	/* background-color: #4a76a8; */
 	background-color: #8C60FF;
 	color: #fff;
 	border: none;
+	border-radius: 10px;
 	cursor: pointer;
+	align-self: flex-end;
+}
+
+.tag-box {
+	background-color: #8C60FF;
+	color: #fff;
+	padding: 4px 8px;
+	border-radius: 5px;
+	font-size: 11px;
+	white-space: nowrap;
 }
 
 code:not([class]) {
@@ -103,6 +117,6 @@ code[class] {
 	max-width: 100%;
 	background-color: #f4f4f4;
 	padding: 10px;
-	border-radius: 5px; 
+	border-radius: 5px;
 	font-family: monospace;
 }

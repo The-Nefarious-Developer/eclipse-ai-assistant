@@ -14,6 +14,7 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 import com.developer.nefarious.zjoule.core.functions.PromptHandler;
+import com.developer.nefarious.zjoule.core.functions.TagHandler;
 import com.developer.nefarious.zjoule.core.events.Initialization;
 import com.developer.nefarious.zjoule.core.functions.ClearHandler;
 import com.developer.nefarious.zjoule.core.functions.LoginHandler;
@@ -53,7 +54,7 @@ public class ViewListener extends ViewPart implements ISelectionListener {
 
 	@Override
 	public void selectionChanged(final IWorkbenchPart part, final ISelection selection) {
-		// TODO Auto-generated method stub
+		TagHandler.update(browser);
 	}
 
 	public IToolBarManager getToolbar() {
