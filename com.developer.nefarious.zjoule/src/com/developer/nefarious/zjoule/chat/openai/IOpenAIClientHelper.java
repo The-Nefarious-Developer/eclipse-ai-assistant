@@ -6,7 +6,7 @@ import com.developer.nefarious.zjoule.chat.IChatMessage;
 
 public interface IOpenAIClientHelper {
 	
-	static final int MAX_TOKENS = 1000;
+	static final int MAX_TOKENS = 4096;
 	
 	static final double TEMPERATURE = 0;
 	
