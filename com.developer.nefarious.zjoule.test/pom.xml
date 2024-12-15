@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>com.developer.nefarious.zjoule.test</artifactId>
+
+	<name>zjoule - test suite</name>
+
+	<parent>
+		<groupId>com.developer.nefarious.zjoule</groupId>
+		<artifactId>com.developer.nefarious.zjoule.parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../maven/pom.xml</relativePath>
+	</parent>
+
+	<packaging>eclipse-test-plugin</packaging>
+
+	<dependencies>
+		<!-- Mockito dependency -->
+		<!-- The "Bundle 'org.mockito.mockito-core' cannot be resolved" issue in
+		MANIFEST.MF is common in Eclipse plugin projects using external libraries 
+		via Maven, particularly when working with OSGi and Tycho. This error happens
+		because Eclipse's PDE (Plugin Development Environment) tooling doesn't 
+		automatically recognize dependencies managed only in the pom.xml as available 
+		bundles, leading to discrepancies between Maven resolution and OSGi resolution. -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>5.14.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.developer.nefarious.zjoule</groupId>
+			<artifactId>com.developer.nefarious.zjoule</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+</project>
