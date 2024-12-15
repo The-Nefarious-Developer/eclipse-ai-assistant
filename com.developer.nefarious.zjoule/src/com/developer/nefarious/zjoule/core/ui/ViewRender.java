@@ -44,9 +44,10 @@ public class ViewRender implements IViewRender {
 		buffer.append("<body>");
 		buffer.append("<div class=\"center-instructions\" id=\"instructions\">");
 		buffer.append("<h2>Let’s Get Started!</h2>");
-		buffer.append("<p>Locate and click on the \"Authentication\" Button at the top of the screen.</p>");
+		buffer.append("<p>Locate and click on the \"Authentication\" Button at the top of the screen. </p>");
 		buffer.append("</div>");
 		buffer.append("<div class=\"chat-container\">");
+		buffer.append("<div class=\"placeholder\" id=\"placeholder\"> We’re ready to roll!<br />Start typing to begin! </div>");
 		buffer.append("<div class=\"chat-box\" id=\"chatBox\">");
 		buffer.append("</div>");
 		buffer.append("<div class=\"chat-input\">");

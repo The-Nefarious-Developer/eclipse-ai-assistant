@@ -7,6 +7,7 @@ function sendMessage() {
 		addBotMessage(answer);
 	} catch (e) {
 	}
+	updatePlaceholder();
 	clearMessageAndScrollDown();
 }
 
@@ -35,6 +36,7 @@ function clearMessageAndScrollDown() {
 function login() {
 	hideInstructions();
 	activateChat();
+	updatePlaceholder();
 }
 
 function logout() {
@@ -59,6 +61,7 @@ function activateChat() {
 }
 
 function showInstructions() {
+	hidePlaceholder();
 	const instructions = document.getElementById("instructions");
 	instructions.style.display = "block";
 }
@@ -77,5 +80,25 @@ function updateTag(file) {
 		tagBox.textContent = '';
 		tagBox.style.display = "none";
 	}
+}
 
+function updatePlaceholder() {
+	const chatBox = document.getElementById("chatBox");
+	const hasMessages = !!chatBox.querySelector(".message");
+	
+	if (hasMessages) {
+		hidePlaceholder();
+	} else {
+		showPlaceholder();
+	}
+}
+
+function showPlaceholder() {
+	const placeholder = document.getElementById("placeholder");
+	placeholder.style.display = "block";
+}
+
+function hidePlaceholder() {
+	const placeholder = document.getElementById("placeholder");
+	placeholder.style.display = "none";
 }

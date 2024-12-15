@@ -43,7 +43,8 @@ body {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
-	flex-grow: 1
+	flex-grow: 1;
+	position: relative
 }
 
 .message {
@@ -119,4 +120,15 @@ code[class] {
 	padding: 10px;
 	border-radius: 5px;
 	font-family: monospace;
+}
+
+.placeholder {
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 16px;
+	color: #aaa;
+	text-align: center;
+	display: none;
 }
