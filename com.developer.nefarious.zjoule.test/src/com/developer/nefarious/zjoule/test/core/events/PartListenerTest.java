@@ -28,7 +28,7 @@ public class PartListenerTest {
 		
 		mockedStaticTagHandler = mockStatic(TagHandler.class);
 		
-		cut = PartListener.getInstance(mockBrowser);
+		cut = PartListener.create(mockBrowser);
 	}
 	
 	@AfterEach

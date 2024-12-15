@@ -30,7 +30,7 @@ public class SelectionListenerTest {
 		
 		mockedStaticTagHandler = mockStatic(TagHandler.class);
 		
-		cut = SelectionListener.getInstance(mockBrowser);
+		cut = SelectionListener.create(mockBrowser);
 	}
 	
 	@AfterEach

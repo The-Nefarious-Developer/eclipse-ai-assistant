@@ -85,9 +85,13 @@ public class ViewListener extends ViewPart {
 	public void setBrowser(final Browser browser) {
 		this.browser = browser;
 	}
-
-	public ISelectionListener getSelectionListener() {
-		return selectionListener;
+	
+	public void setSelectionListener(final ISelectionListener selectionListener) {
+		this.selectionListener = selectionListener;
+	}
+	
+	public void setPartListener(final PartListener partListener) {
+		this.partListener = partListener;
 	}
 
 	private IToolBarManager getToolbar() {

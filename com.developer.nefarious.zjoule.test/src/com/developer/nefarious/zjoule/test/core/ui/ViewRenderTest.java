@@ -34,7 +34,7 @@ public class ViewRenderTest {
 	
 	@BeforeEach
 	public void setUp() {
-		cut = spy(ViewRender.getInstance());
+		cut = spy(ViewRender.create());
 	}
 	
 	@Test

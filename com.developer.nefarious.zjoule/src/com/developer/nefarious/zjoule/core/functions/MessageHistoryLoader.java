@@ -32,7 +32,7 @@ public abstract class MessageHistoryLoader {
 
 	}
 
-	private static String escapeJavaScript(String content) {
+	private static String escapeJavaScript(final String content) {
 		if (content == null) {
 			return "";
 		}
