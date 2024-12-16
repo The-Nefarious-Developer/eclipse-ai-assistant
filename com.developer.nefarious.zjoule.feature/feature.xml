@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.developer.nefarious.zjoule"
+      label="zJoule - SAP AI Assistant"
+      version="1.0.0.qualifier"
+      provider-name="The Nefarious Developer">
+
+   <description>
+      zJoule - AI Assistant for Eclipse - Powered by SAP AI Core Generative AI Hub
+      
+This Eclipse plugin integrates an AI assistant view directly
+into your IDE, enabling seamless interaction with SAP AI Core
+Generative AI Hub foundation models on SAP BTP. Designed for
+developers, the AI assistant offers a chat-based interface that
+enhances productivity by providing intelligent suggestions, code
+explanations, and contextual guidance tailored to your development
+needs.
+
+--- Key Features:
+
+&gt; Integrated Chat View: Communicate with SAP AI Core Generative
+AI models for coding assistance, documentation insights, and
+task automation.
+
+&gt; Developer-Focused: Leverages generative AI capabilities to address
+common programming challenges and provide actionable recommendations
+within your Eclipse environment.
+
+&gt; Secure and Configurable: Stores configuration and user preferences
+securely within Eclipse preferences for a personalized experience.
+
+--- Benefits:
+
+&gt; Accelerate development with on-demand AI-powered assistance.
+
+&gt; Simplify complex tasks and improve code quality with contextual
+suggestions.
+
+&gt; Enhance your Eclipse IDE with cutting-edge generative AI technologies
+from SAP BTP.
+   </description>
+
+   <copyright>
+      Copyright (c) 2024 The Nefarious Developer
+Licensed under the MIT License.
+   </copyright>
+
+   <license url="">
+      MIT License
+
+Copyright (c) 2024 The Nefarious Developer
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+   </license>
+
+   <url>
+      <discovery label="zJoule Project Repository" url="https://github.com/The-Nefarious-Developer/zjoule"/>
+   </url>
+
+   <plugin
+         id="com.developer.nefarious.zjoule.plugin"
+         version="0.0.0"/>
+
+</feature>
