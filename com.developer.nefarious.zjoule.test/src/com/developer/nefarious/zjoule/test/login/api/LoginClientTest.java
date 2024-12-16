@@ -89,7 +89,6 @@ public class LoginClientTest {
 		String mockEndpointInStringFormat = mockServiceURL + "/admin/resourceGroups";
 		URI mockEndpointInURIFormat = mock(URI.class);
 		when(mockLoginClientHelper.createAuthUri(mockEndpointInStringFormat)).thenReturn(mockEndpointInURIFormat);
-		
 		when(mockBuilder.uri(mockEndpointInURIFormat)).thenReturn(mockBuilder);
 		
 		String mockToken = "access-token";
@@ -99,14 +98,11 @@ public class LoginClientTest {
 		when(mockBuilder.header("Authorization", mockAuthorization)).thenReturn(mockBuilder);
 		
 		when(mockBuilder.GET()).thenReturn(mockBuilder);
-		
 		when(mockBuilder.build()).thenReturn(mockHttpRequest);
-		
 		when(mockHttpClient.send(mockHttpRequest, HttpResponse.BodyHandlers.ofString())).thenReturn(mockHttpResponse);
 		
 		String mockResponseBody = "response-content";
 		when(mockHttpResponse.body()).thenReturn(mockResponseBody);
-		
 		when(mockLoginClientHelper.parseResourceGroupsResponseToObject(mockResponseBody)).thenReturn(expectedValue);
 		
 		// Act
@@ -132,7 +128,6 @@ public class LoginClientTest {
 		String mockEndpointInStringFormat = mockServiceURL + "/lm/deployments";
 		URI mockEndpointInURIFormat = mock(URI.class);
 		when(mockLoginClientHelper.createAuthUri(mockEndpointInStringFormat)).thenReturn(mockEndpointInURIFormat);
-		
 		when(mockBuilder.uri(mockEndpointInURIFormat)).thenReturn(mockBuilder);
 		
 		String mockToken = "access-token";
@@ -142,16 +137,12 @@ public class LoginClientTest {
 		when(mockBuilder.header("Authorization", mockAuthorization)).thenReturn(mockBuilder);
 		
 		when(mockBuilder.header("AI-Resource-Group", mockResourceGroup)).thenReturn(mockBuilder);
-		
 		when(mockBuilder.GET()).thenReturn(mockBuilder);
-		
 		when(mockBuilder.build()).thenReturn(mockHttpRequest);
-		
 		when(mockHttpClient.send(mockHttpRequest, HttpResponse.BodyHandlers.ofString())).thenReturn(mockHttpResponse);
 		
 		String mockResponseBody = "response-content";
 		when(mockHttpResponse.body()).thenReturn(mockResponseBody);
-		
 		when(mockLoginClientHelper.parseDeploymentsResponseToObject(mockResponseBody)).thenReturn(expectedValue);
 		
 		// Act
