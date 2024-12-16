@@ -9,7 +9,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
-
 import com.developer.nefarious.zjoule.auth.SessionManager;
 import com.developer.nefarious.zjoule.chat.memory.MemoryMessageHistory;
 

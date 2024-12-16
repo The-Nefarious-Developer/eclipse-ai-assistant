@@ -9,7 +9,7 @@ import com.google.gson.JsonSyntaxException;
 public class JsonValidatorTest {
 	
 	@Test
-	public void testIsValidJsonWithValidJson() {
+	public void shouldBeValid() {
 		// Arrange
 		String validJson = "{\"name\": \"John\", \"age\": 30}";
 		// Act
@@ -19,7 +19,7 @@ public class JsonValidatorTest {
 	}
 	
 	@Test
-	public void testIsValidJsonWithInvalidJson() {
+	public void shouldBeInvalid() {
 		// Arrange
 		String invalidJson = "{name: John, age: 30";
 		boolean gotAnError = false;

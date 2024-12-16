@@ -18,7 +18,7 @@ public class AccessTokenTest {
 	}
 	
 	@Test
-	public void testIsValid() {
+	public void shouldBeValid() {
 		// Arrange
 		// @formatter:off
 		String mockAccessTokenResponse = "{"
@@ -37,7 +37,7 @@ public class AccessTokenTest {
 	}
 	
 	@Test
-	public void testIsNotValid() {
+	public void shouldBeInvalid() {
 		// Arrange
 		// @formatter:off
 		String mockAccessTokenResponse = "{"

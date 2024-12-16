@@ -38,7 +38,7 @@ public class ViewRenderTest {
 	}
 	
 	@Test
-	public void testGetContent() {
+	public void shouldGetViewContent() {
 		// Arrange
 		String mockMarkedContent = "marked-library";
 		doReturn(mockMarkedContent).when(cut).getResourceContent("marked.min.js");
@@ -62,7 +62,7 @@ public class ViewRenderTest {
 	}
 	
 	@Test
-	public void testGetResourceContent() throws IOException {
+	public void shouldGetResourceContent() throws IOException {
 		// Arrange
 		String expectedValue = randomWord() + "\n";
 		InputStream mockInputStream = new ByteArrayInputStream(expectedValue.getBytes());
