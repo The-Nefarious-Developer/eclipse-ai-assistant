@@ -6,13 +6,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 import com.developer.nefarious.zjoule.plugin.core.Activator;
 
 public class ViewRender implements IViewRender {
-
-	private static final String PROJECT_NAME = Activator.PLUGIN_ID;
 
 	private static final String VIEW_FILES_PATH = "resources/views/";
 	
@@ -64,7 +61,7 @@ public class ViewRender implements IViewRender {
 
 	@Override
 	public String getResourceContent(final String filename) {
-		Bundle bundle = Platform.getBundle(ViewRender.PROJECT_NAME);
+		Bundle bundle = Activator.getDefault().getBundle();
 		final URL unresolvedfileURL = bundle.getEntry(VIEW_FILES_PATH + filename);
 		try {
 			URL resolvedFileURL = FileLocator.toFileURL(unresolvedfileURL);

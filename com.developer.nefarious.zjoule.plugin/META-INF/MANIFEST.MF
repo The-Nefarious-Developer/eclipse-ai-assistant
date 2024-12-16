@@ -26,6 +26,7 @@ Export-Package:
  com.developer.nefarious.zjoule.plugin.chat.models,
  com.developer.nefarious.zjoule.plugin.chat.openai,
  com.developer.nefarious.zjoule.plugin.chat.utils,
+ com.developer.nefarious.zjoule.plugin.core,
  com.developer.nefarious.zjoule.plugin.core.events,
  com.developer.nefarious.zjoule.plugin.core.functions,
  com.developer.nefarious.zjoule.plugin.core.ui,
