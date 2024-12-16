@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import org.junit.jupiter.api.Test;
-import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
-import com.developer.nefarious.zjoule.login.utils.ResourceGroupIdExtractor;
-import com.developer.nefarious.zjoule.models.ResourceGroup;
+import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
+import com.developer.nefarious.zjoule.plugin.login.utils.ResourceGroupIdExtractor;
+import com.developer.nefarious.zjoule.plugin.models.ResourceGroup;
 
 public class ResourceGroupIdExtractorTest {
 	

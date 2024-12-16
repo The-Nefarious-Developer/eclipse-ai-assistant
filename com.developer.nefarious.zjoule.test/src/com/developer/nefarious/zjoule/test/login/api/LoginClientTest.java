@@ -18,13 +18,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.auth.IAuthClient;
-import com.developer.nefarious.zjoule.login.api.GetDeploymentsResponse;
-import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
-import com.developer.nefarious.zjoule.login.api.ILoginClient;
-import com.developer.nefarious.zjoule.login.api.ILoginClientHelper;
-import com.developer.nefarious.zjoule.login.api.LoginClient;
-import com.developer.nefarious.zjoule.models.ServiceKey;
+import com.developer.nefarious.zjoule.plugin.auth.IAuthClient;
+import com.developer.nefarious.zjoule.plugin.login.api.GetDeploymentsResponse;
+import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
+import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
+import com.developer.nefarious.zjoule.plugin.login.api.ILoginClientHelper;
+import com.developer.nefarious.zjoule.plugin.login.api.LoginClient;
+import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 
 public class LoginClientTest {
 	

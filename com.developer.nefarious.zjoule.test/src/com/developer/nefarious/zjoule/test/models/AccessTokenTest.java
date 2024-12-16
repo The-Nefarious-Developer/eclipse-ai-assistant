@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.developer.nefarious.zjoule.models.AccessToken;
+import com.developer.nefarious.zjoule.plugin.models.AccessToken;
 import com.google.gson.Gson;
 
 public class AccessTokenTest {

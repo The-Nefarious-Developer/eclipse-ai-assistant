@@ -19,8 +19,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.osgi.framework.Bundle;
-import com.developer.nefarious.zjoule.core.ui.ViewRender;
-import com.developer.nefarious.zjoule.core.ui.IViewRender;
+import com.developer.nefarious.zjoule.plugin.core.ui.IViewRender;
+import com.developer.nefarious.zjoule.plugin.core.ui.ViewRender;
 
 public class ViewRenderTest {
 	

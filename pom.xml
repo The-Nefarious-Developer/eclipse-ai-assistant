@@ -14,7 +14,7 @@
 	<name>zjoule</name>
 
 	<modules>
-		<module>com.developer.nefarious.zjoule</module>
+		<module>com.developer.nefarious.zjoule.plugin</module>
 		<module>com.developer.nefarious.zjoule.test</module>
 	</modules>
 	

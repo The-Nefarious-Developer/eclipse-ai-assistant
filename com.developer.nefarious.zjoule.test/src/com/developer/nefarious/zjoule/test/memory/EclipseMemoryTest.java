@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import org.osgi.service.prefs.BackingStoreException;
-import com.developer.nefarious.zjoule.memory.EclipseMemory;
+import com.developer.nefarious.zjoule.plugin.memory.EclipseMemory;
 
 public class EclipseMemoryTest {
 

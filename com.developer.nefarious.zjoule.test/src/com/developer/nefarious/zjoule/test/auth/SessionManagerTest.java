@@ -13,13 +13,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.auth.SessionManager;
-import com.developer.nefarious.zjoule.core.functions.TagHandler;
-import com.developer.nefarious.zjoule.memory.EclipseMemory;
-import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
-import com.developer.nefarious.zjoule.memory.MemoryDeployment;
-import com.developer.nefarious.zjoule.memory.MemoryResourceGroup;
-import com.developer.nefarious.zjoule.memory.MemoryServiceKey;
+import com.developer.nefarious.zjoule.plugin.auth.SessionManager;
+import com.developer.nefarious.zjoule.plugin.core.functions.TagHandler;
+import com.developer.nefarious.zjoule.plugin.memory.EclipseMemory;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryAccessToken;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryDeployment;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryResourceGroup;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
 
 public class SessionManagerTest {
 	

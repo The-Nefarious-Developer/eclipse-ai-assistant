@@ -1,0 +1,40 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: zjoule
+Bundle-SymbolicName: com.developer.nefarious.zjoule.plugin;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.developer.nefarious.zjoule.plugin.core.Activator
+Bundle-Vendor: The Nefarious Developer
+Require-Bundle: 
+ org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources;bundle-version="3.21.0",
+ org.eclipse.ui.ide;bundle-version="3.22.300",
+ org.eclipse.jface,
+ org.eclipse.swt
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Automatic-Module-Name: com.developer.nefarious.zjoule.plugin
+Import-Package: 
+ com.google.gson;version="[2.11.0,3.0.0)",
+ com.google.gson.annotations;version="[2.11.0,3.0.0)",
+ jakarta.inject;version="[2.0.0,3.0.0)"
+Bundle-ActivationPolicy: lazy
+Export-Package: 
+ com.developer.nefarious.zjoule.plugin.auth,
+ com.developer.nefarious.zjoule.plugin.chat,
+ com.developer.nefarious.zjoule.plugin.chat.memory,
+ com.developer.nefarious.zjoule.plugin.chat.models,
+ com.developer.nefarious.zjoule.plugin.chat.openai,
+ com.developer.nefarious.zjoule.plugin.chat.utils,
+ com.developer.nefarious.zjoule.plugin.core.events,
+ com.developer.nefarious.zjoule.plugin.core.functions,
+ com.developer.nefarious.zjoule.plugin.core.ui,
+ com.developer.nefarious.zjoule.plugin.login,
+ com.developer.nefarious.zjoule.plugin.login.api,
+ com.developer.nefarious.zjoule.plugin.login.events,
+ com.developer.nefarious.zjoule.plugin.login.memory,
+ com.developer.nefarious.zjoule.plugin.login.pages,
+ com.developer.nefarious.zjoule.plugin.login.utils,
+ com.developer.nefarious.zjoule.plugin.memory,
+ com.developer.nefarious.zjoule.plugin.memory.utils,
+ com.developer.nefarious.zjoule.plugin.models

@@ -3,7 +3,7 @@ package com.developer.nefarious.zjoule.test.login.utils;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import com.developer.nefarious.zjoule.login.utils.JsonValidator;
+import com.developer.nefarious.zjoule.plugin.login.utils.JsonValidator;
 import com.google.gson.JsonSyntaxException;
 
 public class JsonValidatorTest {

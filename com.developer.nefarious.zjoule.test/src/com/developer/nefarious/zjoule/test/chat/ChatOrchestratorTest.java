@@ -17,14 +17,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.chat.AIClientFactory;
-import com.developer.nefarious.zjoule.chat.ChatOrchestrator;
-import com.developer.nefarious.zjoule.chat.IAIClient;
-import com.developer.nefarious.zjoule.chat.IChatMessage;
-import com.developer.nefarious.zjoule.chat.IChatOrchestrator;
-import com.developer.nefarious.zjoule.chat.Instruction;
-import com.developer.nefarious.zjoule.chat.utils.EditorContentReader;
-import com.developer.nefarious.zjoule.models.Role;
+import com.developer.nefarious.zjoule.plugin.chat.AIClientFactory;
+import com.developer.nefarious.zjoule.plugin.chat.ChatOrchestrator;
+import com.developer.nefarious.zjoule.plugin.chat.IAIClient;
+import com.developer.nefarious.zjoule.plugin.chat.IChatMessage;
+import com.developer.nefarious.zjoule.plugin.chat.IChatOrchestrator;
+import com.developer.nefarious.zjoule.plugin.chat.Instruction;
+import com.developer.nefarious.zjoule.plugin.chat.utils.EditorContentReader;
+import com.developer.nefarious.zjoule.plugin.models.Role;
 
 public class ChatOrchestratorTest {
 

@@ -14,13 +14,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.chat.memory.IMemoryMessageHistory;
-import com.developer.nefarious.zjoule.chat.memory.MemoryMessageHistory;
-import com.developer.nefarious.zjoule.memory.utils.IObjectSerializer;
-import com.developer.nefarious.zjoule.models.Role;
-import com.developer.nefarious.zjoule.chat.models.Message;
-import com.developer.nefarious.zjoule.chat.models.MessageHistory;
+import com.developer.nefarious.zjoule.plugin.chat.memory.IMemoryMessageHistory;
+import com.developer.nefarious.zjoule.plugin.chat.memory.MemoryMessageHistory;
+import com.developer.nefarious.zjoule.plugin.chat.models.Message;
+import com.developer.nefarious.zjoule.plugin.chat.models.MessageHistory;
+import com.developer.nefarious.zjoule.plugin.memory.IEclipseMemory;
+import com.developer.nefarious.zjoule.plugin.memory.utils.IObjectSerializer;
+import com.developer.nefarious.zjoule.plugin.models.Role;
 
 public class MemoryMessageHistoryTest {
 
