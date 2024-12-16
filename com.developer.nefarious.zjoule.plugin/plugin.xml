@@ -5,7 +5,7 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            name="AI Assistant"
+            name="SAP AI Assistant"
             id="com.developer.nefarious.zjoule.plugin">
       </category>
       <view
