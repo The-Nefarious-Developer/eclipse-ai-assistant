@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.net.URI;
@@ -113,6 +114,9 @@ public class LoginClientTest {
 
 		// Assert
 		assertEquals(expectedValue, returnValue);
+		verify(mockBuilder).uri(mockEndpointInURIFormat);
+		verify(mockBuilder).header("Authorization", mockAuthorization);
+		verify(mockBuilder).GET();
 	}
 	
 	@Test
@@ -155,6 +159,10 @@ public class LoginClientTest {
 
 		// Assert
 		assertEquals(expectedValue, returnValue);
+		verify(mockBuilder).uri(mockEndpointInURIFormat);
+		verify(mockBuilder).header("Authorization", mockAuthorization);
+		verify(mockBuilder).header("AI-Resource-Group", mockResourceGroup);
+		verify(mockBuilder).GET();
 	}
 	
 }
