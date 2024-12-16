@@ -18,6 +18,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.auth.IAuthClient;
+import com.developer.nefarious.zjoule.login.api.GetDeploymentsResponse;
 import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.login.api.ILoginClientHelper;
@@ -109,6 +110,48 @@ public class LoginClientTest {
 		
 		// Act
 		GetResourceGroupsResponse returnValue = cut.getResourceGroups(mockServiceKey);
+
+		// Assert
+		assertEquals(expectedValue, returnValue);
+	}
+	
+	@Test
+	public void shouldPlumbDeployments() throws IOException, InterruptedException {
+		// Arrange
+		GetDeploymentsResponse expectedValue = mock(GetDeploymentsResponse.class);
+		
+		String mockResourceGroup = "selected-resource-group";
+		
+		String mockServiceURL = "https://some-url.com";
+		when(mockServiceKey.getServiceURL()).thenReturn(mockServiceURL);
+		
+		String mockEndpointInStringFormat = mockServiceURL + "/lm/deployments";
+		URI mockEndpointInURIFormat = mock(URI.class);
+		when(mockLoginClientHelper.createAuthUri(mockEndpointInStringFormat)).thenReturn(mockEndpointInURIFormat);
+		
+		when(mockBuilder.uri(mockEndpointInURIFormat)).thenReturn(mockBuilder);
+		
+		String mockToken = "access-token";
+		when(mockAuthClient.getNewAccessToken(mockServiceKey)).thenReturn(mockToken);
+		
+		String mockAuthorization = "Bearer " + mockToken;
+		when(mockBuilder.header("Authorization", mockAuthorization)).thenReturn(mockBuilder);
+		
+		when(mockBuilder.header("AI-Resource-Group", mockResourceGroup)).thenReturn(mockBuilder);
+		
+		when(mockBuilder.GET()).thenReturn(mockBuilder);
+		
+		when(mockBuilder.build()).thenReturn(mockHttpRequest);
+		
+		when(mockHttpClient.send(mockHttpRequest, HttpResponse.BodyHandlers.ofString())).thenReturn(mockHttpResponse);
+		
+		String mockResponseBody = "response-content";
+		when(mockHttpResponse.body()).thenReturn(mockResponseBody);
+		
+		when(mockLoginClientHelper.parseDeploymentsResponseToObject(mockResponseBody)).thenReturn(expectedValue);
+		
+		// Act
+		GetDeploymentsResponse returnValue = cut.getDeployments(mockServiceKey, mockResourceGroup);
 
 		// Assert
 		assertEquals(expectedValue, returnValue);
