@@ -23,6 +23,7 @@ public class Initialization implements Runnable {
 			SessionManager.logout(browser, new EclipseMemory());
 		}
 		MessageHistoryLoader.loadFromMemory(browser);
+		browser.execute("updatePlaceholder();");
 	}
 
 }
