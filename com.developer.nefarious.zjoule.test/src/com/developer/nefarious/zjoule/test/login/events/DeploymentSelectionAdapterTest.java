@@ -1,6 +1,5 @@
 package com.developer.nefarious.zjoule.test.login.events;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -36,7 +35,7 @@ public class DeploymentSelectionAdapterTest {
 	}
 	
 	@Test
-	public void testWidgetSelectedWhenThereIsText() {
+	public void shouldSetAsCompleteWhenThereIsText() {
 		// Arrange
 		SelectionEvent mockSelectionEvent = mock(SelectionEvent.class);
 		
@@ -58,13 +57,12 @@ public class DeploymentSelectionAdapterTest {
 		cut.widgetSelected(mockSelectionEvent);
 		
 		// Assert
-		assertTrue(true);
 		verify(mockSecondLoginWizardPage).setPageComplete(true);
 		verify(mockMemoryDeployment).save(deployment2);
 	}
 	
 	@Test
-	public void testWidgetSelectedWhenThereIsNoText() {
+	public void shouldSetAsIncompleteWhenThereIsNoText() {
 		// Arrange
 		SelectionEvent mockSelectionEvent = mock(SelectionEvent.class);
 		
@@ -77,7 +75,6 @@ public class DeploymentSelectionAdapterTest {
 		cut.widgetSelected(mockSelectionEvent);
 		
 		// Assert
-//		assertTrue(true);
 		verify(mockSecondLoginWizardPage).setPageComplete(false);
 	}
 
