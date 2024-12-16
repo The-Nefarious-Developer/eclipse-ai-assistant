@@ -17,6 +17,7 @@
 		<module>com.developer.nefarious.zjoule.plugin</module>
 		<module>com.developer.nefarious.zjoule.test</module>
 		<module>com.developer.nefarious.zjoule.feature</module>
+		<module>com.developer.nefarious.zjoule.updatesite</module>
 	</modules>
 	
 </project>
