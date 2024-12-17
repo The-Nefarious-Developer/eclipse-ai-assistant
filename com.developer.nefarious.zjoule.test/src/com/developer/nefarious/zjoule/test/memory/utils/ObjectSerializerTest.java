@@ -3,9 +3,9 @@ package com.developer.nefarious.zjoule.test.memory.utils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.developer.nefarious.zjoule.memory.utils.IObjectSerializer;
-import com.developer.nefarious.zjoule.memory.utils.ObjectSerializer;
-import com.developer.nefarious.zjoule.models.AccessToken;
+import com.developer.nefarious.zjoule.plugin.memory.utils.IObjectSerializer;
+import com.developer.nefarious.zjoule.plugin.memory.utils.ObjectSerializer;
+import com.developer.nefarious.zjoule.plugin.models.AccessToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

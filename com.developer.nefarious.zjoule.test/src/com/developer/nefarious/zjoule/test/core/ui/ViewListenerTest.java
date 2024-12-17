@@ -29,17 +29,17 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.core.ui.BrowserFactory;
-import com.developer.nefarious.zjoule.core.ui.IViewRender;
-import com.developer.nefarious.zjoule.core.ui.ViewListener;
-import com.developer.nefarious.zjoule.core.ui.ViewRender;
-import com.developer.nefarious.zjoule.core.events.SelectionListener;
-import com.developer.nefarious.zjoule.core.functions.ClearHandler;
-import com.developer.nefarious.zjoule.core.functions.LoginHandler;
-import com.developer.nefarious.zjoule.core.functions.LogoutHandler;
-import com.developer.nefarious.zjoule.core.functions.PromptHandler;
-import com.developer.nefarious.zjoule.core.events.Initialization;
-import com.developer.nefarious.zjoule.core.events.PartListener;
+import com.developer.nefarious.zjoule.plugin.core.events.Initialization;
+import com.developer.nefarious.zjoule.plugin.core.events.PartListener;
+import com.developer.nefarious.zjoule.plugin.core.events.SelectionListener;
+import com.developer.nefarious.zjoule.plugin.core.functions.ClearHandler;
+import com.developer.nefarious.zjoule.plugin.core.functions.LoginHandler;
+import com.developer.nefarious.zjoule.plugin.core.functions.LogoutHandler;
+import com.developer.nefarious.zjoule.plugin.core.functions.PromptHandler;
+import com.developer.nefarious.zjoule.plugin.core.ui.BrowserFactory;
+import com.developer.nefarious.zjoule.plugin.core.ui.IViewRender;
+import com.developer.nefarious.zjoule.plugin.core.ui.ViewListener;
+import com.developer.nefarious.zjoule.plugin.core.ui.ViewRender;
 
 public class ViewListenerTest {
 

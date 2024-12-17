@@ -14,13 +14,13 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.osgi.framework.Bundle;
-import com.developer.nefarious.zjoule.core.ui.ViewRender;
-import com.developer.nefarious.zjoule.core.ui.IViewRender;
+import com.developer.nefarious.zjoule.plugin.core.ui.IViewRender;
+import com.developer.nefarious.zjoule.plugin.core.ui.ViewRender;
+import com.developer.nefarious.zjoule.plugin.core.Activator;
 
 public class ViewRenderTest {
 	
@@ -67,17 +67,19 @@ public class ViewRenderTest {
 		String expectedValue = randomWord() + "\n";
 		InputStream mockInputStream = new ByteArrayInputStream(expectedValue.getBytes());
 		
-		String projectName = "com.developer.nefarious.zjoule";
 		String viewFilesPath = "resources/views/";
 		String mockFileName = randomWord();
 		
-	    Bundle mockBundle = mock(Bundle.class);
+		Bundle mockBundle = mock(Bundle.class);
+	    Activator mockActivator = mock(Activator.class);
 		URL mockUnresolvedURL = mock(URL.class);
 		URL mockResolvedURL = mock(URL.class);
 		
 		// Mock the static call for Platform.getBundle(...)
-		try (MockedStatic<Platform> mockedStaticPlatform = mockStatic(Platform.class)) {
-			mockedStaticPlatform.when(() -> Platform.getBundle(projectName)).thenReturn(mockBundle);
+		try (MockedStatic<Activator> mockedStaticActivator = mockStatic(Activator.class)) {
+			mockedStaticActivator.when(Activator::getDefault).thenReturn(mockActivator);
+			
+			when(mockActivator.getBundle()).thenReturn(mockBundle);		
 			when(mockBundle.getEntry(viewFilesPath + mockFileName)).thenReturn(mockUnresolvedURL);
 			
 			// Mock the static call for FileLocator.toFileURL(...)

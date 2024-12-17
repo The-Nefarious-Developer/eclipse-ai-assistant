@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/zjoule_1.0.0.qualifier.jar" id="com.developer.nefarious.zjoule" version="1.0.0.qualifier">
+      <category name="com.developer.nefarious.zjoule.group"/>
+   </feature>
+   <category-def name="com.developer.nefarious.zjoule.group" label="The Nefarious Developer - zJoule">
+      <description>
+         Provides an AI-powered assistant for Eclipse, leveraging SAP AI Core to enhance development productivity.
+      </description>
+   </category-def>
+</site>

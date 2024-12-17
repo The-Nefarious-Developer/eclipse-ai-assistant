@@ -7,10 +7,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.login.memory.TemporaryMemoryServiceKey;
-import com.developer.nefarious.zjoule.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.memory.utils.IObjectSerializer;
-import com.developer.nefarious.zjoule.models.ServiceKey;
+import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryServiceKey;
+import com.developer.nefarious.zjoule.plugin.memory.IEclipseMemory;
+import com.developer.nefarious.zjoule.plugin.memory.utils.IObjectSerializer;
+import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 
 public class TemporaryMemoryServiceKeyTest {
 	

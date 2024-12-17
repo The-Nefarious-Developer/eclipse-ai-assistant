@@ -11,13 +11,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.login.api.GetDeploymentsResponse;
-import com.developer.nefarious.zjoule.login.api.ILoginClient;
-import com.developer.nefarious.zjoule.login.events.ResourceGroupSelectionAdapter;
-import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
-import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
-import com.developer.nefarious.zjoule.models.Deployment;
-import com.developer.nefarious.zjoule.models.ServiceKey;
+import com.developer.nefarious.zjoule.plugin.login.api.GetDeploymentsResponse;
+import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
+import com.developer.nefarious.zjoule.plugin.login.events.ResourceGroupSelectionAdapter;
+import com.developer.nefarious.zjoule.plugin.login.pages.SecondLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.plugin.models.Deployment;
+import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 
 public class ResourceGroupSelectionAdapterTest {
 	

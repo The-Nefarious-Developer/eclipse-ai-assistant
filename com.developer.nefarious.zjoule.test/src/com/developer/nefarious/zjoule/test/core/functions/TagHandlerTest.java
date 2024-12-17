@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.chat.utils.EditorContentReader;
-import com.developer.nefarious.zjoule.core.functions.TagHandler;
+import com.developer.nefarious.zjoule.plugin.chat.utils.EditorContentReader;
+import com.developer.nefarious.zjoule.plugin.core.functions.TagHandler;
 
 public class TagHandlerTest {
 	

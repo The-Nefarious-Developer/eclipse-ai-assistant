@@ -8,9 +8,9 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
-import com.developer.nefarious.zjoule.login.api.GetDeploymentsResponse;
-import com.developer.nefarious.zjoule.login.api.GetResourceGroupsResponse;
-import com.developer.nefarious.zjoule.login.api.LoginClientHelper;
+import com.developer.nefarious.zjoule.plugin.login.api.GetDeploymentsResponse;
+import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
+import com.developer.nefarious.zjoule.plugin.login.api.LoginClientHelper;
 import com.google.gson.Gson;
 
 public class LoginClientHelperTest {

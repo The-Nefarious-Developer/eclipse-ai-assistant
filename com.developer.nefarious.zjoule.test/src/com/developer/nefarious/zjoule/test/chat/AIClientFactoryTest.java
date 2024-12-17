@@ -10,15 +10,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.chat.AIClientFactory;
-import com.developer.nefarious.zjoule.chat.IAIClient;
-import com.developer.nefarious.zjoule.chat.memory.MemoryMessageHistory;
-import com.developer.nefarious.zjoule.chat.openai.OpenAIClient;
-import com.developer.nefarious.zjoule.memory.MemoryAccessToken;
-import com.developer.nefarious.zjoule.memory.MemoryDeployment;
-import com.developer.nefarious.zjoule.memory.MemoryResourceGroup;
-import com.developer.nefarious.zjoule.memory.MemoryServiceKey;
-import com.developer.nefarious.zjoule.models.Deployment;
+import com.developer.nefarious.zjoule.plugin.chat.AIClientFactory;
+import com.developer.nefarious.zjoule.plugin.chat.IAIClient;
+import com.developer.nefarious.zjoule.plugin.chat.memory.MemoryMessageHistory;
+import com.developer.nefarious.zjoule.plugin.chat.openai.OpenAIClient;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryAccessToken;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryDeployment;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryResourceGroup;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
+import com.developer.nefarious.zjoule.plugin.models.Deployment;
 
 public class AIClientFactoryTest {
 		

@@ -11,9 +11,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
-import com.developer.nefarious.zjoule.memory.MemoryResourceGroup;
+import com.developer.nefarious.zjoule.plugin.memory.IEclipseMemory;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryResourceGroup;
 
 public class MemoryResourceGroupTest {
 

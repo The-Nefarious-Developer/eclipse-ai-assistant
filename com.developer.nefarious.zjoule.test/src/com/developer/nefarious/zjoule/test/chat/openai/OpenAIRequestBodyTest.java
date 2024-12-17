@@ -3,9 +3,9 @@ package com.developer.nefarious.zjoule.test.chat.openai;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import com.developer.nefarious.zjoule.chat.openai.OpenAIChatMessage;
-import com.developer.nefarious.zjoule.chat.openai.OpenAIRequestBody;
-import com.developer.nefarious.zjoule.models.Role;
+import com.developer.nefarious.zjoule.plugin.chat.openai.OpenAIChatMessage;
+import com.developer.nefarious.zjoule.plugin.chat.openai.OpenAIRequestBody;
+import com.developer.nefarious.zjoule.plugin.models.Role;
 
 public class OpenAIRequestBodyTest {
 	

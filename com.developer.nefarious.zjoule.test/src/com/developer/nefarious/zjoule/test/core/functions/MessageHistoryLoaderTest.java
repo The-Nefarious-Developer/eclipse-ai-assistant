@@ -15,11 +15,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.chat.memory.MemoryMessageHistory;
-import com.developer.nefarious.zjoule.chat.models.Message;
-import com.developer.nefarious.zjoule.chat.models.MessageHistory;
-import com.developer.nefarious.zjoule.core.functions.MessageHistoryLoader;
-import com.developer.nefarious.zjoule.models.Role;
+import com.developer.nefarious.zjoule.plugin.chat.memory.MemoryMessageHistory;
+import com.developer.nefarious.zjoule.plugin.chat.models.Message;
+import com.developer.nefarious.zjoule.plugin.chat.models.MessageHistory;
+import com.developer.nefarious.zjoule.plugin.core.functions.MessageHistoryLoader;
+import com.developer.nefarious.zjoule.plugin.models.Role;
 
 public class MessageHistoryLoaderTest {
 	

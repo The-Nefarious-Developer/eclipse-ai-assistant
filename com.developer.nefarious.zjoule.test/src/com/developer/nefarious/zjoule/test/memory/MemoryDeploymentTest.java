@@ -11,11 +11,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
-import com.developer.nefarious.zjoule.memory.MemoryDeployment;
-import com.developer.nefarious.zjoule.memory.utils.IObjectSerializer;
-import com.developer.nefarious.zjoule.models.Deployment;
+import com.developer.nefarious.zjoule.plugin.memory.IEclipseMemory;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryDeployment;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryDeployment;
+import com.developer.nefarious.zjoule.plugin.memory.utils.IObjectSerializer;
+import com.developer.nefarious.zjoule.plugin.models.Deployment;
 
 public class MemoryDeploymentTest {
 

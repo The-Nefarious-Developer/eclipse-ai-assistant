@@ -24,18 +24,18 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.auth.AuthClient;
-import com.developer.nefarious.zjoule.chat.IChatMessage;
-import com.developer.nefarious.zjoule.chat.models.Message;
-import com.developer.nefarious.zjoule.chat.models.MessageHistory;
-import com.developer.nefarious.zjoule.chat.memory.IMemoryMessageHistory;
-import com.developer.nefarious.zjoule.chat.openai.IOpenAIClientHelper;
-import com.developer.nefarious.zjoule.chat.openai.OpenAIClient;
-import com.developer.nefarious.zjoule.chat.openai.OpenAIChatMessage;
-import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
-import com.developer.nefarious.zjoule.memory.IMemoryResourceGroup;
-import com.developer.nefarious.zjoule.models.Deployment;
-import com.developer.nefarious.zjoule.models.Role;
+import com.developer.nefarious.zjoule.plugin.auth.AuthClient;
+import com.developer.nefarious.zjoule.plugin.chat.IChatMessage;
+import com.developer.nefarious.zjoule.plugin.chat.memory.IMemoryMessageHistory;
+import com.developer.nefarious.zjoule.plugin.chat.models.Message;
+import com.developer.nefarious.zjoule.plugin.chat.models.MessageHistory;
+import com.developer.nefarious.zjoule.plugin.chat.openai.IOpenAIClientHelper;
+import com.developer.nefarious.zjoule.plugin.chat.openai.OpenAIChatMessage;
+import com.developer.nefarious.zjoule.plugin.chat.openai.OpenAIClient;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryDeployment;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.plugin.models.Deployment;
+import com.developer.nefarious.zjoule.plugin.models.Role;
 
 public class OpenAIClientTest {
 

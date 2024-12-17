@@ -12,10 +12,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import com.developer.nefarious.zjoule.login.events.DeploymentSelectionAdapter;
-import com.developer.nefarious.zjoule.login.pages.SecondLoginWizardPage;
-import com.developer.nefarious.zjoule.memory.IMemoryDeployment;
-import com.developer.nefarious.zjoule.models.Deployment;
+import com.developer.nefarious.zjoule.plugin.login.events.DeploymentSelectionAdapter;
+import com.developer.nefarious.zjoule.plugin.login.pages.SecondLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryDeployment;
+import com.developer.nefarious.zjoule.plugin.models.Deployment;
 
 public class DeploymentSelectionAdapterTest {
 	
