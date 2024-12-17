@@ -20,8 +20,7 @@ public class PromptHandler extends BrowserFunction {
 	@Override
 	public Object function(final Object[] arguments) {
 		String userPrompt = arguments[0].toString();
-		String answer = chatOrchestrator.getAnswer(userPrompt);
-		return answer;
+		return chatOrchestrator.getAnswer(userPrompt);
 	}
 
 }

@@ -25,9 +25,9 @@ public class SecondLoginWizardPage extends WizardPage {
 
 	private Combo deploymentDropdown;
 
-	private List<String> resourceGroupsForSelection = new ArrayList<String>();
+	private List<String> resourceGroupsForSelection = new ArrayList<>();
 
-	private List<Deployment> deploymentsForSelection = new ArrayList<Deployment>();
+	private List<Deployment> deploymentsForSelection = new ArrayList<>();
 
 	private ILoginClient loginClient;
 
@@ -110,7 +110,7 @@ public class SecondLoginWizardPage extends WizardPage {
 		return deploymentDropdown;
 	}
 
-	public void setResourceGroupsForSelection(final ArrayList<String> resourceGroupsForSelection) {
+	public void setResourceGroupsForSelection(final List<String> resourceGroupsForSelection) {
 		this.resourceGroupsForSelection = resourceGroupsForSelection;
 	}
 

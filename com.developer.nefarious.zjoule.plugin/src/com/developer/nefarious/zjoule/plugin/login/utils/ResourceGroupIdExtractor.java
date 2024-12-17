@@ -5,9 +5,11 @@ import java.util.List;
 import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.plugin.models.ResourceGroup;
 
-public class ResourceGroupIdExtractor {
+public abstract class ResourceGroupIdExtractor {
 	
-	public static ArrayList<String> extractResourceGroupIds(final GetResourceGroupsResponse response) {
+	private ResourceGroupIdExtractor() { }
+	
+	public static List<String> extractResourceGroupIds(final GetResourceGroupsResponse response) {
 		// Step 0: Check if response is null
         if (response == null) {
             return null;
@@ -17,7 +19,7 @@ public class ResourceGroupIdExtractor {
         List<ResourceGroup> resourceGroups = response.getResourceGroups();
 
         // Step 2: Create an ArrayList to store the resource group IDs
-        ArrayList<String> resourceGroupIds = new ArrayList<>();
+        List<String> resourceGroupIds = new ArrayList<>();
 
         // Step 3 & 4: Loop through each ResourceGroup and extract the resourceGroupId
         for (ResourceGroup resourceGroup : resourceGroups) {

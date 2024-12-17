@@ -61,8 +61,18 @@ public class TemporaryMemoryServiceKey implements IMemoryServiceKey, ITemporaryM
 
 	@Override
 	public Boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return null;
+		ServiceKey serviceKey = load();
+		if (serviceKey == null) {
+			return true;
+		}
+		if (serviceKey.getClientId() == null) {
+			return true;
+		}
+		if (serviceKey.getClientId().isEmpty() || 
+				serviceKey.getClientId().isBlank()) {
+			return true;
+		}
+		return false;
 	}
 
 }

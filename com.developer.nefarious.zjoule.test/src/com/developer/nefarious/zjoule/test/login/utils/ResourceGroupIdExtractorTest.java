@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.plugin.login.utils.ResourceGroupIdExtractor;
@@ -27,7 +27,7 @@ public class ResourceGroupIdExtractorTest {
         when(mockResponse.getResourceGroups()).thenReturn(Arrays.asList(mockResourceGroup1, mockResourceGroup2));
 
         // Act
-        ArrayList<String> returnObject = ResourceGroupIdExtractor.extractResourceGroupIds(mockResponse);
+        List<String> returnObject = ResourceGroupIdExtractor.extractResourceGroupIds(mockResponse);
 
         // Assert
         assertNotNull(returnObject, "The result should not be null");
@@ -43,7 +43,7 @@ public class ResourceGroupIdExtractorTest {
         when(mockResponse.getResourceGroups()).thenReturn(Collections.emptyList());
 
         // Act
-        ArrayList<String> returnObject = ResourceGroupIdExtractor.extractResourceGroupIds(mockResponse);
+        List<String> returnObject = ResourceGroupIdExtractor.extractResourceGroupIds(mockResponse);
 
         // Assert
         assertNotNull(returnObject, "The result should not be null");
@@ -56,7 +56,7 @@ public class ResourceGroupIdExtractorTest {
         GetResourceGroupsResponse mockResponse = null;
 
         // Act
-        ArrayList<String> result = ResourceGroupIdExtractor.extractResourceGroupIds(mockResponse);
+        List<String> result = ResourceGroupIdExtractor.extractResourceGroupIds(mockResponse);
 
         // Assert
         assertNull(result, "The result should be null when the response is null");

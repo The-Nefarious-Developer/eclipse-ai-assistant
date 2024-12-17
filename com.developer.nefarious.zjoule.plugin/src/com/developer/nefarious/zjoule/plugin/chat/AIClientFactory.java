@@ -12,7 +12,9 @@ import com.developer.nefarious.zjoule.plugin.memory.MemoryResourceGroup;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
 
-public class AIClientFactory {
+public abstract class AIClientFactory {
+	
+	private AIClientFactory() { }
 
 	public static IAIClient getClient() {
 

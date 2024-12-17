@@ -61,8 +61,18 @@ public class TemporaryMemoryAccessToken implements IMemoryAccessToken, ITemporar
 
 	@Override
 	public Boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return null;
+		AccessToken accessToken = load();
+		if (accessToken == null) {
+			return true;
+		}
+		if (accessToken.getAccessToken() == null) {
+			return true;
+		}
+		if (accessToken.getAccessToken().isEmpty() ||
+				accessToken.getAccessToken().isBlank()) {
+			return true;
+		}
+		return false;
 	}
 
 }

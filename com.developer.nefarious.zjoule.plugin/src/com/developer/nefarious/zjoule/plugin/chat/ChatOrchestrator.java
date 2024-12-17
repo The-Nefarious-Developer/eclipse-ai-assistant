@@ -11,7 +11,7 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 	@Override
 	public String getAnswer(final String userPrompt) {
 		
-		List<IChatMessage> messages = new ArrayList<IChatMessage>();
+		List<IChatMessage> messages = new ArrayList<>();
 		
 		// 0. Define which AI Client should be used
 		IAIClient aiClient = AIClientFactory.getClient();
@@ -39,7 +39,7 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 		IChatMessage answer;
 		try {
 			answer = aiClient.chatCompletion(messages);
-		} catch (IOException|InterruptedException e) {
+		} catch (IOException | InterruptedException e) {
 			return "Error during the AI request execution";
 		}
 		

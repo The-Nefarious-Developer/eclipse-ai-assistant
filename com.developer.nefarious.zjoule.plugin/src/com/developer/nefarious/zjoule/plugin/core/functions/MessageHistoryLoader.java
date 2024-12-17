@@ -8,6 +8,8 @@ import com.developer.nefarious.zjoule.plugin.chat.models.MessageHistory;
 import com.developer.nefarious.zjoule.plugin.models.Role;
 
 public abstract class MessageHistoryLoader {
+	
+	private MessageHistoryLoader() { }
 
 	public static void loadFromMemory(final Browser browser) {
 		MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
