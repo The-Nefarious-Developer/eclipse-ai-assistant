@@ -67,7 +67,6 @@ public class TemporaryMemoryServiceKeyTest {
 	@Test
 	public void shouldPersistServiceKey() {
 		// Arrange
-		ServiceKey mockServiceKey = new ServiceKey();
 		String mockSerializedObject = "It doesn't matter";
 		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockSerializedObject);
 		// Act
