@@ -172,5 +172,22 @@ public class ChatOrchestratorTest {
 		verify(mockAIClient).setMessageHistory(mockAllMessages);
 		assertEquals(expectedValue, returnValue);
 	}
+	
+	@Test
+	public void shouldReturnErrorIfModelIsIncompatible() {
+		// Arrange
+		String mockUserPrompt = "What's the meaning of life?";
+		String expectedValue = "The model you have selected is incompatible with the current "
+				+ "operation. Please verify the model's configuration or choose a "
+				+ "compatible alternative.";
+		
+		mockedStaticAIClientFactory.when(AIClientFactory::getClient).thenReturn(null);
+		
+		// Act
+		String returnValue = cut.getAnswer(mockUserPrompt);
+		
+		// Assert
+		assertEquals(expectedValue, returnValue);
+	}
 
 }

@@ -1,6 +1,10 @@
 package com.developer.nefarious.zjoule.test.login.memory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,11 +19,11 @@ import com.developer.nefarious.zjoule.plugin.models.Deployment;
 public class TemporaryMemoryDeploymentTest {
 
 	public static final String FINAL_KEY = "deployment";
-	
+
 	public static final String TEMPORARY_KEY = "tmp-deployment";
 
 	private TemporaryMemoryDeployment cut;
-	
+
 	@Mock
 	IObjectSerializer mockObjectSerializer;
 
@@ -29,10 +33,10 @@ public class TemporaryMemoryDeploymentTest {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		
+
 		TemporaryMemoryDeployment.resetInstance();
 		TemporaryMemoryDeployment.initialize(mockObjectSerializer, mockEclipseMemory);
-		cut = TemporaryMemoryDeployment.getInstance();
+		cut = spy(TemporaryMemoryDeployment.getInstance());
 	}
 
 	@Test
@@ -70,5 +74,68 @@ public class TemporaryMemoryDeploymentTest {
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(FINAL_KEY, mockSerializedObject);
 	}
-	
+
+	@Test
+	public void shouldBeEmptyWhenNoMemory() {
+		// Arrange
+		doReturn(null).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+
+	@Test
+	public void shouldBeEmptyWhenDeploymentIsNull() {
+		// Arrange
+		Deployment mockMockDeployment = new Deployment();
+		mockMockDeployment.setConfigurationName(null);
+		doReturn(mockMockDeployment).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+
+	@Test
+	public void shouldBeEmptyWhenDeploymentIsEmpty() {
+		// Arrange
+		Deployment mockMockDeployment = new Deployment();
+		mockMockDeployment.setConfigurationName("");
+		doReturn(mockMockDeployment).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+
+	@Test
+	public void shouldBeEmptyWhenDeploymentIsBlank() {
+		// Arrange
+		Deployment mockMockDeployment = new Deployment();
+		mockMockDeployment.setConfigurationName(" ");
+		doReturn(mockMockDeployment).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+
+	@Test
+	public void shouldNotBeEmptyWhenDeploymentIsSave() {
+		// Arrange
+		Deployment mockMockDeployment = new Deployment();
+		mockMockDeployment.setConfigurationName("some-deployment");
+		doReturn(mockMockDeployment).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertFalse(returnValue);
+	}
+
 }

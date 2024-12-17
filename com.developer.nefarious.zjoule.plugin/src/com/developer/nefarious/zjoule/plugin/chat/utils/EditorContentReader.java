@@ -9,7 +9,9 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-public class EditorContentReader {
+public abstract class EditorContentReader {
+	
+	private EditorContentReader() { }
 
 	public static String readActiveEditorContent() {
 		try {

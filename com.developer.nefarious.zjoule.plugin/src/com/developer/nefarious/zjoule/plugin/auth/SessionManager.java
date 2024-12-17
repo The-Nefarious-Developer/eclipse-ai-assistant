@@ -9,6 +9,8 @@ import com.developer.nefarious.zjoule.plugin.memory.MemoryResourceGroup;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
 
 public abstract class SessionManager {
+	
+	private SessionManager() { }
 
 	public static boolean isUserLoggedIn() {
 		MemoryAccessToken memoryAccessToken = MemoryAccessToken.getInstance();

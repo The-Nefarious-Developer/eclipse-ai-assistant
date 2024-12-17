@@ -50,7 +50,13 @@ public class TemporaryMemoryResourceGroup implements IMemoryResourceGroup, ITemp
 
 	@Override
 	public Boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return null;
+		String resourceGroup = load();
+		if (resourceGroup == null) {
+			return true;
+		}
+		if (resourceGroup.isEmpty() || resourceGroup.isBlank()) {
+			return true;
+		}
+		return false;
 	}
 }

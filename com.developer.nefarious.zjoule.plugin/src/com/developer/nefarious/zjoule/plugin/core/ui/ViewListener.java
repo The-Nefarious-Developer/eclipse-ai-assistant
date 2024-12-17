@@ -27,8 +27,6 @@ public class ViewListener extends ViewPart {
 
 	private Browser browser;
 
-	private IViewRender viewRender;
-
 	private ISelectionListener selectionListener;
 
 	private PartListener partListener;
@@ -37,7 +35,7 @@ public class ViewListener extends ViewPart {
 	public void createPartControl(final Composite parent) {
 		browser = BrowserFactory.create(parent, SWT.WEBKIT);
 		selectionListener = SelectionListener.create(browser);
-		viewRender = ViewRender.create();
+		IViewRender viewRender = ViewRender.create();
 		partListener = PartListener.create(browser);
 
 		browser.setText(viewRender.build());

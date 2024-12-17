@@ -35,8 +35,7 @@ public class LoginClient implements ILoginClient {
 		// @formatter:off
 		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-		GetResourceGroupsResponse getResourceGroupsResponse = loginClientHelper.parseResourceGroupsResponseToObject(response.body());
-		return getResourceGroupsResponse;
+		return loginClientHelper.parseResourceGroupsResponseToObject(response.body());
 	}
 
 	@Override
@@ -53,8 +52,7 @@ public class LoginClient implements ILoginClient {
 		// @formatter:on
 		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-		GetDeploymentsResponse getDeploymentsResponse = loginClientHelper.parseDeploymentsResponseToObject(response.body());
-		return getDeploymentsResponse;
+		return loginClientHelper.parseDeploymentsResponseToObject(response.body());
 	}
 
 }

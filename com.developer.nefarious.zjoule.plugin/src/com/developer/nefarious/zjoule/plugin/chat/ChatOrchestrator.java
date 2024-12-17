@@ -1,5 +1,6 @@
 package com.developer.nefarious.zjoule.plugin.chat;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import com.developer.nefarious.zjoule.plugin.chat.utils.EditorContentReader;
@@ -10,10 +11,13 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 	@Override
 	public String getAnswer(final String userPrompt) {
 		
-		List<IChatMessage> messages = new ArrayList<IChatMessage>();
+		List<IChatMessage> messages = new ArrayList<>();
 		
 		// 0. Define which AI Client should be used
 		IAIClient aiClient = AIClientFactory.getClient();
+		if (aiClient == null) {
+			return getIncompatibilityMessage();
+		}
 		
 		// 1. Get chat history
 		List<IChatMessage> messageHistory = aiClient.getMessageHistory();
@@ -38,8 +42,8 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 		IChatMessage answer;
 		try {
 			answer = aiClient.chatCompletion(messages);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (IOException | InterruptedException e) {
+			Thread.currentThread().interrupt();
 			return "Error during the AI request execution";
 		}
 		
@@ -50,6 +54,12 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 		
 		// 7. Return response in string format
 		return answer.getMessage();
+	}
+
+	private String getIncompatibilityMessage() {
+		return "The model you have selected is incompatible with the current "
+			+ "operation. Please verify the model's configuration or choose a "
+			+ "compatible alternative.";
 	}
 
 }

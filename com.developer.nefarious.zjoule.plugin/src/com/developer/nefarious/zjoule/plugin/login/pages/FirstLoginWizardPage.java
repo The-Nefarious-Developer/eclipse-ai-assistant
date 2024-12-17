@@ -1,6 +1,6 @@
 package com.developer.nefarious.zjoule.plugin.login.pages;
 
-import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -22,9 +22,9 @@ public class FirstLoginWizardPage extends WizardPage {
 	
 	private Text errorText;
 	
-	private final int inputHeigth = 100;
+	private static final int INPUT_HEIGTH = 100;
 	
-	private final int inputWidth = 300;
+	private static final int INPUT_WIDTH = 300;
 	
 	private ServiceKey serviceKey;
 	
@@ -46,8 +46,8 @@ public class FirstLoginWizardPage extends WizardPage {
 		// Text field for user input
 		textField = new Text(container, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true);
-		gridData.heightHint = inputHeigth;
-		gridData.widthHint = inputWidth;
+		gridData.heightHint = INPUT_HEIGTH;
+		gridData.widthHint = INPUT_WIDTH;
 		textField.setLayoutData(gridData);
 
 		// Add a ModifyListener to monitor textField changes
@@ -82,7 +82,7 @@ public class FirstLoginWizardPage extends WizardPage {
 	
 	public void setResourceGroupsOnTheSecondPage(final GetResourceGroupsResponse getResourceGroupsResponse) {
 		SecondLoginWizardPage secondPage = (SecondLoginWizardPage) getWizard().getPage(SecondLoginWizardPage.PAGE_ID);
-		ArrayList<String> resourceGroupsAvailableForSelection = ResourceGroupIdExtractor.extractResourceGroupIds(getResourceGroupsResponse);
+		List<String> resourceGroupsAvailableForSelection = ResourceGroupIdExtractor.extractResourceGroupIds(getResourceGroupsResponse);
 		secondPage.setResourceGroupsForSelection(resourceGroupsAvailableForSelection);
 	}
 	

@@ -61,7 +61,17 @@ public class TemporaryMemoryDeployment implements IMemoryDeployment, ITemporaryM
 
 	@Override
 	public Boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return null;
+		Deployment deployment = load();
+		if (deployment == null) {
+			return true;
+		}
+		if (deployment.getConfigurationName() == null) {
+			return true;
+		}
+		if (deployment.getConfigurationName().isEmpty() || 
+				deployment.getConfigurationName().isBlank()) {
+			return true;
+		}
+		return false;
 	}
 }

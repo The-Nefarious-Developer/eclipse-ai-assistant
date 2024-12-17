@@ -1,6 +1,10 @@
 package com.developer.nefarious.zjoule.test.login.memory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +36,7 @@ public class TemporaryMemoryAccessTokenTest {
 		
 		TemporaryMemoryAccessToken.resetInstance();
 		TemporaryMemoryAccessToken.initialize(mockObjectSerializer, mockEclipseMemory);
-		cut = TemporaryMemoryAccessToken.getInstance();
+		cut = spy(TemporaryMemoryAccessToken.getInstance());
 	}
 
 	@Test
@@ -69,6 +73,69 @@ public class TemporaryMemoryAccessTokenTest {
 		cut.persist();
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(FINAL_KEY, mockSerializedObject);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenNoMemory() {
+		// Arrange
+		doReturn(null).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenAccessTokenIsNull() {
+		// Arrange
+		AccessToken mockAccessaToken = new AccessToken();
+		mockAccessaToken.setAccessToken(null);
+		doReturn(mockAccessaToken).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenAccessTokenIsEmpty() {
+		// Arrange
+		AccessToken mockAccessaToken = new AccessToken();
+		mockAccessaToken.setAccessToken("");
+		doReturn(mockAccessaToken).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldBeEmptyWhenAccessTokenIsBlank() {
+		// Arrange
+		AccessToken mockAccessaToken = new AccessToken();
+		mockAccessaToken.setAccessToken(" ");
+		doReturn(mockAccessaToken).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertTrue(returnValue);
+	}
+	
+	@Test
+	public void shouldNotBeEmptyWhenAccessTokenIsSave() {
+		// Arrange
+		AccessToken mockAccessaToken = new AccessToken();
+		mockAccessaToken.setAccessToken("some-access-token");
+		doReturn(mockAccessaToken).when(cut).load();
+		// Act
+		Boolean returnValue = cut.isEmpty();
+		// Assert
+		verify(cut).load();
+		assertFalse(returnValue);
 	}
 	
 }
