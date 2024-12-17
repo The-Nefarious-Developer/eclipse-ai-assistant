@@ -1,5 +1,6 @@
 package com.developer.nefarious.zjoule.plugin.chat;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import com.developer.nefarious.zjoule.plugin.chat.utils.EditorContentReader;
@@ -38,8 +39,7 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 		IChatMessage answer;
 		try {
 			answer = aiClient.chatCompletion(messages);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (IOException|InterruptedException e) {
 			return "Error during the AI request execution";
 		}
 		
