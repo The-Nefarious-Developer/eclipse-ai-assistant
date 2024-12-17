@@ -75,6 +75,9 @@ SOFTWARE.
 
    <plugin
          id="com.developer.nefarious.zjoule.plugin"
-         version="0.0.0"/>
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>
