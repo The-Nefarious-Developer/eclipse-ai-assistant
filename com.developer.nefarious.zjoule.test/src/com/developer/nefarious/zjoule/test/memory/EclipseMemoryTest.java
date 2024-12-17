@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
@@ -98,6 +99,7 @@ public class EclipseMemoryTest {
 		cut.clearAll();
 		// Assert
 		verify(mockPreferences).clear();
+		verify(mockPreferences).flush();
 	}
 
 	@Test
@@ -108,6 +110,7 @@ public class EclipseMemoryTest {
 		cut.clearAll();
 		// Assert
 		assertThrows(BackingStoreException.class, () -> mockPreferences.clear());
+		verify(mockPreferences, never()).flush();
 	}
 
 }

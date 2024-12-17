@@ -45,6 +45,7 @@ public class EclipseMemory implements IEclipseMemory {
 	public void clearAll() {
 		try {
 			preferences.clear();
+			preferences.flush();
 		} catch (BackingStoreException e) {
 			e.printStackTrace();
 		}
