@@ -2,19 +2,18 @@ package com.developer.nefarious.zjoule.plugin.login.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.plugin.models.ResourceGroup;
 
 public abstract class ResourceGroupIdExtractor {
-	
-	private ResourceGroupIdExtractor() { }
-	
+
 	public static List<String> extractResourceGroupIds(final GetResourceGroupsResponse response) {
 		// Step 0: Check if response is null
         if (response == null) {
             return null;
         }
-        
+
         // Step 1: Get the list of ResourceGroup objects from the response
         List<ResourceGroup> resourceGroups = response.getResourceGroups();
 
@@ -30,5 +29,7 @@ public abstract class ResourceGroupIdExtractor {
         // Return the list of resource group IDs
         return resourceGroupIds;
     }
+
+	private ResourceGroupIdExtractor() { }
 
 }

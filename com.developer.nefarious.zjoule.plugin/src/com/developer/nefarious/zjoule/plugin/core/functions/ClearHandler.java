@@ -4,17 +4,23 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
+
 import com.developer.nefarious.zjoule.plugin.auth.SessionManager;
 import com.developer.nefarious.zjoule.plugin.chat.memory.MemoryMessageHistory;
 
 public class ClearHandler extends Action {
 
 	private static final String ICON = "platform:/plugin/org.eclipse.ui/icons/full/etool16/clear.png";
+
+	public static ClearHandler create(final Browser browser) {
+		return new ClearHandler(browser);
+	}
 
 	private Browser browser;
 
@@ -26,8 +32,13 @@ public class ClearHandler extends Action {
 		setIcon();
 	}
 
-	public static ClearHandler create(final Browser browser) {
-		return new ClearHandler(browser);
+	@Override
+	public void run() {
+		if (SessionManager.isUserLoggedIn()) {
+			MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
+			memoryMessageHistory.clear();
+			browser.execute("clearMessages();");
+		}
 	}
 
 	private void setIcon() {
@@ -38,15 +49,6 @@ public class ClearHandler extends Action {
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 			setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
-		}
-	}
-
-	@Override
-	public void run() {
-		if (SessionManager.isUserLoggedIn()) {
-			MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
-			memoryMessageHistory.clear();
-			browser.execute("clearMessages();");
 		}
 	}
 

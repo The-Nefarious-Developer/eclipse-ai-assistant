@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublisher;
+import java.net.http.HttpResponse;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import com.developer.nefarious.zjoule.plugin.auth.IAuthClient;
 import com.developer.nefarious.zjoule.plugin.chat.IAIClient;
 import com.developer.nefarious.zjoule.plugin.chat.IChatMessage;
@@ -36,7 +37,7 @@ public class OpenAIClient implements IAIClient {
 
 	// @formatter:off
 	public OpenAIClient(
-			final IAuthClient authClient, 
+			final IAuthClient authClient,
 			final IMemoryMessageHistory memoryMessageHistory,
 			final IMemoryResourceGroup memoryResourceGroup,
 			final IMemoryDeployment memoryDeployment,
@@ -87,15 +88,6 @@ public class OpenAIClient implements IAIClient {
 	}
 
 	@Override
-	public void setMessageHistory(final List<IChatMessage> chatMessages) {
-		MessageHistory newMessageHistory = new MessageHistory();
-		newMessageHistory.setMessages(
-				chatMessages.stream().map(chatMessage -> new Message(chatMessage.getRole(), chatMessage.getMessage()))
-						.collect(Collectors.toList()));
-		memoryMessageHistory.save(newMessageHistory);
-	}
-
-	@Override
 	public List<IChatMessage> getMessageHistory() {
 		MessageHistory messageHistory = memoryMessageHistory.load();
 		if (messageHistory == null) {
@@ -108,9 +100,18 @@ public class OpenAIClient implements IAIClient {
 		}
 
 		// Map the messages and collect them
-		return messages.stream().map(message -> 
+		return messages.stream().map(message ->
 			new OpenAIChatMessage(message.getRole(), message.getContent()))
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public void setMessageHistory(final List<IChatMessage> chatMessages) {
+		MessageHistory newMessageHistory = new MessageHistory();
+		newMessageHistory.setMessages(
+				chatMessages.stream().map(chatMessage -> new Message(chatMessage.getRole(), chatMessage.getMessage()))
+						.collect(Collectors.toList()));
+		memoryMessageHistory.save(newMessageHistory);
 	}
 
 }

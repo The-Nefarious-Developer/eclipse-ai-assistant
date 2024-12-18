@@ -1,15 +1,16 @@
 package com.developer.nefarious.zjoule.plugin.core.events;
 
 import org.eclipse.swt.browser.Browser;
+
 import com.developer.nefarious.zjoule.plugin.auth.SessionManager;
 import com.developer.nefarious.zjoule.plugin.core.functions.MessageHistoryLoader;
 import com.developer.nefarious.zjoule.plugin.core.functions.TagHandler;
 import com.developer.nefarious.zjoule.plugin.memory.EclipseMemory;
 
 public class Initialization implements Runnable {
-	
+
 	private Browser browser;
-	
+
 	public Initialization(final Browser browser) {
 		this.browser = browser;
 	}

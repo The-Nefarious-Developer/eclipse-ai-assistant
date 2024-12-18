@@ -1,6 +1,7 @@
 package com.developer.nefarious.zjoule.plugin.models;
 
 import java.util.Date;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -9,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * type, expiration information, and additional metadata. The {@code receivedAt}
  * field is used to track the time when the token was generated or received,
  * which is important for determining its validity.
- * 
+ *
  * <p>
  * This class also provides utility methods to check whether the token is valid,
  * based on its expiration time.
@@ -36,24 +37,6 @@ public class AccessToken {
 	private Date receivedAt;
 
 	/**
-	 * Checks if the access token is still valid based on the {@code expiresIn} and
-	 * {@code receivedAt} values.
-	 * 
-	 * @return {@code true} if the token is still valid; {@code false} otherwise.
-	 */
-	public Boolean isValid() {
-		if (receivedAt == null) {
-			return false;
-		}
-		long currentTime = new Date().getTime();
-		// CHECKSTYLE:OFF 
-		// expiresIn is in seconds, convert to milliseconds
-		long expirationTime = receivedAt.getTime() + (expiresIn * 1000);
-		// CHECKSTYLE:ON
-		return currentTime < expirationTime;
-	}
-
-	/**
 	 * Default constructor that initializes the {@code receivedAt} field to the
 	 * current time.
 	 * <p>
@@ -69,48 +52,66 @@ public class AccessToken {
 		return accessToken;
 	}
 
-	public void setAccessToken(final String accessToken) {
-		this.accessToken = accessToken;
-	}
-
-	public String getTokenType() {
-		return tokenType;
-	}
-
-	public void setTokenType(final String tokenType) {
-		this.tokenType = tokenType;
-	}
-
 	public long getExpiresIn() {
 		return expiresIn;
-	}
-
-	public void setExpiresIn(final long expiresIn) {
-		this.expiresIn = expiresIn;
-	}
-
-	public String getScope() {
-		return scope;
-	}
-
-	public void setScope(final String scope) {
-		this.scope = scope;
 	}
 
 	public String getJti() {
 		return jti;
 	}
 
-	public void setJti(final String jti) {
-		this.jti = jti;
-	}
-
 	public Date getReceivedAt() {
 		return receivedAt;
 	}
 
+	public String getScope() {
+		return scope;
+	}
+
+	public String getTokenType() {
+		return tokenType;
+	}
+
+	/**
+	 * Checks if the access token is still valid based on the {@code expiresIn} and
+	 * {@code receivedAt} values.
+	 *
+	 * @return {@code true} if the token is still valid; {@code false} otherwise.
+	 */
+	public Boolean isValid() {
+		if (receivedAt == null) {
+			return false;
+		}
+		long currentTime = new Date().getTime();
+		// CHECKSTYLE:OFF
+		// expiresIn is in seconds, convert to milliseconds
+		long expirationTime = receivedAt.getTime() + (expiresIn * 1000);
+		// CHECKSTYLE:ON
+		return currentTime < expirationTime;
+	}
+
+	public void setAccessToken(final String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	public void setExpiresIn(final long expiresIn) {
+		this.expiresIn = expiresIn;
+	}
+
+	public void setJti(final String jti) {
+		this.jti = jti;
+	}
+
 	public void setReceivedAt(final Date receivedAt) {
 		this.receivedAt = receivedAt;
+	}
+
+	public void setScope(final String scope) {
+		this.scope = scope;
+	}
+
+	public void setTokenType(final String tokenType) {
+		this.tokenType = tokenType;
 	}
 
 }

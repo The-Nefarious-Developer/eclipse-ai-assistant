@@ -2,6 +2,7 @@ package com.developer.nefarious.zjoule.test.core.functions;
 
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.verify;
+
 import org.eclipse.swt.browser.Browser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,30 +10,24 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
+
 import com.developer.nefarious.zjoule.plugin.chat.utils.EditorContentReader;
 import com.developer.nefarious.zjoule.plugin.core.functions.TagHandler;
 
 public class TagHandlerTest {
-	
+
 	@Mock
 	private Browser mockBrowser;
-	
+
 	MockedStatic<EditorContentReader> mockedStaticEditorContentReader;
-	
+
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		
+
 		mockedStaticEditorContentReader = mockStatic(EditorContentReader.class);
 	}
-	
-	@AfterEach
-	public void tearDown() {
-		if (mockedStaticEditorContentReader != null) {
-			mockedStaticEditorContentReader.close();
-		}
-	}
-	
+
 	@Test
 	public void shouldUpdateTag() {
 		// Arrange
@@ -43,6 +38,13 @@ public class TagHandlerTest {
 		TagHandler.update(mockBrowser);
 		// Assert
 		verify(mockBrowser).execute(mockJsFunctionCall);
+	}
+
+	@AfterEach
+	public void tearDown() {
+		if (mockedStaticEditorContentReader != null) {
+			mockedStaticEditorContentReader.close();
+		}
 	}
 
 }

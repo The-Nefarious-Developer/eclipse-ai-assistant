@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.part.ViewPart;
+
 import com.developer.nefarious.zjoule.plugin.core.events.Initialization;
 import com.developer.nefarious.zjoule.plugin.core.events.PartListener;
 import com.developer.nefarious.zjoule.plugin.core.events.SelectionListener;
@@ -18,6 +19,7 @@ import com.developer.nefarious.zjoule.plugin.core.functions.ClearHandler;
 import com.developer.nefarious.zjoule.plugin.core.functions.LoginHandler;
 import com.developer.nefarious.zjoule.plugin.core.functions.LogoutHandler;
 import com.developer.nefarious.zjoule.plugin.core.functions.PromptHandler;
+
 import jakarta.inject.Inject;
 
 public class ViewListener extends ViewPart {
@@ -55,11 +57,6 @@ public class ViewListener extends ViewPart {
 	}
 
 	@Override
-	public void setFocus() {
-		browser.setFocus();
-	}
-
-	@Override
 	public void dispose() {
 		if (selectionListener != null) {
 			getSite().getPage().removeSelectionListener(selectionListener);
@@ -76,28 +73,33 @@ public class ViewListener extends ViewPart {
 		super.dispose();
 	}
 
-	public void setShell(final Shell shell) {
-		this.shell = shell;
-	}
-
-	public void setBrowser(final Browser browser) {
-		this.browser = browser;
-	}
-	
-	public void setSelectionListener(final ISelectionListener selectionListener) {
-		this.selectionListener = selectionListener;
-	}
-	
-	public void setPartListener(final PartListener partListener) {
-		this.partListener = partListener;
+	private IMenuManager getMenu() {
+		return getViewSite().getActionBars().getMenuManager();
 	}
 
 	private IToolBarManager getToolbar() {
 		return getViewSite().getActionBars().getToolBarManager();
 	}
 
-	private IMenuManager getMenu() {
-		return getViewSite().getActionBars().getMenuManager();
+	public void setBrowser(final Browser browser) {
+		this.browser = browser;
+	}
+
+	@Override
+	public void setFocus() {
+		browser.setFocus();
+	}
+
+	public void setPartListener(final PartListener partListener) {
+		this.partListener = partListener;
+	}
+
+	public void setSelectionListener(final ISelectionListener selectionListener) {
+		this.selectionListener = selectionListener;
+	}
+
+	public void setShell(final Shell shell) {
+		this.shell = shell;
 	}
 
 	private void setUpToolbar() {

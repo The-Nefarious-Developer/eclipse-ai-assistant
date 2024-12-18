@@ -5,16 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.plugin.login.utils.ResourceGroupIdExtractor;
 import com.developer.nefarious.zjoule.plugin.models.ResourceGroup;
 
 public class ResourceGroupIdExtractorTest {
-	
+
 	@Test
     public void shouldExtractResourceGroupIds() {
         // Arrange

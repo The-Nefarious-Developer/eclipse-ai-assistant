@@ -1,6 +1,7 @@
 package com.developer.nefarious.zjoule.plugin.chat;
 
 import java.util.Set;
+
 import com.developer.nefarious.zjoule.plugin.auth.AuthClient;
 import com.developer.nefarious.zjoule.plugin.auth.AuthClientHelper;
 import com.developer.nefarious.zjoule.plugin.chat.memory.MemoryMessageHistory;
@@ -13,8 +14,6 @@ import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
 
 public abstract class AIClientFactory {
-	
-	private AIClientFactory() { }
 
 	public static IAIClient getClient() {
 
@@ -23,7 +22,7 @@ public abstract class AIClientFactory {
 		MemoryResourceGroup memoryResourceGroup = MemoryResourceGroup.getInstance();
 		MemoryDeployment memoryDeployment = MemoryDeployment.getInstance();
 		MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
-		
+
 		AuthClientHelper authHelper = new AuthClientHelper();
 		AuthClient authClient = new AuthClient(memoryAccessToken, memoryServiceKey, authHelper);
 
@@ -42,5 +41,7 @@ public abstract class AIClientFactory {
 		Set<String> openAIModels = Set.of("gpt-4-32k", "gpt-4", "gpt-35-turbo", "gpt-35-turbo-16k");
 		return openAIModels.contains(modelName);
 	}
+
+	private AIClientFactory() { }
 
 }

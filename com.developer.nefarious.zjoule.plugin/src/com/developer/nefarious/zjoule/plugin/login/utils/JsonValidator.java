@@ -4,9 +4,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
 public abstract class JsonValidator {
-	
-	private JsonValidator() { }
-	
+
 	public static boolean isValidJson(final String json) {
         try {
             JsonParser.parseString(json); // Attempts to parse the JSON string
@@ -15,5 +13,7 @@ public abstract class JsonValidator {
             return false; // Exception indicates invalid JSON syntax
         }
     }
+
+	private JsonValidator() { }
 
 }

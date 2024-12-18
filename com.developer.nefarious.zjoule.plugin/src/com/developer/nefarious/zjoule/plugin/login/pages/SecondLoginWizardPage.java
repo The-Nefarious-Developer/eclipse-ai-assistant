@@ -2,6 +2,7 @@ package com.developer.nefarious.zjoule.plugin.login.pages;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -9,6 +10,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+
 import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.plugin.login.events.DeploymentSelectionAdapter;
 import com.developer.nefarious.zjoule.plugin.login.events.ResourceGroupSelectionAdapter;
@@ -37,8 +39,8 @@ public class SecondLoginWizardPage extends WizardPage {
 
 	// @formatter:off
 	public SecondLoginWizardPage(
-			final ILoginClient loginClient, 
-			final IMemoryResourceGroup memoryResourceGroup, 
+			final ILoginClient loginClient,
+			final IMemoryResourceGroup memoryResourceGroup,
 			final IMemoryDeployment memoryDeployment) {
 		// @formatter:on
 		super(PAGE_ID);
@@ -81,6 +83,33 @@ public class SecondLoginWizardPage extends WizardPage {
 		setControl(container);
 	}
 
+	public Combo getDeploymentDropdown() {
+		return deploymentDropdown;
+	}
+
+	public List<Deployment> getDeploymentsForSelection() {
+		return deploymentsForSelection;
+	}
+
+	public Combo getResourceGroupDropdown() {
+		return resourceGroupDropdown;
+	}
+
+	public ServiceKey getServiceKey() {
+		FirstLoginWizardPage firstPage = (FirstLoginWizardPage) getWizard().getPage(FirstLoginWizardPage.PAGE_ID);
+		return firstPage.getServiceKey();
+	}
+
+	public void setDeploymentsForSelection(final List<Deployment> deploymentsForSelection) {
+		this.deploymentsForSelection = deploymentsForSelection;
+		deploymentDropdown.setItems(
+				deploymentsForSelection.stream().map(Deployment::getConfigurationName).toArray(String[]::new));
+	}
+
+	public void setResourceGroupsForSelection(final List<String> resourceGroupsForSelection) {
+		this.resourceGroupsForSelection = resourceGroupsForSelection;
+	}
+
 	@Override
 	public void setVisible(final boolean visible) {
 		super.setVisible(visible);
@@ -100,33 +129,6 @@ public class SecondLoginWizardPage extends WizardPage {
 			deploymentDropdown.setEnabled(false);
 			setPageComplete(false);
 		}
-	}
-
-	public Combo getResourceGroupDropdown() {
-		return resourceGroupDropdown;
-	}
-
-	public Combo getDeploymentDropdown() {
-		return deploymentDropdown;
-	}
-
-	public void setResourceGroupsForSelection(final List<String> resourceGroupsForSelection) {
-		this.resourceGroupsForSelection = resourceGroupsForSelection;
-	}
-
-	public void setDeploymentsForSelection(final List<Deployment> deploymentsForSelection) {
-		this.deploymentsForSelection = deploymentsForSelection;
-		deploymentDropdown.setItems(
-				deploymentsForSelection.stream().map(Deployment::getConfigurationName).toArray(String[]::new));
-	}
-
-	public ServiceKey getServiceKey() {
-		FirstLoginWizardPage firstPage = (FirstLoginWizardPage) getWizard().getPage(FirstLoginWizardPage.PAGE_ID);
-		return firstPage.getServiceKey();
-	}
-
-	public List<Deployment> getDeploymentsForSelection() {
-		return deploymentsForSelection;
 	}
 
 }

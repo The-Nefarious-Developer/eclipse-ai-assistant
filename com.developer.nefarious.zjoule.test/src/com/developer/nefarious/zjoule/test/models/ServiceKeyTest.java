@@ -2,8 +2,10 @@ package com.developer.nefarious.zjoule.test.models;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 import com.google.gson.Gson;
 
@@ -17,88 +19,6 @@ public class ServiceKeyTest {
 	}
 
 	@Test
-	public void shouldBeValid() {
-		// Arrange
-		// @formatter:off
-		String mockServiceKeyInput = "{"
-			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
-		    + "\"appname\": \"this will be ignored\", "
-		    + "\"clientid\": \"this matters\", "
-		    + "\"clientsecret\": \"this matters\", "
-		    + "\"identityzone\": \"this will be ignored\", "
-		    + "\"identityzoneid\": \"this will be ignored\", "
-		    + "\"url\": \"this matters\""
-		    + "}";
-		// @formatter:on
-		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
-		// Act
-		Boolean returnValue = cut.isValid();
-		// Assert
-		assertTrue(returnValue);
-	}
-
-	@Test
-	public void shouldBeInvalidForMissingServiceUrl() {
-		// Arrange
-		// @formatter:off
-		String mockServiceKeyInput = "{"
-			+ "\"appname\": \"this will be ignored\", "
-		    + "\"clientid\": \"this matters\", "
-		    + "\"clientsecret\": \"this matters\", "
-		    + "\"identityzone\": \"this will be ignored\", "
-		    + "\"identityzoneid\": \"this will be ignored\", "
-		    + "\"url\": \"this matters\""
-		    + "}";
-		// @formatter:on
-		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
-		// Act
-		Boolean returnValue = cut.isValid();
-		// Assert
-		assertFalse(returnValue);
-	}
-
-	@Test
-	public void shouldBeInvalidForEmptyServiceUrl() {
-		// Arrange
-		// @formatter:off
-		String mockServiceKeyInput = "{"
-			+ "\"serviceurls\": {\"AI_API_URL\": \"\"}, "
-		    + "\"appname\": \"this will be ignored\", "
-		    + "\"clientid\": \"this matters\", "
-		    + "\"clientsecret\": \"this matters\", "
-		    + "\"identityzone\": \"this will be ignored\", "
-		    + "\"identityzoneid\": \"this will be ignored\", "
-		    + "\"url\": \"this matters\""
-		    + "}";
-		// @formatter:on
-		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
-		// Act
-		Boolean returnValue = cut.isValid();
-		// Assert
-		assertFalse(returnValue);
-	}
-
-	@Test
-	public void shouldBeInvalidForMissingClientId() {
-		// Arrange
-		// @formatter:off
-		String mockServiceKeyInput = "{"
-			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
-		    + "\"appname\": \"this will be ignored\", "
-		    + "\"clientsecret\": \"this matters\", "
-		    + "\"identityzone\": \"this will be ignored\", "
-		    + "\"identityzoneid\": \"this will be ignored\", "
-		    + "\"url\": \"this matters\""
-		    + "}";
-		// @formatter:on
-		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
-		// Act
-		Boolean returnValue = cut.isValid();
-		// Assert
-		assertFalse(returnValue);
-	}
-
-	@Test
 	public void shouldBeInvalidForEmptyClientId() {
 		// Arrange
 		// @formatter:off
@@ -107,26 +27,6 @@ public class ServiceKeyTest {
 		    + "\"appname\": \"this will be ignored\", "
 		    + "\"clientid\": \"\", "
 		    + "\"clientsecret\": \"this matters\", "
-		    + "\"identityzone\": \"this will be ignored\", "
-		    + "\"identityzoneid\": \"this will be ignored\", "
-		    + "\"url\": \"this matters\""
-		    + "}";
-		// @formatter:on
-		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
-		// Act
-		Boolean returnValue = cut.isValid();
-		// Assert
-		assertFalse(returnValue);
-	}
-
-	@Test
-	public void shouldBeInvalidForMissingClientSecret() {
-		// Arrange
-		// @formatter:off
-		String mockServiceKeyInput = "{"
-			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
-		    + "\"appname\": \"this will be ignored\", "
-		    + "\"clientid\": \"this matters\", "
 		    + "\"identityzone\": \"this will be ignored\", "
 		    + "\"identityzoneid\": \"this will be ignored\", "
 		    + "\"url\": \"this matters\""
@@ -161,16 +61,17 @@ public class ServiceKeyTest {
 	}
 
 	@Test
-	public void shouldBeInvalidForMissingTokenUrl() {
+	public void shouldBeInvalidForEmptyServiceUrl() {
 		// Arrange
 		// @formatter:off
 		String mockServiceKeyInput = "{"
-			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
+			+ "\"serviceurls\": {\"AI_API_URL\": \"\"}, "
 		    + "\"appname\": \"this will be ignored\", "
 		    + "\"clientid\": \"this matters\", "
 		    + "\"clientsecret\": \"this matters\", "
 		    + "\"identityzone\": \"this will be ignored\", "
-		    + "\"identityzoneid\": \"this will be ignored\""
+		    + "\"identityzoneid\": \"this will be ignored\", "
+		    + "\"url\": \"this matters\""
 		    + "}";
 		// @formatter:on
 		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
@@ -199,6 +100,107 @@ public class ServiceKeyTest {
 		Boolean returnValue = cut.isValid();
 		// Assert
 		assertFalse(returnValue);
+	}
+
+	@Test
+	public void shouldBeInvalidForMissingClientId() {
+		// Arrange
+		// @formatter:off
+		String mockServiceKeyInput = "{"
+			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
+		    + "\"appname\": \"this will be ignored\", "
+		    + "\"clientsecret\": \"this matters\", "
+		    + "\"identityzone\": \"this will be ignored\", "
+		    + "\"identityzoneid\": \"this will be ignored\", "
+		    + "\"url\": \"this matters\""
+		    + "}";
+		// @formatter:on
+		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
+		// Act
+		Boolean returnValue = cut.isValid();
+		// Assert
+		assertFalse(returnValue);
+	}
+
+	@Test
+	public void shouldBeInvalidForMissingClientSecret() {
+		// Arrange
+		// @formatter:off
+		String mockServiceKeyInput = "{"
+			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
+		    + "\"appname\": \"this will be ignored\", "
+		    + "\"clientid\": \"this matters\", "
+		    + "\"identityzone\": \"this will be ignored\", "
+		    + "\"identityzoneid\": \"this will be ignored\", "
+		    + "\"url\": \"this matters\""
+		    + "}";
+		// @formatter:on
+		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
+		// Act
+		Boolean returnValue = cut.isValid();
+		// Assert
+		assertFalse(returnValue);
+	}
+
+	@Test
+	public void shouldBeInvalidForMissingServiceUrl() {
+		// Arrange
+		// @formatter:off
+		String mockServiceKeyInput = "{"
+			+ "\"appname\": \"this will be ignored\", "
+		    + "\"clientid\": \"this matters\", "
+		    + "\"clientsecret\": \"this matters\", "
+		    + "\"identityzone\": \"this will be ignored\", "
+		    + "\"identityzoneid\": \"this will be ignored\", "
+		    + "\"url\": \"this matters\""
+		    + "}";
+		// @formatter:on
+		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
+		// Act
+		Boolean returnValue = cut.isValid();
+		// Assert
+		assertFalse(returnValue);
+	}
+
+	@Test
+	public void shouldBeInvalidForMissingTokenUrl() {
+		// Arrange
+		// @formatter:off
+		String mockServiceKeyInput = "{"
+			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
+		    + "\"appname\": \"this will be ignored\", "
+		    + "\"clientid\": \"this matters\", "
+		    + "\"clientsecret\": \"this matters\", "
+		    + "\"identityzone\": \"this will be ignored\", "
+		    + "\"identityzoneid\": \"this will be ignored\""
+		    + "}";
+		// @formatter:on
+		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
+		// Act
+		Boolean returnValue = cut.isValid();
+		// Assert
+		assertFalse(returnValue);
+	}
+
+	@Test
+	public void shouldBeValid() {
+		// Arrange
+		// @formatter:off
+		String mockServiceKeyInput = "{"
+			+ "\"serviceurls\": {\"AI_API_URL\": \"this matters\"}, "
+		    + "\"appname\": \"this will be ignored\", "
+		    + "\"clientid\": \"this matters\", "
+		    + "\"clientsecret\": \"this matters\", "
+		    + "\"identityzone\": \"this will be ignored\", "
+		    + "\"identityzoneid\": \"this will be ignored\", "
+		    + "\"url\": \"this matters\""
+		    + "}";
+		// @formatter:on
+		ServiceKey cut = gson.fromJson(mockServiceKeyInput, ServiceKey.class);
+		// Act
+		Boolean returnValue = cut.isValid();
+		// Assert
+		assertTrue(returnValue);
 	}
 
 }

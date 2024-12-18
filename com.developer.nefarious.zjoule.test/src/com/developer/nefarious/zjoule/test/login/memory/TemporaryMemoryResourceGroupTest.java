@@ -7,10 +7,12 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryResourceGroup;
 import com.developer.nefarious.zjoule.plugin.memory.IEclipseMemory;
 
@@ -35,38 +37,6 @@ public class TemporaryMemoryResourceGroupTest {
 	}
 
 	@Test
-	public void shouldSaveResourceGroup() {
-		// Arrange
-		String mockResourceGroup = "selected resource group";
-		// Act
-		cut.save(mockResourceGroup);
-		// Assert
-		verify(mockEclipseMemory).saveOnEclipsePreferences(TEMPORARY_KEY, mockResourceGroup);
-	}
-
-	@Test
-	public void shouldLoadResourceGroup() {
-		// Arrange
-		String expectedValue = "stored resource group";
-		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(expectedValue);
-		// Act
-		String returnValue = cut.load();
-		// Assert
-		assertEquals(returnValue, expectedValue);
-	}
-
-	@Test
-	public void shouldPersistResourceGroup() {
-		// Arrange
-		String mockResourceGroup = "temporary resource group";
-		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockResourceGroup);
-		// Act
-		cut.persist();
-		// Assert
-		verify(mockEclipseMemory).saveOnEclipsePreferences(FINAL_KEY, mockResourceGroup);
-	}
-
-	@Test
 	public void shouldBeEmptyWhenNoMemory() {
 		// Arrange
 		doReturn(null).when(cut).load();
@@ -78,9 +48,9 @@ public class TemporaryMemoryResourceGroupTest {
 	}
 
 	@Test
-	public void shouldBeEmptyWheResourceGroupIsNull() {
+	public void shouldBeEmptyWhenResourceGroupIsBlank() {
 		// Arrange
-		String mockMockResourceGroup = null;
+		String mockMockResourceGroup = " ";
 		doReturn(mockMockResourceGroup).when(cut).load();
 		// Act
 		Boolean returnValue = cut.isEmpty();
@@ -102,15 +72,26 @@ public class TemporaryMemoryResourceGroupTest {
 	}
 
 	@Test
-	public void shouldBeEmptyWhenResourceGroupIsBlank() {
+	public void shouldBeEmptyWheResourceGroupIsNull() {
 		// Arrange
-		String mockMockResourceGroup = " ";
+		String mockMockResourceGroup = null;
 		doReturn(mockMockResourceGroup).when(cut).load();
 		// Act
 		Boolean returnValue = cut.isEmpty();
 		// Assert
 		verify(cut).load();
 		assertTrue(returnValue);
+	}
+
+	@Test
+	public void shouldLoadResourceGroup() {
+		// Arrange
+		String expectedValue = "stored resource group";
+		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(expectedValue);
+		// Act
+		String returnValue = cut.load();
+		// Assert
+		assertEquals(returnValue, expectedValue);
 	}
 
 	@Test
@@ -123,6 +104,27 @@ public class TemporaryMemoryResourceGroupTest {
 		// Assert
 		verify(cut).load();
 		assertFalse(returnValue);
+	}
+
+	@Test
+	public void shouldPersistResourceGroup() {
+		// Arrange
+		String mockResourceGroup = "temporary resource group";
+		when(mockEclipseMemory.loadFromEclipsePreferences(TEMPORARY_KEY)).thenReturn(mockResourceGroup);
+		// Act
+		cut.persist();
+		// Assert
+		verify(mockEclipseMemory).saveOnEclipsePreferences(FINAL_KEY, mockResourceGroup);
+	}
+
+	@Test
+	public void shouldSaveResourceGroup() {
+		// Arrange
+		String mockResourceGroup = "selected resource group";
+		// Act
+		cut.save(mockResourceGroup);
+		// Assert
+		verify(mockEclipseMemory).saveOnEclipsePreferences(TEMPORARY_KEY, mockResourceGroup);
 	}
 
 }

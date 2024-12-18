@@ -4,10 +4,11 @@ public class MemoryResourceGroup implements IMemoryResourceGroup {
 
 	private static MemoryResourceGroup instance;
 
-	private IEclipseMemory eclipseMemory;
-
-	private MemoryResourceGroup(final IEclipseMemory eclipseMemory) {
-		this.eclipseMemory = eclipseMemory;
+	public static MemoryResourceGroup getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException("MemoryResourceGroup not initialized. Call initialize() first.");
+		}
+		return instance;
 	}
 
 	public static void initialize(final IEclipseMemory eclipseMemory) {
@@ -16,37 +17,33 @@ public class MemoryResourceGroup implements IMemoryResourceGroup {
 		}
 	}
 
-	public static MemoryResourceGroup getInstance() {
-		if (instance == null) {
-			throw new IllegalStateException("MemoryResourceGroup not initialized. Call initialize() first.");
-		}
-		return instance;
-	}
-
 	public static void resetInstance() {
 		instance = null;
 	}
 
+	private IEclipseMemory eclipseMemory;
+
+	private MemoryResourceGroup(final IEclipseMemory eclipseMemory) {
+		this.eclipseMemory = eclipseMemory;
+	}
+
 	@Override
-	public void save(final String resourceGroup) {
-		eclipseMemory.saveOnEclipsePreferences(KEY, resourceGroup);
+	public Boolean isEmpty() {
+		String resourceGroup = load();
+		if ((resourceGroup == null) || resourceGroup.isEmpty() || resourceGroup.isBlank()) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public String load() {
 		return eclipseMemory.loadFromEclipsePreferences(KEY);
 	}
-	
+
 	@Override
-	public Boolean isEmpty() {
-		String resourceGroup = load();
-		if (resourceGroup == null) {
-			return true;
-		}
-		if (resourceGroup.isEmpty() || resourceGroup.isBlank()) {
-			return true;
-		}
-		return false;
+	public void save(final String resourceGroup) {
+		eclipseMemory.saveOnEclipsePreferences(KEY, resourceGroup);
 	}
 
 }

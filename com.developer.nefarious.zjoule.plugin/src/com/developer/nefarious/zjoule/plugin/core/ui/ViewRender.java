@@ -5,26 +5,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+
 import org.eclipse.core.runtime.FileLocator;
 import org.osgi.framework.Bundle;
+
 import com.developer.nefarious.zjoule.plugin.core.Activator;
 
 public class ViewRender implements IViewRender {
 
 	private static final String VIEW_FILES_PATH = "resources/views/";
-	
-	private ViewRender() { }
-	
+
 	public static IViewRender create() {
 		return new ViewRender();
 	}
+
+	private ViewRender() { }
 
 	@Override
 	public String build() {
 		String marked = getResourceContent("marked.min.js");
 		String js = getResourceContent("scripts.js");
 		String css = getResourceContent("styles.css");
-		
+
 		StringBuilder buffer = new StringBuilder();
 
 		buffer.append("<!doctype html>");

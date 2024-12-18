@@ -7,6 +7,23 @@ public class MemoryDeployment implements IMemoryDeployment {
 
 	private static MemoryDeployment instance;
 
+	public static MemoryDeployment getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException("MemoryDeployment not initialized. Call initialize() first.");
+		}
+		return instance;
+	}
+
+	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+		if (instance == null) {
+			instance = new MemoryDeployment(objectSerializer, eclipseMemory);
+		}
+	}
+
+	public static void resetInstance() {
+		instance = null;
+	}
+
 	private IObjectSerializer objectSerializer;
 
 	private IEclipseMemory eclipseMemory;
@@ -16,27 +33,14 @@ public class MemoryDeployment implements IMemoryDeployment {
 		this.eclipseMemory = eclipseMemory;
 	}
 
-	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
-		if (instance == null) {
-			instance = new MemoryDeployment(objectSerializer, eclipseMemory);
-		}
-	}
-
-	public static MemoryDeployment getInstance() {
-		if (instance == null) {
-			throw new IllegalStateException("MemoryDeployment not initialized. Call initialize() first.");
-		}
-		return instance;
-	}
-
-	public static void resetInstance() {
-		instance = null;
-	}
-
 	@Override
-	public void save(final Deployment deployment) {
-		String serializedObject = objectSerializer.serialize(deployment);
-		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
+	public Boolean isEmpty() {
+		Deployment deployment = load();
+		if ((deployment == null) || (deployment.getConfigurationName() == null) || deployment.getConfigurationName().isEmpty() ||
+				deployment.getConfigurationName().isBlank()) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -48,21 +52,11 @@ public class MemoryDeployment implements IMemoryDeployment {
 			return null;
 		}
 	}
-	
+
 	@Override
-	public Boolean isEmpty() {
-		Deployment deployment = load();
-		if (deployment == null) {
-			return true;
-		}
-		if (deployment.getConfigurationName() == null) {
-			return true;
-		}
-		if (deployment.getConfigurationName().isEmpty() || 
-				deployment.getConfigurationName().isBlank()) {
-			return true;
-		}
-		return false;
+	public void save(final Deployment deployment) {
+		String serializedObject = objectSerializer.serialize(deployment);
+		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
 	}
 
 }

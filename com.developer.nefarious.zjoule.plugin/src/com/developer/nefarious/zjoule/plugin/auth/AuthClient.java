@@ -5,11 +5,12 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublisher;
+import java.net.http.HttpResponse;
+
 import com.developer.nefarious.zjoule.plugin.memory.IMemoryAccessToken;
 import com.developer.nefarious.zjoule.plugin.memory.IMemoryServiceKey;
 import com.developer.nefarious.zjoule.plugin.models.AccessToken;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
-import java.net.http.HttpResponse;
 
 public class AuthClient implements IAuthClient {
 
@@ -21,14 +22,14 @@ public class AuthClient implements IAuthClient {
 
 	// @formatter:off
 	public AuthClient(
-			final IMemoryAccessToken memoryAccessToken, 
+			final IMemoryAccessToken memoryAccessToken,
 			final IMemoryServiceKey memoryServiceKey,
 			final IAuthClientHelper authClientHelper) {
 		// @formatter:on
 		this.memoryAccessToken = memoryAccessToken;
 		this.memoryServiceKey = memoryServiceKey;
 		this.authClientHelper = authClientHelper;
-		
+
 	}
 
 	@Override
@@ -50,7 +51,7 @@ public class AuthClient implements IAuthClient {
 	@Override
 	public String getNewAccessToken(final ServiceKey serviceKey) throws IOException, InterruptedException {
 		HttpClient httpClient = HttpClient.newHttpClient();
-		
+
 		URI endpoint = authClientHelper.convertEndpointStringToURI(serviceKey.getTokenURL());
 		BodyPublisher requestBody = authClientHelper.createRequestBody(serviceKey.getClientId(), serviceKey.getClientSecret());
 
@@ -69,7 +70,7 @@ public class AuthClient implements IAuthClient {
 
 		return newAccessToken.getAccessToken();
 	}
-	
+
 	@Override
 	public String getServiceUrl() {
 		return memoryServiceKey.load().getServiceURL();

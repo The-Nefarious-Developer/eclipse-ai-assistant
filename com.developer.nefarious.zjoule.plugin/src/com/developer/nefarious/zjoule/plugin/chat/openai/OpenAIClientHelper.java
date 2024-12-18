@@ -3,25 +3,11 @@ package com.developer.nefarious.zjoule.plugin.chat.openai;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.util.List;
+
 import com.developer.nefarious.zjoule.plugin.chat.IChatMessage;
 import com.google.gson.Gson;
 
 public class OpenAIClientHelper implements IOpenAIClientHelper {
-
-	@Override
-	public BodyPublisher createRequestBody(final List<IChatMessage> messages) {
-		OpenAIRequestBody requestBody = new OpenAIRequestBody();
-		
-		requestBody.setMessages(messages);
-		requestBody.setMaxTokens(MAX_TOKENS);
-		requestBody.setTemperature(TEMPERATURE);
-		requestBody.setFrequencyPenalty(FREQUENCY_PENALTY);
-		requestBody.setPresencePenalty(PRESENCE_PENALTY);
-		requestBody.setStop(STOP);
-		
-		BodyPublisher bodyPublisher = HttpRequest.BodyPublishers.ofString(requestBody.toString());
-		return HttpRequest.BodyPublishers.fromPublisher(bodyPublisher);
-	}
 
 	@Override
 	public IChatMessage convertResponseToObject(final String serializedResponseBody) {
@@ -29,7 +15,22 @@ public class OpenAIClientHelper implements IOpenAIClientHelper {
 		OpenAIRequestResponse deserializedResponseBody = gson.fromJson(serializedResponseBody, OpenAIRequestResponse.class);
 		return getFirstAnswer(deserializedResponseBody);
 	}
-	
+
+	@Override
+	public BodyPublisher createRequestBody(final List<IChatMessage> messages) {
+		OpenAIRequestBody requestBody = new OpenAIRequestBody();
+
+		requestBody.setMessages(messages);
+		requestBody.setMaxTokens(MAX_TOKENS);
+		requestBody.setTemperature(TEMPERATURE);
+		requestBody.setFrequencyPenalty(FREQUENCY_PENALTY);
+		requestBody.setPresencePenalty(PRESENCE_PENALTY);
+		requestBody.setStop(STOP);
+
+		BodyPublisher bodyPublisher = HttpRequest.BodyPublishers.ofString(requestBody.toString());
+		return HttpRequest.BodyPublishers.fromPublisher(bodyPublisher);
+	}
+
 	private IChatMessage getFirstAnswer(final OpenAIRequestResponse responseBody) {
 		return responseBody.getChoices().get(0).getMessage();
 	}

@@ -1,8 +1,10 @@
 package com.developer.nefarious.zjoule.test.memory.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import com.developer.nefarious.zjoule.plugin.memory.utils.IObjectSerializer;
 import com.developer.nefarious.zjoule.plugin.memory.utils.ObjectSerializer;
 import com.developer.nefarious.zjoule.plugin.models.AccessToken;
@@ -10,41 +12,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class ObjectSerializerTest {
-	
-	private IObjectSerializer cut;
-	
+
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-	
+
+	private IObjectSerializer cut;
+
 	@BeforeEach
 	public void setUp() {
 		cut = ObjectSerializer.getInstance();
 	}
-	
-	@Test
-	public void shouldSerializeObject() {
-		// Arrange
-		AccessToken someObject = new AccessToken();
-		someObject.setAccessToken("doesn't matter");
-		String expectedValue = GSON.toJson(someObject);
-		// Act
-		String returnValue = cut.serialize(someObject);
-		// Assert
-		assertEquals(returnValue, expectedValue);
-	}
-	
-	@Test
-	public void shouldThrowAnErrorInTheSerializationIfTheObjectIsNull() {
-		// Arrange
-		String expectedErrorMessage = "Object to be serialized cannot be null";
-		// Act
-		try {
-			cut.serialize(null);
-		} catch (IllegalArgumentException error) {
-			// Assert
-			assertEquals(error.getMessage(), expectedErrorMessage);
-		}
-	}
-	
+
 	@Test
 	public void shouldDeserializeObject() {
 		// Arrange
@@ -61,7 +38,19 @@ public class ObjectSerializerTest {
 		// Assert
 		assertEquals(returnObject.getAccessToken(), expectedObject.getAccessToken());
 	}
-	
+
+	@Test
+	public void shouldSerializeObject() {
+		// Arrange
+		AccessToken someObject = new AccessToken();
+		someObject.setAccessToken("doesn't matter");
+		String expectedValue = GSON.toJson(someObject);
+		// Act
+		String returnValue = cut.serialize(someObject);
+		// Assert
+		assertEquals(returnValue, expectedValue);
+	}
+
 	@Test
 	public void shouldThrowAnErrorInTheDeserializationIfTheObjectIsNull() {
 		// Arrange
@@ -74,5 +63,18 @@ public class ObjectSerializerTest {
 			assertEquals(error.getMessage(), expectedErrorMessage);
 		}
 	}
-	
+
+	@Test
+	public void shouldThrowAnErrorInTheSerializationIfTheObjectIsNull() {
+		// Arrange
+		String expectedErrorMessage = "Object to be serialized cannot be null";
+		// Act
+		try {
+			cut.serialize(null);
+		} catch (IllegalArgumentException error) {
+			// Assert
+			assertEquals(error.getMessage(), expectedErrorMessage);
+		}
+	}
+
 }

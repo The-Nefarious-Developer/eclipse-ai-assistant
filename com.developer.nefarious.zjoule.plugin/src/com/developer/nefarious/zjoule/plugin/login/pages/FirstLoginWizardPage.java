@@ -1,12 +1,14 @@
 package com.developer.nefarious.zjoule.plugin.login.pages;
 
 import java.util.List;
+
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+
 import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.plugin.login.events.ServiceKeyModifyListener;
@@ -15,19 +17,19 @@ import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 import com.google.gson.Gson;
 
 public class FirstLoginWizardPage extends WizardPage {
-	
+
 	public static final String PAGE_ID = "First Page";
 
-	private Text textField;
-	
-	private Text errorText;
-	
 	private static final int INPUT_HEIGTH = 100;
-	
+
 	private static final int INPUT_WIDTH = 300;
-	
+
+	private Text textField;
+
+	private Text errorText;
+
 	private ServiceKey serviceKey;
-	
+
 	private ILoginClient loginClient;
 
 	public FirstLoginWizardPage(final ILoginClient loginClient) {
@@ -67,6 +69,20 @@ public class FirstLoginWizardPage extends WizardPage {
 		return textField.getText();
 	}
 
+	public ServiceKey getServiceKey() {
+		return serviceKey;
+	}
+
+	public void setResourceGroupsOnTheSecondPage(final GetResourceGroupsResponse getResourceGroupsResponse) {
+		SecondLoginWizardPage secondPage = (SecondLoginWizardPage) getWizard().getPage(SecondLoginWizardPage.PAGE_ID);
+		List<String> resourceGroupsAvailableForSelection = ResourceGroupIdExtractor.extractResourceGroupIds(getResourceGroupsResponse);
+		secondPage.setResourceGroupsForSelection(resourceGroupsAvailableForSelection);
+	}
+
+	public void setServiceKey(final ServiceKey serviceKey) {
+		this.serviceKey = serviceKey;
+	}
+
 	// Method to set validation error message
 	public void setValidationError(final String message) {
 		if (message != null && !message.isEmpty()) {
@@ -78,20 +94,6 @@ public class FirstLoginWizardPage extends WizardPage {
 			setPageComplete(true);
 		}
 		getShell().layout(true, true); // Update the layout to reflect visibility changes
-	}
-	
-	public void setResourceGroupsOnTheSecondPage(final GetResourceGroupsResponse getResourceGroupsResponse) {
-		SecondLoginWizardPage secondPage = (SecondLoginWizardPage) getWizard().getPage(SecondLoginWizardPage.PAGE_ID);
-		List<String> resourceGroupsAvailableForSelection = ResourceGroupIdExtractor.extractResourceGroupIds(getResourceGroupsResponse);
-		secondPage.setResourceGroupsForSelection(resourceGroupsAvailableForSelection);
-	}
-	
-	public void setServiceKey(final ServiceKey serviceKey) {
-		this.serviceKey = serviceKey;
-	}
-	
-	public ServiceKey getServiceKey() {
-		return serviceKey;
 	}
 
 }

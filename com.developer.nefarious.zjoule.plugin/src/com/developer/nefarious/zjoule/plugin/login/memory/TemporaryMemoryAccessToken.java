@@ -11,6 +11,23 @@ public class TemporaryMemoryAccessToken implements IMemoryAccessToken, ITemporar
 
 	public static final String KEY = "tmp-" + IMemoryAccessToken.KEY;
 
+	public static TemporaryMemoryAccessToken getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException("TemporaryMemoryAccessToken not initialized. Call initialize() first.");
+		}
+		return instance;
+	}
+
+	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+		if (instance == null) {
+			instance = new TemporaryMemoryAccessToken(objectSerializer, eclipseMemory);
+		}
+	}
+
+	public static void resetInstance() {
+		instance = null;
+	}
+
 	IObjectSerializer objectSerializer;
 
 	IEclipseMemory eclipseMemory;
@@ -20,27 +37,14 @@ public class TemporaryMemoryAccessToken implements IMemoryAccessToken, ITemporar
 		this.eclipseMemory = eclipseMemory;
 	}
 
-	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
-		if (instance == null) {
-			instance = new TemporaryMemoryAccessToken(objectSerializer, eclipseMemory);
-		}
-	}
-
-	public static TemporaryMemoryAccessToken getInstance() {
-		if (instance == null) {
-			throw new IllegalStateException("TemporaryMemoryAccessToken not initialized. Call initialize() first.");
-		}
-		return instance;
-	}
-
-	public static void resetInstance() {
-		instance = null;
-	}
-
 	@Override
-	public void save(final AccessToken accesstoken) {
-		String serializedObject = objectSerializer.serialize(accesstoken);
-		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
+	public Boolean isEmpty() {
+		AccessToken accessToken = load();
+		if ((accessToken == null) || (accessToken.getAccessToken() == null) || accessToken.getAccessToken().isEmpty() ||
+				accessToken.getAccessToken().isBlank()) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -60,19 +64,9 @@ public class TemporaryMemoryAccessToken implements IMemoryAccessToken, ITemporar
 	}
 
 	@Override
-	public Boolean isEmpty() {
-		AccessToken accessToken = load();
-		if (accessToken == null) {
-			return true;
-		}
-		if (accessToken.getAccessToken() == null) {
-			return true;
-		}
-		if (accessToken.getAccessToken().isEmpty() ||
-				accessToken.getAccessToken().isBlank()) {
-			return true;
-		}
-		return false;
+	public void save(final AccessToken accesstoken) {
+		String serializedObject = objectSerializer.serialize(accesstoken);
+		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
 	}
 
 }

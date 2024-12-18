@@ -32,8 +32,13 @@
 		<module name="JavadocType" />
 		<module name="JavadocMethod" />
 
-		<!-- Import Rules -->
-		<module name="CustomImportOrder" />
+		<!-- ImportOrder Module to enforce Eclipse's default import order -->
+		<module name="ImportOrder">
+			<property name="groups" value="java,javax,org,com" />
+			<property name="option" value="top" />
+			<property name="separated" value="true" />
+			<property name="sortStaticImportsAlphabetically" value="true" />
+		</module>
 		<module name="UnusedImports" />
 
 		<!-- Blocks and Statements -->

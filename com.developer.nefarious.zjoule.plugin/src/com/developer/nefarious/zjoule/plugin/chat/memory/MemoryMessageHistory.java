@@ -8,6 +8,23 @@ public class MemoryMessageHistory implements IMemoryMessageHistory {
 
 	private static MemoryMessageHistory instance;
 
+	public static MemoryMessageHistory getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException("MemoryMessageHistory not initialized. Call initialize() first.");
+		}
+		return instance;
+	}
+
+	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+		if (instance == null) {
+			instance = new MemoryMessageHistory(objectSerializer, eclipseMemory);
+		}
+	}
+
+	public static void resetInstance() {
+		instance = null;
+	}
+
 	private IObjectSerializer objectSerializer;
 
 	private IEclipseMemory eclipseMemory;
@@ -17,27 +34,18 @@ public class MemoryMessageHistory implements IMemoryMessageHistory {
 		this.eclipseMemory = eclipseMemory;
 	}
 
-	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
-		if (instance == null) {
-			instance = new MemoryMessageHistory(objectSerializer, eclipseMemory);
-		}
-	}
-
-	public static MemoryMessageHistory getInstance() {
-		if (instance == null) {
-			throw new IllegalStateException("MemoryMessageHistory not initialized. Call initialize() first.");
-		}
-		return instance;
-	}
-
-	public static void resetInstance() {
-		instance = null;
+	@Override
+	public void clear() {
+		eclipseMemory.deleteFromEclipsePreferences(KEY);
 	}
 
 	@Override
-	public void save(final MessageHistory messageHistory) {
-		String serializedObject = objectSerializer.serialize(messageHistory);
-		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
+	public Boolean isEmpty() {
+		MessageHistory messageHistory = load();
+		if ((messageHistory == null) || (messageHistory.getMessages() == null) || messageHistory.getMessages().isEmpty()) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -51,23 +59,9 @@ public class MemoryMessageHistory implements IMemoryMessageHistory {
 	}
 
 	@Override
-	public void clear() {
-		eclipseMemory.deleteFromEclipsePreferences(KEY);
-	}
-
-	@Override
-	public Boolean isEmpty() {
-		MessageHistory messageHistory = load();
-		if (messageHistory == null) {
-			return true;
-		}
-		if (messageHistory.getMessages() == null) {
-			return true;
-		}
-		if (messageHistory.getMessages().isEmpty()) {
-			return true;
-		}
-		return false;
+	public void save(final MessageHistory messageHistory) {
+		String serializedObject = objectSerializer.serialize(messageHistory);
+		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
 	}
 
 }

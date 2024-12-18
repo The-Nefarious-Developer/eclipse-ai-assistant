@@ -11,6 +11,23 @@ public class TemporaryMemoryServiceKey implements IMemoryServiceKey, ITemporaryM
 
 	public static final String KEY = "tmp-" + IMemoryServiceKey.KEY;
 
+	public static TemporaryMemoryServiceKey getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException("TemporaryMemoryServiceKey not initialized. Call initialize() first.");
+		}
+		return instance;
+	}
+
+	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+		if (instance == null) {
+			instance = new TemporaryMemoryServiceKey(objectSerializer, eclipseMemory);
+		}
+	}
+
+	public static void resetInstance() {
+		instance = null;
+	}
+
 	IObjectSerializer objectSerializer;
 
 	IEclipseMemory eclipseMemory;
@@ -20,27 +37,14 @@ public class TemporaryMemoryServiceKey implements IMemoryServiceKey, ITemporaryM
 		this.eclipseMemory = eclipseMemory;
 	}
 
-	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
-		if (instance == null) {
-			instance = new TemporaryMemoryServiceKey(objectSerializer, eclipseMemory);
-		}
-	}
-
-	public static TemporaryMemoryServiceKey getInstance() {
-		if (instance == null) {
-			throw new IllegalStateException("TemporaryMemoryServiceKey not initialized. Call initialize() first.");
-		}
-		return instance;
-	}
-
-	public static void resetInstance() {
-		instance = null;
-	}
-
 	@Override
-	public void save(final ServiceKey serviceKey) {
-		String serializedObject = objectSerializer.serialize(serviceKey);
-		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
+	public Boolean isEmpty() {
+		ServiceKey serviceKey = load();
+		if ((serviceKey == null) || (serviceKey.getClientId() == null) || serviceKey.getClientId().isEmpty() ||
+				serviceKey.getClientId().isBlank()) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -60,19 +64,9 @@ public class TemporaryMemoryServiceKey implements IMemoryServiceKey, ITemporaryM
 	}
 
 	@Override
-	public Boolean isEmpty() {
-		ServiceKey serviceKey = load();
-		if (serviceKey == null) {
-			return true;
-		}
-		if (serviceKey.getClientId() == null) {
-			return true;
-		}
-		if (serviceKey.getClientId().isEmpty() || 
-				serviceKey.getClientId().isBlank()) {
-			return true;
-		}
-		return false;
+	public void save(final ServiceKey serviceKey) {
+		String serializedObject = objectSerializer.serialize(serviceKey);
+		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
 	}
 
 }

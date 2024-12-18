@@ -3,15 +3,18 @@ package com.developer.nefarious.zjoule.test.auth;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
+
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ThreadLocalRandom;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
+
 import com.developer.nefarious.zjoule.plugin.auth.AuthClientHelper;
 import com.developer.nefarious.zjoule.plugin.models.AccessToken;
 import com.google.gson.Gson;
@@ -29,26 +32,6 @@ public class AuthClientHelperTest {
 	@BeforeEach
 	public void setUp() {
 		cut = new AuthClientHelper();
-	}
-
-	@Test
-	public void shouldCreateTheRequestBody() {
-		// Arrange
-		String mockClientId = randomWord();
-		String mockClientSecret = randomWord();
-		BodyPublisher expectedObject = mock(BodyPublisher.class);
-		// @formatter:off
-		String mockRequestBody = "grant_type=client_credentials" 
-				+ "&client_id="	+ URLEncoder.encode(mockClientId, StandardCharsets.UTF_8) 
-				+ "&client_secret="	+ URLEncoder.encode(mockClientSecret, StandardCharsets.UTF_8);
-		// @formatter:on
-		try (MockedStatic<BodyPublishers> bodyPublishersStatic = mockStatic(BodyPublishers.class)) {
-			bodyPublishersStatic.when(() -> BodyPublishers.ofString(mockRequestBody)).thenReturn(expectedObject);
-			// Act
-			BodyPublisher returnObject = cut.createRequestBody(mockClientId, mockClientSecret);
-			// Assert
-			assertEquals(returnObject, expectedObject);
-		}
 	}
 
 	@Test
@@ -75,6 +58,26 @@ public class AuthClientHelperTest {
 		AccessToken returnObject = cut.convertResponseToObject(mockResponseBody);
 		// Assert
 		assertEquals(returnObject.getAccessToken(), expectedObject.getAccessToken());
+	}
+
+	@Test
+	public void shouldCreateTheRequestBody() {
+		// Arrange
+		String mockClientId = randomWord();
+		String mockClientSecret = randomWord();
+		BodyPublisher expectedObject = mock(BodyPublisher.class);
+		// @formatter:off
+		String mockRequestBody = "grant_type=client_credentials"
+				+ "&client_id="	+ URLEncoder.encode(mockClientId, StandardCharsets.UTF_8)
+				+ "&client_secret="	+ URLEncoder.encode(mockClientSecret, StandardCharsets.UTF_8);
+		// @formatter:on
+		try (MockedStatic<BodyPublishers> bodyPublishersStatic = mockStatic(BodyPublishers.class)) {
+			bodyPublishersStatic.when(() -> BodyPublishers.ofString(mockRequestBody)).thenReturn(expectedObject);
+			// Act
+			BodyPublisher returnObject = cut.createRequestBody(mockClientId, mockClientSecret);
+			// Assert
+			assertEquals(returnObject, expectedObject);
+		}
 	}
 
 }

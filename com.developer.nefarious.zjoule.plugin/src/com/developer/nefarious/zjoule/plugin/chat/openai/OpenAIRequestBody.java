@@ -1,6 +1,7 @@
 package com.developer.nefarious.zjoule.plugin.chat.openai;
 
 import java.util.List;
+
 import com.developer.nefarious.zjoule.plugin.chat.IChatMessage;
 import com.developer.nefarious.zjoule.plugin.models.Role;
 import com.google.gson.Gson;
@@ -24,52 +25,52 @@ public class OpenAIRequestBody {
 
 	private String stop;
 
-	public List<IChatMessage> getMessages() {
-		return messages;
-	}
-
-	public void setMessages(final List<IChatMessage> messages) {
-		this.messages = messages;
+	public double getFrequencyPenalty() {
+		return frequencyPenalty;
 	}
 
 	public int getMaxTokens() {
 		return maxTokens;
 	}
 
-	public void setMaxTokens(final int maxTokens) {
-		this.maxTokens = maxTokens;
-	}
-
-	public double getTemperature() {
-		return temperature;
-	}
-
-	public void setTemperature(final double temperature) {
-		this.temperature = temperature;
-	}
-
-	public double getFrequencyPenalty() {
-		return frequencyPenalty;
-	}
-
-	public void setFrequencyPenalty(final double frequencyPenalty) {
-		this.frequencyPenalty = frequencyPenalty;
+	public List<IChatMessage> getMessages() {
+		return messages;
 	}
 
 	public double getPresencePenalty() {
 		return presencePenalty;
 	}
 
-	public void setPresencePenalty(final double presencePenalty) {
-		this.presencePenalty = presencePenalty;
-	}
-
 	public String getStop() {
 		return stop;
 	}
 
+	public double getTemperature() {
+		return temperature;
+	}
+
+	public void setFrequencyPenalty(final double frequencyPenalty) {
+		this.frequencyPenalty = frequencyPenalty;
+	}
+
+	public void setMaxTokens(final int maxTokens) {
+		this.maxTokens = maxTokens;
+	}
+
+	public void setMessages(final List<IChatMessage> messages) {
+		this.messages = messages;
+	}
+
+	public void setPresencePenalty(final double presencePenalty) {
+		this.presencePenalty = presencePenalty;
+	}
+
 	public void setStop(final String stop) {
 		this.stop = stop;
+	}
+
+	public void setTemperature(final double temperature) {
+		this.temperature = temperature;
 	}
 
 	@Override

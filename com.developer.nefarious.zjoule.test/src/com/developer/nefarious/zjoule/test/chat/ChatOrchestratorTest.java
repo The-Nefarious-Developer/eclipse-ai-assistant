@@ -7,16 +7,19 @@ import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
+
 import com.developer.nefarious.zjoule.plugin.chat.AIClientFactory;
 import com.developer.nefarious.zjoule.plugin.chat.ChatOrchestrator;
 import com.developer.nefarious.zjoule.plugin.chat.IAIClient;
@@ -54,17 +57,38 @@ public class ChatOrchestratorTest {
 		cut = new ChatOrchestrator();
 	}
 
-	@AfterEach
-	public void tearDown() {
-		if (mockedStaticAIClientFactory != null) {
-			mockedStaticAIClientFactory.close();
-		}
-		if (mockedStaticInstruction != null) {
-			mockedStaticInstruction.close();
-		}
-		if (mockedStaticEditorContentReader != null) {
-			mockedStaticEditorContentReader.close();
-		}
+	@Test
+	public void shouldNotStopIfThereIsNoMessageHistory() throws IOException, InterruptedException {
+		// Arrange
+		mockedStaticAIClientFactory.when(AIClientFactory::getClient).thenReturn(mockAIClient);
+
+		String mockUserPrompt = "What's the meaning of life?";
+		IChatMessage mockUserMessage = mock(IChatMessage.class);
+		when(mockAIClient.createMessage(Role.USER, mockUserPrompt)).thenReturn(mockUserMessage);
+
+		List<IChatMessage> mockMessageHistory = new ArrayList<>();
+		when(mockAIClient.getMessageHistory()).thenReturn(mockMessageHistory);
+
+		mockedStaticEditorContentReader.when(EditorContentReader::readActiveEditorContent).thenReturn(null);
+
+		IChatMessage mockSystemMessage = mock(IChatMessage.class);
+		when(mockAIClient.createMessage(Role.SYSTEM, mockBaseInstructions)).thenReturn(mockSystemMessage);
+
+		List<IChatMessage> mockInputMessages = Arrays.asList(mockSystemMessage, mockUserMessage);
+		IChatMessage mockAnswer = mock(IChatMessage.class);
+		when(mockAIClient.chatCompletion(mockInputMessages)).thenReturn(mockAnswer);
+
+		List<IChatMessage> mockAllMessages = Arrays.asList(mockUserMessage,	mockAnswer);
+
+		String expectedValue = "42";
+		when(mockAnswer.getMessage()).thenReturn(expectedValue);
+
+		// Act
+		String returnValue = cut.getAnswer(mockUserPrompt);
+
+		// Assert
+		verify(mockAIClient).setMessageHistory(mockAllMessages);
+		assertEquals(expectedValue, returnValue);
 	}
 
 	@Test
@@ -140,54 +164,33 @@ public class ChatOrchestratorTest {
 	}
 
 	@Test
-	public void shouldNotStopIfThereIsNoMessageHistory() throws IOException, InterruptedException {
-		// Arrange
-		mockedStaticAIClientFactory.when(AIClientFactory::getClient).thenReturn(mockAIClient);
-
-		String mockUserPrompt = "What's the meaning of life?";
-		IChatMessage mockUserMessage = mock(IChatMessage.class);
-		when(mockAIClient.createMessage(Role.USER, mockUserPrompt)).thenReturn(mockUserMessage);
-
-		List<IChatMessage> mockMessageHistory = new ArrayList<IChatMessage>();
-		when(mockAIClient.getMessageHistory()).thenReturn(mockMessageHistory);
-
-		mockedStaticEditorContentReader.when(EditorContentReader::readActiveEditorContent).thenReturn(null);
-
-		IChatMessage mockSystemMessage = mock(IChatMessage.class);
-		when(mockAIClient.createMessage(Role.SYSTEM, mockBaseInstructions)).thenReturn(mockSystemMessage);
-
-		List<IChatMessage> mockInputMessages = Arrays.asList(mockSystemMessage, mockUserMessage);
-		IChatMessage mockAnswer = mock(IChatMessage.class);
-		when(mockAIClient.chatCompletion(mockInputMessages)).thenReturn(mockAnswer);
-
-		List<IChatMessage> mockAllMessages = Arrays.asList(mockUserMessage,	mockAnswer);
-
-		String expectedValue = "42";
-		when(mockAnswer.getMessage()).thenReturn(expectedValue);
-
-		// Act
-		String returnValue = cut.getAnswer(mockUserPrompt);
-
-		// Assert
-		verify(mockAIClient).setMessageHistory(mockAllMessages);
-		assertEquals(expectedValue, returnValue);
-	}
-	
-	@Test
 	public void shouldReturnErrorIfModelIsIncompatible() {
 		// Arrange
 		String mockUserPrompt = "What's the meaning of life?";
 		String expectedValue = "The model you have selected is incompatible with the current "
 				+ "operation. Please verify the model's configuration or choose a "
 				+ "compatible alternative.";
-		
+
 		mockedStaticAIClientFactory.when(AIClientFactory::getClient).thenReturn(null);
-		
+
 		// Act
 		String returnValue = cut.getAnswer(mockUserPrompt);
-		
+
 		// Assert
 		assertEquals(expectedValue, returnValue);
+	}
+
+	@AfterEach
+	public void tearDown() {
+		if (mockedStaticAIClientFactory != null) {
+			mockedStaticAIClientFactory.close();
+		}
+		if (mockedStaticInstruction != null) {
+			mockedStaticInstruction.close();
+		}
+		if (mockedStaticEditorContentReader != null) {
+			mockedStaticEditorContentReader.close();
+		}
 	}
 
 }
