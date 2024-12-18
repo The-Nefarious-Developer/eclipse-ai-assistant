@@ -9,51 +9,72 @@ import java.net.http.HttpResponse;
 import com.developer.nefarious.zjoule.plugin.auth.IAuthClient;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 
+/**
+ * Implements the {@link ILoginClient} interface for managing API interactions related to login operations.
+ * <p>
+ * The {@code LoginClient} class communicates with SAP AI Core APIs to retrieve deployments
+ * and resource groups, leveraging an {@link IAuthClient} for authentication and an {@link ILoginClientHelper}
+ * for building requests and parsing responses.
+ */
 public class LoginClient implements ILoginClient {
 
-	private HttpClient httpClient;
+    /** The HTTP client used for making API requests. */
+    private HttpClient httpClient;
 
-	private ILoginClientHelper loginClientHelper;
+    /** Helper class for constructing requests and parsing responses. */
+    private ILoginClientHelper loginClientHelper;
 
-	private IAuthClient authClient;
+    /** The authentication client used for retrieving access tokens. */
+    private IAuthClient authClient;
 
-	public LoginClient(final ILoginClientHelper loginClientHelper, final IAuthClient authClient) {
-		httpClient = HttpClient.newHttpClient();
-		this.loginClientHelper = loginClientHelper;
-		this.authClient = authClient;
-	}
+    /**
+     * Constructs a new {@code LoginClient} instance.
+     *
+     * @param loginClientHelper the helper for constructing requests and parsing responses.
+     * @param authClient the authentication client for retrieving access tokens.
+     */
+    public LoginClient(final ILoginClientHelper loginClientHelper, final IAuthClient authClient) {
+        httpClient = HttpClient.newHttpClient();
+        this.loginClientHelper = loginClientHelper;
+        this.authClient = authClient;
+    }
 
-	@Override
-	public GetDeploymentsResponse getDeployments(final ServiceKey serviceKey, final String resourceGroup) throws IOException, InterruptedException {
-		URI endpoint = loginClientHelper.createAuthUri(serviceKey.getServiceURL() + "/lm/deployments");
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GetDeploymentsResponse getDeployments(final ServiceKey serviceKey, final String resourceGroup) 
+            throws IOException, InterruptedException {
+        URI endpoint = loginClientHelper.createAuthUri(serviceKey.getServiceURL() + "/lm/deployments");
 
-		// @formatter:off
-		HttpRequest request = HttpRequest.newBuilder()
-				.uri(endpoint)
-				.header("Authorization", "Bearer " + authClient.getNewAccessToken(serviceKey))
-				.header("AI-Resource-Group", resourceGroup)
-				.GET()
-				.build();
-		// @formatter:on
-		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(endpoint)
+                .header("Authorization", "Bearer " + authClient.getNewAccessToken(serviceKey))
+                .header("AI-Resource-Group", resourceGroup)
+                .GET()
+                .build();
 
-		return loginClientHelper.parseDeploymentsResponseToObject(response.body());
-	}
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-	@Override
-	public GetResourceGroupsResponse getResourceGroups(final ServiceKey serviceKey) throws IOException, InterruptedException {
-		URI endpoint = loginClientHelper.createAuthUri(serviceKey.getServiceURL() + "/admin/resourceGroups");
+        return loginClientHelper.parseDeploymentsResponseToObject(response.body());
+    }
 
-		// @formatter:off
-		HttpRequest request = HttpRequest.newBuilder()
-				.uri(endpoint)
-				.header("Authorization", "Bearer " + authClient.getNewAccessToken(serviceKey))
-				.GET()
-				.build();
-		// @formatter:off
-		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GetResourceGroupsResponse getResourceGroups(final ServiceKey serviceKey) 
+            throws IOException, InterruptedException {
+        URI endpoint = loginClientHelper.createAuthUri(serviceKey.getServiceURL() + "/admin/resourceGroups");
 
-		return loginClientHelper.parseResourceGroupsResponseToObject(response.body());
-	}
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(endpoint)
+                .header("Authorization", "Bearer " + authClient.getNewAccessToken(serviceKey))
+                .GET()
+                .build();
 
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        return loginClientHelper.parseResourceGroupsResponseToObject(response.body());
+    }
 }
