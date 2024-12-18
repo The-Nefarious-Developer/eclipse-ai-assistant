@@ -5,20 +5,16 @@ import com.developer.nefarious.zjoule.plugin.memory.IEclipseMemory;
 import com.developer.nefarious.zjoule.plugin.memory.utils.IObjectSerializer;
 
 /**
- * Manages the storage and retrieval of chat message history in memory.
- * This class uses the Eclipse preferences system and an object serializer to
- * persist and retrieve {@link MessageHistory} objects.
+ * Manages the storage and retrieval of chat message history in Eclipse preferences.
+ * This class provides functionality to persist, retrieve, and manage
+ * {@link MessageHistory} objects using an object serializer and Eclipse's preferences API.
  * 
- * Implements the {@link IMemoryMessageHistory} interface for memory management
- * of chat messages.
+ * Implements the {@link IMemoryMessageHistory} interface.
  */
 public class MemoryMessageHistory implements IMemoryMessageHistory {
 
     /** Singleton instance of {@code MemoryMessageHistory}. */
     private static MemoryMessageHistory instance;
-
-    /** Key used for storing and retrieving data from Eclipse preferences. */
-    private static final String KEY = "memory_message_history";
 
     /** Serializer for converting objects to and from serialized formats. */
     private IObjectSerializer objectSerializer;
@@ -40,8 +36,7 @@ public class MemoryMessageHistory implements IMemoryMessageHistory {
     }
 
     /**
-     * Initializes the {@code MemoryMessageHistory} singleton with the specified
-     * object serializer and Eclipse memory handler.
+     * Initializes the singleton instance of {@code MemoryMessageHistory}.
      *
      * @param objectSerializer the serializer for handling object serialization and deserialization.
      * @param eclipseMemory the handler for managing Eclipse preferences storage.
@@ -54,7 +49,7 @@ public class MemoryMessageHistory implements IMemoryMessageHistory {
 
     /**
      * Resets the singleton instance of {@code MemoryMessageHistory}.
-     * Useful for testing or reinitializing the class.
+     * This is useful for testing or reinitializing the instance.
      */
     public static void resetInstance() {
         instance = null;
@@ -72,8 +67,7 @@ public class MemoryMessageHistory implements IMemoryMessageHistory {
     }
 
     /**
-     * Clears the stored chat message history from memory.
-     * Deletes the data associated with the key {@code KEY} in Eclipse preferences.
+     * {@inheritDoc}
      */
     @Override
     public void clear() {
@@ -110,4 +104,5 @@ public class MemoryMessageHistory implements IMemoryMessageHistory {
         String serializedObject = objectSerializer.serialize(messageHistory);
         eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
     }
+    
 }
