@@ -5,67 +5,111 @@ import com.developer.nefarious.zjoule.plugin.memory.IMemoryDeployment;
 import com.developer.nefarious.zjoule.plugin.memory.utils.IObjectSerializer;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
 
+/**
+ * Manages temporary storage and retrieval of deployment information during the login process.
+ * <p>
+ * The {@code TemporaryMemoryDeployment} class provides methods to save, load, and persist
+ * temporary deployment data using Eclipse preferences. It implements {@link IMemoryDeployment}
+ * and {@link ITemporaryMemoryObject}.
+ */
 public class TemporaryMemoryDeployment implements IMemoryDeployment, ITemporaryMemoryObject {
 
-	private static TemporaryMemoryDeployment instance;
+    /** Singleton instance of {@code TemporaryMemoryDeployment}. */
+    private static TemporaryMemoryDeployment instance;
 
-	public static final String KEY = "tmp-" + IMemoryDeployment.KEY;
+    /** Key used for storing and retrieving the temporary deployment in Eclipse preferences. */
+    public static final String KEY = "tmp-" + IMemoryDeployment.KEY;
 
-	public static TemporaryMemoryDeployment getInstance() {
-		if (instance == null) {
-			throw new IllegalStateException("TemporaryMemoryDeployment not initialized. Call initialize() first.");
-		}
-		return instance;
-	}
+    /** Serializer for converting objects to and from serialized formats. */
+    private IObjectSerializer objectSerializer;
 
-	public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
-		if (instance == null) {
-			instance = new TemporaryMemoryDeployment(objectSerializer, eclipseMemory);
-		}
-	}
+    /** Manages interactions with Eclipse's preferences storage. */
+    private IEclipseMemory eclipseMemory;
 
-	public static void resetInstance() {
-		instance = null;
-	}
+    /**
+     * Retrieves the singleton instance of {@code TemporaryMemoryDeployment}.
+     *
+     * @return the singleton instance.
+     * @throws IllegalStateException if the instance has not been initialized.
+     */
+    public static TemporaryMemoryDeployment getInstance() {
+        if (instance == null) {
+            throw new IllegalStateException("TemporaryMemoryDeployment not initialized. Call initialize() first.");
+        }
+        return instance;
+    }
 
-	IObjectSerializer objectSerializer;
+    /**
+     * Initializes the {@code TemporaryMemoryDeployment} singleton with the specified dependencies.
+     *
+     * @param objectSerializer the serializer for handling object serialization and deserialization.
+     * @param eclipseMemory the manager for Eclipse preferences storage.
+     */
+    public static void initialize(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+        if (instance == null) {
+            instance = new TemporaryMemoryDeployment(objectSerializer, eclipseMemory);
+        }
+    }
 
-	IEclipseMemory eclipseMemory;
+    /**
+     * Resets the singleton instance. Useful for testing or reinitialization.
+     */
+    public static void resetInstance() {
+        instance = null;
+    }
 
-	private TemporaryMemoryDeployment(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
-		this.objectSerializer = objectSerializer;
-		this.eclipseMemory = eclipseMemory;
-	}
+    /**
+     * Private constructor to enforce singleton behavior.
+     *
+     * @param objectSerializer the serializer for handling object serialization and deserialization.
+     * @param eclipseMemory the manager for Eclipse preferences storage.
+     */
+    private TemporaryMemoryDeployment(final IObjectSerializer objectSerializer, final IEclipseMemory eclipseMemory) {
+        this.objectSerializer = objectSerializer;
+        this.eclipseMemory = eclipseMemory;
+    }
 
-	@Override
-	public Boolean isEmpty() {
-		Deployment deployment = load();
-		if ((deployment == null) || (deployment.getConfigurationName() == null) || deployment.getConfigurationName().isEmpty() ||
-				deployment.getConfigurationName().isBlank()) {
-			return true;
-		}
-		return false;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Boolean isEmpty() {
+        Deployment deployment = load();
+        if ((deployment == null) || (deployment.getConfigurationName() == null) || deployment.getConfigurationName().isEmpty()
+                || deployment.getConfigurationName().isBlank()) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public Deployment load() {
-		try {
-			String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-			return objectSerializer.deserialize(serializedObject, Deployment.class);
-		} catch (Exception e) {
-			return null;
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Deployment load() {
+        try {
+            String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
+            return objectSerializer.deserialize(serializedObject, Deployment.class);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
-	@Override
-	public void persist() {
-		String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-		eclipseMemory.saveOnEclipsePreferences(IMemoryDeployment.KEY, serializedObject);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void persist() {
+        String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
+        eclipseMemory.saveOnEclipsePreferences(IMemoryDeployment.KEY, serializedObject);
+    }
 
-	@Override
-	public void save(final Deployment deployment) {
-		String serializedObject = objectSerializer.serialize(deployment);
-		eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void save(final Deployment deployment) {
+        String serializedObject = objectSerializer.serialize(deployment);
+        eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
+    }
 }
