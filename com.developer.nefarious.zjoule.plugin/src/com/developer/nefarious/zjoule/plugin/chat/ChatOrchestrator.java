@@ -7,8 +7,16 @@ import java.util.List;
 import com.developer.nefarious.zjoule.plugin.chat.utils.EditorContentReader;
 import com.developer.nefarious.zjoule.plugin.models.Role;
 
-public class ChatOrchestrator implements IChatOrchestrator  {
+/**
+ * Orchestrates the chat process by interacting with the AI client to retrieve
+ * answers based on user prompts and active editor content. Implements the
+ * {@link IChatOrchestrator} interface to provide chat functionality.
+ */
+public class ChatOrchestrator implements IChatOrchestrator {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getAnswer(final String userPrompt) {
 
@@ -29,8 +37,8 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 		String editorContent = EditorContentReader.readActiveEditorContent();
 
 		String systemInstructions = editorContent != null
-		    ? baseInstructions + " Consider the following code as context: " + editorContent
-		    : baseInstructions;
+				? baseInstructions + " Consider the following code as context: " + editorContent
+				: baseInstructions;
 
 		IChatMessage systemMessage = aiClient.createMessage(Role.SYSTEM, systemInstructions);
 		messages.add(systemMessage);
@@ -57,10 +65,14 @@ public class ChatOrchestrator implements IChatOrchestrator  {
 		return answer.getMessage();
 	}
 
+	/**
+	 * Returns a message indicating incompatibility with the current operation.
+	 *
+	 * @return an error message explaining the model's incompatibility.
+	 */
 	private String getIncompatibilityMessage() {
 		return "The model you have selected is incompatible with the current "
-			+ "operation. Please verify the model's configuration or choose a "
-			+ "compatible alternative.";
+				+ "operation. Please verify the model's configuration or choose a " + "compatible alternative.";
 	}
 
 }
