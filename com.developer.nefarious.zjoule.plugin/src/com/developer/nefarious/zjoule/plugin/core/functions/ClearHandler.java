@@ -14,42 +14,73 @@ import org.eclipse.ui.PlatformUI;
 import com.developer.nefarious.zjoule.plugin.auth.SessionManager;
 import com.developer.nefarious.zjoule.plugin.chat.memory.MemoryMessageHistory;
 
+/**
+ * Handles the "Clear Chat" action in the application.
+ * <p>
+ * This class extends {@link Action} and provides functionality to clear the chat message history
+ * and reset the associated browser state. It also manages the display icon for the action.
+ */
 public class ClearHandler extends Action {
 
-	private static final String ICON = "platform:/plugin/org.eclipse.ui/icons/full/etool16/clear.png";
+    /** Path to the icon used for the "Clear Chat" action. */
+    private static final String ICON = "platform:/plugin/org.eclipse.ui/icons/full/etool16/clear.png";
 
-	public static ClearHandler create(final Browser browser) {
-		return new ClearHandler(browser);
-	}
+    /** The {@link Browser} instance associated with the action. */
+    private Browser browser;
 
-	private Browser browser;
+    /**
+     * Factory method to create a new {@code ClearHandler} instance.
+     *
+     * @param browser the {@link Browser} instance associated with the action.
+     * @return a new {@code ClearHandler} instance.
+     */
+    public static ClearHandler create(final Browser browser) {
+        return new ClearHandler(browser);
+    }
 
-	private ClearHandler(final Browser browser) {
-		this.browser = browser;
+    /**
+     * Constructs a new {@code ClearHandler} instance.
+     *
+     * @param browser the {@link Browser} instance associated with the action.
+     */
+    private ClearHandler(final Browser browser) {
+        this.browser = browser;
 
-		setText("Clear Chat");
-		setToolTipText("Clear message history.");
-		setIcon();
-	}
+        setText("Clear Chat");
+        setToolTipText("Clear message history.");
+        setIcon();
+    }
 
-	@Override
-	public void run() {
-		if (SessionManager.isUserLoggedIn()) {
-			MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
-			memoryMessageHistory.clear();
-			browser.execute("clearMessages();");
-		}
-	}
+    /**
+     * Executes the "Clear Chat" action.
+     * <p>
+     * If the user is logged in, this method clears the chat message history stored in
+     * {@link MemoryMessageHistory} and resets the browser state by executing the
+     * {@code clearMessages()} JavaScript function.
+     */
+    @Override
+    public void run() {
+        if (SessionManager.isUserLoggedIn()) {
+            MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
+            memoryMessageHistory.clear();
+            browser.execute("clearMessages();");
+        }
+    }
 
-	private void setIcon() {
-		try {
-			URI iconURI = new URI(ICON);
-			URL iconURL = iconURI.toURL();
-			setImageDescriptor(ImageDescriptor.createFromURL(iconURL));
-		} catch (URISyntaxException | MalformedURLException e) {
-			e.printStackTrace();
-			setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
-		}
-	}
-
+    /**
+     * Sets the icon for the action.
+     * <p>
+     * Attempts to load the icon from the specified path. If the icon cannot be loaded,
+     * a default icon from Eclipse's shared images is used.
+     */
+    private void setIcon() {
+        try {
+            URI iconURI = new URI(ICON);
+            URL iconURL = iconURI.toURL();
+            setImageDescriptor(ImageDescriptor.createFromURL(iconURL));
+        } catch (URISyntaxException | MalformedURLException e) {
+            e.printStackTrace();
+            setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
+        }
+    }
 }
