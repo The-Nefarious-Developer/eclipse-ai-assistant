@@ -7,8 +7,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpResponse;
 
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryAccessToken;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryServiceKey;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.models.AccessToken;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 
@@ -20,10 +19,10 @@ import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 public class AuthClient implements IAuthClient {
 
     /** Memory storage for saving and loading access tokens. */
-    private IMemoryAccessToken memoryAccessToken;
+    private IMemoryObject<AccessToken> memoryAccessToken;
 
     /** Memory storage for saving and loading service keys. */
-    private IMemoryServiceKey memoryServiceKey;
+    private IMemoryObject<ServiceKey> memoryServiceKey;
 
     /** Helper class for constructing requests and processing responses. */
     private IAuthClientHelper authClientHelper;
@@ -36,8 +35,8 @@ public class AuthClient implements IAuthClient {
      * @param authClientHelper the helper for constructing and handling authentication requests
      */
     public AuthClient(
-            final IMemoryAccessToken memoryAccessToken,
-            final IMemoryServiceKey memoryServiceKey,
+            final IMemoryObject<AccessToken> memoryAccessToken,
+            final IMemoryObject<ServiceKey> memoryServiceKey,
             final IAuthClientHelper authClientHelper) {
         this.memoryAccessToken = memoryAccessToken;
         this.memoryServiceKey = memoryServiceKey;

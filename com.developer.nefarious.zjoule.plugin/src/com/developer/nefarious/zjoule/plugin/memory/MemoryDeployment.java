@@ -7,9 +7,12 @@ import com.developer.nefarious.zjoule.plugin.models.Deployment;
  * Manages the storage and retrieval of deployment information in memory.
  * <p>
  * The {@code MemoryDeployment} class provides methods to save, load, and check
- * the validity of deployment data stored in Eclipse preferences. It implements {@link IMemoryDeployment}.
+ * the validity of deployment data stored in Eclipse preferences. It implements {@link IMemoryObject<Deployment>}.
  */
-public class MemoryDeployment implements IMemoryDeployment {
+public class MemoryDeployment implements IMemoryObject<Deployment> {
+	
+	/** Key used for storing and retrieving deployment information in memory. */
+    public static final String KEY = "deployment";
 
     /** Singleton instance of {@code MemoryDeployment}. */
     private static MemoryDeployment instance;

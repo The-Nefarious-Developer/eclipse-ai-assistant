@@ -14,8 +14,7 @@ import org.eclipse.swt.widgets.Label;
 import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.plugin.login.events.DeploymentSelectionAdapter;
 import com.developer.nefarious.zjoule.plugin.login.events.ResourceGroupSelectionAdapter;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryDeployment;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 
@@ -52,23 +51,23 @@ public class SecondLoginWizardPage extends WizardPage {
     private ILoginClient loginClient;
 
     /** Memory interface for managing resource group data. */
-    private IMemoryResourceGroup memoryResourceGroup;
+    private IMemoryObject<String> memoryResourceGroup;
 
     /** Memory interface for managing deployment data. */
-    private IMemoryDeployment memoryDeployment;
+    private IMemoryObject<Deployment> memoryDeployment;
 
     /**
      * Constructs a new {@code SecondLoginWizardPage}.
      * 
      * @param loginClient the {@link ILoginClient} used for API interactions during the login process.
-     * @param memoryResourceGroup the {@link IMemoryResourceGroup} for resource group memory management.
-     * @param memoryDeployment the {@link IMemoryDeployment} for deployment memory management.
+     * @param memoryResourceGroup the {@link IMemoryObject<String>} for resource group memory management.
+     * @param memoryDeployment the {@link IMemoryObject<Deployment>} for deployment memory management.
      */
     // @formatter:off
     public SecondLoginWizardPage(
             final ILoginClient loginClient,
-            final IMemoryResourceGroup memoryResourceGroup,
-            final IMemoryDeployment memoryDeployment) {
+            final IMemoryObject<String> memoryResourceGroup,
+            final IMemoryObject<Deployment> memoryDeployment) {
         // @formatter:on
         super(PAGE_ID);
         setTitle("Select the model");

@@ -4,9 +4,12 @@ package com.developer.nefarious.zjoule.plugin.memory;
  * Manages the storage and retrieval of resource group information in memory.
  * <p>
  * The {@code MemoryResourceGroup} class provides methods to save, load, and check
- * the validity of resource group data stored in Eclipse preferences. It implements {@link IMemoryResourceGroup}.
+ * the validity of resource group data stored in Eclipse preferences. It implements {@link IMemoryObject<String>}.
  */
-public class MemoryResourceGroup implements IMemoryResourceGroup {
+public class MemoryResourceGroup implements IMemoryObject<String> {
+	
+    /** Key used for storing and retrieving the resource group information in memory. */
+    public static final String KEY = "resource-group";
 
     /** Singleton instance of {@code MemoryResourceGroup}. */
     private static MemoryResourceGroup instance;

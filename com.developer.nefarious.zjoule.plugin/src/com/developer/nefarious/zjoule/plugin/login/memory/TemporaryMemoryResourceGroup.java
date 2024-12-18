@@ -1,22 +1,23 @@
 package com.developer.nefarious.zjoule.plugin.login.memory;
 
 import com.developer.nefarious.zjoule.plugin.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryResourceGroup;
 
 /**
  * Manages temporary storage and retrieval of resource group information during the login process.
  * <p>
  * The {@code TemporaryMemoryResourceGroup} class provides methods to save, load, and persist
- * temporary resource group data using Eclipse preferences. It implements {@link IMemoryResourceGroup}
+ * temporary resource group data using Eclipse preferences. It implements {@link IMemoryObject<String>}
  * and {@link ITemporaryMemoryObject}.
  */
-public class TemporaryMemoryResourceGroup implements IMemoryResourceGroup, ITemporaryMemoryObject {
+public class TemporaryMemoryResourceGroup implements IMemoryObject<String>, ITemporaryMemoryObject {
 
     /** Singleton instance of {@code TemporaryMemoryResourceGroup}. */
     private static TemporaryMemoryResourceGroup instance;
 
     /** Key used for storing and retrieving the temporary resource group in Eclipse preferences. */
-    public static final String KEY = "tmp-" + IMemoryResourceGroup.KEY;
+    public static final String KEY = "tmp-" + MemoryResourceGroup.KEY;
 
     /** Manages interactions with Eclipse's preferences storage. */
     private IEclipseMemory eclipseMemory;
@@ -87,7 +88,7 @@ public class TemporaryMemoryResourceGroup implements IMemoryResourceGroup, ITemp
     @Override
     public void persist() {
         String resourceGroup = eclipseMemory.loadFromEclipsePreferences(KEY);
-        eclipseMemory.saveOnEclipsePreferences(IMemoryResourceGroup.KEY, resourceGroup);
+        eclipseMemory.saveOnEclipsePreferences(MemoryResourceGroup.KEY, resourceGroup);
     }
 
     /**

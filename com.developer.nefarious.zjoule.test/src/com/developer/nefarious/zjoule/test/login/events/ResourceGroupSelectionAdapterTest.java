@@ -18,7 +18,7 @@ import com.developer.nefarious.zjoule.plugin.login.api.GetDeploymentsResponse;
 import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.plugin.login.events.ResourceGroupSelectionAdapter;
 import com.developer.nefarious.zjoule.plugin.login.pages.SecondLoginWizardPage;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 
@@ -33,7 +33,7 @@ public class ResourceGroupSelectionAdapterTest {
 	private ILoginClient mockLoginClient;
 
 	@Mock
-	private IMemoryResourceGroup mockMemoryResourceGroup;
+	private IMemoryObject<String> mockMemoryResourceGroup;
 
 	@BeforeEach
 	public void setUp() {

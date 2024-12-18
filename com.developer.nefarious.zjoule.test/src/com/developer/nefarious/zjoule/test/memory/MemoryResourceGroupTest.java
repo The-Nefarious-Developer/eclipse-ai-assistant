@@ -14,14 +14,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.developer.nefarious.zjoule.plugin.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryResourceGroup;
 
 public class MemoryResourceGroupTest {
 
 	public static final String KEY = "resource-group";
 
-	private IMemoryResourceGroup cut;
+	private IMemoryObject<String> cut;
 
 	@Mock
 	IEclipseMemory mockEclipseMemory;

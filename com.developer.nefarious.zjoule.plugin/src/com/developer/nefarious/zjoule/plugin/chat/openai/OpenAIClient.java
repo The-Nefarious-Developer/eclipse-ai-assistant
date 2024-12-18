@@ -16,8 +16,7 @@ import com.developer.nefarious.zjoule.plugin.chat.IChatMessage;
 import com.developer.nefarious.zjoule.plugin.chat.memory.IMemoryMessageHistory;
 import com.developer.nefarious.zjoule.plugin.chat.models.Message;
 import com.developer.nefarious.zjoule.plugin.chat.models.MessageHistory;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryDeployment;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
 import com.developer.nefarious.zjoule.plugin.models.Role;
 
@@ -38,10 +37,10 @@ public class OpenAIClient implements IAIClient {
     private IMemoryMessageHistory memoryMessageHistory;
 
     /** The memory component for managing resource groups. */
-    private IMemoryResourceGroup memoryResourceGroup;
+    private IMemoryObject<String> memoryResourceGroup;
 
     /** The memory component for storing deployment details. */
-    private IMemoryDeployment memoryDeployment;
+    private IMemoryObject<Deployment> memoryDeployment;
 
     /** Helper class for constructing requests and processing responses for OpenAI. */
     private IOpenAIClientHelper helper;
@@ -58,8 +57,8 @@ public class OpenAIClient implements IAIClient {
     public OpenAIClient(
             final IAuthClient authClient,
             final IMemoryMessageHistory memoryMessageHistory,
-            final IMemoryResourceGroup memoryResourceGroup,
-            final IMemoryDeployment memoryDeployment,
+            final IMemoryObject<String> memoryResourceGroup,
+            final IMemoryObject<Deployment> memoryDeployment,
             final IOpenAIClientHelper openAIClientHelper) {
         this.httpClient = HttpClient.newHttpClient();
         auth = authClient;

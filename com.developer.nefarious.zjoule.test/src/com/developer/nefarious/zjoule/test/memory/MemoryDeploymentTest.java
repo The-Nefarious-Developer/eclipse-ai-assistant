@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.developer.nefarious.zjoule.plugin.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryDeployment;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryDeployment;
 import com.developer.nefarious.zjoule.plugin.memory.utils.IObjectSerializer;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
@@ -23,7 +23,7 @@ public class MemoryDeploymentTest {
 
 	public static final String KEY = "deployment";
 
-	private IMemoryDeployment cut;
+	private IMemoryObject<Deployment> cut;
 
 	@Mock
 	IObjectSerializer mockObjectSerializer;

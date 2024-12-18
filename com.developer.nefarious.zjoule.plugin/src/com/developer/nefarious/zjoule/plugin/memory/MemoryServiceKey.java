@@ -7,9 +7,12 @@ import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
  * Manages the storage and retrieval of service key information in memory.
  * <p>
  * The {@code MemoryServiceKey} class provides methods to save, load, and check
- * the validity of service key data stored in Eclipse preferences. It implements {@link IMemoryServiceKey}.
+ * the validity of service key data stored in Eclipse preferences. It implements {@link IMemoryObject<ServiceKey>}.
  */
-public class MemoryServiceKey implements IMemoryServiceKey {
+public class MemoryServiceKey implements IMemoryObject<ServiceKey> {
+	
+    /** Key used for storing and retrieving the service key information in memory. */
+    public static final String KEY = "service-key";
 
     /** Singleton instance of {@code MemoryServiceKey}. */
     private static MemoryServiceKey instance;

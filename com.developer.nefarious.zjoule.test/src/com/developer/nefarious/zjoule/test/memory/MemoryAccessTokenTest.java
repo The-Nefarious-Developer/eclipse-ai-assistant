@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.developer.nefarious.zjoule.plugin.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryAccessToken;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryAccessToken;
 import com.developer.nefarious.zjoule.plugin.memory.utils.IObjectSerializer;
 import com.developer.nefarious.zjoule.plugin.models.AccessToken;
@@ -23,7 +23,7 @@ public class MemoryAccessTokenTest {
 
 	public static final String KEY = "access-token";
 
-	private IMemoryAccessToken cut;
+	private IMemoryObject<AccessToken> cut;
 
 	@Mock
 	IObjectSerializer mockObjectSerializer;

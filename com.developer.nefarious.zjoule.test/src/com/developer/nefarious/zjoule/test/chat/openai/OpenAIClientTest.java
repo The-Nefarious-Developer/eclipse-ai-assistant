@@ -35,8 +35,7 @@ import com.developer.nefarious.zjoule.plugin.chat.models.MessageHistory;
 import com.developer.nefarious.zjoule.plugin.chat.openai.IOpenAIClientHelper;
 import com.developer.nefarious.zjoule.plugin.chat.openai.OpenAIChatMessage;
 import com.developer.nefarious.zjoule.plugin.chat.openai.OpenAIClient;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryDeployment;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryResourceGroup;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
 import com.developer.nefarious.zjoule.plugin.models.Role;
 
@@ -57,10 +56,10 @@ public class OpenAIClientTest {
 	private HttpClient mockHttpClient;
 
 	@Mock
-	private IMemoryResourceGroup mockMemoryResourceGroup;
+	private IMemoryObject<String> mockMemoryResourceGroup;
 
 	@Mock
-	private IMemoryDeployment mockMemoryDeployment;
+	private IMemoryObject<Deployment> mockMemoryDeployment;
 
 	@Mock
 	private IMemoryMessageHistory mockMemoryMessageHistory;

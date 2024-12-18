@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.developer.nefarious.zjoule.plugin.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryServiceKey;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
 import com.developer.nefarious.zjoule.plugin.memory.utils.IObjectSerializer;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
@@ -23,7 +23,7 @@ public class MemoryServiceKeyTest {
 
 	public static final String KEY = "service-key";
 
-	private IMemoryServiceKey cut;
+	private IMemoryObject<ServiceKey> cut;
 
 	@Mock
 	IObjectSerializer mockObjectSerializer;

@@ -1,7 +1,8 @@
 package com.developer.nefarious.zjoule.plugin.login.memory;
 
 import com.developer.nefarious.zjoule.plugin.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryAccessToken;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryAccessToken;
 import com.developer.nefarious.zjoule.plugin.memory.utils.IObjectSerializer;
 import com.developer.nefarious.zjoule.plugin.models.AccessToken;
 
@@ -9,16 +10,16 @@ import com.developer.nefarious.zjoule.plugin.models.AccessToken;
  * Manages temporary storage and retrieval of an access token during the login process.
  * <p>
  * The {@code TemporaryMemoryAccessToken} class provides methods to save, load, and persist
- * temporary access tokens using Eclipse preferences. It implements {@link IMemoryAccessToken}
+ * temporary access tokens using Eclipse preferences. It implements {@link IMemoryObject<AccessToken>}
  * and {@link ITemporaryMemoryObject}.
  */
-public class TemporaryMemoryAccessToken implements IMemoryAccessToken, ITemporaryMemoryObject {
+public class TemporaryMemoryAccessToken implements IMemoryObject<AccessToken>, ITemporaryMemoryObject {
 
     /** Singleton instance of {@code TemporaryMemoryAccessToken}. */
     private static TemporaryMemoryAccessToken instance;
 
     /** Key used for storing and retrieving the temporary access token in Eclipse preferences. */
-    public static final String KEY = "tmp-" + IMemoryAccessToken.KEY;
+    public static final String KEY = "tmp-" + MemoryAccessToken.KEY;
 
     /** Serializer for converting objects to and from serialized formats. */
     private IObjectSerializer objectSerializer;
@@ -101,7 +102,7 @@ public class TemporaryMemoryAccessToken implements IMemoryAccessToken, ITemporar
     @Override
     public void persist() {
         String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-        eclipseMemory.saveOnEclipsePreferences(IMemoryAccessToken.KEY, serializedObject);
+        eclipseMemory.saveOnEclipsePreferences(MemoryAccessToken.KEY, serializedObject);
     }
 
     /**

@@ -1,7 +1,8 @@
 package com.developer.nefarious.zjoule.plugin.login.memory;
 
 import com.developer.nefarious.zjoule.plugin.memory.IEclipseMemory;
-import com.developer.nefarious.zjoule.plugin.memory.IMemoryDeployment;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryDeployment;
 import com.developer.nefarious.zjoule.plugin.memory.utils.IObjectSerializer;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
 
@@ -9,16 +10,16 @@ import com.developer.nefarious.zjoule.plugin.models.Deployment;
  * Manages temporary storage and retrieval of deployment information during the login process.
  * <p>
  * The {@code TemporaryMemoryDeployment} class provides methods to save, load, and persist
- * temporary deployment data using Eclipse preferences. It implements {@link IMemoryDeployment}
+ * temporary deployment data using Eclipse preferences. It implements {@link IMemoryObject<Deployment>}
  * and {@link ITemporaryMemoryObject}.
  */
-public class TemporaryMemoryDeployment implements IMemoryDeployment, ITemporaryMemoryObject {
+public class TemporaryMemoryDeployment implements IMemoryObject<Deployment>, ITemporaryMemoryObject {
 
     /** Singleton instance of {@code TemporaryMemoryDeployment}. */
     private static TemporaryMemoryDeployment instance;
 
     /** Key used for storing and retrieving the temporary deployment in Eclipse preferences. */
-    public static final String KEY = "tmp-" + IMemoryDeployment.KEY;
+    public static final String KEY = "tmp-" + MemoryDeployment.KEY;
 
     /** Serializer for converting objects to and from serialized formats. */
     private IObjectSerializer objectSerializer;
@@ -101,7 +102,7 @@ public class TemporaryMemoryDeployment implements IMemoryDeployment, ITemporaryM
     @Override
     public void persist() {
         String serializedObject = eclipseMemory.loadFromEclipsePreferences(KEY);
-        eclipseMemory.saveOnEclipsePreferences(IMemoryDeployment.KEY, serializedObject);
+        eclipseMemory.saveOnEclipsePreferences(MemoryDeployment.KEY, serializedObject);
     }
 
     /**

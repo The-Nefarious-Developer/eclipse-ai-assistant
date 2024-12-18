@@ -7,9 +7,12 @@ import com.developer.nefarious.zjoule.plugin.models.AccessToken;
  * Manages the storage and retrieval of access tokens in memory.
  * <p>
  * The {@code MemoryAccessToken} class provides methods to save, load, and check
- * the validity of access tokens stored in Eclipse preferences. It implements {@link IMemoryAccessToken}.
+ * the validity of access tokens stored in Eclipse preferences. It implements {@link IMemoryObject<AccessToken>}.
  */
-public class MemoryAccessToken implements IMemoryAccessToken {
+public class MemoryAccessToken implements IMemoryObject<AccessToken> {
+	
+    /** Key used for storing and retrieving the access token in memory. */
+    public static final String KEY = "access-token";
 
     /** Singleton instance of {@code MemoryAccessToken}. */
     private static MemoryAccessToken instance;
