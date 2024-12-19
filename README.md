@@ -93,6 +93,17 @@ Clean up chat history.
 
 Logout from the current SAP AI Core instance.
 
+## How can I contribute?
+
+Contributions are welcome! Here's how you can get involved:
+
+1. **Report Issues:** Found a bug or have a feature request? [Open an issue](https://github.com/The-Nefarious-Developer/zjoule/issues). <br />
+2. **Submit Pull Requests:** Fork the repository, create a new branch, make your changes, and submit a PR. <br />
+3. **Improve Documentation:** Help us improve the README or add examples to make setup easier. <br />
+4. **Test & Feedback:** Try the devcontainer template and give us feedback to improve them.
+
+Please follow the [contribution guidelines](CONTRIBUTING.md) for more details.
+
 ## Reference
 
 [How this project consumes generative AI models.](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/consume-generative-ai-models-using-sap-ai-core)
