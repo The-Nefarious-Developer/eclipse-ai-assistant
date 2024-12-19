@@ -1,4 +1,4 @@
-# <img src="docs/zjoule.png" alt="Intro GIF" width="20"/> zJoule - Eclipse AI Assistant
+# <img src="assets/zjoule.png" alt="Intro GIF" width="20"/> zJoule - Eclipse AI Assistant
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=The-Nefarious-Developer_zjoule&metric=alert_status&token=e2a58dc0706342532d8d14ae0badfe72fd08ff28)](https://sonarcloud.io/summary/new_code?id=The-Nefarious-Developer_zjoule) 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -6,14 +6,14 @@
 **zJoule** is an Open Source AI assistant plugin for Eclipse designed to integrate the **SAP AI Core** Generative AI Hub foundation-models into your development environment.
 
 <div align="center">
-  <img src="docs/intro.gif" alt="Intro GIF" width="250"/>
+  <img src="assets/intro.gif" alt="Intro GIF" width="250"/>
 </div>
 
 ## Documentation Content
 - [Requirements](#requirements)
 - [Compatibility](#compatibility)
 - [Motivation](#motivation)
-- [Getting Started]()
+- [Getting Started](#getting-started)
 - [References](#reference)
 - [License](#license)
 
@@ -73,6 +73,14 @@ All from the cozy confines of your Eclipse ADT =)
 #### 7. Enhanced Development Experience:
 - Enable faster learning for beginners or new team members.
 - Provide a smoother workflow for experienced developers needing quick solutions.
+
+## Getting Started
+
+1. Download and install **zJoule** in your Eclipse instance.
+
+2. Login using your SAP AI Core `Service Key`.
+
+3. Select the `resource group` and the `deployment` model you want to use.
 
 ## Reference
 
