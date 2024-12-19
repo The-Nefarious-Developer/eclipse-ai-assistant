@@ -5,10 +5,15 @@
 
 **zJoule** is an Open Source AI assistant plugin for Eclipse designed to integrate the **SAP AI Core** Generative AI Hub foundation-models into your development environment.
 
+<div align="center">
+  <img src="docs/intro.gif" alt="Intro GIF" width="250"/>
+</div>
+
+## Documentation Content:
 - [Requirements]()
 - [Compatibility]()
 - [Motivation]()
-- [How It Can Help]()
+- [Benefits]()
 - [Getting Started]()
 - [References]()
 
@@ -47,25 +52,25 @@ The idea is to open the door to integrate SAP ABAP development with new models a
 
 All from the cozy confines of your Eclipse ADT =)
 
-## Benefits
+### Benefits
 
-### 1. Coding Assistance:
+#### 1. Coding Assistance:
 - Answer coding-related questions.
 - Provide real-time suggestions and explanations for code.
 - Assist in debugging by analyzing error messages and suggesting fixes.
-### 2. Documentation & Learning:
+#### 2. Documentation & Learning:
 - Summarize or explain code snippets and concepts.
 - Fetch and clarify information on APIs, libraries, or frameworks.
-### 3. Productivity Boost:
+#### 3. Productivity Boost:
 - Reduce context switching by enabling developers to query information directly within Eclipse.
 - Automate repetitive tasks through scripting and custom commands.
-### 4. Integration with SAP AI Core:
+#### 4. Integration with SAP AI Core:
 - Access advanced AI capabilities, potentially tailored to SAP-specific development workflows.
-### 5. Dynamic Testing Support:
+#### 5. Dynamic Testing Support:
 - Offer insights into test cases or suggest ways to optimize testing processes.
-### 6. Natural Language Interaction:
+#### 6. Natural Language Interaction:
 - Simplify complex development tasks by allowing users to describe their needs in plain language.
-### 7. Enhanced Development Experience:
+#### 7. Enhanced Development Experience:
 - Enable faster learning for beginners or new team members.
 - Provide a smoother workflow for experienced developers needing quick solutions.
 
@@ -74,3 +79,7 @@ All from the cozy confines of your Eclipse ADT =)
 [How this project consumes generative AI models.](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/consume-generative-ai-models-using-sap-ai-core)
 
 [SAP Note: 3437766 (Availability of Generative AI Models)](https://me.sap.com/notes/3437766)
+
+## License
+Copyright (c) 2024 The Nefarious Developer <br />
+Licensed under the MIT License. See [LICENSE](LICENSE).
