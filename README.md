@@ -14,6 +14,7 @@
 - [Compatibility](#compatibility)
 - [Motivation](#motivation)
 - [Getting Started](#getting-started)
+- [Demo](#demo)
 - [References](#reference)
 - [License](#license)
 
@@ -81,6 +82,16 @@ All from the cozy confines of your Eclipse ADT =)
 2. Login using your SAP AI Core `Service Key`.
 
 3. Select the `resource group` and the `deployment` model you want to use.
+
+## Demo
+
+Asking for code samples.
+
+Requesting context information.
+
+Clean up chat history.
+
+Logout from the current SAP AI Core instance.
 
 ## Reference
 
