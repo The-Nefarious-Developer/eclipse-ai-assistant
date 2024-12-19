@@ -15,6 +15,7 @@
 - [Motivation](#motivation)
 - [Getting Started](#getting-started)
 - [Demo](#demo)
+- [How to Contribute](#how-to-contribute)
 - [References](#reference)
 - [License](#license)
 
@@ -93,7 +94,7 @@ Clean up chat history.
 
 Logout from the current SAP AI Core instance.
 
-## How can I contribute?
+## How to Contribute
 
 Contributions are welcome! Here's how you can get involved:
 
