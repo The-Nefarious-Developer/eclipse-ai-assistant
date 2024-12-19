@@ -81,5 +81,5 @@ All from the cozy confines of your Eclipse ADT =)
 [SAP Note: 3437766 (Availability of Generative AI Models)](https://me.sap.com/notes/3437766)
 
 ## License
-Copyright (c) 2024 The Nefarious Developer <br />
+Copyright (c) 2024 Nicholas Coutinho Checan. <br />
 Licensed under the MIT License. See [LICENSE](LICENSE).
