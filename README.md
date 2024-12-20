@@ -1,7 +1,12 @@
-# <img src="assets/zjoule.png" alt="Intro GIF" width="20"/> zJoule - Eclipse AI Assistant
+<h1 align="center">
+<img src="assets/zjoule.png" alt="Intro GIF" width="20"/> zJoule - Eclipse AI Assistant
+</h1>
+
+<div align="center">
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=The-Nefarious-Developer_zjoule&metric=alert_status&token=e2a58dc0706342532d8d14ae0badfe72fd08ff28)](https://sonarcloud.io/summary/new_code?id=The-Nefarious-Developer_zjoule) 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+</div>
 
 **zJoule** is an Open Source AI assistant plugin for Eclipse designed to integrate the **SAP AI Core** Generative AI Hub foundation-models into your development environment.
 
@@ -25,15 +30,23 @@
 
 ## Compatibility
 
-The following table outlines the Generative AI models compatible with this plugin.
+The following table outlines the Generative AI models currently compatible with this plugin, as well as the next models that will soon be available:
 
-| Executable ID | Model              | Version       |
-|---------------|--------------------|---------------|
-| azure-openai  | `gpt-35-turbo`     | 0613          |
-| azure-openai  | `gpt-35-turbo`     | 1106 (latest) |
-| azure-openai  | `gpt-35-turbo-16k` | 0613 (latest) |
-| azure-openai  | `gpt-4`            | 0613          |
-| azure-openai  | `gpt-4-32k`        | 0613 (latest) |
+| Executable ID | Model                          | Compatibility      | Version                   |
+|---------------|--------------------------------|--------------------|---------------------------|
+| azure-openai  | `gpt-35-turbo`                 | :white_check_mark: | 0613                      |
+| azure-openai  | `gpt-35-turbo`                 | :white_check_mark: | 1106 (latest)             | 
+| azure-openai  | `gpt-35-turbo-16k`             | :white_check_mark: | 0613 (latest)             |
+| azure-openai  | `gpt-4`                        | :white_check_mark: | 0613                      |
+| azure-openai  | `gpt-4-32k`                    | :white_check_mark: | 0613 (latest)             |
+| azure-openai  | `gpt-4o`                       | :construction:     | 2024-05-13                |
+| azure-openai  | `gpt-4o`                       | :construction:     | 2024-08-06 (latest)       |
+| azure-openai  | `gpt-4o-mini`                  | :construction:     | 2024-07-18                |
+| azure-openai  | `gpt-4`                        | :construction:     | turbo-2024-04-09 (latest) |
+| aws-bedrock   | `anthropic--claude-3-haiku`    | :construction:     | 1 (latest)                |
+| aws-bedrock   | `anthropic--claude-3-sonnet`   | :construction:     | 1 (latest)                |
+| aws-bedrock   | `anthropic--claude-3.5-sonnet` | :construction:     | 1                         |
+| aws-bedrock   | `anthropic--claude-3.5-sonnet` | :construction:     | 2 (latest)                |
 
 LLM models that are not compatible may be selected during the login process; however, their functionality cannot be guaranteed, and errors may occur.
 
