@@ -28,7 +28,6 @@
 				<configuration>
 					<doctitle>zJoule - Eclipse AI Assitant</doctitle>
 					<windowtitle>zJoule Documentation</windowtitle>
-					<outputDirectory>${project.build.directory}/../../docs</outputDirectory>
 					<failOnError>false</failOnError>
 				</configuration>
 			</plugin>

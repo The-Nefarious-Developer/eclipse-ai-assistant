@@ -1,4 +1,4 @@
-name: Build Test and Deploy
+name: Build, Test and Deploy
 
 on:
   push
@@ -9,15 +9,48 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'temurin'
-        cache: maven
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
 
-    - name: Build with Maven Wrapper
-      run: ./mvnw clean verify
+      - name: Build with Maven Wrapper
+        run: ./mvnw clean verify
+
+      - name: Upload plugin update-site  
+        uses: actions/upload-artifact@v3
+        with:
+          name: javadoc
+          path: com.developer.nefarious.zjoule.updatesite/target/repository/
+  
+  documentation:
+    # needs: deploy
+    runs-on: ubuntu-latest
+    # if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Generate Javadoc
+        run: |
+          ./mvnw javadoc:javadoc \
+          -pl com.developer.nefarious.zjoule.plugin
+      
+      # - name: Upload JavaDoc
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: javadoc
+      #     path: com.developer.nefarious.zjoule.plugin/target/reports/apidocs/
