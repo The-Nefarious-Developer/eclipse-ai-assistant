@@ -32,21 +32,21 @@
 
 The following table outlines the Generative AI models currently compatible with this plugin, as well as the next models that will soon be available:
 
-| Executable ID | Model                          | Compatibility      | Version                   |
-|---------------|--------------------------------|:------------------:|---------------------------|
-| azure-openai  | `gpt-35-turbo`                 | :white_check_mark: | 0613                      |
-| azure-openai  | `gpt-35-turbo`                 | :white_check_mark: | 1106 (latest)             | 
-| azure-openai  | `gpt-35-turbo-16k`             | :white_check_mark: | 0613 (latest)             |
-| azure-openai  | `gpt-4`                        | :white_check_mark: | 0613                      |
-| azure-openai  | `gpt-4-32k`                    | :white_check_mark: | 0613 (latest)             |
-| azure-openai  | `gpt-4o`                       | :construction:     | 2024-05-13                |
-| azure-openai  | `gpt-4o`                       | :construction:     | 2024-08-06 (latest)       |
-| azure-openai  | `gpt-4o-mini`                  | :construction:     | 2024-07-18                |
-| azure-openai  | `gpt-4`                        | :construction:     | turbo-2024-04-09 (latest) |
-| aws-bedrock   | `anthropic--claude-3-haiku`    | :construction:     | 1 (latest)                |
-| aws-bedrock   | `anthropic--claude-3-sonnet`   | :construction:     | 1 (latest)                |
-| aws-bedrock   | `anthropic--claude-3.5-sonnet` | :construction:     | 1                         |
-| aws-bedrock   | `anthropic--claude-3.5-sonnet` | :construction:     | 2 (latest)                |
+| Executable ID | Model                          | Version                   | Compatibility      |
+|---------------|--------------------------------|---------------------------|:------------------:|
+| azure-openai  | `gpt-35-turbo`                 | 0613                      | :white_check_mark: |
+| azure-openai  | `gpt-35-turbo`                 | 1106 (latest)             | :white_check_mark: | 
+| azure-openai  | `gpt-35-turbo-16k`             | 0613 (latest)             | :white_check_mark: |
+| azure-openai  | `gpt-4`                        | 0613                      | :white_check_mark: |
+| azure-openai  | `gpt-4-32k`                    | 0613 (latest)             | :white_check_mark: |
+| azure-openai  | `gpt-4o`                       | 2024-05-13                | :construction:     |
+| azure-openai  | `gpt-4o`                       | 2024-08-06 (latest)       | :construction:     |
+| azure-openai  | `gpt-4o-mini`                  | 2024-07-18                | :construction:     |
+| azure-openai  | `gpt-4`                        | turbo-2024-04-09 (latest) | :construction:     |
+| aws-bedrock   | `anthropic--claude-3-haiku`    | 1 (latest)                | :construction:     |
+| aws-bedrock   | `anthropic--claude-3-sonnet`   | 1 (latest)                | :construction:     |
+| aws-bedrock   | `anthropic--claude-3.5-sonnet` | 1                         | :construction:     |
+| aws-bedrock   | `anthropic--claude-3.5-sonnet` | 2 (latest)                | :construction:     |
 
 LLM models that are not compatible may be selected during the login process; however, their functionality cannot be guaranteed, and errors may occur.
 
