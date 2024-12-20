@@ -25,7 +25,7 @@ jobs:
       - name: Upload plugin update-site  
         uses: actions/upload-artifact@v3
         with:
-          name: javadoc
+          name: updatesite
           path: com.developer.nefarious.zjoule.updatesite/target/repository/
   
   documentation:
@@ -49,8 +49,8 @@ jobs:
           ./mvnw javadoc:javadoc \
           -pl com.developer.nefarious.zjoule.plugin
       
-      # - name: Upload JavaDoc
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: javadoc
-      #     path: com.developer.nefarious.zjoule.plugin/target/reports/apidocs/
+      - name: Upload JavaDoc
+        uses: actions/upload-artifact@v3
+        with:
+          name: javadoc
+          path: com.developer.nefarious.zjoule.plugin/target/reports/apidocs/
