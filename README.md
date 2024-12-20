@@ -33,7 +33,7 @@
 The following table outlines the Generative AI models currently compatible with this plugin, as well as the next models that will soon be available:
 
 | Executable ID | Model                          | Compatibility      | Version                   |
-|---------------|--------------------------------|--------------------|---------------------------|
+|---------------|--------------------------------|:------------------:|---------------------------|
 | azure-openai  | `gpt-35-turbo`                 | :white_check_mark: | 0613                      |
 | azure-openai  | `gpt-35-turbo`                 | :white_check_mark: | 1106 (latest)             | 
 | azure-openai  | `gpt-35-turbo-16k`             | :white_check_mark: | 0613 (latest)             |
