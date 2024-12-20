@@ -18,12 +18,19 @@
 		<url>https://github.com/The-Nefarious-Developer</url>
 	</organization>
 
+	<scm>
+    	<connection>scm:git:https://github.com/The-Nefarious-Developer/zjoule.git</connection>
+    	<developerConnection>scm:git:git@github.com:The-Nefarious-Developer/zjoule.git</developerConnection>
+    	<url>https://github.com/The-Nefarious-Developer/zjoule</url>
+    	<tag>HEAD</tag>
+	</scm>
+
 	<properties>
 		<tycho-version>4.0.9</tycho-version>
 		<build.qualifier>'t'yyyyMMddHHmm</build.qualifier>
 		<build.version>1.0.0</build.version>
 		<sonar.organization>the-nefarious-developer</sonar.organization>
-  		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
 	<!-- Build Configuration -->
@@ -119,6 +126,11 @@
 					<failOnViolation>true</failOnViolation>
 				</configuration>
 			</plugin>
+			<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-release-plugin</artifactId>
+        		<version>3.1.1</version>
+      		</plugin>
 		</plugins>
 	</build>
 
