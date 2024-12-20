@@ -33,15 +33,12 @@ jobs:
     runs-on: ubuntu-latest
     # if: github.ref == 'refs/heads/main'
     steps:
-    
+
       - name: Download updatesite
         uses: actions/download-artifact@v3
         with:
           name: updatesite
 
-
-
-  
   javadoc:
     needs: release
     runs-on: ubuntu-latest
