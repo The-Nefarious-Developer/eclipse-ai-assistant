@@ -119,11 +119,6 @@
 					<failOnViolation>true</failOnViolation>
 				</configuration>
 			</plugin>
-			<plugin>
-        		<groupId>org.apache.maven.plugins</groupId>
-        		<artifactId>maven-release-plugin</artifactId>
-        		<version>3.1.1</version>
-      		</plugin>
 		</plugins>
 	</build>
 
@@ -134,12 +129,5 @@
 			<layout>p2</layout>
 		</repository>
 	</repositories>
-	
-	<scm>
-		<tag>HEAD</tag>
-    	<url>https://github.com/The-Nefarious-Developer/zjoule</url>
-    	<connection>scm:git:https://github.com:The-Nefarious-Developer/zjoule.git</connection>
-    	<developerConnection>scm:git:https://github.com:The-Nefarious-Developer/zjoule.git</developerConnection>
-	</scm>
 
 </project>
