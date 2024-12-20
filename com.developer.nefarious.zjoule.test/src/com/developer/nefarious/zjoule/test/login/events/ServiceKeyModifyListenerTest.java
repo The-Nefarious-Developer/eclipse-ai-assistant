@@ -5,13 +5,16 @@ import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import java.io.IOException;
+
 import org.eclipse.swt.events.ModifyEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
+
 import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
 import com.developer.nefarious.zjoule.plugin.login.events.ServiceKeyModifyListener;
@@ -31,10 +34,10 @@ public class ServiceKeyModifyListenerTest {
 
 	@Mock
 	private ILoginClient mockLoginClient;
-	
+
 	@Mock
 	private Gson mockGson;
-	
+
 	@Mock
 	private ServiceKey mockServiceKey;
 
@@ -42,49 +45,6 @@ public class ServiceKeyModifyListenerTest {
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 		cut = spy(new ServiceKeyModifyListener(mockFirstLoginWizardPage, mockLoginClient, mockGson));
-	}
-
-	@Test
-	public void shouldEnableTheNextButtonIfInputIsValid() throws IOException, InterruptedException {
-		// Arrange
-		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
-		String mockInputText = "{ \"attribute\": \"value\" }";
-		String mockInputTextTrimmed = mockInputText.trim();
-		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockInputTextTrimmed);
-		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
-			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockInputTextTrimmed)).thenReturn(true);
-		}
-		when(mockGson.fromJson(mockInputTextTrimmed, ServiceKey.class)).thenReturn(mockServiceKey);
-		when(mockServiceKey.isValid()).thenReturn(true);
-		GetResourceGroupsResponse mockGetResourceGroupsResponse = mock(GetResourceGroupsResponse.class);
-		when(mockLoginClient.getResourceGroups(mockServiceKey)).thenReturn(mockGetResourceGroupsResponse);
-		// Act
-		cut.modifyText(mockModifyEvent);
-		// Assert
-		verify(mockFirstLoginWizardPage).setValidationError(null);
-		verify(mockFirstLoginWizardPage).setPageComplete(true);
-		verify(mockFirstLoginWizardPage).setResourceGroupsOnTheSecondPage(mockGetResourceGroupsResponse);
-		verify(mockFirstLoginWizardPage).setServiceKey(mockServiceKey);
-	}
-	
-	@Test
-	public void shouldGracefullyHandleAnyError() throws IOException, InterruptedException {
-		// Arrange
-		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
-		String mockInputText = "{ \"attribute\": \"value\" }";
-		String mockInputTextTrimmed = mockInputText.trim();
-		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockInputTextTrimmed);
-		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
-			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockInputTextTrimmed)).thenReturn(true);
-		}
-		when(mockGson.fromJson(mockInputTextTrimmed, ServiceKey.class)).thenReturn(mockServiceKey);
-		when(mockServiceKey.isValid()).thenReturn(true);
-		when(mockLoginClient.getResourceGroups(mockServiceKey)).thenThrow(new IOException());
-		// Act
-		cut.modifyText(mockModifyEvent);
-		// Assert
-		verify(mockFirstLoginWizardPage).setValidationError(INVALID_INPUT_MESSAGE);
-		verify(mockFirstLoginWizardPage).setPageComplete(false);
 	}
 
 	@Test
@@ -129,6 +89,49 @@ public class ServiceKeyModifyListenerTest {
 		}
 		when(mockGson.fromJson(mockInputTextTrimmed, ServiceKey.class)).thenReturn(mockServiceKey);
 		when(mockServiceKey.isValid()).thenReturn(false);
+		// Act
+		cut.modifyText(mockModifyEvent);
+		// Assert
+		verify(mockFirstLoginWizardPage).setValidationError(INVALID_INPUT_MESSAGE);
+		verify(mockFirstLoginWizardPage).setPageComplete(false);
+	}
+
+	@Test
+	public void shouldEnableTheNextButtonIfInputIsValid() throws IOException, InterruptedException {
+		// Arrange
+		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
+		String mockInputText = "{ \"attribute\": \"value\" }";
+		String mockInputTextTrimmed = mockInputText.trim();
+		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockInputTextTrimmed);
+		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
+			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockInputTextTrimmed)).thenReturn(true);
+		}
+		when(mockGson.fromJson(mockInputTextTrimmed, ServiceKey.class)).thenReturn(mockServiceKey);
+		when(mockServiceKey.isValid()).thenReturn(true);
+		GetResourceGroupsResponse mockGetResourceGroupsResponse = mock(GetResourceGroupsResponse.class);
+		when(mockLoginClient.getResourceGroups(mockServiceKey)).thenReturn(mockGetResourceGroupsResponse);
+		// Act
+		cut.modifyText(mockModifyEvent);
+		// Assert
+		verify(mockFirstLoginWizardPage).setValidationError(null);
+		verify(mockFirstLoginWizardPage).setPageComplete(true);
+		verify(mockFirstLoginWizardPage).setResourceGroupsOnTheSecondPage(mockGetResourceGroupsResponse);
+		verify(mockFirstLoginWizardPage).setServiceKey(mockServiceKey);
+	}
+
+	@Test
+	public void shouldGracefullyHandleAnyError() throws IOException, InterruptedException {
+		// Arrange
+		ModifyEvent mockModifyEvent = mock(ModifyEvent.class);
+		String mockInputText = "{ \"attribute\": \"value\" }";
+		String mockInputTextTrimmed = mockInputText.trim();
+		when(mockFirstLoginWizardPage.getInputText()).thenReturn(mockInputTextTrimmed);
+		try (MockedStatic<JsonValidator> mockedJsonValidatorStatic = mockStatic(JsonValidator.class)) {
+			mockedJsonValidatorStatic.when(() -> JsonValidator.isValidJson(mockInputTextTrimmed)).thenReturn(true);
+		}
+		when(mockGson.fromJson(mockInputTextTrimmed, ServiceKey.class)).thenReturn(mockServiceKey);
+		when(mockServiceKey.isValid()).thenReturn(true);
+		when(mockLoginClient.getResourceGroups(mockServiceKey)).thenThrow(new IOException());
 		// Act
 		cut.modifyText(mockModifyEvent);
 		// Assert

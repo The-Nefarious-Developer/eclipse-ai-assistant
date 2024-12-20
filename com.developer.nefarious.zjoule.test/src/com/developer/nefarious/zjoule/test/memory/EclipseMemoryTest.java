@@ -7,6 +7,7 @@ import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 import org.osgi.service.prefs.BackingStoreException;
+
 import com.developer.nefarious.zjoule.plugin.memory.EclipseMemory;
 
 public class EclipseMemoryTest {
@@ -33,15 +35,47 @@ public class EclipseMemoryTest {
 	}
 
 	@Test
-	public void shouldSaveOnEclipsePreferences() throws BackingStoreException {
+	public void shouldClearAllMemory() throws BackingStoreException {
+		// Arrange
+		// Act
+		cut.clearAll();
+		// Assert
+		verify(mockPreferences).clear();
+		verify(mockPreferences).flush();
+	}
+
+	@Test
+	public void shouldDeleteFromEclipsePreferences() throws BackingStoreException {
 		// Arrange
 		String mockKey = "some key";
-		String mockValue = "some random value";
 		// Act
-		cut.saveOnEclipsePreferences(mockKey, mockValue);
+		cut.deleteFromEclipsePreferences(mockKey);
 		// Assert
-		verify(mockPreferences).put(mockKey, mockValue);
+		verify(mockPreferences).remove(mockKey);
 		verify(mockPreferences).flush();
+	}
+
+	@Test
+	public void shouldDoNothingIfClearFail() throws BackingStoreException {
+		// Arrange
+		doThrow(new BackingStoreException("Accidents happen")).when(mockPreferences).clear();
+		// Act
+		cut.clearAll();
+		// Assert
+		assertThrows(BackingStoreException.class, () -> mockPreferences.clear());
+		verify(mockPreferences, never()).flush();
+	}
+
+	@Test
+	public void shouldDoNothingInCaseOfErrorsOnDelete() throws BackingStoreException {
+		// Arrange
+		String mockKey = "some key";
+		doThrow(new BackingStoreException("Accidents happen")).when(mockPreferences).flush();
+		// Act
+		cut.deleteFromEclipsePreferences(mockKey);
+		// Assert
+		verify(mockPreferences).remove(mockKey);
+		assertThrows(BackingStoreException.class, () -> mockPreferences.flush());
 	}
 
 	@Test
@@ -70,47 +104,15 @@ public class EclipseMemoryTest {
 	}
 
 	@Test
-	public void shouldDeleteFromEclipsePreferences() throws BackingStoreException {
+	public void shouldSaveOnEclipsePreferences() throws BackingStoreException {
 		// Arrange
 		String mockKey = "some key";
+		String mockValue = "some random value";
 		// Act
-		cut.deleteFromEclipsePreferences(mockKey);
+		cut.saveOnEclipsePreferences(mockKey, mockValue);
 		// Assert
-		verify(mockPreferences).remove(mockKey);
-		verify(mockPreferences).flush();		
-	}
-	
-	@Test
-	public void shouldDoNothingInCaseOfErrorsOnDelete() throws BackingStoreException {
-		// Arrange
-		String mockKey = "some key";
-		doThrow(new BackingStoreException("Accidents happen")).when(mockPreferences).flush();
-		// Act
-		cut.deleteFromEclipsePreferences(mockKey);
-		// Assert
-		verify(mockPreferences).remove(mockKey);
-		assertThrows(BackingStoreException.class, () -> mockPreferences.flush());	
-	}
-
-	@Test
-	public void shouldClearAllMemory() throws BackingStoreException {
-		// Arrange
-		// Act
-		cut.clearAll();
-		// Assert
-		verify(mockPreferences).clear();
+		verify(mockPreferences).put(mockKey, mockValue);
 		verify(mockPreferences).flush();
-	}
-
-	@Test
-	public void shouldDoNothingIfClearFail() throws BackingStoreException {
-		// Arrange
-		doThrow(new BackingStoreException("Accidents happen")).when(mockPreferences).clear();
-		// Act
-		cut.clearAll();
-		// Assert
-		assertThrows(BackingStoreException.class, () -> mockPreferences.clear());
-		verify(mockPreferences, never()).flush();
 	}
 
 }

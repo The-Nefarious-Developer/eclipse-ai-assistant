@@ -111,10 +111,23 @@
 					</execution>
 				</executions>
 				<configuration>
-					<configLocation>checkstyle.xml</configLocation> 
+					<configLocation>checkstyle.xml</configLocation>
 					<encoding>UTF-8</encoding>
 					<consoleOutput>true</consoleOutput>
 					<failOnViolation>true</failOnViolation>
+				</configuration>
+			</plugin>
+			<!-- Maven plugin for custom clean up -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${project.basedir}/../docs</directory>
+						</fileset>
+					</filesets>
 				</configuration>
 			</plugin>
 		</plugins>

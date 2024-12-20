@@ -19,4 +19,20 @@
 
 	<packaging>eclipse-plugin</packaging>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.11.2</version>
+				<configuration>
+					<doctitle>zJoule - Eclipse AI Assitant</doctitle>
+					<windowtitle>zJoule Documentation</windowtitle>
+					<outputDirectory>${project.build.directory}/../../docs</outputDirectory>
+					<failOnError>false</failOnError>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

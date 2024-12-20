@@ -8,6 +8,7 @@ import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
@@ -29,6 +30,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
+
 import com.developer.nefarious.zjoule.plugin.core.events.Initialization;
 import com.developer.nefarious.zjoule.plugin.core.events.PartListener;
 import com.developer.nefarious.zjoule.plugin.core.events.SelectionListener;
@@ -44,62 +46,62 @@ import com.developer.nefarious.zjoule.plugin.core.ui.ViewRender;
 public class ViewListenerTest {
 
 	private ViewListener cut;
-	
+
 	private MockedStatic<BrowserFactory> mockedStaticBrowserFactory;
-	
+
 	private MockedStatic<SelectionListener> mockedStaticSelectionListener;
-	
+
 	private MockedStatic<ViewRender> mockedStaticViewRender;
-	
+
 	private MockedStatic<PartListener> mockedStaticPartListener;
-	
+
 	private MockedStatic<PromptHandler> mockedStaticPromptHandler;
-	
+
 	private MockedStatic<Display> mockedStaticDisplay;
-	
+
 	private MockedStatic<LoginHandler> mockedStaticLoginHandler;
-	
+
 	private MockedStatic<ClearHandler> mockedStaticClearHandler;
-	
+
 	private MockedStatic<LogoutHandler> mockedStaticLogoutHandler;
-	
+
 	@Mock
 	private Shell mockShell;
-	
+
 	@Mock
 	private Browser mockBrowser;
-	
+
 	@Mock
 	private ISelectionListener mockSelectionListener;
-	
+
 	@Mock
 	private IViewRender mockViewRender;
-	
+
 	@Mock
 	private PartListener mockPartListener;
-	
+
 	@Mock
 	private Composite mockParent;
-	
+
 	@Mock
 	private PromptHandler mockPromptHandler;
-	
+
 	@Mock
 	private Display mockDisplay;
-	
+
 	@Mock
 	private LoginHandler mockLoginHandler;
-	
+
 	@Mock
 	private ClearHandler mockClearHandler;
-	
+
 	@Mock
 	private LogoutHandler mockLogoutHandler;
-	
+
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		
+
 		mockedStaticBrowserFactory = mockStatic(BrowserFactory.class);
 		mockedStaticSelectionListener = mockStatic(SelectionListener.class);
 		mockedStaticViewRender = mockStatic(ViewRender.class);
@@ -109,7 +111,7 @@ public class ViewListenerTest {
 		mockedStaticLoginHandler = mockStatic(LoginHandler.class);
 		mockedStaticClearHandler = mockStatic(ClearHandler.class);
 		mockedStaticLogoutHandler = mockStatic(LogoutHandler.class);
-		
+
 		mockedStaticBrowserFactory.when(() -> BrowserFactory.create(mockParent, SWT.WEBKIT)).thenReturn(mockBrowser);
 		mockedStaticSelectionListener.when(() -> SelectionListener.create(mockBrowser)).thenReturn(mockSelectionListener);
 		mockedStaticViewRender.when(ViewRender::create).thenReturn(mockViewRender);
@@ -119,11 +121,54 @@ public class ViewListenerTest {
 		mockedStaticLoginHandler.when(() -> LoginHandler.create(mockShell, mockBrowser)).thenReturn(mockLoginHandler);
 		mockedStaticClearHandler.when(() -> ClearHandler.create(mockBrowser)).thenReturn(mockClearHandler);
 		mockedStaticLogoutHandler.when(() -> LogoutHandler.create(mockBrowser)).thenReturn(mockLogoutHandler);
-		
+
 		cut = spy(new ViewListener());
 		cut.setShell(mockShell);
 	}
-	
+
+	@Test
+	public void shouldPlumbPartControl() {
+		// Arrange
+		String mockBuildResult = "html-text";
+		when(mockViewRender.build()).thenReturn(mockBuildResult);
+
+		IWorkbenchPartSite mockSite = mock(IWorkbenchPartSite.class);
+		doReturn(mockSite).when(cut).getSite();
+
+		IWorkbenchPage mockPage = mock(IWorkbenchPage.class);
+		when(mockSite.getPage()).thenReturn(mockPage);
+
+		IViewSite mockViewSite = mock(IViewSite.class);
+		doReturn(mockViewSite).when(cut).getViewSite();
+		IActionBars mockActionBars = mock(IActionBars.class);
+		when(mockViewSite.getActionBars()).thenReturn(mockActionBars);
+
+		IToolBarManager mockToolBarManager = mock(IToolBarManager.class);
+		when(mockActionBars.getToolBarManager()).thenReturn(mockToolBarManager);
+
+		IMenuManager mockMenuManager = mock(IMenuManager.class);
+		when(mockActionBars.getMenuManager()).thenReturn(mockMenuManager);
+
+		// Act
+		cut.createPartControl(mockParent);
+
+		// Assert
+		verify(mockBrowser).setText(mockBuildResult);
+		verify(mockBrowser).addDisposeListener(any(DisposeListener.class));
+		verify(mockPage).addPartListener(mockPartListener);
+		verify(mockPage).addSelectionListener(mockSelectionListener);
+
+		ArgumentCaptor<Runnable> captor = ArgumentCaptor.forClass(Runnable.class);
+        verify(mockDisplay).asyncExec(captor.capture());
+        Runnable actualRunnable = captor.getValue();
+        assertTrue(actualRunnable instanceof Initialization);
+
+        verify(mockToolBarManager).add(mockLoginHandler);
+        verify(mockMenuManager).add(mockClearHandler);
+        verify(mockMenuManager).add(any(Separator.class));
+        verify(mockMenuManager).add(mockLogoutHandler);
+	}
+
 	@AfterEach
 	public void tearDown() {
 		if (mockedStaticBrowserFactory != null) {
@@ -154,69 +199,14 @@ public class ViewListenerTest {
 			mockedStaticLogoutHandler.close();
 		}
 	}
-	
-	@Test
-	public void shouldPlumbPartControl() {
-		// Arrange
-		String mockBuildResult = "html-text";
-		when(mockViewRender.build()).thenReturn(mockBuildResult);
-		
-		IWorkbenchPartSite mockSite = mock(IWorkbenchPartSite.class);
-		doReturn(mockSite).when(cut).getSite();
-		
-		IWorkbenchPage mockPage = mock(IWorkbenchPage.class);
-		when(mockSite.getPage()).thenReturn(mockPage);
-		
-		IViewSite mockViewSite = mock(IViewSite.class);
-		doReturn(mockViewSite).when(cut).getViewSite();
-		IActionBars mockActionBars = mock(IActionBars.class);
-		when(mockViewSite.getActionBars()).thenReturn(mockActionBars);
-		
-		IToolBarManager mockToolBarManager = mock(IToolBarManager.class);
-		when(mockActionBars.getToolBarManager()).thenReturn(mockToolBarManager);
-		
-		IMenuManager mockMenuManager = mock(IMenuManager.class);
-		when(mockActionBars.getMenuManager()).thenReturn(mockMenuManager);
-		
-		// Act
-		cut.createPartControl(mockParent);
-		
-		// Assert
-		verify(mockBrowser).setText(mockBuildResult);
-		verify(mockBrowser).addDisposeListener(any(DisposeListener.class));
-		verify(mockPage).addPartListener(mockPartListener);
-		verify(mockPage).addSelectionListener(mockSelectionListener);
-		
-		ArgumentCaptor<Runnable> captor = ArgumentCaptor.forClass(Runnable.class);
-        verify(mockDisplay).asyncExec(captor.capture());
-        Runnable actualRunnable = captor.getValue();
-        assertTrue(actualRunnable instanceof Initialization);
-        
-        verify(mockToolBarManager).add(mockLoginHandler);
-        verify(mockMenuManager).add(mockClearHandler);
-        verify(mockMenuManager).add(any(Separator.class));
-        verify(mockMenuManager).add(mockLogoutHandler);
-	}
-	
-	@Test
-	public void testSetFocus() {
-		// Arrange
-		cut.setBrowser(mockBrowser);
-		
-		// Act
-		cut.setFocus();
-		
-		// Assert
-		verify(mockBrowser).setFocus();
-	}
-	
+
 	@Test
 	public void testDispose() {
 		// Arrange
 		cut.setSelectionListener(mockSelectionListener);
 		cut.setBrowser(mockBrowser);
 		cut.setPartListener(mockPartListener);
-		
+
 		IWorkbenchPartSite mockSite = mock(IWorkbenchPartSite.class);
 		doReturn(mockSite).when(cut).getSite();
 
@@ -230,6 +220,18 @@ public class ViewListenerTest {
 		verify(mockPage).removeSelectionListener(mockSelectionListener);
 		verify(mockBrowser).dispose();
 		verify(mockPage).removePartListener(mockPartListener);
+	}
+
+	@Test
+	public void testSetFocus() {
+		// Arrange
+		cut.setBrowser(mockBrowser);
+
+		// Act
+		cut.setFocus();
+
+		// Assert
+		verify(mockBrowser).setFocus();
 	}
 
 }
