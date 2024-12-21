@@ -103,7 +103,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>3.6.0</version> <!-- Use the latest version -->
+				<version>3.6.0</version>
 				<executions>
 					<execution>
 						<phase>validate</phase>
@@ -114,7 +114,6 @@
 				</executions>
 				<configuration>
 					<configLocation>checkstyle.xml</configLocation>
-					<encoding>UTF-8</encoding>
 					<consoleOutput>true</consoleOutput>
 					<failOnViolation>true</failOnViolation>
 				</configuration>
