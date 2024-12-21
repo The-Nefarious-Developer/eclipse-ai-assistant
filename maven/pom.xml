@@ -20,7 +20,7 @@
 
 	<properties>
 		<tycho-version>4.0.9</tycho-version>
-		<build.qualifier>'t'yyyyMMddHHmm</build.qualifier>
+		<build.qualifier></build.qualifier>
 		<sonar.organization>the-nefarious-developer</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
