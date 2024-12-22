@@ -35,7 +35,15 @@ chmod +x ./scripts/update-category.sh
 ./scripts/update-category.sh ${NEW_VERSION}
 
 # Generate target files for the new release
-mvn package
+./mvnw clean package
 
 # Zip the update site and copy it to the release folder
-mkdir -p release && (cd com.developer.nefarious.zjoule.updatesite/target/repository && zip -r ../../../release/test.zip .)
+FILE_NAME="zjoule-${NEW_VERSION}"
+mkdir -p release && (cd com.developer.nefarious.zjoule.updatesite/target/repository && zip -r "../../../release/${FILE_NAME}.zip" .)
+
+# Generate JavaDoc
+./mvnw javadoc:javadoc -pl com.developer.nefarious.zjoule.plugin
+
+# Zip the JavaDoc and copy it to the release folder
+FILE_NAME="zjoule-${NEW_VERSION}"
+mkdir -p release && (cd com.developer.nefarious.zjoule.updatesite/target/repository && zip -r "../../../release/${FILE_NAME}.zip" .)
