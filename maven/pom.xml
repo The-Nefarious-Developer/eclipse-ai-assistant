@@ -8,20 +8,21 @@
 
 	<groupId>com.developer.nefarious.zjoule</groupId>
 	<artifactId>com.developer.nefarious.zjoule.parent</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>pom</packaging>
 
 	<name>zjoule</name>
 
 	<organization>
-		<name>The Nefarious Developer</name>
+		<name>Nicholas Coutinho Checan - The Nefarious Developer</name>
 		<url>https://github.com/The-Nefarious-Developer</url>
 	</organization>
 
 	<properties>
 		<tycho-version>4.0.9</tycho-version>
-		<build.qualifier>'t'yyyyMMddHHmm</build.qualifier>
-		<build.version>1.0.0</build.version>
+		<build.qualifier></build.qualifier>
+		<sonar.organization>the-nefarious-developer</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
 	<!-- Build Configuration -->
@@ -101,7 +102,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>3.6.0</version> <!-- Use the latest version -->
+				<version>3.6.0</version>
 				<executions>
 					<execution>
 						<phase>validate</phase>
@@ -112,22 +113,8 @@
 				</executions>
 				<configuration>
 					<configLocation>checkstyle.xml</configLocation>
-					<encoding>UTF-8</encoding>
 					<consoleOutput>true</consoleOutput>
 					<failOnViolation>true</failOnViolation>
-				</configuration>
-			</plugin>
-			<!-- Maven plugin for custom clean up -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.2.0</version>
-				<configuration>
-					<filesets>
-						<fileset>
-							<directory>${project.basedir}/../docs</directory>
-						</fileset>
-					</filesets>
 				</configuration>
 			</plugin>
 		</plugins>

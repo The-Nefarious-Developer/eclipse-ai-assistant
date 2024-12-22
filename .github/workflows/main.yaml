@@ -1,0 +1,62 @@
+name: Build, Test and Deploy
+
+on:
+  push:
+    paths:
+      - 'com.developer.nefarious.zjoule.feature/**'
+      - 'com.developer.nefarious.zjoule.plugin/**'
+      - 'com.developer.nefarious.zjoule.test/**'
+      - 'com.developer.nefarious.zjoule.updatesite/**'
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build with Maven Wrapper
+        run: ./mvnw clean verify
+
+  release:
+    needs: test
+    if: "!contains(github.event.head_commit.message, 'skip ci') && github.ref == 'refs/heads/main'"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18
+
+      - name: Install semantic-release
+        run: |
+          npm install -g semantic-release \
+            @semantic-release/changelog \
+            @semantic-release/commit-analyzer \
+            @semantic-release/exec \ 
+            semantic-release/git \
+            semantic-release/release-notes-generator
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
+        run: chmod +x ./scripts/prepare-release.sh && npx semantic-release

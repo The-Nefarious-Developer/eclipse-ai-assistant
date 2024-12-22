@@ -7,13 +7,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>com.developer.nefarious.zjoule.plugin</artifactId>
-
 	<name>zjoule - plugin</name>
+	<version>1.0.0</version>
 
 	<parent>
 		<groupId>com.developer.nefarious.zjoule</groupId>
 		<artifactId>com.developer.nefarious.zjoule.parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.0</version>
 		<relativePath>../maven/pom.xml</relativePath>
 	</parent>
 
@@ -28,7 +28,6 @@
 				<configuration>
 					<doctitle>zJoule - Eclipse AI Assitant</doctitle>
 					<windowtitle>zJoule Documentation</windowtitle>
-					<outputDirectory>${project.build.directory}/../../docs</outputDirectory>
 					<failOnError>false</failOnError>
 				</configuration>
 			</plugin>

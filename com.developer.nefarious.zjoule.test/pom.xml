@@ -7,13 +7,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>com.developer.nefarious.zjoule.test</artifactId>
-
 	<name>zjoule - tests</name>
+	<version>1.0.0</version>
 
 	<parent>
 		<groupId>com.developer.nefarious.zjoule</groupId>
 		<artifactId>com.developer.nefarious.zjoule.parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.0</version>
 		<relativePath>../maven/pom.xml</relativePath>
 	</parent>
 
@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>com.developer.nefarious.zjoule</groupId>
 			<artifactId>com.developer.nefarious.zjoule.plugin</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 
