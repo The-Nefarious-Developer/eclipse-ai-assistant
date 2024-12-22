@@ -1,8 +1,10 @@
 {
-     "branches": "main",
-     "repositoryUrl": "https://github.com/The-Nefarious-Developer/zjoule",
-     "debug": "true",
-     "plugins": [
+    "branches": "main",
+    "repositoryUrl": "https://github.com/The-Nefarious-Developer/zjoule",
+    "initialReleaseVersion": "1.0.0",
+    "preset": "angular",
+    "debug": "true",
+    "plugins": [
         "@semantic-release/commit-analyzer",
         "@semantic-release/release-notes-generator",
         [
