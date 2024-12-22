@@ -2,12 +2,12 @@ name: Build, Test and Deploy
 
 on:
   push:
-    paths:
-      - 'com.developer.nefarious.zjoule.feature/**'
-      - 'com.developer.nefarious.zjoule.plugin/**'
-      - 'com.developer.nefarious.zjoule.test/**'
-      - 'com.developer.nefarious.zjoule.updatesite/**'
-
+    # TODO: add back path verification
+    # paths:
+    #   - 'com.developer.nefarious.zjoule.feature/**'
+    #   - 'com.developer.nefarious.zjoule.plugin/**'
+    #   - 'com.developer.nefarious.zjoule.test/**'
+    #   - 'com.developer.nefarious.zjoule.updatesite/**'
 jobs:
 
   test:
@@ -46,17 +46,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 18
-        env:
-          GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }} 
 
       - name: Install semantic-release
         run: |
           npm install -g semantic-release \
             @semantic-release/changelog \
             @semantic-release/commit-analyzer \
-            @semantic-release/exec \ 
-            semantic-release/git \
-            semantic-release/release-notes-generator
+            @semantic-release/exec \
+            @semantic-release/git \
+            @semantic-release/release-notes-generator
 
       - name: Release
         env:
