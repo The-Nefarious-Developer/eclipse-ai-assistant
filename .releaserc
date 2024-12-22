@@ -3,7 +3,7 @@
     "repositoryUrl": "https://github.com/The-Nefarious-Developer/zjoule",
     "initialReleaseVersion": "v1.0.0",
     "preset": "angular",
-    "debug": "true",
+    "debug": "false",
     "plugins": [
         "@semantic-release/commit-analyzer",
         "@semantic-release/release-notes-generator",
