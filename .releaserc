@@ -1,0 +1,49 @@
+{
+     "branches": "main",
+     "repositoryUrl": "https://github.com/The-Nefarious-Developer/zjoule",
+     "debug": "true",
+     "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        [
+            "@semantic-release/changelog",
+            {
+                "changelogFile": "CHANGELOG.md",
+                "changelogTitle": "# Semantic Versioning Changelog"
+            }
+        ],
+        [
+            "@semantic-release/exec",
+            {
+                "prepareCmd": "./prepare-release.sh ${nextRelease.version}"
+            }
+        ],
+        [
+            "@semantic-release/git",
+            {
+                "assets": [
+                    "CHANGELOG.md",
+                    "pom.xml",
+                    "com.developer.nefarious.zjoule.updatesite/pom.xml",
+                    "com.developer.nefarious.zjoule.updatesite/category.xml",
+                    "com.developer.nefarious.zjoule.test/pom.xml",
+                    "com.developer.nefarious.zjoule.test/META-INF/MANIFEST.MF",
+                    "com.developer.nefarious.zjoule.plugin/pom.xml",
+                    "com.developer.nefarious.zjoule.plugin/META-INF/MANIFEST.MF",
+                    "com.developer.nefarious.zjoule.feature/pom.xml",
+                    "com.developer.nefarious.zjoule.feature/feature.xml"
+                ]
+            }
+        ],
+        [
+            "@semantic-release/github",
+            {
+                "assets": [
+                    {
+                        "path": "release/**"
+                    }
+                ]
+            }
+        ]
+    ]
+}
