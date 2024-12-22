@@ -38,4 +38,4 @@ chmod +x ./scripts/update-category.sh
 mvn package
 
 # Zip the update site and copy it to the release folder
-mkdir release && (cd com.developer.nefarious.zjoule.updatesite/target/repository && zip -r ../../../release/test.zip .)
+mkdir -p release && (cd com.developer.nefarious.zjoule.updatesite/target/repository && zip -r ../../../release/test.zip .)
