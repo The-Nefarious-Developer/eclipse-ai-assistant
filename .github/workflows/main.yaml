@@ -8,6 +8,10 @@ on:
     #   - 'com.developer.nefarious.zjoule.plugin/**'
     #   - 'com.developer.nefarious.zjoule.test/**'
     #   - 'com.developer.nefarious.zjoule.updatesite/**'
+
+permissions:
+  contents: write
+
 jobs:
 
   test:
@@ -46,8 +50,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 18
-        env:
-          GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }} 
 
       - name: Install semantic-release
         run: |
