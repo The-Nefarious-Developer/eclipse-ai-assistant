@@ -41,12 +41,12 @@ chmod +x ./scripts/update-category.sh
 mkdir -p release
 
 # Zip the updatesite and copy it to the release folder
-PLUGIN_FILE_NAME="zjoule-${NEW_VERSION}"
+PLUGIN_FILE_NAME="plugin"
 (cd com.developer.nefarious.zjoule.updatesite/target/repository && zip -r "../../../release/${PLUGIN_FILE_NAME}.zip" .)
 
 # Generate JavaDoc
 ./mvnw javadoc:javadoc -pl com.developer.nefarious.zjoule.plugin
 
 # Zip the JavaDoc and copy it to the release folder
-DOC_FILE_NAME="zjoule-javadoc-${NEW_VERSION}"
+DOC_FILE_NAME="doc"
 (cd com.developer.nefarious.zjoule.plugin/target/reports/apidocs && zip -r "../../../../release/${DOC_FILE_NAME}.zip" .)
