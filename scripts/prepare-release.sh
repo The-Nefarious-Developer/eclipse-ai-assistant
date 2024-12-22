@@ -7,7 +7,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 # Assign the new version from the argument
-NEW_VERSION="$1"
+NEW_VERSION=`echo $1 | cut -d'v' -f2` # Version should come from semantic release with a 'v' prefix
 
 # Navigate to the parent folder of the script
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
