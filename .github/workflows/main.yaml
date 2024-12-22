@@ -2,6 +2,7 @@ name: Build, Test and Deploy
 
 on:
   push:
+    # TODO: add back path verification
     # paths:
     #   - 'com.developer.nefarious.zjoule.feature/**'
     #   - 'com.developer.nefarious.zjoule.plugin/**'
