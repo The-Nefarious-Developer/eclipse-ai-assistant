@@ -33,3 +33,9 @@ cd "$PARENT_DIR" || { echo "Error: Failed to navigate to parent folder."; exit 1
 # Update the category.xml file with the new version at the updatesite module
 chmod +x ./scripts/update-category.sh
 ./scripts/update-category.sh ${NEW_VERSION}
+
+# Generate target files for the new release
+mvn package
+
+# Zip the update site and copy it to the release folder
+mkdir release && (cd com.developer.nefarious.zjoule.updatesite/target/repository && zip -r ../../../release/test.zip .)
