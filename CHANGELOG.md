@@ -1,5 +1,14 @@
 # Semantic Versioning Changelog
 
+## [1.0.1](https://github.com/The-Nefarious-Developer/zjoule/compare/v1.0.0...v1.0.1) (2024-12-23)
+
+
+### Bug Fixes
+
+* add devcontainer to dependabot check ([14e27ca](https://github.com/The-Nefarious-Developer/zjoule/commit/14e27caf4cf1bb11c9314f9c851fdf28873a54f0))
+* add test and feedback information ([ed5ee0e](https://github.com/The-Nefarious-Developer/zjoule/commit/ed5ee0e1283c2e468b322ef9549d3263199376f6))
+* change javadoc link ([9b74159](https://github.com/The-Nefarious-Developer/zjoule/commit/9b741593260427b68a6f0d5fcba53618e5c03f48))
+
 # 1.0.0 (2024-12-22)
 
 
