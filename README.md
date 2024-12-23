@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="assets/zjoule.png" alt="Intro GIF" width="25"/> zJoule - Eclipse AI Assistant
+<img src="assets/zjoule.png" alt="Intro GIF" width="25"/> zJoule - ABAP Copilot
 </h1>
 
 <div align="center">
@@ -7,7 +7,7 @@
 [![Latest Test](https://github.com/The-Nefarious-Developer/zjoule/actions/workflows/main.yaml/badge.svg)](https://github.com/The-Nefarious-Developer/zjoule/actions/workflows/main.yaml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=The-Nefarious-Developer_zjoule&metric=alert_status&token=e2a58dc0706342532d8d14ae0badfe72fd08ff28)](https://sonarcloud.io/summary/new_code?id=The-Nefarious-Developer_zjoule) 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://YOUR-USERNAME.github.io/YOUR-REPO/javadoc/)
+[![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://zjoule.com/v1.0.1/doc/)
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
 </div>
@@ -163,6 +163,10 @@ Please follow the [contribution guidelines](CONTRIBUTING.md) for more details.
 [How this project consumes generative AI models.](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/consume-generative-ai-models-using-sap-ai-core)
 
 [SAP Note: 3437766 (Availability of Generative AI Models)](https://me.sap.com/notes/3437766)
+
+[zJoule - ABAP Copilot website repository](https://github.com/The-Nefarious-Developer/zjoule-website)
+
+[zJoule - ABAP Copilot website](https://zjoule.com)
 
 ## License
 Copyright (c) 2024 Nicholas Coutinho Checan. <br />
