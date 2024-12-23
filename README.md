@@ -164,6 +164,10 @@ Please follow the [contribution guidelines](CONTRIBUTING.md) for more details.
 
 [SAP Note: 3437766 (Availability of Generative AI Models)](https://me.sap.com/notes/3437766)
 
+[zJoule - ABAP Copilot website repository](https://github.com/The-Nefarious-Developer/zjoule-website)
+
+[zJoule - ABAP Copilot website](https://zjoule.com)
+
 ## License
 Copyright (c) 2024 Nicholas Coutinho Checan. <br />
 Licensed under the MIT License. See [LICENSE](LICENSE).
