@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="assets/zjoule.png" alt="Intro GIF" width="25"/> zJoule - Eclipse AI Assistant
+<img src="assets/zjoule.png" alt="Intro GIF" width="25"/> zJoule - ABAP Copilot
 </h1>
 
 <div align="center">
