@@ -91,7 +91,7 @@ All from the cozy confines of your Eclipse ADT =)
 
 ## Getting Started
 
-1. Download and install **zJoule** in your Eclipse instance.
+1. Download and install **zJoule** in your Eclipse instance following the procedure described [right here](https://zjoule.com).
 
 
 
