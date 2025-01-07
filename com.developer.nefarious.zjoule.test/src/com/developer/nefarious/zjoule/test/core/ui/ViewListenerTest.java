@@ -112,7 +112,6 @@ public class ViewListenerTest {
 		mockedStaticClearHandler = mockStatic(ClearHandler.class);
 		mockedStaticLogoutHandler = mockStatic(LogoutHandler.class);
 
-		mockedStaticBrowserFactory.when(() -> BrowserFactory.create(mockParent, SWT.WEBKIT)).thenReturn(mockBrowser);
 		mockedStaticSelectionListener.when(() -> SelectionListener.create(mockBrowser)).thenReturn(mockSelectionListener);
 		mockedStaticViewRender.when(ViewRender::create).thenReturn(mockViewRender);
 		mockedStaticPartListener.when(() -> PartListener.create(mockBrowser)).thenReturn(mockPartListener);
@@ -127,8 +126,10 @@ public class ViewListenerTest {
 	}
 
 	@Test
-	public void shouldPlumbPartControl() {
+	public void shouldPlumbPartControlForOtherSystems() {
 		// Arrange
+		mockedStaticBrowserFactory.when(() -> BrowserFactory.create(mockParent, SWT.WEBKIT)).thenReturn(mockBrowser);
+		
 		String mockBuildResult = "html-text";
 		when(mockViewRender.build()).thenReturn(mockBuildResult);
 
