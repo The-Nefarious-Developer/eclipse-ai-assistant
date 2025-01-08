@@ -19,6 +19,7 @@ import com.developer.nefarious.zjoule.plugin.core.functions.ClearHandler;
 import com.developer.nefarious.zjoule.plugin.core.functions.LoginHandler;
 import com.developer.nefarious.zjoule.plugin.core.functions.LogoutHandler;
 import com.developer.nefarious.zjoule.plugin.core.functions.PromptHandler;
+import com.developer.nefarious.zjoule.plugin.core.utils.SystemProvider;
 
 import jakarta.inject.Inject;
 
@@ -54,7 +55,8 @@ public class ViewListener extends ViewPart {
      */
     @Override
     public void createPartControl(final Composite parent) {
-        browser = BrowserFactory.create(parent, SWT.WEBKIT);
+    	int style = (isWindows()) ? SWT.EDGE : SWT.WEBKIT;
+        browser = BrowserFactory.create(parent, style);
         selectionListener = SelectionListener.create(browser);
         IViewRender viewRender = ViewRender.create();
         partListener = PartListener.create(browser);
@@ -74,8 +76,24 @@ public class ViewListener extends ViewPart {
 
         setUpToolbar();
     }
-
+    
     /**
+     * Checks if the current operating system is a version of Windows.
+     * <p>
+     * This method determines the operating system by checking if the string
+     * returned by {@link SystemProvider#getCurrentSystem()} contains the substring "win"
+     * (case insensitive).
+     * </p>
+     *
+     * @return {@code true} if the operating system name contains "win", indicating a Windows OS;
+     *         {@code false} otherwise.
+     * @see SystemProvider#getCurrentSystem()
+     */
+    private boolean isWindows() {
+		return SystemProvider.getCurrentSystem().toLowerCase().contains("win");
+	}
+
+	/**
      * Disposes of the view and its associated resources, including listeners and the browser.
      */
     @Override

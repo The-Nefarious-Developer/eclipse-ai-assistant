@@ -42,6 +42,7 @@ import com.developer.nefarious.zjoule.plugin.core.ui.BrowserFactory;
 import com.developer.nefarious.zjoule.plugin.core.ui.IViewRender;
 import com.developer.nefarious.zjoule.plugin.core.ui.ViewListener;
 import com.developer.nefarious.zjoule.plugin.core.ui.ViewRender;
+import com.developer.nefarious.zjoule.plugin.core.utils.SystemProvider;
 
 public class ViewListenerTest {
 
@@ -64,6 +65,8 @@ public class ViewListenerTest {
 	private MockedStatic<ClearHandler> mockedStaticClearHandler;
 
 	private MockedStatic<LogoutHandler> mockedStaticLogoutHandler;
+	
+	private MockedStatic<SystemProvider> mockedSystemProvider;
 
 	@Mock
 	private Shell mockShell;
@@ -111,6 +114,7 @@ public class ViewListenerTest {
 		mockedStaticLoginHandler = mockStatic(LoginHandler.class);
 		mockedStaticClearHandler = mockStatic(ClearHandler.class);
 		mockedStaticLogoutHandler = mockStatic(LogoutHandler.class);
+		mockedSystemProvider = mockStatic(SystemProvider.class);
 
 		mockedStaticSelectionListener.when(() -> SelectionListener.create(mockBrowser)).thenReturn(mockSelectionListener);
 		mockedStaticViewRender.when(ViewRender::create).thenReturn(mockViewRender);
@@ -124,10 +128,57 @@ public class ViewListenerTest {
 		cut = spy(new ViewListener());
 		cut.setShell(mockShell);
 	}
+	
+	@Test
+	public void shouldPlumbPartControlForWindows() {
+		// Arrange
+		mockedSystemProvider.when(SystemProvider::getCurrentSystem).thenReturn("Windows 95");
+		mockedStaticBrowserFactory.when(() -> BrowserFactory.create(mockParent, SWT.EDGE)).thenReturn(mockBrowser);
+		
+		String mockBuildResult = "html-text";
+		when(mockViewRender.build()).thenReturn(mockBuildResult);
+
+		IWorkbenchPartSite mockSite = mock(IWorkbenchPartSite.class);
+		doReturn(mockSite).when(cut).getSite();
+
+		IWorkbenchPage mockPage = mock(IWorkbenchPage.class);
+		when(mockSite.getPage()).thenReturn(mockPage);
+
+		IViewSite mockViewSite = mock(IViewSite.class);
+		doReturn(mockViewSite).when(cut).getViewSite();
+		IActionBars mockActionBars = mock(IActionBars.class);
+		when(mockViewSite.getActionBars()).thenReturn(mockActionBars);
+
+		IToolBarManager mockToolBarManager = mock(IToolBarManager.class);
+		when(mockActionBars.getToolBarManager()).thenReturn(mockToolBarManager);
+
+		IMenuManager mockMenuManager = mock(IMenuManager.class);
+		when(mockActionBars.getMenuManager()).thenReturn(mockMenuManager);
+
+		// Act
+		cut.createPartControl(mockParent);
+
+		// Assert
+		verify(mockBrowser).setText(mockBuildResult);
+		verify(mockBrowser).addDisposeListener(any(DisposeListener.class));
+		verify(mockPage).addPartListener(mockPartListener);
+		verify(mockPage).addSelectionListener(mockSelectionListener);
+
+		ArgumentCaptor<Runnable> captor = ArgumentCaptor.forClass(Runnable.class);
+        verify(mockDisplay).asyncExec(captor.capture());
+        Runnable actualRunnable = captor.getValue();
+        assertTrue(actualRunnable instanceof Initialization);
+
+        verify(mockToolBarManager).add(mockLoginHandler);
+        verify(mockMenuManager).add(mockClearHandler);
+        verify(mockMenuManager).add(any(Separator.class));
+        verify(mockMenuManager).add(mockLogoutHandler);
+	}
 
 	@Test
 	public void shouldPlumbPartControlForOtherSystems() {
 		// Arrange
+		mockedSystemProvider.when(SystemProvider::getCurrentSystem).thenReturn("Mac OS");
 		mockedStaticBrowserFactory.when(() -> BrowserFactory.create(mockParent, SWT.WEBKIT)).thenReturn(mockBrowser);
 		
 		String mockBuildResult = "html-text";
@@ -170,6 +221,7 @@ public class ViewListenerTest {
         verify(mockMenuManager).add(mockLogoutHandler);
 	}
 
+	//CHECKSTYLE:OFF CyclomaticComplexity
 	@AfterEach
 	public void tearDown() {
 		if (mockedStaticBrowserFactory != null) {
@@ -199,7 +251,11 @@ public class ViewListenerTest {
 		if (mockedStaticLogoutHandler != null) {
 			mockedStaticLogoutHandler.close();
 		}
+		if (mockedSystemProvider != null) {
+			mockedSystemProvider.close();
+		}
 	}
+	//CHECKSTYLE:ON CyclomaticComplexity
 
 	@Test
 	public void testDispose() {
