@@ -1,5 +1,13 @@
 # Semantic Versioning Changelog
 
+## [1.0.2](https://github.com/The-Nefarious-Developer/zjoule/compare/v1.0.1...v1.0.2) (2025-01-08)
+
+
+### Bug Fixes
+
+* adapt web view to work on windows with edge ([429000c](https://github.com/The-Nefarious-Developer/zjoule/commit/429000cab7977d6e3782d9b9d01c89f8f41428d8))
+* bundle plugin that contain icons for windows buttons rendering ([7341082](https://github.com/The-Nefarious-Developer/zjoule/commit/7341082df2083c6e14469dc4ba533c524bccdb53))
+
 ## [1.0.1](https://github.com/The-Nefarious-Developer/zjoule/compare/v1.0.0...v1.0.1) (2024-12-23)
 
 
