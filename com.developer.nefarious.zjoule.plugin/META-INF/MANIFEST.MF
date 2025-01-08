@@ -30,6 +30,7 @@ Export-Package:
  com.developer.nefarious.zjoule.plugin.core.events,
  com.developer.nefarious.zjoule.plugin.core.functions,
  com.developer.nefarious.zjoule.plugin.core.ui,
+ com.developer.nefarious.zjoule.plugin.core.utils,
  com.developer.nefarious.zjoule.plugin.login,
  com.developer.nefarious.zjoule.plugin.login.api,
  com.developer.nefarious.zjoule.plugin.login.events,
