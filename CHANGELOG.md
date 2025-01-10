@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.0.3](https://github.com/The-Nefarious-Developer/zjoule/compare/v1.0.2...v1.0.3) (2025-01-10)
+
+
+### Bug Fixes
+
+* windows first start should go to instructions page ([ad8bd94](https://github.com/The-Nefarious-Developer/zjoule/commit/ad8bd94a222db9605daa7877b06d54dac389d93e))
+
 ## [1.0.2](https://github.com/The-Nefarious-Developer/zjoule/compare/v1.0.1...v1.0.2) (2025-01-08)
 
 
