@@ -2,7 +2,7 @@
 <feature
       id="com.developer.nefarious.zjoule"
       label="zJoule - SAP AI Assistant"
-      version="1.0.3"
+      version="1.1.0"
       provider-name="The Nefarious Developer">
 
    <description>

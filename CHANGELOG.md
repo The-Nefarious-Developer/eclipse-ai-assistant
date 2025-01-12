@@ -1,5 +1,20 @@
 # Semantic Versioning Changelog
 
+# [1.1.0](https://github.com/The-Nefarious-Developer/zjoule/compare/v1.0.3...v1.1.0) (2025-01-12)
+
+
+### Bug Fixes
+
+* avoid issues when running if icon component is missing ([2e33e79](https://github.com/The-Nefarious-Developer/zjoule/commit/2e33e797da34a91225eba26406f0572888e71a61))
+* remove unnecessary dependency ([fd5f7e7](https://github.com/The-Nefarious-Developer/zjoule/commit/fd5f7e70ace1b4a5b82f6c31d7fb48e0941d040c))
+
+
+### Features
+
+* add loading indicator to ai request ([aac5895](https://github.com/The-Nefarious-Developer/zjoule/commit/aac58956b97754b27a9c85b90850602eb273495d))
+* disable input and send button when waiting for ai message ([a0b6827](https://github.com/The-Nefarious-Developer/zjoule/commit/a0b682738923beb88e17457584986f370fbe03da))
+* implement async ai request ([62d22ae](https://github.com/The-Nefarious-Developer/zjoule/commit/62d22ae8acd1584ffa58aceacbc35c46baa3d052))
+
 ## [1.0.3](https://github.com/The-Nefarious-Developer/zjoule/compare/v1.0.2...v1.0.3) (2025-01-10)
 
 
