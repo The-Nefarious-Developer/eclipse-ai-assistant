@@ -73,11 +73,12 @@ SOFTWARE.
       <discovery label="zJoule Project Repository" url="https://github.com/The-Nefarious-Developer/zjoule"/>
    </url>
 
+   <requires>
+      <import plugin="org.eclipse.wst.wsdl.ui"/>
+   </requires>
+
    <plugin
          id="com.developer.nefarious.zjoule.plugin"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>
