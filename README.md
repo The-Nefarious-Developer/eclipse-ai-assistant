@@ -168,6 +168,9 @@ Please follow the [contribution guidelines](CONTRIBUTING.md) for more details.
 
 [zJoule - ABAP Copilot website](https://zjoule.com)
 
+[The spinner "Ellipsis" is provided by loading.io](https://loading.io/icon/)
+
+
 ## License
 Copyright (c) 2024 Nicholas Coutinho Checan. <br />
 Licensed under the MIT License. See [LICENSE](LICENSE).
