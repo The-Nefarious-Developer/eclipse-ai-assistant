@@ -1,5 +1,13 @@
 # Semantic Versioning Changelog
 
+## [1.1.1](https://github.com/The-Nefarious-Developer/zjoule/compare/v1.1.0...v1.1.1) (2025-01-12)
+
+
+### Bug Fixes
+
+* add back plugin info on features ([2425ec7](https://github.com/The-Nefarious-Developer/zjoule/commit/2425ec7766a2d8ec82336bf76c925eb16be96092))
+* include dependency for logout icon ([542898e](https://github.com/The-Nefarious-Developer/zjoule/commit/542898e8165297b8d0eb2f6cecfb9b0ef33b13b0))
+
 # [1.1.0](https://github.com/The-Nefarious-Developer/zjoule/compare/v1.0.3...v1.1.0) (2025-01-12)
 
 
