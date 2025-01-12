@@ -3,8 +3,7 @@ function sendMessage() {
 	if (userInput.trim() === "") return;
 	try {
 		addUserMessage(userInput);
-		var answer = getAIResponse(userInput); // Java callback
-		addBotMessage(answer);
+		getAIResponse(userInput); // Java callback
 	} catch (e) {
 	}
 	updatePlaceholder();
@@ -32,6 +31,12 @@ function clearMessageAndScrollDown() {
 	document.getElementById('userInput').value = "";
 	chatBox.scrollTop = chatBox.scrollHeight;
 }
+
+function receiveMessage(output) {
+	addBotMessage(output);
+	updatePlaceholder();
+	clearMessageAndScrollDown();
+} 
 
 function login() {
 	hideInstructions();
