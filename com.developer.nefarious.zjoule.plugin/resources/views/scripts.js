@@ -65,7 +65,7 @@ function receiveMessage(output) {
 	addBotMessage(output);
 	updatePlaceholder();
 	clearMessageAndScrollDown();
-} 
+}
 
 function login() {
 	hideInstructions();
@@ -119,7 +119,7 @@ function updateTag(file) {
 function updatePlaceholder() {
 	const chatBox = document.getElementById("chatBox");
 	const hasMessages = !!chatBox.querySelector(".message");
-	
+
 	if (hasMessages) {
 		hidePlaceholder();
 	} else {
@@ -160,8 +160,8 @@ function finishLoading() {
 	const chatBox = document.getElementById('chatBox');
 	const botMessages = document.getElementsByClassName('message bot-message');
 	if (botMessages.length > 0) {
-	  const loadingIndicator = botMessages[botMessages.length - 1];
-	  chatBox.removeChild(loadingIndicator);
+		const loadingIndicator = botMessages[botMessages.length - 1];
+		chatBox.removeChild(loadingIndicator);
 	}
 	unblockInput();
 }
