@@ -7,7 +7,6 @@ import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.widgets.Display;
 
 import com.developer.nefarious.zjoule.plugin.chat.ChatOrchestrator;
-import com.developer.nefarious.zjoule.plugin.core.events.Initialization;
 
 /**
  * Handles user prompts from the browser and communicates with the chat orchestrator to generate responses.
@@ -88,7 +87,7 @@ public class PromptHandler extends BrowserFunction {
      * @param input the string to escape
      * @return the escaped string
      */
-    private String escapeForJavaScript(String input) {
+    private String escapeForJavaScript(final String input) {
         if (input == null) {
             return "";
         }
