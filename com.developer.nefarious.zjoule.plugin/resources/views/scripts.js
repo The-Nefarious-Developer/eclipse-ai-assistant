@@ -1,4 +1,4 @@
-const loadingIconSvg = `
+const loadingIcon = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="50" height="50" style="shape-rendering: auto; display: block; background: none;" xmlns:xlink="http://www.w3.org/1999/xlink">
   <g>
     <circle fill="#422e78" r="10" cy="50" cx="84">
@@ -141,7 +141,7 @@ function startLoading() {
 	const chatBox = document.getElementById('chatBox');
 	const message = document.createElement('div');
 	message.className = 'message bot-message';
-	message.innerHTML = loadingIconSvg;
+	message.innerHTML = loadingIcon;
 	chatBox.appendChild(message);
 }
 
