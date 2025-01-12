@@ -137,12 +137,23 @@ function hidePlaceholder() {
 	placeholder.style.display = "none";
 }
 
+function blockInput() {
+	document.getElementById('userInput').disabled = true;
+	document.getElementById('send').disabled = true;
+}
+
+function unblockInput() {
+	document.getElementById('userInput').disabled = false;
+	document.getElementById('send').disabled = false;
+}
+
 function startLoading() {
 	const chatBox = document.getElementById('chatBox');
 	const message = document.createElement('div');
 	message.className = 'message bot-message';
 	message.innerHTML = loadingIcon;
 	chatBox.appendChild(message);
+	blockInput();
 }
 
 function finishLoading() {
@@ -152,4 +163,5 @@ function finishLoading() {
 	  const loadingIndicator = botMessages[botMessages.length - 1];
 	  chatBox.removeChild(loadingIndicator);
 	}
+	unblockInput();
 }
