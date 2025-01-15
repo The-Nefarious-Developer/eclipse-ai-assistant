@@ -67,7 +67,7 @@ public class LoginHandler extends Action {
      */
     @Override
     public void run() {
-        LoginWizard wizard = new LoginWizard(browser);
+        LoginWizard wizard = new LoginWizard(shell, browser);
         LoginOptionsWizardDialog dialog = new LoginOptionsWizardDialog(shell, wizard);
         dialog.open();
     }

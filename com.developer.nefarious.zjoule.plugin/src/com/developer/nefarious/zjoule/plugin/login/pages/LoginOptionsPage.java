@@ -10,13 +10,24 @@ import org.eclipse.swt.widgets.Composite;
 public class LoginOptionsPage extends WizardPage {
 	
 	public static final String PAGE_ID = "Login Options";
+	
+	private Button option1;
+	
+	private Button option2;
 
 	public LoginOptionsPage() {
 		super(PAGE_ID);
 		setTitle("Login Options");
         setDescription("Choose the AI provider.");
         setPageComplete(false); // Initially set the page as incomplete
-        
+	}
+	
+	public boolean isOption1Selected() {
+		return option1.getSelection();
+	}
+
+	public boolean isOption2Selected() {
+		return option2.getSelection();
 	}
 
 	@Override
@@ -24,27 +35,19 @@ public class LoginOptionsPage extends WizardPage {
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(1, false));
 		
-		Button option1 = new Button(container, SWT.RADIO);
+		option1 = new Button(container, SWT.RADIO);
 		option1.setText("SAP AI Core");
 	    option1.setToolTipText("Select model from the SAP AI Core Generative AI Hub.");
 	    option1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-	    option1.addListener(SWT.Selection, event -> setOption1());
+	    option1.addListener(SWT.Selection, event -> setPageComplete(true));
 	    
-	    Button option2 = new Button(container, SWT.RADIO);
+	    option2 = new Button(container, SWT.RADIO);
 	    option2.setText("Ollama (Local)");
 	    option2.setToolTipText("Select a local Ollama model.");
 	    option2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-	    option2.addListener(SWT.Selection, event -> setOption2());
-	        
+	    option2.addListener(SWT.Selection, event -> setPageComplete(true));
+	    
 	    setControl(container);
-	}
-	
-	private void setOption1() {
-		setPageComplete(true);
-	}
-	
-	private void setOption2() {
-		setPageComplete(true);
 	}
 
 }
