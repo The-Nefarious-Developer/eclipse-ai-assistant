@@ -24,14 +24,14 @@ import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.plugin.auth.IAuthClient;
 import com.developer.nefarious.zjoule.plugin.login.api.GetDeploymentsResponse;
 import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
-import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
-import com.developer.nefarious.zjoule.plugin.login.api.ILoginClientHelper;
-import com.developer.nefarious.zjoule.plugin.login.api.LoginClient;
+import com.developer.nefarious.zjoule.plugin.login.api.ISapLoginClient;
+import com.developer.nefarious.zjoule.plugin.login.api.ISapLoginClientHelper;
+import com.developer.nefarious.zjoule.plugin.login.api.SapLoginClient;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 
-public class LoginClientTest {
+public class SapLoginClientTest {
 
-	private ILoginClient cut;
+	private ISapLoginClient cut;
 
 	MockedStatic<HttpClient> mockedStaticHttpClient;
 
@@ -47,7 +47,7 @@ public class LoginClientTest {
 	private IAuthClient mockAuthClient;
 
 	@Mock
-	private ILoginClientHelper mockLoginClientHelper;
+	private ISapLoginClientHelper mockSapLoginClientHelper;
 
 	@Mock
 	private Builder mockBuilder;
@@ -68,7 +68,7 @@ public class LoginClientTest {
 		mockedStaticHttpRequest = mockStatic(HttpRequest.class);
 		mockedStaticHttpRequest.when(HttpRequest::newBuilder).thenReturn(mockBuilder);
 
-		cut = spy(new LoginClient(mockLoginClientHelper, mockAuthClient));
+		cut = spy(new SapLoginClient(mockSapLoginClientHelper, mockAuthClient));
 	}
 
 	@Test
@@ -83,7 +83,7 @@ public class LoginClientTest {
 
 		String mockEndpointInStringFormat = mockServiceURL + "/lm/deployments";
 		URI mockEndpointInURIFormat = mock(URI.class);
-		when(mockLoginClientHelper.createAuthUri(mockEndpointInStringFormat)).thenReturn(mockEndpointInURIFormat);
+		when(mockSapLoginClientHelper.createAuthUri(mockEndpointInStringFormat)).thenReturn(mockEndpointInURIFormat);
 		when(mockBuilder.uri(mockEndpointInURIFormat)).thenReturn(mockBuilder);
 
 		String mockToken = "access-token";
@@ -99,7 +99,7 @@ public class LoginClientTest {
 
 		String mockResponseBody = "response-content";
 		when(mockHttpResponse.body()).thenReturn(mockResponseBody);
-		when(mockLoginClientHelper.parseDeploymentsResponseToObject(mockResponseBody)).thenReturn(expectedValue);
+		when(mockSapLoginClientHelper.parseDeploymentsResponseToObject(mockResponseBody)).thenReturn(expectedValue);
 
 		// Act
 		GetDeploymentsResponse returnValue = cut.getDeployments(mockServiceKey, mockResourceGroup);
@@ -122,7 +122,7 @@ public class LoginClientTest {
 
 		String mockEndpointInStringFormat = mockServiceURL + "/admin/resourceGroups";
 		URI mockEndpointInURIFormat = mock(URI.class);
-		when(mockLoginClientHelper.createAuthUri(mockEndpointInStringFormat)).thenReturn(mockEndpointInURIFormat);
+		when(mockSapLoginClientHelper.createAuthUri(mockEndpointInStringFormat)).thenReturn(mockEndpointInURIFormat);
 		when(mockBuilder.uri(mockEndpointInURIFormat)).thenReturn(mockBuilder);
 
 		String mockToken = "access-token";
@@ -137,7 +137,7 @@ public class LoginClientTest {
 
 		String mockResponseBody = "response-content";
 		when(mockHttpResponse.body()).thenReturn(mockResponseBody);
-		when(mockLoginClientHelper.parseResourceGroupsResponseToObject(mockResponseBody)).thenReturn(expectedValue);
+		when(mockSapLoginClientHelper.parseResourceGroupsResponseToObject(mockResponseBody)).thenReturn(expectedValue);
 
 		// Act
 		GetResourceGroupsResponse returnValue = cut.getResourceGroups(mockServiceKey);

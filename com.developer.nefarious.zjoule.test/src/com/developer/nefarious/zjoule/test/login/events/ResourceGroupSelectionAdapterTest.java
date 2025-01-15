@@ -15,7 +15,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.developer.nefarious.zjoule.plugin.login.api.GetDeploymentsResponse;
-import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
+import com.developer.nefarious.zjoule.plugin.login.api.ISapLoginClient;
 import com.developer.nefarious.zjoule.plugin.login.events.ResourceGroupSelectionAdapter;
 import com.developer.nefarious.zjoule.plugin.login.pages.SecondLoginWizardPage;
 import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
@@ -30,7 +30,7 @@ public class ResourceGroupSelectionAdapterTest {
 	private SecondLoginWizardPage mockSecondLoginWizardPage;
 
 	@Mock
-	private ILoginClient mockLoginClient;
+	private ISapLoginClient mockSapLoginClient;
 
 	@Mock
 	private IMemoryObject<String> mockMemoryResourceGroup;
@@ -38,7 +38,7 @@ public class ResourceGroupSelectionAdapterTest {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		cut = new ResourceGroupSelectionAdapter(mockSecondLoginWizardPage, mockLoginClient, mockMemoryResourceGroup);
+		cut = new ResourceGroupSelectionAdapter(mockSecondLoginWizardPage, mockSapLoginClient, mockMemoryResourceGroup);
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class ResourceGroupSelectionAdapterTest {
 		when(mockSecondLoginWizardPage.getServiceKey()).thenReturn(mockServiceKey);
 
 		GetDeploymentsResponse mockGetDeploymentsResponse = mock(GetDeploymentsResponse.class);
-		when(mockLoginClient.getDeployments(mockServiceKey, mockText)).thenReturn(mockGetDeploymentsResponse);
+		when(mockSapLoginClient.getDeployments(mockServiceKey, mockText)).thenReturn(mockGetDeploymentsResponse);
 
 		List<Deployment> mockDeployments = mock(List.class);
 		when(mockGetDeploymentsResponse.getDeployments()).thenReturn(mockDeployments);

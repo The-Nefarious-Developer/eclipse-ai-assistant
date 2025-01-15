@@ -13,12 +13,12 @@ import org.mockito.MockedStatic;
 
 import com.developer.nefarious.zjoule.plugin.login.api.GetDeploymentsResponse;
 import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
-import com.developer.nefarious.zjoule.plugin.login.api.LoginClientHelper;
+import com.developer.nefarious.zjoule.plugin.login.api.SapLoginClientHelper;
 import com.google.gson.Gson;
 
-public class LoginClientHelperTest {
+public class SapLoginClientHelperTest {
 
-	private LoginClientHelper cut;
+	private SapLoginClientHelper cut;
 
 	private String randomWord() {
 		final String[] WORDS = { "apple", "banana", "grape" };
@@ -28,7 +28,7 @@ public class LoginClientHelperTest {
 
 	@BeforeEach
 	public void setUp() {
-		cut = new LoginClientHelper();
+		cut = new SapLoginClientHelper();
 	}
 
 	@Test

@@ -8,7 +8,7 @@ import java.net.URI;
  * The {@code ILoginClientHelper} defines methods for creating API request URIs
  * and parsing JSON response bodies into their corresponding Java objects.
  */
-public interface ILoginClientHelper {
+public interface ISapLoginClientHelper {
 
 	/**
      * Creates a URI for the given API endpoint.

@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
+import com.developer.nefarious.zjoule.plugin.login.api.ISapLoginClient;
 import com.developer.nefarious.zjoule.plugin.login.events.DeploymentSelectionAdapter;
 import com.developer.nefarious.zjoule.plugin.login.events.ResourceGroupSelectionAdapter;
 import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
@@ -48,7 +48,7 @@ public class SecondLoginWizardPage extends WizardPage {
     private List<Deployment> deploymentsForSelection = new ArrayList<>();
 
     /** Client for handling API interactions. */
-    private ILoginClient loginClient;
+    private ISapLoginClient sapLoginClient;
 
     /** Memory interface for managing resource group data. */
     private IMemoryObject<String> memoryResourceGroup;
@@ -59,13 +59,13 @@ public class SecondLoginWizardPage extends WizardPage {
     /**
      * Constructs a new {@code SecondLoginWizardPage}.
      * 
-     * @param loginClient the {@link ILoginClient} used for API interactions during the login process.
+     * @param sapLoginClient the {@link ISapLoginClient} used for API interactions during the login process.
      * @param memoryResourceGroup the {@link IMemoryObject<String>} for resource group memory management.
      * @param memoryDeployment the {@link IMemoryObject<Deployment>} for deployment memory management.
      */
     // @formatter:off
     public SecondLoginWizardPage(
-            final ILoginClient loginClient,
+            final ISapLoginClient sapLoginClient,
             final IMemoryObject<String> memoryResourceGroup,
             final IMemoryObject<Deployment> memoryDeployment) {
         // @formatter:on
@@ -73,7 +73,7 @@ public class SecondLoginWizardPage extends WizardPage {
         setTitle("Select the model");
         setDescription("Choose the Resource Group and the Deployment ID.");
         setPageComplete(false); // Initially set the page as incomplete
-        this.loginClient = loginClient;
+        this.sapLoginClient = sapLoginClient;
         this.memoryResourceGroup = memoryResourceGroup;
         this.memoryDeployment = memoryDeployment;
     }
@@ -97,7 +97,7 @@ public class SecondLoginWizardPage extends WizardPage {
 
         // Add a SelectionListener to enable the deployment dropdown when a valid resource group is selected
         resourceGroupDropdown
-                .addSelectionListener(new ResourceGroupSelectionAdapter(this, loginClient, memoryResourceGroup));
+                .addSelectionListener(new ResourceGroupSelectionAdapter(this, sapLoginClient, memoryResourceGroup));
 
         // Create label and dropdown for deployment ID selection
         Label deploymentLabel = new Label(container, SWT.NONE);

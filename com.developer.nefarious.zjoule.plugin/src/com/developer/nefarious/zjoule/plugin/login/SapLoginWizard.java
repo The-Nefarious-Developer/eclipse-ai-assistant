@@ -7,9 +7,9 @@ import com.developer.nefarious.zjoule.plugin.auth.AuthClient;
 import com.developer.nefarious.zjoule.plugin.auth.AuthClientHelper;
 import com.developer.nefarious.zjoule.plugin.auth.IAuthClient;
 import com.developer.nefarious.zjoule.plugin.auth.SessionManager;
-import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
-import com.developer.nefarious.zjoule.plugin.login.api.LoginClient;
-import com.developer.nefarious.zjoule.plugin.login.api.LoginClientHelper;
+import com.developer.nefarious.zjoule.plugin.login.api.ISapLoginClient;
+import com.developer.nefarious.zjoule.plugin.login.api.SapLoginClient;
+import com.developer.nefarious.zjoule.plugin.login.api.SapLoginClientHelper;
 import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryAccessToken;
 import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryDeployment;
 import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryResourceGroup;
@@ -26,24 +26,24 @@ import com.developer.nefarious.zjoule.plugin.login.pages.SecondLoginWizardPage;
  * It integrates with temporary memory components and client objects to handle authentication
  * and session management.
  */
-public class LoginWizard extends Wizard {
+public class SapLoginWizard extends Wizard {
 
     /** The browser instance used for login-related UI updates. */
     private Browser browser;
 
     /** The client responsible for managing the login process. */
-    private ILoginClient loginClient;
+    private ISapLoginClient sapLoginClient;
 
     /**
      * Constructs a new {@code LoginWizard} instance.
      *
      * @param browser the {@link Browser} instance used for login-related UI updates.
      */
-    public LoginWizard(final Browser browser) {
+    public SapLoginWizard(final Browser browser) {
         this.browser = browser;
 
         setWindowTitle("AI Provider Setup");
-        loginClient = createLoginClient();
+        sapLoginClient = createLoginClient();
     }
 
     /**
@@ -57,21 +57,21 @@ public class LoginWizard extends Wizard {
      */
     @Override
     public void addPages() {
-        addPage(new FirstLoginWizardPage(loginClient));
-        addPage(new SecondLoginWizardPage(loginClient, TemporaryMemoryResourceGroup.getInstance(), TemporaryMemoryDeployment.getInstance()));
+        addPage(new FirstLoginWizardPage(sapLoginClient));
+        addPage(new SecondLoginWizardPage(sapLoginClient, TemporaryMemoryResourceGroup.getInstance(), TemporaryMemoryDeployment.getInstance()));
     }
 
     /**
-     * Creates and initializes the {@link ILoginClient} used for the login process.
+     * Creates and initializes the {@link ISapLoginClient} used for the login process.
      *
-     * @return a new {@link ILoginClient} instance.
+     * @return a new {@link ISapLoginClient} instance.
      */
-    private ILoginClient createLoginClient() {
+    private ISapLoginClient createLoginClient() {
         TemporaryMemoryAccessToken tmpMemoryAccessToken = TemporaryMemoryAccessToken.getInstance();
         TemporaryMemoryServiceKey tmpMemoryServiceKey = TemporaryMemoryServiceKey.getInstance();
 
         IAuthClient tmpAuthClient = new AuthClient(tmpMemoryAccessToken, tmpMemoryServiceKey, new AuthClientHelper());
-        return new LoginClient(new LoginClientHelper(), tmpAuthClient);
+        return new SapLoginClient(new SapLoginClientHelper(), tmpAuthClient);
     }
 
     /**

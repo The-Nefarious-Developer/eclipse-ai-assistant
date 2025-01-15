@@ -10,7 +10,7 @@ import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
  * The {@code ILoginClient} defines methods for retrieving deployments and resource groups
  * by interacting with the SAP AI Core API.
  */
-public interface ILoginClient {
+public interface ISapLoginClient {
 
 	/**
      * Retrieves a list of deployments from the SAP AI Core API.
