@@ -15,7 +15,6 @@ import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryDeploym
 import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryResourceGroup;
 import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryServiceKey;
 import com.developer.nefarious.zjoule.plugin.login.pages.FirstLoginWizardPage;
-import com.developer.nefarious.zjoule.plugin.login.pages.LoginOptionsPage;
 import com.developer.nefarious.zjoule.plugin.login.pages.SecondLoginWizardPage;
 
 /**
