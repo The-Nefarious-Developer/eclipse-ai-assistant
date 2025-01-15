@@ -13,6 +13,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
+import com.developer.nefarious.zjoule.plugin.login.LoginOptionsWizardDialog;
+import com.developer.nefarious.zjoule.plugin.login.LoginWizard;
 import com.developer.nefarious.zjoule.plugin.login.SapLoginWizard;
 
 /**
@@ -60,13 +62,13 @@ public class LoginHandler extends Action {
     /**
      * Executes the "Login" action.
      * <p>
-     * This method launches the {@link SapLoginWizard} in a {@link WizardDialog},
+     * This method launches the {@link LoginWizard} in a {@link WizardDialog},
      * allowing the user to log in to their BTP subaccount.
      */
     @Override
     public void run() {
-        SapLoginWizard wizard = new SapLoginWizard(browser);
-        WizardDialog dialog = new WizardDialog(shell, wizard);
+        LoginWizard wizard = new LoginWizard(browser);
+        LoginOptionsWizardDialog dialog = new LoginOptionsWizardDialog(shell, wizard);
         dialog.open();
     }
 

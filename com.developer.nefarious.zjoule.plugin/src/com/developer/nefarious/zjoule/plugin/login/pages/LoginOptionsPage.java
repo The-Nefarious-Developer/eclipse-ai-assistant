@@ -16,6 +16,7 @@ public class LoginOptionsPage extends WizardPage {
 		setTitle("Login Options");
         setDescription("Choose the AI provider.");
         setPageComplete(false); // Initially set the page as incomplete
+        
 	}
 
 	@Override
@@ -34,7 +35,7 @@ public class LoginOptionsPage extends WizardPage {
 	    option2.setToolTipText("Select a local Ollama model.");
 	    option2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 	    option2.addListener(SWT.Selection, event -> setOption2());
-	    	    
+	        
 	    setControl(container);
 	}
 	
