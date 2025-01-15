@@ -42,7 +42,7 @@ public class SapLoginWizard extends Wizard {
     public SapLoginWizard(final Browser browser) {
         this.browser = browser;
 
-        setWindowTitle("AI Provider Setup");
+        setWindowTitle("Login to SAP AI Core");
         sapLoginClient = createLoginClient();
     }
 
