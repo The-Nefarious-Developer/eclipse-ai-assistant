@@ -15,6 +15,7 @@ import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryDeploym
 import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryResourceGroup;
 import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryServiceKey;
 import com.developer.nefarious.zjoule.plugin.login.pages.FirstLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.login.pages.LoginOptionsPage;
 import com.developer.nefarious.zjoule.plugin.login.pages.SecondLoginWizardPage;
 
 /**
@@ -42,7 +43,7 @@ public class LoginWizard extends Wizard {
     public LoginWizard(final Browser browser) {
         this.browser = browser;
 
-        setWindowTitle("Login to SAP AI Core");
+        setWindowTitle("AI Provider Setup");
         loginClient = createLoginClient();
     }
 
@@ -57,6 +58,7 @@ public class LoginWizard extends Wizard {
      */
     @Override
     public void addPages() {
+    	addPage(new LoginOptionsPage());
         addPage(new FirstLoginWizardPage(loginClient));
         addPage(new SecondLoginWizardPage(loginClient, TemporaryMemoryResourceGroup.getInstance(), TemporaryMemoryDeployment.getInstance()));
     }
