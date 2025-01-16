@@ -18,7 +18,7 @@ import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.plugin.login.api.ISapLoginClient;
 import com.developer.nefarious.zjoule.plugin.login.events.ServiceKeyModifyListener;
-import com.developer.nefarious.zjoule.plugin.login.pages.FirstLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.login.pages.FirstSapLoginWizardPage;
 import com.developer.nefarious.zjoule.plugin.login.utils.JsonValidator;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 import com.google.gson.Gson;
@@ -30,7 +30,7 @@ public class ServiceKeyModifyListenerTest {
 	private ServiceKeyModifyListener cut;
 
 	@Mock
-	private FirstLoginWizardPage mockFirstLoginWizardPage;
+	private FirstSapLoginWizardPage mockFirstLoginWizardPage;
 
 	@Mock
 	private ISapLoginClient mockSapLoginClient;

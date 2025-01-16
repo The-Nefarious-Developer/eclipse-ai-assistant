@@ -14,8 +14,8 @@ import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryAccessT
 import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryDeployment;
 import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryResourceGroup;
 import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryServiceKey;
-import com.developer.nefarious.zjoule.plugin.login.pages.FirstLoginWizardPage;
-import com.developer.nefarious.zjoule.plugin.login.pages.SecondLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.login.pages.FirstSapLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.login.pages.SecondSapLoginWizardPage;
 
 /**
  * A wizard for logging into SAP AI Core.
@@ -51,14 +51,14 @@ public class SapLoginWizard extends Wizard {
      * <p>
      * This method initializes:
      * <ul>
-     *   <li>The {@link FirstLoginWizardPage} for entering credentials.</li>
-     *   <li>The {@link SecondLoginWizardPage} for selecting resources and configurations.</li>
+     *   <li>The {@link FirstSapLoginWizardPage} for entering credentials.</li>
+     *   <li>The {@link SecondSapLoginWizardPage} for selecting resources and configurations.</li>
      * </ul>
      */
     @Override
     public void addPages() {
-        addPage(new FirstLoginWizardPage(sapLoginClient));
-        addPage(new SecondLoginWizardPage(sapLoginClient, TemporaryMemoryResourceGroup.getInstance(), TemporaryMemoryDeployment.getInstance()));
+        addPage(new FirstSapLoginWizardPage(sapLoginClient));
+        addPage(new SecondSapLoginWizardPage(sapLoginClient, TemporaryMemoryResourceGroup.getInstance(), TemporaryMemoryDeployment.getInstance()));
     }
 
     /**

@@ -7,7 +7,7 @@ import org.eclipse.swt.events.ModifyListener;
 
 import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
 import com.developer.nefarious.zjoule.plugin.login.api.ISapLoginClient;
-import com.developer.nefarious.zjoule.plugin.login.pages.FirstLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.login.pages.FirstSapLoginWizardPage;
 import com.developer.nefarious.zjoule.plugin.login.utils.JsonValidator;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 import com.google.gson.Gson;
@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 public class ServiceKeyModifyListener implements ModifyListener {
 
     /** The first page of the login wizard associated with this listener. */
-    private FirstLoginWizardPage firstLoginWizardPage;
+    private FirstSapLoginWizardPage firstLoginWizardPage;
 
     /** The login client used for validating the service key and retrieving resource groups. */
     private ISapLoginClient sapLoginClient;
@@ -32,13 +32,13 @@ public class ServiceKeyModifyListener implements ModifyListener {
     /**
      * Constructs a new {@code ServiceKeyModifyListener}.
      *
-     * @param firstLoginWizardPage the {@link FirstLoginWizardPage} containing the service key input field.
+     * @param firstLoginWizardPage the {@link FirstSapLoginWizardPage} containing the service key input field.
      * @param sapLoginClient the {@link ISapLoginClient} for validating the service key and retrieving resource groups.
      * @param gson the {@link Gson} instance for parsing the service key JSON.
      */
     // @formatter:off
     public ServiceKeyModifyListener(
-    		final FirstLoginWizardPage firstLoginWizardPage, 
+    		final FirstSapLoginWizardPage firstLoginWizardPage, 
     		final ISapLoginClient sapLoginClient, 
     		final Gson gson) {
     	// @formatter:on

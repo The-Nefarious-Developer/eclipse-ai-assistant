@@ -17,7 +17,7 @@ import org.mockito.MockitoAnnotations;
 import com.developer.nefarious.zjoule.plugin.login.api.GetDeploymentsResponse;
 import com.developer.nefarious.zjoule.plugin.login.api.ISapLoginClient;
 import com.developer.nefarious.zjoule.plugin.login.events.ResourceGroupSelectionAdapter;
-import com.developer.nefarious.zjoule.plugin.login.pages.SecondLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.login.pages.SecondSapLoginWizardPage;
 import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
@@ -27,7 +27,7 @@ public class ResourceGroupSelectionAdapterTest {
 	private ResourceGroupSelectionAdapter cut;
 
 	@Mock
-	private SecondLoginWizardPage mockSecondLoginWizardPage;
+	private SecondSapLoginWizardPage mockSecondLoginWizardPage;
 
 	@Mock
 	private ISapLoginClient mockSapLoginClient;

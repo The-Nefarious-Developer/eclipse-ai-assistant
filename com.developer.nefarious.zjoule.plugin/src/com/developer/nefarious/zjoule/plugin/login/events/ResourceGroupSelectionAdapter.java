@@ -7,7 +7,7 @@ import org.eclipse.swt.events.SelectionEvent;
 
 import com.developer.nefarious.zjoule.plugin.login.api.GetDeploymentsResponse;
 import com.developer.nefarious.zjoule.plugin.login.api.ISapLoginClient;
-import com.developer.nefarious.zjoule.plugin.login.pages.SecondLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.login.pages.SecondSapLoginWizardPage;
 import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 
@@ -21,7 +21,7 @@ import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 public class ResourceGroupSelectionAdapter extends SelectionAdapter {
 
     /** The second login wizard page associated with this adapter. */
-    private SecondLoginWizardPage secondLoginWizardPage;
+    private SecondSapLoginWizardPage secondLoginWizardPage;
 
     /** The login client for retrieving deployments. */
     private ISapLoginClient sapLoginClient;
@@ -32,13 +32,13 @@ public class ResourceGroupSelectionAdapter extends SelectionAdapter {
     /**
      * Constructs a new {@code ResourceGroupSelectionAdapter}.
      *
-     * @param secondLoginWizardPage the {@link SecondLoginWizardPage} containing the resource group dropdown.
+     * @param secondLoginWizardPage the {@link SecondSapLoginWizardPage} containing the resource group dropdown.
      * @param sapLoginClient the {@link ISapLoginClient} for retrieving deployments.
      * @param memoryResourceGroup the {@link IMemoryObject<String>} used to store the selected resource group.
      */
     // @formatter:off
     public ResourceGroupSelectionAdapter(
-            final SecondLoginWizardPage secondLoginWizardPage,
+            final SecondSapLoginWizardPage secondLoginWizardPage,
             final ISapLoginClient sapLoginClient,
             final IMemoryObject<String> memoryResourceGroup) {
     	// @formatter:on

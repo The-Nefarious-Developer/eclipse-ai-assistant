@@ -28,9 +28,9 @@ import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
  *   <li>A dropdown for selecting a resource group.</li>
  *   <li>A dropdown for selecting a deployment ID (enabled after selecting a resource group).</li>
  * </ul>
- * It also communicates with {@link FirstLoginWizardPage} to retrieve service key data.
+ * It also communicates with {@link FirstSapLoginWizardPage} to retrieve service key data.
  */
-public class SecondLoginWizardPage extends WizardPage {
+public class SecondSapLoginWizardPage extends WizardPage {
 
     /** The unique identifier for this wizard page. */
     public static final String PAGE_ID = "Second Page";
@@ -64,7 +64,7 @@ public class SecondLoginWizardPage extends WizardPage {
      * @param memoryDeployment the {@link IMemoryObject<Deployment>} for deployment memory management.
      */
     // @formatter:off
-    public SecondLoginWizardPage(
+    public SecondSapLoginWizardPage(
             final ISapLoginClient sapLoginClient,
             final IMemoryObject<String> memoryResourceGroup,
             final IMemoryObject<Deployment> memoryDeployment) {
@@ -146,7 +146,7 @@ public class SecondLoginWizardPage extends WizardPage {
      * @return the {@link ServiceKey} provided on the first page.
      */
     public ServiceKey getServiceKey() {
-        FirstLoginWizardPage firstPage = (FirstLoginWizardPage) getWizard().getPage(FirstLoginWizardPage.PAGE_ID);
+        FirstSapLoginWizardPage firstPage = (FirstSapLoginWizardPage) getWizard().getPage(FirstSapLoginWizardPage.PAGE_ID);
         return firstPage.getServiceKey();
     }
 
@@ -181,7 +181,7 @@ public class SecondLoginWizardPage extends WizardPage {
         super.setVisible(visible);
         if (visible) {
             // Retrieve data from the first page
-            FirstLoginWizardPage firstPage = (FirstLoginWizardPage) getWizard().getPage(FirstLoginWizardPage.PAGE_ID);
+            FirstSapLoginWizardPage firstPage = (FirstSapLoginWizardPage) getWizard().getPage(FirstSapLoginWizardPage.PAGE_ID);
             String data = firstPage.getInputText();
 
             // Dynamically populate resource group dropdown based on first page's data

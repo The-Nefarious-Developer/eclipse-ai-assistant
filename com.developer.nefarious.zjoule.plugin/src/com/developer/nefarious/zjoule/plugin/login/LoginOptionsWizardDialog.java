@@ -6,7 +6,7 @@ import org.eclipse.swt.widgets.Shell;
 
 public class LoginOptionsWizardDialog extends WizardDialog {
 	
-	public LoginOptionsWizardDialog(Shell parentShell, LoginWizard wizard) {
+	public LoginOptionsWizardDialog(final Shell parentShell, final LoginWizard wizard) {
         super(parentShell, wizard);
     }
 

@@ -26,7 +26,7 @@ import com.google.gson.Gson;
  *   <li>Logic to propagate resource group information to subsequent wizard pages.</li>
  * </ul>
  */
-public class FirstLoginWizardPage extends WizardPage {
+public class FirstSapLoginWizardPage extends WizardPage {
 
     /** The unique identifier for this wizard page. */
     public static final String PAGE_ID = "First Page";
@@ -54,7 +54,7 @@ public class FirstLoginWizardPage extends WizardPage {
      *
      * @param sapLoginClient the {@link ISapLoginClient} used for API interactions during the login process.
      */
-    public FirstLoginWizardPage(final ISapLoginClient sapLoginClient) {
+    public FirstSapLoginWizardPage(final ISapLoginClient sapLoginClient) {
         super(PAGE_ID);
         setTitle("Provide credentials");
         setDescription("Attach the Service Key json file content for the SAP AI Core service.");
@@ -116,7 +116,7 @@ public class FirstLoginWizardPage extends WizardPage {
      * @param getResourceGroupsResponse the response containing available resource groups.
      */
     public void setResourceGroupsOnTheSecondPage(final GetResourceGroupsResponse getResourceGroupsResponse) {
-        SecondLoginWizardPage secondPage = (SecondLoginWizardPage) getWizard().getPage(SecondLoginWizardPage.PAGE_ID);
+        SecondSapLoginWizardPage secondPage = (SecondSapLoginWizardPage) getWizard().getPage(SecondSapLoginWizardPage.PAGE_ID);
         List<String> resourceGroupsAvailableForSelection = ResourceGroupIdExtractor.extractResourceGroupIds(getResourceGroupsResponse);
         secondPage.setResourceGroupsForSelection(resourceGroupsAvailableForSelection);
     }
