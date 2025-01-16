@@ -49,9 +49,9 @@ public class LoginWizard extends Wizard {
 	}
 	
 	private void startOllamaLogin() {
-//		OllamaLoginWizard wizard = new OllamaLoginWizard(browser);
-//        WizardDialog dialog = new WizardDialog(shell, wizard);
-//        dialog.open();
+		OllamaLoginWizard wizard = new OllamaLoginWizard(browser);
+        WizardDialog dialog = new WizardDialog(shell, wizard);
+        dialog.open();
 	}
 
 }
