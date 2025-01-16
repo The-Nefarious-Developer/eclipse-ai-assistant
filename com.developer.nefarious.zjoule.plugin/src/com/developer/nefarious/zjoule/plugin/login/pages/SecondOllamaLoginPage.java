@@ -28,7 +28,7 @@ public class SecondOllamaLoginPage extends WizardPage {
 	}
 
 	@Override
-	public void createControl(Composite parent) {
+	public void createControl(final Composite parent) {
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(2, false));
 	    
@@ -46,7 +46,7 @@ public class SecondOllamaLoginPage extends WizardPage {
 		setPageComplete(true);
 	}
 	
-	public void setModelsForSelection(List<String> modelsForSelection) {
+	public void setModelsForSelection(final List<String> modelsForSelection) {
 		modelDropdown.setItems(modelsForSelection.toArray(new String[0]));
 	}
 
