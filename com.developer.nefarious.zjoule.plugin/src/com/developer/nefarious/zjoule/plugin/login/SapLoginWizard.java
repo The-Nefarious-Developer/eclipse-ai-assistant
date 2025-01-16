@@ -43,7 +43,7 @@ public class SapLoginWizard extends Wizard {
         this.browser = browser;
 
         setWindowTitle("Login to SAP AI Core");
-        sapLoginClient = createLoginClient();
+        sapLoginClient = createSapLoginClient();
     }
 
     /**
@@ -66,7 +66,7 @@ public class SapLoginWizard extends Wizard {
      *
      * @return a new {@link ISapLoginClient} instance.
      */
-    private ISapLoginClient createLoginClient() {
+    private ISapLoginClient createSapLoginClient() {
         TemporaryMemoryAccessToken tmpMemoryAccessToken = TemporaryMemoryAccessToken.getInstance();
         TemporaryMemoryServiceKey tmpMemoryServiceKey = TemporaryMemoryServiceKey.getInstance();
 
