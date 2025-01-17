@@ -23,7 +23,7 @@ import com.developer.nefarious.zjoule.plugin.memory.MemoryResourceGroup;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
 
-public class AIClientFactorySapTest {
+public class AiClientFactorySapTest {
 	
 	private MockedStatic<SessionManager> mockStaticSessionManager;
 	
