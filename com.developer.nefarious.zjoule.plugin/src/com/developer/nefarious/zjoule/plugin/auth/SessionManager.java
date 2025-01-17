@@ -19,19 +19,12 @@ import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
  */
 public abstract class SessionManager {
 
-    /**
-     * Checks if the user is currently logged in.
-     * A user is considered logged in if the following memory components are not empty:
-     * <ul>
-     *   <li>{@link MemoryAccessToken}</li>
-     *   <li>{@link MemoryServiceKey}</li>
-     *   <li>{@link MemoryResourceGroup}</li>
-     *   <li>{@link MemoryDeployment}</li>
-     * </ul>
-     *
-     * @return {@code true} if the user is logged in, {@code false} otherwise.
-     */
+
     public static boolean isUserLoggedIn() {
+    	return (isSapSessionOn() || isOllamaSessionOn()) ? true : false;
+    }
+    
+    private static boolean isSapSessionOn() {
         MemoryAccessToken memoryAccessToken = MemoryAccessToken.getInstance();
         MemoryServiceKey memoryServiceKey = MemoryServiceKey.getInstance();
         MemoryResourceGroup memoryResourceGroup = MemoryResourceGroup.getInstance();
@@ -39,6 +32,13 @@ public abstract class SessionManager {
 
         return (memoryAccessToken.isEmpty() || memoryServiceKey.isEmpty() || memoryResourceGroup.isEmpty()
                 || memoryDeployment.isEmpty()) ? false : true;
+    }
+    
+    private static boolean isOllamaSessionOn() {
+        MemoryOllamaEndpoint memoryOllamaEndpoint = MemoryOllamaEndpoint.getInstance();
+        MemoryOllamaModel memoryOllamaModel = MemoryOllamaModel.getInstance();
+
+        return (memoryOllamaEndpoint.isEmpty() || memoryOllamaModel.isEmpty()) ? false : true;
     }
 
     /**
