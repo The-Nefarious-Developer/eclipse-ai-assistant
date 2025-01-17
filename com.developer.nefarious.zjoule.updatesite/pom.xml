@@ -6,7 +6,7 @@
 
 	<artifactId>com.developer.nefarious.zjoule.updatesite</artifactId>
 	<name>zjoule - updatesite</name>
-	<version>1.1.1</version>
+	<version>1.1.2</version>
 
 	<parent>
 		<groupId>com.developer.nefarious.zjoule</groupId>
