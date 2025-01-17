@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-public class SecondOllamaLoginPage extends WizardPage {
+public class SecondOllamaLoginWizardPage extends WizardPage {
 	
 	public static final String PAGE_ID = "Ollama Login Second Page";
 	
@@ -19,7 +19,7 @@ public class SecondOllamaLoginPage extends WizardPage {
 	
 	private List<String> modelsForSelection = new ArrayList<>();
 	
-	public SecondOllamaLoginPage() {
+	public SecondOllamaLoginWizardPage() {
 		super(PAGE_ID);
 		
 		setTitle("Ollama Setup");

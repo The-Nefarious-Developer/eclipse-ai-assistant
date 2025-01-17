@@ -7,8 +7,8 @@ import com.developer.nefarious.zjoule.plugin.login.api.IOllamaLoginClient;
 import com.developer.nefarious.zjoule.plugin.login.api.OllamaLoginClient;
 import com.developer.nefarious.zjoule.plugin.login.api.OllamaLoginClientHelper;
 import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryOllamaEndpoint;
-import com.developer.nefarious.zjoule.plugin.login.pages.FirstOllamaLoginPage;
-import com.developer.nefarious.zjoule.plugin.login.pages.SecondOllamaLoginPage;
+import com.developer.nefarious.zjoule.plugin.login.pages.FirstOllamaLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.login.pages.SecondOllamaLoginWizardPage;
 
 public class OllamaLoginWizard extends Wizard {
 	
@@ -25,8 +25,8 @@ public class OllamaLoginWizard extends Wizard {
 	
 	@Override
     public void addPages() {
-        addPage(new FirstOllamaLoginPage(ollamaLoginClient));
-        addPage(new SecondOllamaLoginPage());
+        addPage(new FirstOllamaLoginWizardPage(ollamaLoginClient));
+        addPage(new SecondOllamaLoginWizardPage());
     }
 
 	@Override

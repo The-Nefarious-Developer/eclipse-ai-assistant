@@ -16,7 +16,7 @@ import com.developer.nefarious.zjoule.plugin.login.api.GetOllamaModelsResponse;
 import com.developer.nefarious.zjoule.plugin.login.api.IOllamaLoginClient;
 import com.developer.nefarious.zjoule.plugin.login.utils.OllamaModelNamesExtractor;
 
-public class FirstOllamaLoginPage extends WizardPage {
+public class FirstOllamaLoginWizardPage extends WizardPage {
 
 	public static final String PAGE_ID = "Ollama Login First Page";
 
@@ -26,7 +26,7 @@ public class FirstOllamaLoginPage extends WizardPage {
 
 	private Text errorText;
 
-	public FirstOllamaLoginPage(final IOllamaLoginClient ollamaLoginClient) {
+	public FirstOllamaLoginWizardPage(final IOllamaLoginClient ollamaLoginClient) {
 		super(PAGE_ID);
 
 		setTitle("Ollama Setup");
@@ -85,7 +85,7 @@ public class FirstOllamaLoginPage extends WizardPage {
 
 	private void setAvailableModelsFor(final String ollamaEndpoint) throws IOException, InterruptedException {
 		GetOllamaModelsResponse response = ollamaLoginClient.getModels(ollamaEndpoint);
-		SecondOllamaLoginPage secondPage = (SecondOllamaLoginPage) getWizard().getPage(SecondOllamaLoginPage.PAGE_ID);
+		SecondOllamaLoginWizardPage secondPage = (SecondOllamaLoginWizardPage) getWizard().getPage(SecondOllamaLoginWizardPage.PAGE_ID);
 		List<String> modelsAvailableForSelection = OllamaModelNamesExtractor.extractModelNames(response);
 		secondPage.setModelsForSelection(modelsAvailableForSelection);
 	}
