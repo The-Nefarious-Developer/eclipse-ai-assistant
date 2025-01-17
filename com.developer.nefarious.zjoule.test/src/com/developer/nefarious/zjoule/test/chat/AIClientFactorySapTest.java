@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 
+import com.developer.nefarious.zjoule.plugin.auth.SessionManager;
 import com.developer.nefarious.zjoule.plugin.chat.AIClientFactory;
 import com.developer.nefarious.zjoule.plugin.chat.IAIClient;
 import com.developer.nefarious.zjoule.plugin.chat.memory.MemoryMessageHistory;
@@ -22,8 +23,10 @@ import com.developer.nefarious.zjoule.plugin.memory.MemoryResourceGroup;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
 
-public class AIClientFactoryTest {
-
+public class AIClientFactorySapTest {
+	
+	private MockedStatic<SessionManager> mockStaticSessionManager;
+	
 	private MockedStatic<MemoryAccessToken> mockStaticMemoryAccessToken;
 
 	private MockedStatic<MemoryServiceKey> mockStaticMemoryServiceKey;
@@ -61,12 +64,15 @@ public class AIClientFactoryTest {
 		mockStaticMemoryResourceGroup = mockStatic(MemoryResourceGroup.class);
 		mockStaticMemoryDeployment = mockStatic(MemoryDeployment.class);
 		mockStaticMemoryMessageHistory = mockStatic(MemoryMessageHistory.class);
+		mockStaticSessionManager = mockStatic(SessionManager.class);
 
 		mockStaticMemoryAccessToken.when(MemoryAccessToken::getInstance).thenReturn(mockMemoryAccessToken);
 		mockStaticMemoryServiceKey.when(MemoryServiceKey::getInstance).thenReturn(mockMemoryServiceKey);
 		mockStaticMemoryResourceGroup.when(MemoryResourceGroup::getInstance).thenReturn(mockMemoryResourceGroup);
 		mockStaticMemoryDeployment.when(MemoryDeployment::getInstance).thenReturn(mockMemoryDeployment);
 		mockStaticMemoryMessageHistory.when(MemoryMessageHistory::getInstance).thenReturn(mockMemoryMessageHistory);
+		mockStaticSessionManager.when(SessionManager::isSapSession).thenReturn(true);
+		mockStaticSessionManager.when(SessionManager::isOllamaSession).thenReturn(false);
 
 		when(mockMemoryDeployment.load()).thenReturn(mockDeployment);
 	}
@@ -137,6 +143,9 @@ public class AIClientFactoryTest {
 		}
 		if (mockStaticMemoryMessageHistory != null) {
 			mockStaticMemoryMessageHistory.close();
+		}
+		if (mockStaticSessionManager != null) {
+			mockStaticSessionManager.close();
 		}
 	}
 

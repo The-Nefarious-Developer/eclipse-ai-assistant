@@ -21,10 +21,10 @@ public abstract class SessionManager {
 
 
     public static boolean isUserLoggedIn() {
-    	return (isSapSessionOn() || isOllamaSessionOn()) ? true : false;
+    	return (isSapSession() || isOllamaSession()) ? true : false;
     }
     
-    private static boolean isSapSessionOn() {
+    public static boolean isSapSession() {
         MemoryAccessToken memoryAccessToken = MemoryAccessToken.getInstance();
         MemoryServiceKey memoryServiceKey = MemoryServiceKey.getInstance();
         MemoryResourceGroup memoryResourceGroup = MemoryResourceGroup.getInstance();
@@ -34,7 +34,7 @@ public abstract class SessionManager {
                 || memoryDeployment.isEmpty()) ? false : true;
     }
     
-    private static boolean isOllamaSessionOn() {
+    public static boolean isOllamaSession() {
         MemoryOllamaEndpoint memoryOllamaEndpoint = MemoryOllamaEndpoint.getInstance();
         MemoryOllamaModel memoryOllamaModel = MemoryOllamaModel.getInstance();
 

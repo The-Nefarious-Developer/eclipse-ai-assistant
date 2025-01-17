@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.developer.nefarious.zjoule.plugin.auth.AuthClient;
 import com.developer.nefarious.zjoule.plugin.auth.AuthClientHelper;
+import com.developer.nefarious.zjoule.plugin.auth.SessionManager;
 import com.developer.nefarious.zjoule.plugin.chat.memory.MemoryMessageHistory;
 import com.developer.nefarious.zjoule.plugin.chat.openai.OpenAIClient;
 import com.developer.nefarious.zjoule.plugin.chat.openai.OpenAIClientHelper;
@@ -29,8 +30,17 @@ public abstract class AIClientFactory {
      * @return an instance of {@link IAIClient} for the corresponding model, or {@code null} if unsupported.
      */
     public static IAIClient getClient() {
-
-        // Load memory components for access token, service key, resource group, deployment, and message history.
+        if (SessionManager.isSapSession()) {
+        	return getClientForSapAiCore();
+        } else if (SessionManager.isOllamaSession()) {
+        	return getClientForOllama();
+        } else {
+        	return null;
+        }
+    }
+    
+    private static IAIClient getClientForSapAiCore() {
+    	// Load memory components for access token, service key, resource group, deployment, and message history.
         MemoryAccessToken memoryAccessToken = MemoryAccessToken.getInstance();
         MemoryServiceKey memoryServiceKey = MemoryServiceKey.getInstance();
         MemoryResourceGroup memoryResourceGroup = MemoryResourceGroup.getInstance();
@@ -51,6 +61,11 @@ public abstract class AIClientFactory {
         } else {
             return null;
         }
+    }
+    
+    private static IAIClient getClientForOllama() {
+    	return null;
+    
     }
 
     /**
