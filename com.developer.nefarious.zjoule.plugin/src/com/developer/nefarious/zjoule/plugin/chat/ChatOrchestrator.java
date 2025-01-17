@@ -30,7 +30,7 @@ public class ChatOrchestrator implements IChatOrchestrator {
 		List<IChatMessage> messageHistory = aiClient.getMessageHistory();
 		messages.addAll(messageHistory);
 
-		// 2. Get context
+		// 2. Set instructions and editor content as context
 		String baseInstructions = Instruction.getMessage();
 		String systemInstructions = editorContent != null
 				? baseInstructions + " Consider the following code as context: " + editorContent
