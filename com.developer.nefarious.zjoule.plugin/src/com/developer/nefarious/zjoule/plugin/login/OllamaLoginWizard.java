@@ -33,10 +33,11 @@ public class OllamaLoginWizard extends Wizard {
 
 	@Override
 	public boolean performFinish() {
+		SessionManager.clearAllSessions();
+		
 		TemporaryMemoryOllamaEndpoint.getInstance().persist();
 		TemporaryMemoryOllamaModel.getInstance().persist();
 		
-//		SessionManager.logout(browser, new EclipseMemory());
 		SessionManager.login(browser);
 		return true;
 	}

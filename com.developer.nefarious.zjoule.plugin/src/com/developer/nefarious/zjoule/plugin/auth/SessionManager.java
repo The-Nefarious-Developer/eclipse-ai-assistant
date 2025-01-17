@@ -6,6 +6,8 @@ import com.developer.nefarious.zjoule.plugin.core.functions.TagHandler;
 import com.developer.nefarious.zjoule.plugin.memory.EclipseMemory;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryAccessToken;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryDeployment;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryOllamaEndpoint;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryOllamaModel;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryResourceGroup;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
 
@@ -65,6 +67,23 @@ public abstract class SessionManager {
         if (browser != null && !browser.isDisposed()) {
             browser.execute("logout();");
         }
+    }
+    
+    public static void clearAllSessions() {
+    	clearSapSession();
+    	clearOllamaSession();
+    }
+    
+    private static void clearSapSession() {
+    	MemoryAccessToken.getInstance().clear();
+    	MemoryServiceKey.getInstance().clear();
+    	MemoryResourceGroup.getInstance().clear();
+    	MemoryDeployment.getInstance().clear();
+    }
+    
+    private static void clearOllamaSession() {
+    	MemoryOllamaEndpoint.getInstance().clear();
+    	MemoryOllamaModel.getInstance().clear();    	
     }
 
     /**

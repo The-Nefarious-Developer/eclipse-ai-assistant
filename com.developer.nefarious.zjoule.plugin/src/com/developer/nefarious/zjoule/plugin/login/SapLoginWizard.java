@@ -90,6 +90,8 @@ public class SapLoginWizard extends Wizard {
      */
     @Override
     public boolean performFinish() {
+    	SessionManager.clearAllSessions();
+    	
         TemporaryMemoryAccessToken.getInstance().persist();
         TemporaryMemoryServiceKey.getInstance().persist();
         TemporaryMemoryResourceGroup.getInstance().persist();
