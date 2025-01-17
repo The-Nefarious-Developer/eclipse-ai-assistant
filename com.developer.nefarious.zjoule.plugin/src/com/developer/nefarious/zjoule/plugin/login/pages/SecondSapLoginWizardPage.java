@@ -96,8 +96,8 @@ public class SecondSapLoginWizardPage extends WizardPage {
         resourceGroupDropdown.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
         // Add a SelectionListener to enable the deployment dropdown when a valid resource group is selected
-        resourceGroupDropdown
-                .addSelectionListener(new ResourceGroupSelectionAdapter(this, sapLoginClient, memoryResourceGroup));
+        resourceGroupDropdown.addSelectionListener(
+        		new ResourceGroupSelectionAdapter(this, sapLoginClient, memoryResourceGroup));
 
         // Create label and dropdown for deployment ID selection
         Label deploymentLabel = new Label(container, SWT.NONE);

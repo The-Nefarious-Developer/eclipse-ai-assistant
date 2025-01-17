@@ -7,6 +7,7 @@ import com.developer.nefarious.zjoule.plugin.login.api.IOllamaLoginClient;
 import com.developer.nefarious.zjoule.plugin.login.api.OllamaLoginClient;
 import com.developer.nefarious.zjoule.plugin.login.api.OllamaLoginClientHelper;
 import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryOllamaEndpoint;
+import com.developer.nefarious.zjoule.plugin.login.memory.TemporaryMemoryOllamaModel;
 import com.developer.nefarious.zjoule.plugin.login.pages.FirstOllamaLoginWizardPage;
 import com.developer.nefarious.zjoule.plugin.login.pages.SecondOllamaLoginWizardPage;
 
@@ -25,13 +26,14 @@ public class OllamaLoginWizard extends Wizard {
 	
 	@Override
     public void addPages() {
-        addPage(new FirstOllamaLoginWizardPage(ollamaLoginClient));
-        addPage(new SecondOllamaLoginWizardPage());
+        addPage(new FirstOllamaLoginWizardPage(ollamaLoginClient, TemporaryMemoryOllamaEndpoint.getInstance()));
+        addPage(new SecondOllamaLoginWizardPage(TemporaryMemoryOllamaModel.getInstance()));
     }
 
 	@Override
 	public boolean performFinish() {
 		TemporaryMemoryOllamaEndpoint.getInstance().persist();
+		TemporaryMemoryOllamaModel.getInstance().persist();
 		
 //		SessionManager.login(browser);
 		return true;

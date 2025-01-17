@@ -1,7 +1,6 @@
 package com.developer.nefarious.zjoule.plugin.login.pages;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
@@ -14,25 +13,29 @@ import org.eclipse.swt.widgets.Text;
 
 import com.developer.nefarious.zjoule.plugin.login.api.GetOllamaModelsResponse;
 import com.developer.nefarious.zjoule.plugin.login.api.IOllamaLoginClient;
-import com.developer.nefarious.zjoule.plugin.login.utils.OllamaModelNamesExtractor;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 
 public class FirstOllamaLoginWizardPage extends WizardPage {
 
 	public static final String PAGE_ID = "Ollama Login First Page";
 
 	private IOllamaLoginClient ollamaLoginClient;
+	
+	private IMemoryObject<String> memoryOllamaEndpoint;
 
 	private Text endpointText;
 
 	private Text errorText;
 
-	public FirstOllamaLoginWizardPage(final IOllamaLoginClient ollamaLoginClient) {
+	public FirstOllamaLoginWizardPage(
+			final IOllamaLoginClient ollamaLoginClient,
+			final IMemoryObject<String> memoryOllamaEndpoint) {
 		super(PAGE_ID);
-
 		setTitle("Ollama Setup");
 		setDescription("Enter the host and port for the local Ollama instance.");
-		setPageComplete(false); // Initially set the page as incomplete
+		setPageComplete(true);
 		this.ollamaLoginClient = ollamaLoginClient;
+		this.memoryOllamaEndpoint = memoryOllamaEndpoint;
 	}
 
 	@Override
@@ -78,16 +81,16 @@ public class FirstOllamaLoginWizardPage extends WizardPage {
 			displayErrorMessage("Local instance of Ollama invalid or doesn't exist in the informed address.");
 			return null;
 		}
-
+		
 		errorText.setVisible(false);
-		return super.getNextPage(); // Proceed to the next page
+		memoryOllamaEndpoint.save(ollamaEndpoint);
+		return super.getNextPage(); // Proceed to the next wizard page
 	}
 
 	private void setAvailableModelsFor(final String ollamaEndpoint) throws IOException, InterruptedException {
-		GetOllamaModelsResponse response = ollamaLoginClient.getModels(ollamaEndpoint);
+		GetOllamaModelsResponse getOllamaModelsResponse = ollamaLoginClient.getModels(ollamaEndpoint);
 		SecondOllamaLoginWizardPage secondPage = (SecondOllamaLoginWizardPage) getWizard().getPage(SecondOllamaLoginWizardPage.PAGE_ID);
-		List<String> modelsAvailableForSelection = OllamaModelNamesExtractor.extractModelNames(response);
-		secondPage.setModelsForSelection(modelsAvailableForSelection);
+		secondPage.setOllamaModelsForSelection(getOllamaModelsResponse);
 	}
 
 	private void displayErrorMessage(final String message) {
