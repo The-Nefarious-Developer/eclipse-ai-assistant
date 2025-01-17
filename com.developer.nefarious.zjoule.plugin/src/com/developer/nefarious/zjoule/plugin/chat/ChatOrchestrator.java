@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.developer.nefarious.zjoule.plugin.chat.utils.EditorContentReader;
 import com.developer.nefarious.zjoule.plugin.models.Role;
 
 /**
@@ -18,8 +17,7 @@ public class ChatOrchestrator implements IChatOrchestrator {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getAnswer(final String userPrompt) {
-
+	public String getAnswer(final String userPrompt, final String editorContent) {
 		List<IChatMessage> messages = new ArrayList<>();
 
 		// 0. Define which AI Client should be used
@@ -32,10 +30,8 @@ public class ChatOrchestrator implements IChatOrchestrator {
 		List<IChatMessage> messageHistory = aiClient.getMessageHistory();
 		messages.addAll(messageHistory);
 
-		// 2. Get content of the active window
+		// 2. Get context
 		String baseInstructions = Instruction.getMessage();
-		String editorContent = EditorContentReader.readActiveEditorContent();
-
 		String systemInstructions = editorContent != null
 				? baseInstructions + " Consider the following code as context: " + editorContent
 				: baseInstructions;

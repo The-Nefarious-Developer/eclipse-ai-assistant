@@ -7,6 +7,7 @@ import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.widgets.Display;
 
 import com.developer.nefarious.zjoule.plugin.chat.ChatOrchestrator;
+import com.developer.nefarious.zjoule.plugin.chat.utils.EditorContentReader;
 
 /**
  * Handles user prompts from the browser and communicates with the chat orchestrator to generate responses.
@@ -49,9 +50,9 @@ public class PromptHandler extends BrowserFunction {
      * Handles a user prompt from the browser and initiates asynchronous processing to generate an AI response.
      *
      * <p>This method is invoked via the {@link BrowserFunction} interface when a corresponding JavaScript
-     * function is called in the browser widget. It processes the first argument as a user prompt, retrieves
-     * an AI-generated response asynchronously using the {@link ChatOrchestrator}, and delivers the response
-     * back to the browser environment through the JavaScript function {@code receiveMessage}.</p>
+     * function is called in the browser widget. It processes the first argument as a user prompt, read the editor
+     * content, retrieves an AI-generated response asynchronously using the {@link ChatOrchestrator}, and delivers 
+     * the response back to the browser environment through the JavaScript function {@code receiveMessage}.</p>
      *
      * <p>The response is escaped to ensure it is safe for inclusion in JavaScript code, avoiding issues
      * caused by special characters.</p>
@@ -65,8 +66,10 @@ public class PromptHandler extends BrowserFunction {
     @Override
     public Object function(final Object[] arguments) {
         String userPrompt = arguments[0].toString();
+        String editorContent = EditorContentReader.readActiveEditorContent();
         
-        CompletableFuture<String> futureResponse = CompletableFuture.supplyAsync(() -> chatOrchestrator.getAnswer(userPrompt));
+        CompletableFuture<String> futureResponse = CompletableFuture.supplyAsync(
+        		() -> chatOrchestrator.getAnswer(userPrompt, editorContent));
         
         futureResponse.thenAccept(response -> {
             Display.getDefault().asyncExec(new Runnable() {
