@@ -113,4 +113,10 @@ public class TemporaryMemoryDeployment implements IMemoryObject<Deployment>, ITe
         String serializedObject = objectSerializer.serialize(deployment);
         eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
     }
+    
+    @Override
+    public void clear() {
+    	eclipseMemory.deleteFromEclipsePreferences(KEY);
+    }
+    
 }

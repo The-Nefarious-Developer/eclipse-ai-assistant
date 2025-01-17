@@ -113,4 +113,10 @@ public class TemporaryMemoryOllamaModel implements IMemoryObject<OllamaModel>, I
         String serializedObject = objectSerializer.serialize(ollamaModel);
         eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
     }
+
+    @Override
+    public void clear() {
+    	eclipseMemory.deleteFromEclipsePreferences(KEY);
+    }
+    
 }

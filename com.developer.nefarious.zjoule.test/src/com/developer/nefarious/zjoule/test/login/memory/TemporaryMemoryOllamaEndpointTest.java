@@ -126,5 +126,14 @@ public class TemporaryMemoryOllamaEndpointTest {
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(TEMPORARY_KEY, mockOllamaEndpoint);
 	}
+	
+	@Test
+	public void shouldEraseFromMemory() {
+		// Arrange
+		// Act
+		cut.clear();
+		// Assert
+		verify(mockEclipseMemory).deleteFromEclipsePreferences(TEMPORARY_KEY);
+	}
 
 }

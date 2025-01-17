@@ -113,4 +113,10 @@ public class TemporaryMemoryAccessToken implements IMemoryObject<AccessToken>, I
         String serializedObject = objectSerializer.serialize(accessToken);
         eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
     }
+
+    @Override
+    public void clear() {
+    	eclipseMemory.deleteFromEclipsePreferences(KEY);
+    }
+    
 }

@@ -58,4 +58,9 @@ public class TemporaryMemoryOllamaEndpoint implements IMemoryObject<String>, ITe
         eclipseMemory.saveOnEclipsePreferences(KEY, ollamaEndpoint);
     }
     
+    @Override
+    public void clear() {
+    	eclipseMemory.deleteFromEclipsePreferences(KEY);
+    }
+    
 }
