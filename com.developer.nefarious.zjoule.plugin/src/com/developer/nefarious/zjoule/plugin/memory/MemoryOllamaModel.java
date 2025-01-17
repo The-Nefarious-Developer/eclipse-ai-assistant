@@ -100,4 +100,9 @@ public class MemoryOllamaModel implements IMemoryObject<OllamaModel> {
         String serializedObject = objectSerializer.serialize(ollamaModel);
         eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
     }
+    
+    @Override
+    public void clear() {
+    	eclipseMemory.deleteFromEclipsePreferences(KEY);
+    }
 }

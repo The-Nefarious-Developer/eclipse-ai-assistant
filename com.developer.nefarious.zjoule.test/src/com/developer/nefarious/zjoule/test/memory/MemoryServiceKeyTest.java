@@ -128,5 +128,14 @@ public class MemoryServiceKeyTest {
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(KEY, mockSerializedObject);
 	}
+	
+	@Test
+	public void shouldEraseFromMemory() {
+		// Arrange
+		// Act
+		cut.clear();
+		// Assert
+		verify(mockEclipseMemory).deleteFromEclipsePreferences(KEY);
+	}
 
 }

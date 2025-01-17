@@ -47,5 +47,10 @@ public class MemoryOllamaEndpoint implements IMemoryObject<String> {
     public void save(final String ollamaEndpoint) {
         eclipseMemory.saveOnEclipsePreferences(KEY, ollamaEndpoint);
     }
+    
+    @Override
+    public void clear() {
+    	eclipseMemory.deleteFromEclipsePreferences(KEY);
+    }
 
 }

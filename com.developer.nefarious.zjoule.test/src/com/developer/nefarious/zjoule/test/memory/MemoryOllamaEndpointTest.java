@@ -114,5 +114,14 @@ public class MemoryOllamaEndpointTest {
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(KEY, mockOllamaEndpoint);
 	}
+	
+	@Test
+	public void shouldEraseFromMemory() {
+		// Arrange
+		// Act
+		cut.clear();
+		// Assert
+		verify(mockEclipseMemory).deleteFromEclipsePreferences(KEY);
+	}
 
 }

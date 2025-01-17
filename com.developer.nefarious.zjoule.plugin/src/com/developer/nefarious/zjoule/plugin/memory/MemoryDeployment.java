@@ -100,4 +100,9 @@ public class MemoryDeployment implements IMemoryObject<Deployment> {
         String serializedObject = objectSerializer.serialize(deployment);
         eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
     }
+    
+    @Override
+    public void clear() {
+    	eclipseMemory.deleteFromEclipsePreferences(KEY);
+    }
 }
