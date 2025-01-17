@@ -11,6 +11,10 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
+import com.developer.nefarious.zjoule.plugin.login.events.OllamaModelSelectionAdapter;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
+import com.developer.nefarious.zjoule.plugin.models.OllamaModel;
+
 public class SecondOllamaLoginWizardPage extends WizardPage {
 	
 	public static final String PAGE_ID = "Ollama Login Second Page";
@@ -19,7 +23,9 @@ public class SecondOllamaLoginWizardPage extends WizardPage {
 	
 	private List<String> modelsForSelection = new ArrayList<>();
 	
-	public SecondOllamaLoginWizardPage() {
+	private IMemoryObject<OllamaModel> memoryOllamaModel;
+	
+	public SecondOllamaLoginWizardPage(final IMemoryObject<OllamaModel> memoryOllamaModel) {
 		super(PAGE_ID);
 		
 		setTitle("Ollama Setup");
@@ -37,13 +43,10 @@ public class SecondOllamaLoginWizardPage extends WizardPage {
 
         modelDropdown = new Combo(container, SWT.DROP_DOWN | SWT.READ_ONLY);
         modelDropdown.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-        modelDropdown.addListener(SWT.Selection, event -> selectModel());
+      
+        modelDropdown.addSelectionListener(new OllamaModelSelectionAdapter(this, memoryOllamaModel));
               
         setControl(container);
-	}
-	
-	private void selectModel() {
-		setPageComplete(true);
 	}
 	
 	public void setModelsForSelection(final List<String> modelsForSelection) {
