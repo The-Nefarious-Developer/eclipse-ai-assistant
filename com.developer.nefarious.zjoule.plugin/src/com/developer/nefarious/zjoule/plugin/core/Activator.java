@@ -1,5 +1,6 @@
 package com.developer.nefarious.zjoule.plugin.core;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -101,5 +102,11 @@ public class Activator extends AbstractUIPlugin {
     public void stop(final BundleContext context) throws Exception {
         plugin = null;
         super.stop(context);
+    }
+    
+    @Override
+    protected void initializeDefaultPreferences(final IPreferenceStore store) {
+        store.setDefault("instructions", "Be a friendly SAP ABAP expert, providing concise answers aligned with best practices and clean-code principles.");
+        
     }
 }

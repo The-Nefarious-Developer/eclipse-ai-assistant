@@ -18,6 +18,7 @@ import com.developer.nefarious.zjoule.plugin.core.events.SelectionListener;
 import com.developer.nefarious.zjoule.plugin.core.functions.ClearHandler;
 import com.developer.nefarious.zjoule.plugin.core.functions.LoginHandler;
 import com.developer.nefarious.zjoule.plugin.core.functions.LogoutHandler;
+import com.developer.nefarious.zjoule.plugin.core.functions.PreferencesHandler;
 import com.developer.nefarious.zjoule.plugin.core.functions.PromptHandler;
 import com.developer.nefarious.zjoule.plugin.core.utils.SystemProvider;
 
@@ -131,6 +132,7 @@ public class ViewListener extends ViewPart {
         toolbar.add(LoginHandler.create(shell, browser));
         IMenuManager menu = getMenu();
         menu.add(ClearHandler.create(browser));
+        menu.add(PreferencesHandler.create());
         menu.add(new Separator());
         menu.add(LogoutHandler.create(browser));
     }
