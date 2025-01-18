@@ -152,8 +152,8 @@ public class OpenAIClient implements IAIClient {
     @Override
     public void setMessageHistory(final List<IChatMessage> chatMessages) {
         MessageHistory newMessageHistory = new MessageHistory();
-        newMessageHistory.setMessages(
-                chatMessages.stream().map(chatMessage -> new Message(chatMessage.getRole(), chatMessage.getMessage()))
+        newMessageHistory.setMessages(chatMessages.stream().map(
+        		chatMessage -> new Message(chatMessage.getRole(), chatMessage.getMessage()))
                         .collect(Collectors.toList()));
         memoryMessageHistory.save(newMessageHistory);
     }

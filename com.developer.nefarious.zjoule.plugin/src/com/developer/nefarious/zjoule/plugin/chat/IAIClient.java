@@ -49,8 +49,8 @@ public interface IAIClient {
     /**
      * Updates the chat message history with the provided list of messages.
      * 
-     * @param messages the list of {@link IChatMessage} objects to save as the updated chat history.
+     * @param chatMessages the list of {@link IChatMessage} objects to save as the updated chat history.
      */
-    void setMessageHistory(final List<IChatMessage> messages);
+    void setMessageHistory(final List<IChatMessage> chatMessages);
 
 }
