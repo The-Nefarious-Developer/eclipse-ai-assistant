@@ -68,8 +68,9 @@ public class ChatOrchestratorTest {
 
 		List<IChatMessage> mockMessageHistory = new ArrayList<>();
 		when(mockAIClient.getMessageHistory()).thenReturn(mockMessageHistory);
-
-		mockedStaticEditorContentReader.when(EditorContentReader::readActiveEditorContent).thenReturn(null);
+		
+		String mockEditorContent = null;
+		mockedStaticEditorContentReader.when(EditorContentReader::readActiveEditorContent).thenReturn(mockEditorContent);
 
 		IChatMessage mockSystemMessage = mock(IChatMessage.class);
 		when(mockAIClient.createMessage(Role.SYSTEM, mockBaseInstructions)).thenReturn(mockSystemMessage);
@@ -84,7 +85,7 @@ public class ChatOrchestratorTest {
 		when(mockAnswer.getMessage()).thenReturn(expectedValue);
 
 		// Act
-		String returnValue = cut.getAnswer(mockUserPrompt);
+		String returnValue = cut.getAnswer(mockUserPrompt, mockEditorContent);
 
 		// Assert
 		verify(mockAIClient).setMessageHistory(mockAllMessages);
@@ -125,7 +126,7 @@ public class ChatOrchestratorTest {
 		when(mockAnswer.getMessage()).thenReturn(expectedValue);
 
 		// Act
-		String returnValue = cut.getAnswer(mockUserPrompt);
+		String returnValue = cut.getAnswer(mockUserPrompt, mockEditorContent);
 
 		// Assert
 		verify(mockAIClient).setMessageHistory(mockAllMessages);
@@ -145,7 +146,8 @@ public class ChatOrchestratorTest {
 		List<IChatMessage> mockMessageHistory = Arrays.asList(mockOldMessage);
 		when(mockAIClient.getMessageHistory()).thenReturn(mockMessageHistory);
 
-		mockedStaticEditorContentReader.when(EditorContentReader::readActiveEditorContent).thenReturn(null);
+		String mockEditorContent = null;
+		mockedStaticEditorContentReader.when(EditorContentReader::readActiveEditorContent).thenReturn(mockEditorContent);
 
 		IChatMessage mockSystemMessage = mock(IChatMessage.class);
 		when(mockAIClient.createMessage(Role.SYSTEM, mockBaseInstructions)).thenReturn(mockSystemMessage);
@@ -156,7 +158,7 @@ public class ChatOrchestratorTest {
 		String expectedValue = "Error during the AI request execution";
 
 		// Act
-		String returnValue = cut.getAnswer(mockUserPrompt);
+		String returnValue = cut.getAnswer(mockUserPrompt, mockEditorContent);
 
 		// Assert
 		verify(mockAIClient, never()).setMessageHistory(any());
@@ -170,11 +172,14 @@ public class ChatOrchestratorTest {
 		String expectedValue = "The model you have selected is incompatible with the current "
 				+ "operation. Please verify the model's configuration or choose a "
 				+ "compatible alternative.";
+		
+		String mockEditorContent = null;
+		mockedStaticEditorContentReader.when(EditorContentReader::readActiveEditorContent).thenReturn(mockEditorContent);
 
 		mockedStaticAIClientFactory.when(AIClientFactory::getClient).thenReturn(null);
 
 		// Act
-		String returnValue = cut.getAnswer(mockUserPrompt);
+		String returnValue = cut.getAnswer(mockUserPrompt, mockEditorContent);
 
 		// Assert
 		assertEquals(expectedValue, returnValue);

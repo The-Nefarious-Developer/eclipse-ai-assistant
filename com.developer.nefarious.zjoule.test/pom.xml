@@ -8,7 +8,7 @@
 
 	<artifactId>com.developer.nefarious.zjoule.test</artifactId>
 	<name>zjoule - tests</name>
-	<version>1.1.1</version>
+	<version>1.1.2</version>
 
 	<parent>
 		<groupId>com.developer.nefarious.zjoule</groupId>
@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>com.developer.nefarious.zjoule</groupId>
 			<artifactId>com.developer.nefarious.zjoule.plugin</artifactId>
-			<version>1.1.1</version>
+			<version>1.1.2</version>
 		</dependency>
 	</dependencies>
 

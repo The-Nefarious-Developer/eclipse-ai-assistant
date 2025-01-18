@@ -19,9 +19,10 @@ public interface IChatOrchestrator {
      *   <li>Returning the response message as a string.</li>
      * </ol>
      *
-     * @param userPrompt the prompt or query provided by the user.
+     * @param userPrompt the prompt or query provided by the user
+     * @param editorContent the editor content to be provided as context 
      * @return the AI-generated response as a {@link String}.
      */
-	String getAnswer(final String userPrompt);
+	String getAnswer(final String userPrompt, final String editorContent);
 
 }
