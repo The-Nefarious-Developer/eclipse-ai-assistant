@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.developer.nefarious.zjoule.plugin.core.preferences.Instruction;
 import com.developer.nefarious.zjoule.plugin.models.Role;
 
 /**

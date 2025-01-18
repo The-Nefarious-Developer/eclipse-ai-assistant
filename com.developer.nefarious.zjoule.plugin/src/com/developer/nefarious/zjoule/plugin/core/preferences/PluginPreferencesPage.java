@@ -34,7 +34,7 @@ public class PluginPreferencesPage extends FieldEditorPreferencePage implements 
         groupContent.setLayout(new GridLayout(1, false));
         groupContent.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-        addField(new StringFieldEditor("instructions", "Instructions:", groupContent));
+        addField(new StringFieldEditor(Instruction.KEY, "Instructions:", groupContent));
 		
 	}
 
