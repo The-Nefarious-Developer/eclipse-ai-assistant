@@ -9,7 +9,8 @@ jobs:
   update-website:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ github.token }} # Needed for gh cli
+      # GH_TOKEN: ${{ github.token }} # Needed for gh cli
+      GH_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
       GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
     steps:
 
