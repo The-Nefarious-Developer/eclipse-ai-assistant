@@ -39,6 +39,7 @@ jobs:
 
       - name: Run the script to update the website
         run: |
+          chmod +x ./scripts/update-website.sh
           ./scripts/update-website.sh $LATEST_TAG
 
       # - name: Commit the changes
