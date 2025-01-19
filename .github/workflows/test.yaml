@@ -30,7 +30,7 @@ jobs:
       - name: Configure Git
         run: |
           git config --global user.name "nefarious-developer-bot"
-          git config --global user.email "nefarious-developer-bot@noreply.github.com"
+          git config --global user.email "nefarious-developer-bot@users.noreply.github.com"
 
       - name: Clone the target repository
         env:
@@ -58,4 +58,4 @@ jobs:
       - name: Push the changes
         working-directory: website-repo
         run: |
-          git push https://nefarious-developer-bot:${BOT_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git update-to-$LATEST_TAG
+          git push origin update-to-$LATEST_TAG
