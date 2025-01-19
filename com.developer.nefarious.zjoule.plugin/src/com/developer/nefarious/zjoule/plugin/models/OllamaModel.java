@@ -67,6 +67,22 @@ public class OllamaModel {
     public void setDetails(final OllamaModelDetails details) {
         this.details = details;
     }
+    
+    public String getFormat() {
+        return details.getFormat();
+    }
+    
+    public String getFamily() {
+        return details.getFamily();
+    }
+    
+    public String getParameterSize() {
+        return details.getParameterSize();
+    }
+    
+    public String getQuantizationLevel() {
+        return details.getQuantizationLevel();
+    }
 
 }
 
