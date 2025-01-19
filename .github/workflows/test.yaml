@@ -29,8 +29,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.name "nefarious-developer-bot[bot]"
-          git config --global user.email "nefarious-developer-bot[bot]@noreply.github.com"
+          git config --global user.name "nefarious-developer-bot"
+          git config --global user.email "nefarious-developer-bot@noreply.github.com"
 
       - name: Clone the target repository
         env:
