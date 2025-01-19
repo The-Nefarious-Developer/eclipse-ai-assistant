@@ -28,9 +28,18 @@ jobs:
           git config --global user.name "nefarious-developer[bot]"
           git config --global user.email "nefarious-developer[bot]@noreply.github.com"
 
+      - name: Create a GitHub App token
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: nefarious-developer-bot
+          private-key: ${{ secrets.NEFARIOUS_BOT_PRIVATE_KEY }}
+
       - name: Clone the target repository
+        env:
+          BOT_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
-          git clone https://x-access-token:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
+          git clone https://x-access-token:${BOT_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
 
       - name: Create a new branch
         working-directory: website-repo
