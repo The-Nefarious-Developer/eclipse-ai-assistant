@@ -9,9 +9,7 @@ jobs:
   update-website:
     runs-on: ubuntu-latest
     env:
-      # GH_TOKEN: ${{ github.token }} # Needed for gh cli
       GH_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
-      GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
     steps:
 
       - name: Checkout code
@@ -30,7 +28,7 @@ jobs:
 
       - name: Clone the target repository
         run: |
-          git clone https://nefarious-developer-bot:${GITHUB_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
+          git clone https://nefarious-developer-bot:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
 
       - name: Create a new branch
         working-directory: website-repo
@@ -52,12 +50,10 @@ jobs:
       - name: Push the changes
         working-directory: website-repo
         run: |
-          git push https://nefarious-developer-bot:${GITHUB_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git update-to-$LATEST_TAG
+          git push https://nefarious-developer-bot:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git update-to-$LATEST_TAG
 
       - name: Create a pull request
         working-directory: website-repo
-        env:
-          GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
         run: |
           gh pr create \
             --title "testing automated update for $LATEST_TAG" \
@@ -66,8 +62,7 @@ jobs:
             --base main
 
       - name: Automatically merge the pull request
-        env:
-          GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
+        working-directory: website-repo
         run: |
           PR_URL=$(gh pr view update-to-$LATEST_TAG --json url -q ".url")
           gh pr merge $PR_URL --squash --admin
