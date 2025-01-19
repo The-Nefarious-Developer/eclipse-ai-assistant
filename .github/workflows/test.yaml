@@ -30,7 +30,7 @@ jobs:
 
       - name: Clone the target repository
         run: |
-          git clone https://x-access-token:${github.token}@github.com/The-Nefarious-Developer/zjoule-website.git target-repo
+          git clone https://x-access-token:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git target-repo
           cd target-repo
 
       - name: Create a new branch
