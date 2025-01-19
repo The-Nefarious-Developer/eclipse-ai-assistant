@@ -5,7 +5,7 @@ permissions:
   contents: read
 
 jobs:
-  get-latest-release:
+  update-website:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ github.token }}
@@ -31,9 +31,9 @@ jobs:
       - name: Clone the target repository
         run: |
           git clone https://x-access-token:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
-          cd website-repo
 
       - name: Create a new branch
+        working-directory: website-repo
         run: |
           git checkout -b update-to-$LATEST_TAG
 
@@ -43,11 +43,13 @@ jobs:
           chmod +x ../scripts/update-website.sh
           ../scripts/update-website.sh $LATEST_TAG
 
-      # - name: Commit the changes
-      #   run: |
-      #     git add .
-      #     git commit -m "feat: update to $LATEST_TAG"
+      - name: Commit the changes
+        working-directory: website-repo
+        run: |
+          git add .
+          git commit -m "feat: update to $LATEST_TAG"
       
-      # - name: Push the changes
-      #   run: |
-      #     git push origin update-to-$LATEST_TAG
+      - name: Push the changes
+        working-directory: website-repo
+        run: |
+          git push origin update-to-$LATEST_TAG
