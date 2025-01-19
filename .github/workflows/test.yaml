@@ -57,6 +57,7 @@ jobs:
       
       - name: Push the changes
         working-directory: website-repo
+        env:
+          BOT_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
-          git config --unset-all http.https://github.com/.extraheader
-          git push origin update-to-$LATEST_TAG
+          git push https://nefarious-developer-bot:${BOT_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git update-to-$LATEST_TAG
