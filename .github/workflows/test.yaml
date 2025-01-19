@@ -7,8 +7,9 @@ permissions:
 jobs:
   get-latest-release:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
-
       - name: Get the latest release tag
         id: get_release
         run: |
