@@ -2,7 +2,7 @@ name: Get Latest Release Version
 on: [push, repository_dispatch]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   update-website:
