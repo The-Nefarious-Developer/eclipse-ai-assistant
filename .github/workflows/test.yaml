@@ -1,26 +1,23 @@
 name: Get Latest Release Version
+on: [push, repository_dispatch]
 
-on:
-  push:
-  workflow_dispatch:
+permissions:
+  contents: read
 
 jobs:
   get-latest-release:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: Authenticate GitHub CLI
+        env:
+          GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
+        run: gh auth login --with-token
 
-      - name: Install GitHub CLI
-        run: sudo apt-get install gh -y
-
-      - name: Get Latest Release Version
+      - name: Get the latest release tag
+        id: get_release
         run: |
-          gh auth login --with-token <<< "$GITHUB_TOKEN"
-          LATEST_RELEASE=$(gh release list --limit 1 --json tagName --jq '.[0].tagName')
-          echo "Latest Release Version: $LATEST_RELEASE"
-          echo "LATEST_RELEASE=$LATEST_RELEASE" >> $GITHUB_ENV
+          LATEST_TAG=$(gh release view --json tagName -q ".tagName")
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
 
-      - name: Use Latest Release
-        run: echo "The latest release is $LATEST_RELEASE"
+      - name: Print the latest tag
+        run: echo "The latest release tag is $LATEST_TAG"
