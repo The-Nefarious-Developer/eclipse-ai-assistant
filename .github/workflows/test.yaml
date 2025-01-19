@@ -34,7 +34,8 @@ jobs:
 
       - name: Clone the target repository
         env:
-          BOT_TOKEN: ${{ steps.app-token.outputs.token }}
+          # BOT_TOKEN: ${{ steps.app-token.outputs.token }}
+          BOT_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
         run: |
           git clone https://nefarious-developer-bot:${BOT_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
 
@@ -58,6 +59,7 @@ jobs:
       - name: Push the changes
         working-directory: website-repo
         env:
-          BOT_TOKEN: ${{ steps.app-token.outputs.token }}
+          # BOT_TOKEN: ${{ steps.app-token.outputs.token }}
+          BOT_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
         run: |
           git push https://nefarious-developer-bot:${BOT_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git update-to-$LATEST_TAG
