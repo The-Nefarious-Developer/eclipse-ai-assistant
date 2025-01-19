@@ -40,8 +40,8 @@ jobs:
       - name: Run the script to update the website
         working-directory: website-repo
         run: |
-          chmod +x ./scripts/update-website.sh
-          ./scripts/update-website.sh $LATEST_TAG
+          chmod +x ../scripts/update-website.sh
+          ../scripts/update-website.sh $LATEST_TAG
 
       # - name: Commit the changes
       #   run: |
