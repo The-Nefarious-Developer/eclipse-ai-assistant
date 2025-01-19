@@ -100,6 +100,9 @@ public class PluginPreferencesPage extends FieldEditorPreferencePage implements 
 
 		String model = MemoryDeployment.getInstance().load().getModelName();
 		addField(outputFieldFactory.create("Model:", model));
+		
+		String version = MemoryDeployment.getInstance().load().getModelVersion();
+		addField(outputFieldFactory.create("Version:", version));
 
 		String deploymentUrl = MemoryDeployment.getInstance().load().getDeploymentUrl();
 		addField(outputFieldFactory.create("Deployment Url:", deploymentUrl));

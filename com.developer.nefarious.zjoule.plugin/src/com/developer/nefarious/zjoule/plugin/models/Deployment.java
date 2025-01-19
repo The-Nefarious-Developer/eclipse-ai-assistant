@@ -173,6 +173,15 @@ public class Deployment {
 	public String getModelName() {
 		return getDetails().getResources().get("backendDetails").getModel().getName();
 	}
+	
+	/**
+	 * Retrieves the version of the model associated with this deployment.
+	 *
+	 * @return the version of the model.
+	 */
+	public String getModelVersion() {
+		return getDetails().getResources().get("backendDetails").getModel().getVersion();
+	}
 }
 
 /**
