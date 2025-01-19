@@ -20,13 +20,6 @@ jobs:
           LATEST_TAG=$(gh release view --json tagName -q ".tagName")
           echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
 
-      - name: Print the latest tag
-        run: echo "The latest release tag is $LATEST_TAG"
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "nefarious-developer-bot"
-
       - name: Create a GitHub App token
         uses: actions/create-github-app-token@v1
         id: app-token
@@ -34,11 +27,16 @@ jobs:
           app-id: ${{ vars.NEFARIOUS_BOT }}
           private-key: ${{ secrets.NEFARIOUS_BOT_PRIVATE_KEY }}
 
+      - name: Configure Git
+        run: |
+          git config --global user.name "nefarious-developer-bot[bot]"
+          git config --global user.email "nefarious-developer-bot[bot]@noreply.github.com"
+
       - name: Clone the target repository
         env:
           BOT_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
-          git clone https://x-access-token:${BOT_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
+          git clone https://nefarious-developer-bot:${BOT_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
 
       - name: Create a new branch
         working-directory: website-repo
