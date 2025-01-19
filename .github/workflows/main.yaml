@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
 
@@ -63,3 +64,66 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
         run: chmod +x ./scripts/prepare-release.sh && npx semantic-release
+
+  update-website:
+    needs: release
+    if: "!contains(github.event.head_commit.message, 'skip ci') && github.ref == 'refs/heads/main'"
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get the latest release tag
+        id: get_release
+        run: |
+          LATEST_TAG=$(gh release view --json tagName -q ".tagName")
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "nefarious-developer-bot"
+          git config --global user.email "nefarious-developer-bot@users.noreply.github.com"
+
+      - name: Clone the target repository
+        run: |
+          git clone https://nefarious-developer-bot:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
+
+      - name: Create a new branch
+        working-directory: website-repo
+        run: |
+          git checkout -b update-to-$LATEST_TAG
+
+      - name: Run the script to update the website
+        working-directory: website-repo
+        run: |
+          chmod +x ../scripts/update-website.sh
+          ../scripts/update-website.sh $LATEST_TAG
+
+      - name: Commit the changes
+        working-directory: website-repo
+        run: |
+          git add .
+          git commit -m "feat: update to $LATEST_TAG"
+      
+      - name: Push the changes
+        working-directory: website-repo
+        run: |
+          git push https://nefarious-developer-bot:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git update-to-$LATEST_TAG
+
+      - name: Create a pull request
+        working-directory: website-repo
+        run: |
+          gh pr create \
+            --title "Update to $LATEST_TAG" \
+            --body "This PR updates the website to the latest release $LATEST_TAG." \
+            --head update-to-$LATEST_TAG \
+            --base main
+
+      - name: Automatically merge the pull request
+        working-directory: website-repo
+        run: |
+          PR_URL=$(gh pr view update-to-$LATEST_TAG --json url -q ".url")
+          gh pr merge $PR_URL --squash --admin --delete-branch
