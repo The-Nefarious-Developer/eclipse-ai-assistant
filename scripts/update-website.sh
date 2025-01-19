@@ -4,7 +4,7 @@ LATEST_VERSION=$1 # Needs to be passed as an argument
 
 set -e # Ensure the script stops on error
 
-#-----------------------------------------------------
+#----------------------------------------------------------
 # Step 1: Check if LATEST_VERSION is provided
 
 if [[ -z "$LATEST_VERSION" ]]; then
@@ -13,7 +13,7 @@ if [[ -z "$LATEST_VERSION" ]]; then
     exit 1
 fi
 
-#-----------------------------------------------------
+#----------------------------------------------------------
 # Step 2: Setup page for the new version
 
 # Create a new version variable with the dots replaced by underscores
@@ -30,7 +30,7 @@ sed -i "/- Versions:/a\      - $LATEST_VERSION: $NEW_FILE_NAME.md" mkdocs.yml
 
 echo "Setup of the page for version $LATEST_VERSION is complete."
 
-#-----------------------------------------------------
+#----------------------------------------------------------
 # Step 3: Setup the doc and plugin for the new version
 
 # Create a directory for the version in the /docs folder
@@ -46,5 +46,16 @@ wget -O docs/$LATEST_VERSION/plugin.zip https://github.com/The-Nefarious-Develop
 unzip -o docs/$LATEST_VERSION/plugin.zip -d docs/$LATEST_VERSION/plugin && rm docs/$LATEST_VERSION/plugin.zip
 echo "Setup of the plugin for version $LATEST_VERSION is complete."
 
-#-----------------------------------------------------
-# Step 4: Update index.md with the latest version
+#----------------------------------------------------------
+# Step 4: Update installation instructions at the home page
+
+# Delete old index.md file
+rm docs/index.md
+
+# Copy the docs/index-template.md and name it after the new version
+cp docs/index-template.md docs/index.md
+
+# Replace the placeholder __NEW_VERSION__ with the latest version in the new file
+sed -i "s/__NEW_VERSION__/$LATEST_VERSION/g" docs/index.md
+
+echo "Setup of the index for version $LATEST_VERSION is complete."
