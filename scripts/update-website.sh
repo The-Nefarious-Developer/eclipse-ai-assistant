@@ -19,8 +19,8 @@ fi
 # Create a new version variable with the dots replaced by underscores
 NEW_FILE_NAME=$(echo $LATEST_VERSION | tr . _)
 
-# Copy the docs/template.md and name it after the new version
-cp docs/template.md docs/$NEW_VERSION.md
+# Copy the docs/version-template.md and name it after the new version
+cp docs/version-template.md docs/$NEW_VERSION.md
 
 # Replace the placeholder __NEW_VERSION__ with the latest version in the new file
 sed -i "s/__NEW_VERSION__/$LATEST_VERSION/g" docs/$NEW_FILE_NAME.md
@@ -52,7 +52,7 @@ echo "Setup of the plugin for version $LATEST_VERSION is complete."
 # Delete old index.md file
 rm docs/index.md
 
-# Copy the docs/index-template.md and name it after the new version
+# Copy the docs/index-template.md and name it index.md
 cp docs/index-template.md docs/index.md
 
 # Replace the placeholder __NEW_VERSION__ with the latest version in the new file
