@@ -31,7 +31,6 @@ jobs:
       - name: Clone the target repository
         run: |
           git clone https://x-access-token:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
-          cd website-repo
 
       - name: Create a new branch
         run: |
