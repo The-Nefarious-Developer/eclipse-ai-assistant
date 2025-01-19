@@ -7,8 +7,8 @@ permissions:
 jobs:
   update-website:
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ github.token }}
+    # env:
+    #   GH_TOKEN: ${{ github.token }}
     steps:
 
       - name: Checkout code
@@ -29,7 +29,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
         run: |
-          git clone https://nefarious-developer-bot:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
+          git clone https://nefarious-developer-bot:${GITHUB_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
 
       - name: Create a new branch
         working-directory: website-repo
@@ -53,7 +53,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
         run: |
-          git push https://nefarious-developer-bot:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git update-to-$LATEST_TAG
+          git push https://nefarious-developer-bot:${GITHUB_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git update-to-$LATEST_TAG
 
       # - name: Create a pull request
       #   working-directory: website-repo
