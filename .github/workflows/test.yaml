@@ -39,13 +39,15 @@ jobs:
 
       - name: Run the script to update the website
         run: |
-          ./update-website.sh $LATEST_TAG
+          # ./update-website.sh $LATEST_TAG
+          echo "Directories in $(pwd):"
+          ls -d */ || echo "No directories found"
 
-      - name: Commit the changes
-        run: |
-          git add .
-          git commit -m "feat: update to $LATEST_TAG"
+      # - name: Commit the changes
+      #   run: |
+      #     git add .
+      #     git commit -m "feat: update to $LATEST_TAG"
       
-      - name: Push the changes
-        run: |
-          git push origin update-to-$LATEST_TAG
+      # - name: Push the changes
+      #   run: |
+      #     git push origin update-to-$LATEST_TAG
