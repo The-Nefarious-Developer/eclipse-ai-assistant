@@ -31,12 +31,14 @@ jobs:
       - name: Clone the target repository
         run: |
           git clone https://x-access-token:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
+          cd website-repo
 
       - name: Create a new branch
         run: |
           git checkout -b update-to-$LATEST_TAG
 
       - name: Run the script to update the website
+        working-directory: website-repo
         run: |
           chmod +x ./scripts/update-website.sh
           ./scripts/update-website.sh $LATEST_TAG
