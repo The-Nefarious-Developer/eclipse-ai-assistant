@@ -20,13 +20,6 @@ jobs:
           LATEST_TAG=$(gh release view --json tagName -q ".tagName")
           echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
 
-      - name: Create a GitHub App token
-        uses: actions/create-github-app-token@v1
-        id: app-token
-        with:
-          app-id: ${{ vars.NEFARIOUS_BOT }}
-          private-key: ${{ secrets.NEFARIOUS_BOT_PRIVATE_KEY }}
-
       - name: Configure Git
         run: |
           git config --global user.name "nefarious-developer-bot"
@@ -34,10 +27,9 @@ jobs:
 
       - name: Clone the target repository
         env:
-          # BOT_TOKEN: ${{ steps.app-token.outputs.token }}
-          BOT_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
         run: |
-          git clone https://nefarious-developer-bot:${BOT_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
+          git clone https://nefarious-developer-bot:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
 
       - name: Create a new branch
         working-directory: website-repo
@@ -59,7 +51,24 @@ jobs:
       - name: Push the changes
         working-directory: website-repo
         env:
-          # BOT_TOKEN: ${{ steps.app-token.outputs.token }}
-          BOT_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
         run: |
-          git push https://nefarious-developer-bot:${BOT_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git update-to-$LATEST_TAG
+          git push https://nefarious-developer-bot:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git update-to-$LATEST_TAG
+
+      # - name: Create a pull request
+      #   working-directory: website-repo
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
+      #   run: |
+      #     gh pr create \
+      #       --title "feat: update to $LATEST_TAG" \
+      #       --body "This PR updates the website to the latest release $LATEST_TAG." \
+      #       --head update-to-$LATEST_TAG \
+      #       --base main
+
+      # - name: Automatically merge the pull request
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.NEFARIOUS_GITHUB_TOKEN }}
+      #   run: |
+      #     PR_URL=$(gh pr view update-to-$LATEST_TAG --json url -q ".url")
+      #     gh pr merge $PR_URL --squash --admin
