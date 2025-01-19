@@ -30,8 +30,8 @@ jobs:
 
       - name: Clone the target repository
         run: |
-          git clone https://x-access-token:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git target-repo
-          cd target-repo
+          git clone https://x-access-token:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git website-repo
+          cd website-repo
 
       - name: Create a new branch
         run: |
@@ -39,9 +39,7 @@ jobs:
 
       - name: Run the script to update the website
         run: |
-          # ./update-website.sh $LATEST_TAG
-          echo "Directories in $(pwd):"
-          ls -d */ || echo "No directories found"
+          ./scripts/update-website.sh $LATEST_TAG
 
       # - name: Commit the changes
       #   run: |
