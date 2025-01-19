@@ -41,28 +41,28 @@ jobs:
           chmod +x ../scripts/update-website.sh
           ../scripts/update-website.sh $LATEST_TAG
 
-      - name: Commit the changes
-        working-directory: website-repo
-        run: |
-          git add .
-          git commit -m "feat: update to $LATEST_TAG"
+      # - name: Commit the changes
+      #   working-directory: website-repo
+      #   run: |
+      #     git add .
+      #     git commit -m "feat: update to $LATEST_TAG"
       
-      - name: Push the changes
-        working-directory: website-repo
-        run: |
-          git push https://nefarious-developer-bot:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git update-to-$LATEST_TAG
+      # - name: Push the changes
+      #   working-directory: website-repo
+      #   run: |
+      #     git push https://nefarious-developer-bot:${GH_TOKEN}@github.com/The-Nefarious-Developer/zjoule-website.git update-to-$LATEST_TAG
 
-      - name: Create a pull request
-        working-directory: website-repo
-        run: |
-          gh pr create \
-            --title "testing automated update for $LATEST_TAG" \
-            --body "This PR updates the website to the latest release $LATEST_TAG." \
-            --head update-to-$LATEST_TAG \
-            --base main
+      # - name: Create a pull request
+      #   working-directory: website-repo
+      #   run: |
+      #     gh pr create \
+      #       --title "Update to $LATEST_TAG" \
+      #       --body "This PR updates the website to the latest release $LATEST_TAG." \
+      #       --head update-to-$LATEST_TAG \
+      #       --base main
 
-      - name: Automatically merge the pull request
-        working-directory: website-repo
-        run: |
-          PR_URL=$(gh pr view update-to-$LATEST_TAG --json url -q ".url")
-          gh pr merge $PR_URL --squash --admin
+      # - name: Automatically merge the pull request
+      #   working-directory: website-repo
+      #   run: |
+      #     PR_URL=$(gh pr view update-to-$LATEST_TAG --json url -q ".url")
+      #     gh pr merge $PR_URL --squash --admin --delete-branch
