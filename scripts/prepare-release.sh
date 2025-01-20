@@ -50,3 +50,6 @@ PLUGIN_FILE_NAME="plugin"
 # Zip the JavaDoc and copy it to the release folder
 DOC_FILE_NAME="doc"
 (cd com.developer.nefarious.zjoule.plugin/target/reports/apidocs && zip -r "../../../../release/${DOC_FILE_NAME}.zip" .)
+
+# Update the version of the javadoc link in the README.md file
+sed -i "s|\(https://zjoule.com/\)v[0-9]\+\.[0-9]\+\.[0-9]\+\(/doc/\)|\1${NEW_VERSION}\2|" README.md
