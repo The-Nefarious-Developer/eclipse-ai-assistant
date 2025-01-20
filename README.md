@@ -13,7 +13,7 @@
 
 </div>
 
-**zJoule** is an Open Source AI assistant plugin for Eclipse designed to integrate Generative AI Hub into your development environment.
+**zJoule** is an Open Source AI assistant plugin for Eclipse designed to integrate Generative AI into your development environment.
 
 ## Documentation Content
 - [Requirements](#requirements)
