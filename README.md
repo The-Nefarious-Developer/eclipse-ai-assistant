@@ -13,7 +13,7 @@
 
 </div>
 
-**zJoule** is an Open Source AI assistant plugin for Eclipse designed to integrate the **SAP AI Core** Generative AI Hub foundation-models into your development environment.
+**zJoule** is an Open Source AI assistant plugin for Eclipse designed to integrate Generative AI Hub into your development environment.
 
 ## Documentation Content
 - [Requirements](#requirements)
@@ -26,12 +26,25 @@
 - [License](#license)
 
 ## Requirements
-- SAP AI Core with the `Extended` service plan (for the Generative AI Hub enablement).
+- A local **Ollama** installation or **SAP AI Core** with the `Extended` service plan (for the Generative AI Hub enablement).
 - Eclipse 2024-09 (4.33.0) or latest. *Compatibility with older versions is not guaranteed.*
 
 ## Compatibility
 
-The following table outlines the Generative AI models currently compatible with this plugin, as well as the next models that will soon be available:
+The following table outlines the Generative AI models currently compatible with this plugin, as well as the next models that will soon be available.
+
+> **Privacy Information** <br>
+We know how privacy is important and ensure that all communication handled by the plugin is secure **is a must**. Here's how your data is managed:
+> - **Data Flow:** All communication facilitated by the plugin occurs exclusively between Eclipse and the SAP AI Core model APIs. No external intermediaries are involved.
+> - **Data Storage:** Any data processed or generated during plugin usage is stored locally within Eclipse's memory mechanism, ensuring it remains private and confined to your development environment. <br>
+>
+> By keeping all operations local and secure, the plugin should provide a trustworthy and seamless experience.
+
+### Ollama
+
+This plugin supports Ollama models through a local installation. For more information regarding the models available, please, check [this link]().
+
+### SAP AI Core Generative AI Hub
 
 | Executable ID | Model                          | Version                   | Compatibility      |
 |---------------|--------------------------------|---------------------------|:------------------:|
@@ -53,16 +66,9 @@ LLM models that are not compatible may be selected during the login process; how
 
 Additional model compatibilities may be introduced in the near future :)
 
-> **Privacy Information** <br>
-We know how privacy is important and ensure that all communication handled by the plugin is secure **is a must**. Here's how your data is managed:
-> - **Data Flow:** All communication facilitated by the plugin occurs exclusively between Eclipse and the SAP AI Core model APIs. No external intermediaries are involved.
-> - **Data Storage:** Any data processed or generated during plugin usage is stored locally within Eclipse's memory mechanism, ensuring it remains private and confined to your development environment. <br>
->
-> By keeping all operations local and secure, the plugin should provide a trustworthy and seamless experience.
-
 ## Motivation
 
-The official Joule version for ADT is being rolled out exclusively for S/4HANA Private Cloud and SAP BTP, ABAP Environment at the end of Q1 of 2025. But don’t worry, this plugin was created to bridges the gap! It introduces an AI-powered chat interface that seamlessly connects other types of SAP systems to large language models (LLMs) through SAP AI Core.
+The official Joule version for ADT is being rolled out exclusively for S/4HANA Private Cloud and SAP BTP, ABAP Environment at the end of Q1 of 2025. But don’t worry, this plugin was created to bridges the gap! It introduces an AI-powered chat interface that seamlessly connects other types of SAP systems to large language models (LLMs) through different AI providers.
 
 The idea is to open the door to integrate SAP ABAP development with new models and innovative features that could emerge from the expanding possibilities of AI. 
 
@@ -89,25 +95,54 @@ All from the cozy confines of your Eclipse ADT =)
 #### 7. Enhanced Development Experience:
 - Enable faster learning for beginners or new team members.
 - Provide a smoother workflow for experienced developers needing quick solutions.
+#### 8. Privacy and Security:
+- If using a local Ollama installation, all data processing occurs entirely on your machine, without any internet dependency.
+- This ensures maximum privacy, as sensitive code or project details never leave your local environment.
 
 ## Getting Started
 
 1. Download and install **zJoule** in your Eclipse instance following the procedure described [right here](https://zjoule.com).
 
-
-
-2. Login using your SAP AI Core `Service Key`.
+2. If the plugin view is not currently open in your Eclipse Editor, go to `Window > Show View > Other..` and search for **zJoule** inside the **ABAP Copilot** folder.
 
 <div align="center">
-  <img src="assets/login_1.png" alt="Intro GIF" width="400"/>
+  <img src="assets/view.png" alt="Intro GIF" width="200"/>
+</div>
+
+3. Click on the authentication button (lock icon) at the top of the view and select the AI provider you want to work with.
+
+<div align="center">
+  <img src="assets/login_0.png" alt="Intro GIF" width="400"/>
+</div>
+
+### Connecting to an Ollama local installation
+
+4. Enter the localhost and port where your Ollama instance is available.
+
+<div align="center">
+  <img src="assets/login_ollama_1.png" alt="Intro GIF" width="400"/>
+</div>
+
+5. Select the model you have installed and want to work with.
+
+<div align="center">
+  <img src="assets/login_ollama_2.png" alt="Intro GIF" width="400"/>
+</div>
+
+### Connecting to an SAP AI Core instance
+
+4. Login using your SAP AI Core `Service Key`.
+
+<div align="center">
+  <img src="assets/login_sap_1.png" alt="Intro GIF" width="400"/>
 </div>
 
 You can find it in the *Instances an Subscriptions* area of your SAP BTP subaccount.
 
-3. Select the `resource group` and the `deployment` model you want to use.
+5. Select the `resource group` and the `deployment` model you want to use.
 
 <div align="center">
-  <img src="assets/login_2.png" alt="Intro GIF" width="400"/>
+  <img src="assets/login_sap_2.png" alt="Intro GIF" width="400"/>
 </div>
 
 Resource Groups are essentially a project workspace in the context of SAP AI Core, and contains all components a specific ML or AI solution might use to attend a specific requirement. [More Information](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/resource-groups?q=resource+groups).
@@ -161,16 +196,19 @@ Please follow the [contribution guidelines](CONTRIBUTING.md) for more details.
 
 ## Reference
 
+[SAP Note: 3437766 (Availability of Generative AI Models)](https://me.sap.com/notes/3437766)
+
 [How this project consumes generative AI models.](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/consume-generative-ai-models-using-sap-ai-core)
 
-[SAP Note: 3437766 (Availability of Generative AI Models)](https://me.sap.com/notes/3437766)
+[The spinner "Ellipsis" is provided by loading.io](https://loading.io/icon/)
 
 [zJoule - ABAP Copilot website repository](https://github.com/The-Nefarious-Developer/zjoule-website)
 
 [zJoule - ABAP Copilot website](https://zjoule.com)
 
-[The spinner "Ellipsis" is provided by loading.io](https://loading.io/icon/)
+[Ollama API documentation](https://github.com/ollama/ollama/blob/main/docs/api.md)
 
+[Ollama website](https://ollama.com)
 
 ## License
 Copyright (c) 2024 Nicholas Coutinho Checan. <br />
