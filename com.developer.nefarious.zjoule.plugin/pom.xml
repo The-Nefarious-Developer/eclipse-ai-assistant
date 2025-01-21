@@ -8,7 +8,7 @@
 
 	<artifactId>com.developer.nefarious.zjoule.plugin</artifactId>
 	<name>zjoule - plugin</name>
-	<version>1.1.2</version>
+	<version>2.0.0</version>
 
 	<parent>
 		<groupId>com.developer.nefarious.zjoule</groupId>

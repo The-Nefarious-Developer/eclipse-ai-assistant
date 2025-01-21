@@ -1,5 +1,40 @@
 # Semantic Versioning Changelog
 
+# [2.0.0](https://github.com/The-Nefarious-Developer/zjoule/compare/v1.1.2...v2.0.0) (2025-01-21)
+
+
+### Bug Fixes
+
+* disable finish button if user go back in the ollama wizard ([d2d8185](https://github.com/The-Nefarious-Developer/zjoule/commit/d2d8185ddf909d9ff5a96649f2792143d69e4d6c))
+* remove unnecessary dependency from login wizard ([fabc25a](https://github.com/The-Nefarious-Developer/zjoule/commit/fabc25a399ec379a233d500b22c482b5b752ef45))
+* remove unnecessary testing file ([a56b249](https://github.com/The-Nefarious-Developer/zjoule/commit/a56b249cd6fbdc206effa679ae33386689acf1cf))
+
+
+### chore
+
+* implement instruction retrieval during chat operation ([4dbee73](https://github.com/The-Nefarious-Developer/zjoule/commit/4dbee7397b58d2630ef3c0297d03d9f0293ceb80))
+
+
+### Features
+
+* add sap ai core model version to output on preferences ([5d78c12](https://github.com/The-Nefarious-Developer/zjoule/commit/5d78c1272f77ee6d62721d0c1a2ff62b9dd9f23d))
+* automate the update of the website ([fa76a9a](https://github.com/The-Nefarious-Developer/zjoule/commit/fa76a9ab94692aae4b326011000362ab5db1ae25))
+* create a custom dialog for login process ([3cb83b8](https://github.com/The-Nefarious-Developer/zjoule/commit/3cb83b8e6479fce9925f9456d9a18755357104c7))
+* create a login options screen ([7079701](https://github.com/The-Nefarious-Developer/zjoule/commit/707970183b4469fcb66ceb8214f6590300b1d7d2))
+* display connection configuration on preferences window ([735cb09](https://github.com/The-Nefarious-Developer/zjoule/commit/735cb092d6a52170601a685c076a0e70450666b9))
+* implement instructions customization feature ([33379e6](https://github.com/The-Nefarious-Developer/zjoule/commit/33379e6615b182700d38d1f4bd94ff28decf1b18))
+* implement listener to send messages when the user press enter ([c6531ef](https://github.com/The-Nefarious-Developer/zjoule/commit/c6531efa199739f92a755dd5eb41ada5f1c81f6b))
+* implement object memory removal method ([e4d7285](https://github.com/The-Nefarious-Developer/zjoule/commit/e4d728568de5d632ad74d95f910bbb2e0cdf6ff4))
+* implement ollama login pages ([f8b7e88](https://github.com/The-Nefarious-Developer/zjoule/commit/f8b7e88ba0da26b11dfa8d7c1218affb86ab284a))
+* setup chat orchestration for ollama :rocket: ([7f0e0c7](https://github.com/The-Nefarious-Developer/zjoule/commit/7f0e0c78cb807ec3e7f9a73257c3cbe48a9fd74b))
+* trigger selected wizard for login ([5f9e5a5](https://github.com/The-Nefarious-Developer/zjoule/commit/5f9e5a5689373b65289b549832bc62cffc0b095d))
+
+
+### BREAKING CHANGES
+
+* The predefined function operation needed to be changed.
+* This introduces a new authentication system
+
 ## [1.1.2](https://github.com/The-Nefarious-Developer/zjoule/compare/v1.1.1...v1.1.2) (2025-01-17)
 
 
