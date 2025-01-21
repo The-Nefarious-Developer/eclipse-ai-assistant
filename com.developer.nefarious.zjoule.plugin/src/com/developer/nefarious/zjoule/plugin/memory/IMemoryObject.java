@@ -30,4 +30,6 @@ public interface IMemoryObject<T> {
      * @param data the object of type {@code T} to save.
      */
     void save(final T data);
+    
+    void clear();
 }

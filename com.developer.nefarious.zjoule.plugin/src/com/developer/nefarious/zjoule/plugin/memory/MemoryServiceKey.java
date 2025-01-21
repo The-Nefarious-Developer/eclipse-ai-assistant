@@ -100,4 +100,9 @@ public class MemoryServiceKey implements IMemoryObject<ServiceKey> {
         String serializedObject = objectSerializer.serialize(serviceKey);
         eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
     }
+    
+    @Override
+    public void clear() {
+    	eclipseMemory.deleteFromEclipsePreferences(KEY);
+    }
 }

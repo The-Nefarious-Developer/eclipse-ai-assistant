@@ -5,7 +5,7 @@ import java.util.List;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
-import com.developer.nefarious.zjoule.plugin.login.pages.SecondLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.login.pages.SecondSapLoginWizardPage;
 import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
 
@@ -18,7 +18,7 @@ import com.developer.nefarious.zjoule.plugin.models.Deployment;
 public class DeploymentSelectionAdapter extends SelectionAdapter {
 
     /** The second login wizard page associated with this adapter. */
-    private SecondLoginWizardPage secondLoginWizardPage;
+    private SecondSapLoginWizardPage secondLoginWizardPage;
 
     /** The memory manager for storing the selected deployment. */
     private IMemoryObject<Deployment> memoryDeployment;
@@ -26,12 +26,12 @@ public class DeploymentSelectionAdapter extends SelectionAdapter {
     /**
      * Constructs a new {@code DeploymentSelectionAdapter}.
      *
-     * @param secondLoginWizardPage the {@link SecondLoginWizardPage} containing the deployment dropdown.
+     * @param secondLoginWizardPage the {@link SecondSapLoginWizardPage} containing the deployment dropdown.
      * @param memoryDeployment the {@link IMemoryObject<Deployment>} used to store the selected deployment.
      */
     // @formatter:off
     public DeploymentSelectionAdapter(
-            final SecondLoginWizardPage secondLoginWizardPage,
+            final SecondSapLoginWizardPage secondLoginWizardPage,
             final IMemoryObject<Deployment> memoryDeployment) {
     	// @formatter:on
         this.secondLoginWizardPage = secondLoginWizardPage;

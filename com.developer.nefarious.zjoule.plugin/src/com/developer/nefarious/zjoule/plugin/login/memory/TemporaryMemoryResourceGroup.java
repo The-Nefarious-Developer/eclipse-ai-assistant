@@ -98,4 +98,10 @@ public class TemporaryMemoryResourceGroup implements IMemoryObject<String>, ITem
     public void save(final String resourceGroup) {
         eclipseMemory.saveOnEclipsePreferences(KEY, resourceGroup);
     }
+    
+    @Override
+    public void clear() {
+    	eclipseMemory.deleteFromEclipsePreferences(KEY);
+    }
+    
 }

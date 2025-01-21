@@ -6,8 +6,8 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
 import com.developer.nefarious.zjoule.plugin.login.api.GetDeploymentsResponse;
-import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
-import com.developer.nefarious.zjoule.plugin.login.pages.SecondLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.login.api.ISapLoginClient;
+import com.developer.nefarious.zjoule.plugin.login.pages.SecondSapLoginWizardPage;
 import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 
@@ -21,10 +21,10 @@ import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 public class ResourceGroupSelectionAdapter extends SelectionAdapter {
 
     /** The second login wizard page associated with this adapter. */
-    private SecondLoginWizardPage secondLoginWizardPage;
+    private SecondSapLoginWizardPage secondLoginWizardPage;
 
     /** The login client for retrieving deployments. */
-    private ILoginClient loginClient;
+    private ISapLoginClient sapLoginClient;
 
     /** The memory manager for storing the selected resource group. */
     private IMemoryObject<String> memoryResourceGroup;
@@ -32,18 +32,18 @@ public class ResourceGroupSelectionAdapter extends SelectionAdapter {
     /**
      * Constructs a new {@code ResourceGroupSelectionAdapter}.
      *
-     * @param secondLoginWizardPage the {@link SecondLoginWizardPage} containing the resource group dropdown.
-     * @param loginClient the {@link ILoginClient} for retrieving deployments.
+     * @param secondLoginWizardPage the {@link SecondSapLoginWizardPage} containing the resource group dropdown.
+     * @param sapLoginClient the {@link ISapLoginClient} for retrieving deployments.
      * @param memoryResourceGroup the {@link IMemoryObject<String>} used to store the selected resource group.
      */
     // @formatter:off
     public ResourceGroupSelectionAdapter(
-            final SecondLoginWizardPage secondLoginWizardPage,
-            final ILoginClient loginClient,
+            final SecondSapLoginWizardPage secondLoginWizardPage,
+            final ISapLoginClient sapLoginClient,
             final IMemoryObject<String> memoryResourceGroup) {
     	// @formatter:on
         this.secondLoginWizardPage = secondLoginWizardPage;
-        this.loginClient = loginClient;
+        this.sapLoginClient = sapLoginClient;
         this.memoryResourceGroup = memoryResourceGroup;
     }
 
@@ -71,7 +71,7 @@ public class ResourceGroupSelectionAdapter extends SelectionAdapter {
     private void handleAvailableDeployments() throws IOException, InterruptedException {
         String selectedResourceGroup = secondLoginWizardPage.getResourceGroupDropdown().getText();
         ServiceKey serviceKey = secondLoginWizardPage.getServiceKey();
-        GetDeploymentsResponse getDeploymentsResponse = loginClient.getDeployments(serviceKey, selectedResourceGroup);
+        GetDeploymentsResponse getDeploymentsResponse = sapLoginClient.getDeployments(serviceKey, selectedResourceGroup);
         secondLoginWizardPage.setDeploymentsForSelection(getDeploymentsResponse.getDeployments());
         memoryResourceGroup.save(selectedResourceGroup);
         enableTheDeploymentSelection();

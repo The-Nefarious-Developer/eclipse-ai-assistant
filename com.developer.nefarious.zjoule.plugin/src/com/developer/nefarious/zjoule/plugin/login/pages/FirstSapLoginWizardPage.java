@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
 import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
-import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
+import com.developer.nefarious.zjoule.plugin.login.api.ISapLoginClient;
 import com.developer.nefarious.zjoule.plugin.login.events.ServiceKeyModifyListener;
 import com.developer.nefarious.zjoule.plugin.login.utils.ResourceGroupIdExtractor;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
@@ -26,7 +26,7 @@ import com.google.gson.Gson;
  *   <li>Logic to propagate resource group information to subsequent wizard pages.</li>
  * </ul>
  */
-public class FirstLoginWizardPage extends WizardPage {
+public class FirstSapLoginWizardPage extends WizardPage {
 
     /** The unique identifier for this wizard page. */
     public static final String PAGE_ID = "First Page";
@@ -47,19 +47,19 @@ public class FirstLoginWizardPage extends WizardPage {
     private ServiceKey serviceKey;
 
     /** The login client for handling API interactions. */
-    private ILoginClient loginClient;
+    private ISapLoginClient sapLoginClient;
 
     /**
      * Constructs a new {@code FirstLoginWizardPage}.
      *
-     * @param loginClient the {@link ILoginClient} used for API interactions during the login process.
+     * @param sapLoginClient the {@link ISapLoginClient} used for API interactions during the login process.
      */
-    public FirstLoginWizardPage(final ILoginClient loginClient) {
+    public FirstSapLoginWizardPage(final ISapLoginClient sapLoginClient) {
         super(PAGE_ID);
         setTitle("Provide credentials");
         setDescription("Attach the Service Key json file content for the SAP AI Core service.");
         setPageComplete(false); // Initially set the page as incomplete
-        this.loginClient = loginClient;
+        this.sapLoginClient = sapLoginClient;
     }
 
     /**
@@ -80,7 +80,7 @@ public class FirstLoginWizardPage extends WizardPage {
         textField.setLayoutData(gridData);
 
         // Add a ModifyListener to monitor textField changes
-        textField.addModifyListener(new ServiceKeyModifyListener(this, loginClient, new Gson()));
+        textField.addModifyListener(new ServiceKeyModifyListener(this, sapLoginClient, new Gson()));
 
         // Hidden error text widget
         errorText = new Text(container, SWT.READ_ONLY | SWT.MULTI | SWT.WRAP);
@@ -116,7 +116,7 @@ public class FirstLoginWizardPage extends WizardPage {
      * @param getResourceGroupsResponse the response containing available resource groups.
      */
     public void setResourceGroupsOnTheSecondPage(final GetResourceGroupsResponse getResourceGroupsResponse) {
-        SecondLoginWizardPage secondPage = (SecondLoginWizardPage) getWizard().getPage(SecondLoginWizardPage.PAGE_ID);
+        SecondSapLoginWizardPage secondPage = (SecondSapLoginWizardPage) getWizard().getPage(SecondSapLoginWizardPage.PAGE_ID);
         List<String> resourceGroupsAvailableForSelection = ResourceGroupIdExtractor.extractResourceGroupIds(getResourceGroupsResponse);
         secondPage.setResourceGroupsForSelection(resourceGroupsAvailableForSelection);
     }

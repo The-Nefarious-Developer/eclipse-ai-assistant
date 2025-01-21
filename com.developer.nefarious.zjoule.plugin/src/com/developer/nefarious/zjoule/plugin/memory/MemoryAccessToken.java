@@ -100,4 +100,9 @@ public class MemoryAccessToken implements IMemoryObject<AccessToken> {
         String serializedObject = objectSerializer.serialize(accesstoken);
         eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
     }
+    
+    @Override
+    public void clear() {
+    	eclipseMemory.deleteFromEclipsePreferences(KEY);
+    }
 }

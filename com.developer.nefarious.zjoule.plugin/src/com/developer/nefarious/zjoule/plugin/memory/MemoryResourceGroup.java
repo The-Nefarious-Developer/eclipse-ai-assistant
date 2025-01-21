@@ -85,4 +85,9 @@ public class MemoryResourceGroup implements IMemoryObject<String> {
         eclipseMemory.saveOnEclipsePreferences(KEY, resourceGroup);
     }
     
+    @Override
+    public void clear() {
+    	eclipseMemory.deleteFromEclipsePreferences(KEY);
+    }
+    
 }

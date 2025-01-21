@@ -126,5 +126,14 @@ public class TemporaryMemoryResourceGroupTest {
 		// Assert
 		verify(mockEclipseMemory).saveOnEclipsePreferences(TEMPORARY_KEY, mockResourceGroup);
 	}
+	
+	@Test
+	public void shouldEraseFromMemory() {
+		// Arrange
+		// Act
+		cut.clear();
+		// Assert
+		verify(mockEclipseMemory).deleteFromEclipsePreferences(TEMPORARY_KEY);
+	}
 
 }

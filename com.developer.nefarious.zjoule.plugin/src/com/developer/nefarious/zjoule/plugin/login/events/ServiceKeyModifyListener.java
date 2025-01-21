@@ -6,8 +6,8 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 
 import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
-import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
-import com.developer.nefarious.zjoule.plugin.login.pages.FirstLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.login.api.ISapLoginClient;
+import com.developer.nefarious.zjoule.plugin.login.pages.FirstSapLoginWizardPage;
 import com.developer.nefarious.zjoule.plugin.login.utils.JsonValidator;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 import com.google.gson.Gson;
@@ -21,10 +21,10 @@ import com.google.gson.Gson;
 public class ServiceKeyModifyListener implements ModifyListener {
 
     /** The first page of the login wizard associated with this listener. */
-    private FirstLoginWizardPage firstLoginWizardPage;
+    private FirstSapLoginWizardPage firstLoginWizardPage;
 
     /** The login client used for validating the service key and retrieving resource groups. */
-    private ILoginClient loginClient;
+    private ISapLoginClient sapLoginClient;
 
     /** A {@link Gson} instance for parsing the service key from JSON. */
     private Gson gson;
@@ -32,18 +32,18 @@ public class ServiceKeyModifyListener implements ModifyListener {
     /**
      * Constructs a new {@code ServiceKeyModifyListener}.
      *
-     * @param firstLoginWizardPage the {@link FirstLoginWizardPage} containing the service key input field.
-     * @param loginClient the {@link ILoginClient} for validating the service key and retrieving resource groups.
+     * @param firstLoginWizardPage the {@link FirstSapLoginWizardPage} containing the service key input field.
+     * @param sapLoginClient the {@link ISapLoginClient} for validating the service key and retrieving resource groups.
      * @param gson the {@link Gson} instance for parsing the service key JSON.
      */
     // @formatter:off
     public ServiceKeyModifyListener(
-    		final FirstLoginWizardPage firstLoginWizardPage, 
-    		final ILoginClient loginClient, 
+    		final FirstSapLoginWizardPage firstLoginWizardPage, 
+    		final ISapLoginClient sapLoginClient, 
     		final Gson gson) {
     	// @formatter:on
         this.firstLoginWizardPage = firstLoginWizardPage;
-        this.loginClient = loginClient;
+        this.sapLoginClient = sapLoginClient;
         this.gson = gson;
     }
 
@@ -76,7 +76,7 @@ public class ServiceKeyModifyListener implements ModifyListener {
      * @throws InterruptedException if the resource group retrieval is interrupted.
      */
     private void handleValidServiceKey(final ServiceKey serviceKey) throws IOException, InterruptedException {
-        GetResourceGroupsResponse getResourceGroupsResponse = loginClient.getResourceGroups(serviceKey);
+        GetResourceGroupsResponse getResourceGroupsResponse = sapLoginClient.getResourceGroups(serviceKey);
         firstLoginWizardPage.setResourceGroupsOnTheSecondPage(getResourceGroupsResponse);
         firstLoginWizardPage.setServiceKey(serviceKey);
         clearMessageLog();

@@ -9,9 +9,9 @@ import com.google.gson.Gson;
  * <p>
  * The {@code LoginClientHelper} provides utility methods for creating URIs
  * and parsing API responses into their corresponding Java objects.
- * Implements the {@link ILoginClientHelper} interface.
+ * Implements the {@link ISapLoginClientHelper} interface.
  */
-public class LoginClientHelper implements ILoginClientHelper {
+public class SapLoginClientHelper implements ISapLoginClientHelper {
 
     /** The {@link Gson} instance for parsing JSON responses. */
     private Gson gson;
@@ -21,7 +21,7 @@ public class LoginClientHelper implements ILoginClientHelper {
      * <p>
      * Initializes a {@link Gson} instance for JSON parsing.
      */
-    public LoginClientHelper() {
+    public SapLoginClientHelper() {
         gson = new Gson();
     }
 

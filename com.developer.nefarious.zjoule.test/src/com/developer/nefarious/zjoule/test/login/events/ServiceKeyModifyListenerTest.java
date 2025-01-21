@@ -16,9 +16,9 @@ import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 
 import com.developer.nefarious.zjoule.plugin.login.api.GetResourceGroupsResponse;
-import com.developer.nefarious.zjoule.plugin.login.api.ILoginClient;
+import com.developer.nefarious.zjoule.plugin.login.api.ISapLoginClient;
 import com.developer.nefarious.zjoule.plugin.login.events.ServiceKeyModifyListener;
-import com.developer.nefarious.zjoule.plugin.login.pages.FirstLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.login.pages.FirstSapLoginWizardPage;
 import com.developer.nefarious.zjoule.plugin.login.utils.JsonValidator;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 import com.google.gson.Gson;
@@ -30,10 +30,10 @@ public class ServiceKeyModifyListenerTest {
 	private ServiceKeyModifyListener cut;
 
 	@Mock
-	private FirstLoginWizardPage mockFirstLoginWizardPage;
+	private FirstSapLoginWizardPage mockFirstLoginWizardPage;
 
 	@Mock
-	private ILoginClient mockLoginClient;
+	private ISapLoginClient mockSapLoginClient;
 
 	@Mock
 	private Gson mockGson;
@@ -44,7 +44,7 @@ public class ServiceKeyModifyListenerTest {
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		cut = spy(new ServiceKeyModifyListener(mockFirstLoginWizardPage, mockLoginClient, mockGson));
+		cut = spy(new ServiceKeyModifyListener(mockFirstLoginWizardPage, mockSapLoginClient, mockGson));
 	}
 
 	@Test
@@ -109,7 +109,7 @@ public class ServiceKeyModifyListenerTest {
 		when(mockGson.fromJson(mockInputTextTrimmed, ServiceKey.class)).thenReturn(mockServiceKey);
 		when(mockServiceKey.isValid()).thenReturn(true);
 		GetResourceGroupsResponse mockGetResourceGroupsResponse = mock(GetResourceGroupsResponse.class);
-		when(mockLoginClient.getResourceGroups(mockServiceKey)).thenReturn(mockGetResourceGroupsResponse);
+		when(mockSapLoginClient.getResourceGroups(mockServiceKey)).thenReturn(mockGetResourceGroupsResponse);
 		// Act
 		cut.modifyText(mockModifyEvent);
 		// Assert
@@ -131,7 +131,7 @@ public class ServiceKeyModifyListenerTest {
 		}
 		when(mockGson.fromJson(mockInputTextTrimmed, ServiceKey.class)).thenReturn(mockServiceKey);
 		when(mockServiceKey.isValid()).thenReturn(true);
-		when(mockLoginClient.getResourceGroups(mockServiceKey)).thenThrow(new IOException());
+		when(mockSapLoginClient.getResourceGroups(mockServiceKey)).thenThrow(new IOException());
 		// Act
 		cut.modifyText(mockModifyEvent);
 		// Assert

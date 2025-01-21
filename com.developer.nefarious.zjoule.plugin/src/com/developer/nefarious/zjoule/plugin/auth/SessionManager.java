@@ -6,6 +6,8 @@ import com.developer.nefarious.zjoule.plugin.core.functions.TagHandler;
 import com.developer.nefarious.zjoule.plugin.memory.EclipseMemory;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryAccessToken;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryDeployment;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryOllamaEndpoint;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryOllamaModel;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryResourceGroup;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
 
@@ -17,19 +19,12 @@ import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
  */
 public abstract class SessionManager {
 
-    /**
-     * Checks if the user is currently logged in.
-     * A user is considered logged in if the following memory components are not empty:
-     * <ul>
-     *   <li>{@link MemoryAccessToken}</li>
-     *   <li>{@link MemoryServiceKey}</li>
-     *   <li>{@link MemoryResourceGroup}</li>
-     *   <li>{@link MemoryDeployment}</li>
-     * </ul>
-     *
-     * @return {@code true} if the user is logged in, {@code false} otherwise.
-     */
+
     public static boolean isUserLoggedIn() {
+    	return (isSapSession() || isOllamaSession()) ? true : false;
+    }
+    
+    public static boolean isSapSession() {
         MemoryAccessToken memoryAccessToken = MemoryAccessToken.getInstance();
         MemoryServiceKey memoryServiceKey = MemoryServiceKey.getInstance();
         MemoryResourceGroup memoryResourceGroup = MemoryResourceGroup.getInstance();
@@ -37,6 +32,13 @@ public abstract class SessionManager {
 
         return (memoryAccessToken.isEmpty() || memoryServiceKey.isEmpty() || memoryResourceGroup.isEmpty()
                 || memoryDeployment.isEmpty()) ? false : true;
+    }
+    
+    public static boolean isOllamaSession() {
+        MemoryOllamaEndpoint memoryOllamaEndpoint = MemoryOllamaEndpoint.getInstance();
+        MemoryOllamaModel memoryOllamaModel = MemoryOllamaModel.getInstance();
+
+        return (memoryOllamaEndpoint.isEmpty() || memoryOllamaModel.isEmpty()) ? false : true;
     }
 
     /**
@@ -65,6 +67,23 @@ public abstract class SessionManager {
         if (browser != null && !browser.isDisposed()) {
             browser.execute("logout();");
         }
+    }
+    
+    public static void clearAllSessions() {
+    	clearSapSession();
+    	clearOllamaSession();
+    }
+    
+    private static void clearSapSession() {
+    	MemoryAccessToken.getInstance().clear();
+    	MemoryServiceKey.getInstance().clear();
+    	MemoryResourceGroup.getInstance().clear();
+    	MemoryDeployment.getInstance().clear();
+    }
+    
+    private static void clearOllamaSession() {
+    	MemoryOllamaEndpoint.getInstance().clear();
+    	MemoryOllamaModel.getInstance().clear();    	
     }
 
     /**

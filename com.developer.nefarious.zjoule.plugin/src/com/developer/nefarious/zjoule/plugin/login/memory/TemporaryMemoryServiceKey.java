@@ -113,4 +113,10 @@ public class TemporaryMemoryServiceKey implements IMemoryObject<ServiceKey>, ITe
         String serializedObject = objectSerializer.serialize(serviceKey);
         eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
     }
+    
+    @Override
+    public void clear() {
+    	eclipseMemory.deleteFromEclipsePreferences(KEY);
+    }
+    
 }

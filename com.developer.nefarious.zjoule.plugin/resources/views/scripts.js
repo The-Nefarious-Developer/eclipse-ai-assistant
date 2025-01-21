@@ -165,3 +165,9 @@ function finishLoading() {
 	}
 	unblockInput();
 }
+
+document.addEventListener('keydown', function(event) {
+	if (event.key === 'Enter') {
+		sendMessage();
+	}
+});

@@ -13,7 +13,7 @@ import com.developer.nefarious.zjoule.plugin.memory.utils.IObjectSerializer;
  */
 public class MemoryMessageHistory implements IMemoryMessageHistory {
 
-    /** Singleton instance of {@code MemoryMessageHistory}. */
+    /** Singleton instance of {@code IMemoryMessageHistory}. */
     private static MemoryMessageHistory instance;
 
     /** Serializer for converting objects to and from serialized formats. */
@@ -23,9 +23,9 @@ public class MemoryMessageHistory implements IMemoryMessageHistory {
     private IEclipseMemory eclipseMemory;
 
     /**
-     * Retrieves the singleton instance of {@code MemoryMessageHistory}.
+     * Retrieves the singleton instance of {@code IMemoryMessageHistory}.
      *
-     * @return the singleton instance of {@code MemoryMessageHistory}.
+     * @return the singleton instance of {@code IMemoryMessageHistory}.
      * @throws IllegalStateException if the instance is not initialized.
      */
     public static MemoryMessageHistory getInstance() {

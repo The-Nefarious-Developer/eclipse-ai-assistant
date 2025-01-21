@@ -4,14 +4,23 @@ import java.util.Set;
 
 import com.developer.nefarious.zjoule.plugin.auth.AuthClient;
 import com.developer.nefarious.zjoule.plugin.auth.AuthClientHelper;
+import com.developer.nefarious.zjoule.plugin.auth.SessionManager;
 import com.developer.nefarious.zjoule.plugin.chat.memory.MemoryMessageHistory;
+import com.developer.nefarious.zjoule.plugin.chat.ollama.OllamaClient;
+import com.developer.nefarious.zjoule.plugin.chat.ollama.OllamaClientHelper;
 import com.developer.nefarious.zjoule.plugin.chat.openai.OpenAIClient;
 import com.developer.nefarious.zjoule.plugin.chat.openai.OpenAIClientHelper;
+import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryAccessToken;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryDeployment;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryOllamaEndpoint;
+import com.developer.nefarious.zjoule.plugin.memory.MemoryOllamaModel;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryResourceGroup;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
+import com.developer.nefarious.zjoule.plugin.models.AccessToken;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
+import com.developer.nefarious.zjoule.plugin.models.OllamaModel;
+import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 
 /**
  * A factory class responsible for creating instances of {@link IAIClient}.
@@ -29,13 +38,22 @@ public abstract class AIClientFactory {
      * @return an instance of {@link IAIClient} for the corresponding model, or {@code null} if unsupported.
      */
     public static IAIClient getClient() {
-
-        // Load memory components for access token, service key, resource group, deployment, and message history.
-        MemoryAccessToken memoryAccessToken = MemoryAccessToken.getInstance();
-        MemoryServiceKey memoryServiceKey = MemoryServiceKey.getInstance();
-        MemoryResourceGroup memoryResourceGroup = MemoryResourceGroup.getInstance();
-        MemoryDeployment memoryDeployment = MemoryDeployment.getInstance();
-        MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
+        if (SessionManager.isSapSession()) {
+        	return getClientForSapAiCore();
+        } else if (SessionManager.isOllamaSession()) {
+        	return getClientForOllama();
+        } else {
+        	return null;
+        }
+    }
+    
+    private static IAIClient getClientForSapAiCore() {
+    	// Load memory components for access token, service key, resource group, deployment, and message history.
+    	MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
+    	IMemoryObject<AccessToken> memoryAccessToken = MemoryAccessToken.getInstance();
+        IMemoryObject<ServiceKey> memoryServiceKey = MemoryServiceKey.getInstance();
+        IMemoryObject<String> memoryResourceGroup = MemoryResourceGroup.getInstance();
+        IMemoryObject<Deployment> memoryDeployment = MemoryDeployment.getInstance();
 
         // Initialize authentication helpers and the authentication client.
         AuthClientHelper authHelper = new AuthClientHelper();
@@ -51,6 +69,16 @@ public abstract class AIClientFactory {
         } else {
             return null;
         }
+    }
+    
+    private static IAIClient getClientForOllama() {
+    	MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
+    	IMemoryObject<String> memoryOllamaEndpoint = MemoryOllamaEndpoint.getInstance();
+    	IMemoryObject<OllamaModel> memoryOllamaModel = MemoryOllamaModel.getInstance();
+    	
+    	OllamaClientHelper helper = new OllamaClientHelper(memoryOllamaModel);
+    	return new OllamaClient(memoryMessageHistory, memoryOllamaEndpoint, helper);
+    
     }
 
     /**

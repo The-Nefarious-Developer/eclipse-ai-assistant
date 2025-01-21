@@ -37,6 +37,7 @@ import com.developer.nefarious.zjoule.plugin.core.events.SelectionListener;
 import com.developer.nefarious.zjoule.plugin.core.functions.ClearHandler;
 import com.developer.nefarious.zjoule.plugin.core.functions.LoginHandler;
 import com.developer.nefarious.zjoule.plugin.core.functions.LogoutHandler;
+import com.developer.nefarious.zjoule.plugin.core.functions.PreferencesHandler;
 import com.developer.nefarious.zjoule.plugin.core.functions.PromptHandler;
 import com.developer.nefarious.zjoule.plugin.core.ui.BrowserFactory;
 import com.developer.nefarious.zjoule.plugin.core.ui.IViewRender;
@@ -66,7 +67,9 @@ public class ViewListenerTest {
 
 	private MockedStatic<LogoutHandler> mockedStaticLogoutHandler;
 	
-	private MockedStatic<SystemProvider> mockedSystemProvider;
+	private MockedStatic<SystemProvider> mockedStaticSystemProvider;
+	
+	private MockedStatic<PreferencesHandler> mockedStaticPreferencesHandler;
 
 	@Mock
 	private Shell mockShell;
@@ -100,6 +103,9 @@ public class ViewListenerTest {
 
 	@Mock
 	private LogoutHandler mockLogoutHandler;
+	
+	@Mock
+	private PreferencesHandler mockPreferencesHandler;
 
 	@BeforeEach
 	public void setUp() {
@@ -114,7 +120,8 @@ public class ViewListenerTest {
 		mockedStaticLoginHandler = mockStatic(LoginHandler.class);
 		mockedStaticClearHandler = mockStatic(ClearHandler.class);
 		mockedStaticLogoutHandler = mockStatic(LogoutHandler.class);
-		mockedSystemProvider = mockStatic(SystemProvider.class);
+		mockedStaticSystemProvider = mockStatic(SystemProvider.class);
+		mockedStaticPreferencesHandler = mockStatic(PreferencesHandler.class);
 
 		mockedStaticSelectionListener.when(() -> SelectionListener.create(mockBrowser)).thenReturn(mockSelectionListener);
 		mockedStaticViewRender.when(ViewRender::create).thenReturn(mockViewRender);
@@ -124,6 +131,7 @@ public class ViewListenerTest {
 		mockedStaticLoginHandler.when(() -> LoginHandler.create(mockShell, mockBrowser)).thenReturn(mockLoginHandler);
 		mockedStaticClearHandler.when(() -> ClearHandler.create(mockBrowser)).thenReturn(mockClearHandler);
 		mockedStaticLogoutHandler.when(() -> LogoutHandler.create(mockBrowser)).thenReturn(mockLogoutHandler);
+		mockedStaticPreferencesHandler.when(PreferencesHandler::create).thenReturn(mockPreferencesHandler);
 
 		cut = spy(new ViewListener());
 		cut.setShell(mockShell);
@@ -132,7 +140,7 @@ public class ViewListenerTest {
 	@Test
 	public void shouldPlumbPartControlForWindows() {
 		// Arrange
-		mockedSystemProvider.when(SystemProvider::getCurrentSystem).thenReturn("Windows 95");
+		mockedStaticSystemProvider.when(SystemProvider::getCurrentSystem).thenReturn("Windows 95");
 		mockedStaticBrowserFactory.when(() -> BrowserFactory.create(mockParent, SWT.EDGE)).thenReturn(mockBrowser);
 		
 		String mockBuildResult = "html-text";
@@ -171,6 +179,7 @@ public class ViewListenerTest {
 
         verify(mockToolBarManager).add(mockLoginHandler);
         verify(mockMenuManager).add(mockClearHandler);
+        verify(mockMenuManager).add(mockPreferencesHandler);
         verify(mockMenuManager).add(any(Separator.class));
         verify(mockMenuManager).add(mockLogoutHandler);
 	}
@@ -178,7 +187,7 @@ public class ViewListenerTest {
 	@Test
 	public void shouldPlumbPartControlForOtherSystems() {
 		// Arrange
-		mockedSystemProvider.when(SystemProvider::getCurrentSystem).thenReturn("Mac OS");
+		mockedStaticSystemProvider.when(SystemProvider::getCurrentSystem).thenReturn("Mac OS");
 		mockedStaticBrowserFactory.when(() -> BrowserFactory.create(mockParent, SWT.WEBKIT)).thenReturn(mockBrowser);
 		
 		String mockBuildResult = "html-text";
@@ -217,6 +226,7 @@ public class ViewListenerTest {
 
         verify(mockToolBarManager).add(mockLoginHandler);
         verify(mockMenuManager).add(mockClearHandler);
+        verify(mockMenuManager).add(mockPreferencesHandler);
         verify(mockMenuManager).add(any(Separator.class));
         verify(mockMenuManager).add(mockLogoutHandler);
 	}
@@ -251,8 +261,11 @@ public class ViewListenerTest {
 		if (mockedStaticLogoutHandler != null) {
 			mockedStaticLogoutHandler.close();
 		}
-		if (mockedSystemProvider != null) {
-			mockedSystemProvider.close();
+		if (mockedStaticSystemProvider != null) {
+			mockedStaticSystemProvider.close();
+		}
+		if (mockedStaticPreferencesHandler != null) {
+			mockedStaticPreferencesHandler.close();
 		}
 	}
 	//CHECKSTYLE:ON CyclomaticComplexity

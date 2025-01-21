@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.developer.nefarious.zjoule.plugin.login.events.DeploymentSelectionAdapter;
-import com.developer.nefarious.zjoule.plugin.login.pages.SecondLoginWizardPage;
+import com.developer.nefarious.zjoule.plugin.login.pages.SecondSapLoginWizardPage;
 import com.developer.nefarious.zjoule.plugin.memory.IMemoryObject;
 import com.developer.nefarious.zjoule.plugin.models.Deployment;
 
@@ -25,7 +25,7 @@ public class DeploymentSelectionAdapterTest {
 	private DeploymentSelectionAdapter cut;
 
 	@Mock
-	private SecondLoginWizardPage mockSecondLoginWizardPage;
+	private SecondSapLoginWizardPage mockSecondLoginWizardPage;
 
 	@Mock
 	private IMemoryObject<Deployment> mockMemoryDeployment;

@@ -10,19 +10,19 @@ import com.developer.nefarious.zjoule.plugin.auth.IAuthClient;
 import com.developer.nefarious.zjoule.plugin.models.ServiceKey;
 
 /**
- * Implements the {@link ILoginClient} interface for managing API interactions related to login operations.
+ * Implements the {@link ISapLoginClient} interface for managing API interactions related to login operations.
  * <p>
  * The {@code LoginClient} class communicates with SAP AI Core APIs to retrieve deployments
- * and resource groups, leveraging an {@link IAuthClient} for authentication and an {@link ILoginClientHelper}
+ * and resource groups, leveraging an {@link IAuthClient} for authentication and an {@link ISapLoginClientHelper}
  * for building requests and parsing responses.
  */
-public class LoginClient implements ILoginClient {
+public class SapLoginClient implements ISapLoginClient {
 
     /** The HTTP client used for making API requests. */
     private HttpClient httpClient;
 
     /** Helper class for constructing requests and parsing responses. */
-    private ILoginClientHelper loginClientHelper;
+    private ISapLoginClientHelper sapLoginClientHelper;
 
     /** The authentication client used for retrieving access tokens. */
     private IAuthClient authClient;
@@ -30,12 +30,12 @@ public class LoginClient implements ILoginClient {
     /**
      * Constructs a new {@code LoginClient} instance.
      *
-     * @param loginClientHelper the helper for constructing requests and parsing responses.
+     * @param sapLoginClientHelper the helper for constructing requests and parsing responses.
      * @param authClient the authentication client for retrieving access tokens.
      */
-    public LoginClient(final ILoginClientHelper loginClientHelper, final IAuthClient authClient) {
+    public SapLoginClient(final ISapLoginClientHelper sapLoginClientHelper, final IAuthClient authClient) {
         httpClient = HttpClient.newHttpClient();
-        this.loginClientHelper = loginClientHelper;
+        this.sapLoginClientHelper = sapLoginClientHelper;
         this.authClient = authClient;
     }
 
@@ -45,7 +45,7 @@ public class LoginClient implements ILoginClient {
     @Override
     public GetDeploymentsResponse getDeployments(final ServiceKey serviceKey, final String resourceGroup) 
             throws IOException, InterruptedException {
-        URI endpoint = loginClientHelper.createAuthUri(serviceKey.getServiceURL() + "/lm/deployments");
+        URI endpoint = sapLoginClientHelper.createAuthUri(serviceKey.getServiceURL() + "/lm/deployments");
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(endpoint)
@@ -56,7 +56,7 @@ public class LoginClient implements ILoginClient {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        return loginClientHelper.parseDeploymentsResponseToObject(response.body());
+        return sapLoginClientHelper.parseDeploymentsResponseToObject(response.body());
     }
 
     /**
@@ -65,7 +65,7 @@ public class LoginClient implements ILoginClient {
     @Override
     public GetResourceGroupsResponse getResourceGroups(final ServiceKey serviceKey) 
             throws IOException, InterruptedException {
-        URI endpoint = loginClientHelper.createAuthUri(serviceKey.getServiceURL() + "/admin/resourceGroups");
+        URI endpoint = sapLoginClientHelper.createAuthUri(serviceKey.getServiceURL() + "/admin/resourceGroups");
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(endpoint)
@@ -75,6 +75,6 @@ public class LoginClient implements ILoginClient {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        return loginClientHelper.parseResourceGroupsResponseToObject(response.body());
+        return sapLoginClientHelper.parseResourceGroupsResponseToObject(response.body());
     }
 }
