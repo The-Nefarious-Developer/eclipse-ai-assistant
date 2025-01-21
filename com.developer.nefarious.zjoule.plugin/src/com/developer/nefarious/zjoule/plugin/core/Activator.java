@@ -104,6 +104,13 @@ public class Activator extends AbstractUIPlugin {
         super.stop(context);
     }
     
+    /**
+     * Initializes the default preferences for the plugin.
+     * <p>
+     * This method sets up default preference values to guide plugin behavior.
+     *
+     * @param store the {@link IPreferenceStore} instance used for storing preferences.
+     */
     @Override
     protected void initializeDefaultPreferences(final IPreferenceStore store) {
         store.setDefault("instructions", "Be a friendly SAP ABAP expert, providing concise answers aligned with best practices and clean-code principles.");
