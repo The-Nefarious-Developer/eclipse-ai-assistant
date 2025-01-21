@@ -16,6 +16,8 @@ import com.developer.nefarious.zjoule.plugin.memory.MemoryDeployment;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryOllamaEndpoint;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryOllamaModel;
 import com.developer.nefarious.zjoule.plugin.memory.MemoryResourceGroup;
+import com.developer.nefarious.zjoule.plugin.models.Deployment;
+import com.developer.nefarious.zjoule.plugin.models.OllamaModel;
 
 public class PluginPreferencesPage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 	
@@ -94,17 +96,19 @@ public class PluginPreferencesPage extends FieldEditorPreferencePage implements 
 
 		String resourceGroup = MemoryResourceGroup.getInstance().load();
 		addField(outputFieldFactory.create("Resource Group:", resourceGroup));
-
-		String configurationName = MemoryDeployment.getInstance().load().getConfigurationName();
+		
+		Deployment deployment = MemoryDeployment.getInstance().load();
+		
+		String configurationName = deployment.getConfigurationName();
 		addField(outputFieldFactory.create("Configuration Name:", configurationName));
 
-		String model = MemoryDeployment.getInstance().load().getModelName();
+		String model = deployment.getModelName();
 		addField(outputFieldFactory.create("Model:", model));
 		
-		String version = MemoryDeployment.getInstance().load().getModelVersion();
+		String version = deployment.getModelVersion();
 		addField(outputFieldFactory.create("Version:", version));
 
-		String deploymentUrl = MemoryDeployment.getInstance().load().getDeploymentUrl();
+		String deploymentUrl = deployment.getDeploymentUrl();
 		addField(outputFieldFactory.create("Deployment Url:", deploymentUrl));
 	}
 
@@ -122,22 +126,24 @@ public class PluginPreferencesPage extends FieldEditorPreferencePage implements 
 		String endpoint = MemoryOllamaEndpoint.getInstance().load();
 		addField(outputFieldFactory.create("Endpoint:", endpoint));
 		
-		String name = MemoryOllamaModel.getInstance().load().getName();
+		OllamaModel ollamaModel = MemoryOllamaModel.getInstance().load();
+		
+		String name = ollamaModel.getName();
 		addField(outputFieldFactory.create("Name:", name));
 		
-		String model = MemoryOllamaModel.getInstance().load().getModel();
+		String model = ollamaModel.getModel();
 		addField(outputFieldFactory.create("Model:", model));
 		
-		String format = MemoryOllamaModel.getInstance().load().getFormat();
+		String format = ollamaModel.getFormat();
 		addField(outputFieldFactory.create("Format:", format));
 		
-		String family = MemoryOllamaModel.getInstance().load().getFamily();
+		String family = ollamaModel.getFamily();
 		addField(outputFieldFactory.create("Family:", family));
 		
-		String parameterSize = MemoryOllamaModel.getInstance().load().getParameterSize();
+		String parameterSize = ollamaModel.getParameterSize();
 		addField(outputFieldFactory.create("Parameter Size:", parameterSize));
 		
-		String quantizationLevel = MemoryOllamaModel.getInstance().load().getQuantizationLevel();
+		String quantizationLevel = ollamaModel.getQuantizationLevel();
 		addField(outputFieldFactory.create("Quantization Level:", quantizationLevel));
 	}
 
