@@ -20,7 +20,7 @@ fi
 NEW_FILE_NAME=$(echo $LATEST_VERSION | tr . _)
 
 # Copy the docs/version-template.md and name it after the new version
-cp docs/version-template.md docs/$NEW_VERSION.md
+cp docs/version-template.md docs/$NEW_FILE_NAME.md
 
 # Replace the placeholder __NEW_VERSION__ with the latest version in the new file
 sed -i "s/__NEW_VERSION__/$LATEST_VERSION/g" docs/$NEW_FILE_NAME.md
@@ -50,5 +50,5 @@ echo "Setup of the plugin for version $LATEST_VERSION is complete."
 # Step 4: Update installation instructions at the home page
 
 # Replace the plugin version in the URL with the new version
-sed -i "s|https://zjoule.com/.*/plugin|https://zjoule.com/$NEW_VERSION/plugin|g" docs/index.md
+sed -i "s|https://zjoule.com/.*/plugin|https://zjoule.com/$LATEST_VERSION/plugin|g" docs/index.md
 echo "Setup of the index for version $LATEST_VERSION is complete."
