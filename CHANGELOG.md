@@ -1,5 +1,14 @@
 # Semantic Versioning Changelog
 
+## [2.0.1](https://github.com/The-Nefarious-Developer/zjoule/compare/v2.0.0...v2.0.1) (2025-01-21)
+
+
+### Bug Fixes
+
+* add javadoc for missing method ([05898ca](https://github.com/The-Nefarious-Developer/zjoule/commit/05898ca416eba6e55889fe547d2d5d905df852b4))
+* reduce the amount of load from memory when opening preferences ([3637c8b](https://github.com/The-Nefarious-Developer/zjoule/commit/3637c8b673fb6431f5538d107b4d944b56e14d6e))
+* set correct variables for website update process ([40771ac](https://github.com/The-Nefarious-Developer/zjoule/commit/40771acb592d543bd0c1308cf7c959dbbe3eb012))
+
 # [2.0.0](https://github.com/The-Nefarious-Developer/zjoule/compare/v1.1.2...v2.0.0) (2025-01-21)
 
 
