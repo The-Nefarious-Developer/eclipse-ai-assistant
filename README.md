@@ -8,7 +8,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=The-Nefarious-Developer_zjoule&metric=alert_status&token=e2a58dc0706342532d8d14ae0badfe72fd08ff28)](https://sonarcloud.io/summary/new_code?id=The-Nefarious-Developer_zjoule) 
 [![CodeQL](https://github.com/The-Nefarious-Developer/zjoule/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/The-Nefarious-Developer/zjoule/actions/workflows/github-code-scanning/codeql)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://zjoule.com/v1.1.2/doc/)
+[![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://zjoule.com/v2.0.2/doc/)
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
 </div>
