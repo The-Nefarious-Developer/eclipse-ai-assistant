@@ -170,24 +170,55 @@ public class ResourceGroup {
     }
 }
 
+/**
+ * Represents a label associated with a resource group.
+ * <p>
+ * A label is a key-value pair used for categorizing or tagging resources.
+ * Labels provide metadata that can be utilized for searching, filtering,
+ * or organizing resource groups. Each label consists of a unique key and an
+ * associated value.
+ * </p>
+ */
 class Label { 
 	
+	/** The key of the label, representing the category or identifier. */
 	private String key;
 	
+	/** The value of the label, providing additional information or context. */
 	private String value;
 	
+	/**
+     * Retrieves the key of the label.
+     *
+     * @return the key as a {@link String}.
+     */
 	public String getKey() {
         return key;
     }
 
+	/**
+     * Sets the key of the label.
+     *
+     * @param key the key to set.
+     */
     public void setKey(final String key) {
         this.key = key;
     }
 
+    /**
+     * Retrieves the value of the label.
+     *
+     * @return the value as a {@link String}.
+     */
     public String getValue() {
         return value;
     }
 
+    /**
+     * Sets the value of the label.
+     *
+     * @param value the value to set.
+     */
     public void setValue(final String value) {
         this.value = value;
     }
