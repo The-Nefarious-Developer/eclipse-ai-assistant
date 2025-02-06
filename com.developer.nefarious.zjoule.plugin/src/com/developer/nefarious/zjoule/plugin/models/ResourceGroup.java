@@ -21,7 +21,7 @@ public class ResourceGroup {
 
     /** A list of labels associated with the resource group. */
     @SerializedName("labels")
-    private List<String> labels;
+    private List<Label> labels;
 
     /** The unique identifier of the resource group. */
     @SerializedName("resourceGroupId")
@@ -66,7 +66,7 @@ public class ResourceGroup {
      *
      * @return a {@link List} of labels as {@link String}.
      */
-    public List<String> getLabels() {
+    public List<Label> getLabels() {
         return labels;
     }
 
@@ -75,7 +75,7 @@ public class ResourceGroup {
      *
      * @param labels a {@link List} of labels to set.
      */
-    public void setLabels(final List<String> labels) {
+    public void setLabels(final List<Label> labels) {
         this.labels = labels;
     }
 
@@ -168,4 +168,28 @@ public class ResourceGroup {
     public void setZoneId(final String zoneId) {
         this.zoneId = zoneId;
     }
+}
+
+class Label { 
+	
+	private String key;
+	
+	private String value;
+	
+	public String getKey() {
+        return key;
+    }
+
+    public void setKey(final String key) {
+        this.key = key;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(final String value) {
+        this.value = value;
+    }
+	
 }
