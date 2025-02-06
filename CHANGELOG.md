@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [2.0.2](https://github.com/The-Nefarious-Developer/zjoule/compare/v2.0.1...v2.0.2) (2025-02-06)
+
+
+### Bug Fixes
+
+* add label object to handle correct resource group response parsing ([b9feeed](https://github.com/The-Nefarious-Developer/zjoule/commit/b9feeed43a692759bddaf2ca278e05172672041e))
+
 ## [2.0.1](https://github.com/The-Nefarious-Developer/zjoule/compare/v2.0.0...v2.0.1) (2025-01-21)
 
 
