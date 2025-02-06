@@ -21,7 +21,7 @@ public class ResourceGroup {
 
     /** A list of labels associated with the resource group. */
     @SerializedName("labels")
-    private List<String> labels;
+    private List<Label> labels;
 
     /** The unique identifier of the resource group. */
     @SerializedName("resourceGroupId")
@@ -66,7 +66,7 @@ public class ResourceGroup {
      *
      * @return a {@link List} of labels as {@link String}.
      */
-    public List<String> getLabels() {
+    public List<Label> getLabels() {
         return labels;
     }
 
@@ -75,7 +75,7 @@ public class ResourceGroup {
      *
      * @param labels a {@link List} of labels to set.
      */
-    public void setLabels(final List<String> labels) {
+    public void setLabels(final List<Label> labels) {
         this.labels = labels;
     }
 
@@ -168,4 +168,59 @@ public class ResourceGroup {
     public void setZoneId(final String zoneId) {
         this.zoneId = zoneId;
     }
+}
+
+/**
+ * Represents a label associated with a resource group.
+ * <p>
+ * A label is a key-value pair used for categorizing or tagging resources.
+ * Labels provide metadata that can be utilized for searching, filtering,
+ * or organizing resource groups. Each label consists of a unique key and an
+ * associated value.
+ * </p>
+ */
+class Label { 
+	
+	/** The key of the label, representing the category or identifier. */
+	private String key;
+	
+	/** The value of the label, providing additional information or context. */
+	private String value;
+	
+	/**
+     * Retrieves the key of the label.
+     *
+     * @return the key as a {@link String}.
+     */
+	public String getKey() {
+        return key;
+    }
+
+	/**
+     * Sets the key of the label.
+     *
+     * @param key the key to set.
+     */
+    public void setKey(final String key) {
+        this.key = key;
+    }
+
+    /**
+     * Retrieves the value of the label.
+     *
+     * @return the value as a {@link String}.
+     */
+    public String getValue() {
+        return value;
+    }
+
+    /**
+     * Sets the value of the label.
+     *
+     * @param value the value to set.
+     */
+    public void setValue(final String value) {
+        this.value = value;
+    }
+	
 }
