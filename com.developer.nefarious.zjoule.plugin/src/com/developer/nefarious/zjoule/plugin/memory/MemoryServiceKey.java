@@ -101,6 +101,9 @@ public class MemoryServiceKey implements IMemoryObject<ServiceKey> {
         eclipseMemory.saveOnEclipsePreferences(KEY, serializedObject);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void clear() {
     	eclipseMemory.deleteFromEclipsePreferences(KEY);

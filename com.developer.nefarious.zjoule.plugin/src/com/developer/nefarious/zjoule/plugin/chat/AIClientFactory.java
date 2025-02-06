@@ -47,6 +47,16 @@ public abstract class AIClientFactory {
         }
     }
     
+    /**
+     * Creates and returns an {@link IAIClient} for SAP AI Core.
+     * <p>
+     * This method initializes the required memory components, authentication client,
+     * and deployment details. If the deployment's model name matches an OpenAI model,
+     * an {@link OpenAIClient} is returned. Otherwise, it returns {@code null}.
+     * </p>
+     *
+     * @return an instance of {@link IAIClient} for SAP AI Core, or {@code null} if unsupported.
+     */
     private static IAIClient getClientForSapAiCore() {
     	// Load memory components for access token, service key, resource group, deployment, and message history.
     	MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
@@ -71,6 +81,16 @@ public abstract class AIClientFactory {
         }
     }
     
+    /**
+     * Creates and returns an {@link IAIClient} for Ollama.
+     * <p>
+     * This method initializes the required memory components and
+     * returns an {@link OllamaClient} instance configured with
+     * an {@link OllamaClientHelper}.
+     * </p>
+     *
+     * @return an instance of {@link OllamaClient}.
+     */
     private static IAIClient getClientForOllama() {
     	MemoryMessageHistory memoryMessageHistory = MemoryMessageHistory.getInstance();
     	IMemoryObject<String> memoryOllamaEndpoint = MemoryOllamaEndpoint.getInstance();

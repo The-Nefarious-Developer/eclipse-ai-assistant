@@ -20,10 +20,20 @@ import com.developer.nefarious.zjoule.plugin.memory.MemoryServiceKey;
 public abstract class SessionManager {
 
 
+	/**
+     * Checks if the user is logged in by verifying both SAP and Ollama sessions.
+     *
+     * @return {@code true} if the user is logged into either SAP or Ollama, {@code false} otherwise.
+     */
     public static boolean isUserLoggedIn() {
     	return (isSapSession() || isOllamaSession()) ? true : false;
     }
     
+    /**
+     * Checks if an SAP session is active by verifying required memory components.
+     *
+     * @return {@code true} if all required SAP session components are present, {@code false} otherwise.
+     */
     public static boolean isSapSession() {
         MemoryAccessToken memoryAccessToken = MemoryAccessToken.getInstance();
         MemoryServiceKey memoryServiceKey = MemoryServiceKey.getInstance();
@@ -34,6 +44,11 @@ public abstract class SessionManager {
                 || memoryDeployment.isEmpty()) ? false : true;
     }
     
+    /**
+     * Checks if an Ollama session is active by verifying required memory components.
+     *
+     * @return {@code true} if all required Ollama session components are present, {@code false} otherwise.
+     */
     public static boolean isOllamaSession() {
         MemoryOllamaEndpoint memoryOllamaEndpoint = MemoryOllamaEndpoint.getInstance();
         MemoryOllamaModel memoryOllamaModel = MemoryOllamaModel.getInstance();
@@ -69,11 +84,21 @@ public abstract class SessionManager {
         }
     }
     
+    /**
+     * Clears all active sessions, including both SAP and Ollama sessions.
+     */
     public static void clearAllSessions() {
     	clearSapSession();
     	clearOllamaSession();
     }
     
+    /**
+     * Clears all SAP session-related memory components.
+     * <p>
+     * This method resets stored access tokens, service keys, resource groups,
+     * and deployment information associated with the SAP session.
+     * </p>
+     */
     private static void clearSapSession() {
     	MemoryAccessToken.getInstance().clear();
     	MemoryServiceKey.getInstance().clear();
@@ -81,6 +106,12 @@ public abstract class SessionManager {
     	MemoryDeployment.getInstance().clear();
     }
     
+    /**
+     * Clears all Ollama session-related memory components.
+     * <p>
+     * This method resets stored Ollama endpoint and model information.
+     * </p>
+     */
     private static void clearOllamaSession() {
     	MemoryOllamaEndpoint.getInstance().clear();
     	MemoryOllamaModel.getInstance().clear();    	
