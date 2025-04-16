@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="assets/zjoule.png" alt="Intro GIF" width="25"/> zJoule - ABAP Copilot
+zJoule - ABAP Copilot
 </h1>
 
 <div align="center">
@@ -12,6 +12,9 @@
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
 </div>
+
+> [!IMPORTANT]
+> :construction: This repository is passing through important changes and during this time, the plugin won't be available. :construction: <br />
 
 **zJoule** is an Open Source AI assistant plugin for Eclipse designed to integrate Generative AI into your development environment.
 
