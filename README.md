@@ -14,7 +14,7 @@ zJoule - ABAP Copilot
 </div>
 
 > [!IMPORTANT]
-> :construction: This repository is passing through important changes and during this time, the plugin won't be available. :construction: <br />
+> :construction: This repository is passing through important changes and during this time, the plugin won't be available. <br />
 
 **zJoule** is an Open Source AI assistant plugin for Eclipse designed to integrate Generative AI into your development environment.
 
